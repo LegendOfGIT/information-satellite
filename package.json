@@ -5,6 +5,9 @@
     "jest": "26.0.1"
   },
   "dependencies": {
-    "express": "4.17.1"
+    "fastify": "2.14.1"
+  },
+  "scripts": {
+    "start": "node src/server.js"
   }
 }
