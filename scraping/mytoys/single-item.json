@@ -1,0 +1,11 @@
+{
+  "site": "mytoys.de",
+
+  "item-id": "{site}-{request-item-id}",
+
+  "scraping": [
+    {
+      "uri": "{site}/suche/13550024/"
+    }
+  ]
+}
