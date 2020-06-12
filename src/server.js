@@ -45,6 +45,10 @@ fastify.get('/', async (request, reply) => {
         reply.send([]);
     });
 });
+fastify.get('/observe/site/:site/use-case/:useCase', async (request, reply) => {
+    const observe = require('./observe');
+    reply.send(observe(request.params.site, request.params.useCase));
+})
 
 fastify.listen(3000, (err, address) => {
     if (err) throw err
