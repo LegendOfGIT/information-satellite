@@ -13,6 +13,7 @@
   "scripts": {
     "start": "node src/server.js",
     "start:dev": "nodemon src/server.js",
+    "code-coverage": "jest --collect-coverage",
     "test": "jest"
   },
   "_moduleAliases": {
