@@ -6,6 +6,13 @@ const getScrapingTemplateBySiteAndUseCaseJestMock = jest.mock(
     () => getScrapingTemplateBySiteAndUseCaseMock
 );
 
+const applyScrapingTemplateMock = jest.fn();
+const applyScrapingTemplateJestMock = jest.mock(
+    '../src/scraping/applyScrapingTemplate',
+    () => applyScrapingTemplateMock
+);
+
+
 const observe = require('../src/observe');
 
 describe('observe', () => {
@@ -34,6 +41,10 @@ describe('observe', () => {
             expect(observe('abc', 'item-overview')).toEqual({
                 error: ''
             })
+        });
+
+        test('calls applyScrapingTemplate with found template', () => {
+            expect(applyScrapingTemplateMock).toHaveBeenCalledWith(templateMock);
         });
     });
 });

@@ -5,6 +5,7 @@
 
   "scraping": [
     {
+      "command": "visit-uri",
       "uri": "{site}/suche/13550024/"
     }
   ]

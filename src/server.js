@@ -46,6 +46,8 @@ fastify.get('/', async (request, reply) => {
     });
 });
 fastify.get('/observe/site/:site/use-case/:useCase', async (request, reply) => {
+    reply.type('application/json').code(200);
+
     const observe = require('./observe');
     reply.send(observe(request.params.site, request.params.useCase));
 })
