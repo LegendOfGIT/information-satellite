@@ -1,3 +1,5 @@
+const getScrapingCommandById = require('./getScrapingCommandById');
+
 module.exports = (template = {}) => {
     console.log('Let us scrape!');
 
@@ -7,6 +9,12 @@ module.exports = (template = {}) => {
     }
 
     template.scraping.forEach(scrapingCommand => {
-        console.log(`apply scraping command "${scrapingCommand.command || ''}"`);
+        const commandId = scrapingCommand.commandId || '';
+        console.log(`apply scraping command "${commandId}"`);
+
+        const command = getScrapingCommandById(commandId);
+        if(!command) {
+            console.log(`command "${commandId}" is not defined`);
+        }
     });
 }

@@ -1,11 +1,12 @@
 {
   "site": "mytoys.de",
 
-  "item-id": "{site}-{request-item-id}",
+  "itemId": "{site}-{request-item-id}",
 
   "scraping": [
     {
-      "command": "visit-uri",
+      "commandId": "visit-uri",
+      "contentId": "article-search",
       "uri": "{site}/suche/13550024/"
     }
   ]

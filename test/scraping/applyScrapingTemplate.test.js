@@ -5,6 +5,13 @@
 const consoleMock = {
     log: jest.fn()
 }
+
+const getScrapingCommandByIdMock = jest.fn();
+const getScrapingCommandByIdJestMock = jest.mock(
+    '../../src/scraping/getScrapingCommandById',
+    () => getScrapingCommandByIdMock
+);
+
 const applyScrapingTemplate = require('../../src/scraping/applyScrapingTemplate');
 
 const originalConsole = global.console;
@@ -32,8 +39,8 @@ describe('applyScrapingTemplate', () => {
         beforeEach(() => {
             applyScrapingTemplate({
                 scraping: [
-                    { command: 'a' },
-                    { command: 'b' }
+                    { commandId: 'a' },
+                    { commandId: 'b' }
                 ]
             });
         });
@@ -42,6 +49,18 @@ describe('applyScrapingTemplate', () => {
             expect(consoleMock.log).toHaveBeenCalledWith('Let us scrape!');
             expect(consoleMock.log).toHaveBeenCalledWith('apply scraping command "a"');
             expect(consoleMock.log).toHaveBeenCalledWith('apply scraping command "b"');
+        });
+
+        test('calls getScrapingCommandById with expected arguments', () => {
+            expect(getScrapingCommandByIdMock).toHaveBeenCalledWith('a');
+            expect(getScrapingCommandByIdMock).toHaveBeenCalledWith('b');
+        });
+
+        describe('scraping command HAS NOT been found', () => {
+            test('logs a message', () => {
+                expect(consoleMock.log).toHaveBeenCalledWith('command "a" is not defined');
+                expect(consoleMock.log).toHaveBeenCalledWith('command "b" is not defined');
+            });
         });
     });
 });
