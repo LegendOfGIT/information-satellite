@@ -8,6 +8,8 @@ module.exports = (template = {}) => {
         return;
     }
 
+    let context = {};
+
     template.scraping.forEach(scrapingCommand => {
         const commandId = scrapingCommand.commandId || '';
         console.log(`apply scraping command "${commandId}"`);
@@ -15,6 +17,12 @@ module.exports = (template = {}) => {
         const command = getScrapingCommandById(commandId);
         if(!command) {
             console.log(`command "${commandId}" is not defined`);
+            return;
         }
+
+        console.log(`execute command "${commandId}"`);
+        command({
+            context
+        });
     });
 }

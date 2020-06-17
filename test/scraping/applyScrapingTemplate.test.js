@@ -2,34 +2,52 @@
  * global console
  */
 
-const consoleMock = {
-    log: jest.fn()
-}
+let consoleMock;
 
-const getScrapingCommandByIdMock = jest.fn();
+const scrapingCommandMock = jest.fn();
+const getScrapingCommandByIdMock = jest.fn((commandId) => {
+    if ('c' === commandId) {
+        return scrapingCommandMock;
+    }
+
+    return undefined;
+});
 const getScrapingCommandByIdJestMock = jest.mock(
     '../../src/scraping/getScrapingCommandById',
     () => getScrapingCommandByIdMock
 );
 
-const applyScrapingTemplate = require('../../src/scraping/applyScrapingTemplate');
-
 const originalConsole = global.console;
 
 describe('applyScrapingTemplate', () => {
-    beforeEach(() => {
-        jest.resetAllMocks();
-        global.console = consoleMock;
-    });
-
     afterEach(() => {
         global.console = originalConsole;
     });
 
-    describe('applyScrapingTemplate is called without scraping commands', () => {
-        test('logs a message', () => {
-            applyScrapingTemplate();
+    const whenApplyScrapingTemplateIsCalled = (scrapingTemplate) => {
+        consoleMock = {
+            log: jest.fn()
+        };
+        global.console = consoleMock;
 
+        const applyScrapingTemplate = require('../../src/scraping/applyScrapingTemplate');
+
+        scrapingTemplate = scrapingTemplate || {
+            scraping: [
+                { commandId: 'a' },
+                { commandId: 'b' }
+            ]
+        };
+
+        applyScrapingTemplate(scrapingTemplate);
+    };
+
+    describe('applyScrapingTemplate is called without scraping commands', () => {
+        beforeEach(() => {
+            whenApplyScrapingTemplateIsCalled({});
+        });
+
+        test('logs a message', () => {
             expect(consoleMock.log).toHaveBeenCalledWith('Let us scrape!');
             expect(consoleMock.log).toHaveBeenCalledWith('nothing to scrape. stopping.');
         });
@@ -37,12 +55,7 @@ describe('applyScrapingTemplate', () => {
 
     describe('applyScrapingTemplate is called with scraping commands', () => {
         beforeEach(() => {
-            applyScrapingTemplate({
-                scraping: [
-                    { commandId: 'a' },
-                    { commandId: 'b' }
-                ]
-            });
+            whenApplyScrapingTemplateIsCalled();
         });
 
         test('logs a message for each executed command', () => {
@@ -55,11 +68,39 @@ describe('applyScrapingTemplate', () => {
             expect(getScrapingCommandByIdMock).toHaveBeenCalledWith('a');
             expect(getScrapingCommandByIdMock).toHaveBeenCalledWith('b');
         });
+    });
 
-        describe('scraping command HAS NOT been found', () => {
-            test('logs a message', () => {
-                expect(consoleMock.log).toHaveBeenCalledWith('command "a" is not defined');
-                expect(consoleMock.log).toHaveBeenCalledWith('command "b" is not defined');
+    describe('scraping command HAS NOT been found', () => {
+        beforeEach(() => {
+            whenApplyScrapingTemplateIsCalled();
+        });
+
+        test('logs a message', () => {
+            expect(consoleMock.log).toHaveBeenCalledWith('command "a" is not defined');
+            expect(consoleMock.log).toHaveBeenCalledWith('command "b" is not defined');
+        });
+    });
+
+    describe('the second scraping command HAS been found', () => {
+        beforeEach(() => {
+            whenApplyScrapingTemplateIsCalled({
+                scraping: [
+                    { commandId: 'a' },
+                    { commandId: 'c' },
+                    { commandId: 'd' }
+                ]
+            });
+        });
+
+        test('logs a message', () => {
+            expect(consoleMock.log).toHaveBeenCalledWith('command "a" is not defined');
+            expect(consoleMock.log).toHaveBeenCalledWith('execute command "c"');
+            expect(consoleMock.log).toHaveBeenCalledWith('command "d" is not defined');
+        });
+
+        test('the found command is called with expected arguments', () => {
+            expect(scrapingCommandMock).toHaveBeenCalledWith({
+                context: {}
             });
         });
     });
