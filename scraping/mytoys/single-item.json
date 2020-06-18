@@ -6,8 +6,10 @@
   "scraping": [
     {
       "commandId": "visit-uri",
-      "contentId": "article-search",
-      "uri": "{site}/suche/13550024/"
+      "parameters": {
+        "contextId": "article-search",
+        "uri": "{site}/suche/13550024/"
+      }
     }
   ]
 }

@@ -10,19 +10,22 @@ module.exports = (template = {}) => {
 
     let context = {};
 
-    template.scraping.forEach(scrapingCommand => {
-        const commandId = scrapingCommand.commandId || '';
+    template.scraping.forEach(templateCommand => {
+        const commandId = templateCommand.commandId || '';
         console.log(`apply scraping command "${commandId}"`);
 
         const command = getScrapingCommandById(commandId);
-        if(!command) {
+        if (!command) {
             console.log(`command "${commandId}" is not defined`);
             return;
         }
 
         console.log(`execute command "${commandId}"`);
-        command({
-            context
-        });
+        command(
+            context,
+            templateCommand.parameters
+        );
     });
+    
+    console.log(context);
 }

@@ -86,7 +86,13 @@ describe('applyScrapingTemplate', () => {
             whenApplyScrapingTemplateIsCalled({
                 scraping: [
                     { commandId: 'a' },
-                    { commandId: 'c' },
+                    {
+                        commandId: 'c',
+                        parameters: {
+                           pa: 'ra',
+                           me: 'ters'
+                        }
+                    },
                     { commandId: 'd' }
                 ]
             });
@@ -98,10 +104,14 @@ describe('applyScrapingTemplate', () => {
             expect(consoleMock.log).toHaveBeenCalledWith('command "d" is not defined');
         });
 
-        test('the found command is called with expected arguments', () => {
-            expect(scrapingCommandMock).toHaveBeenCalledWith({
-                context: {}
-            });
+        test('the found command is called with parameters from template', () => {
+            expect(scrapingCommandMock).toHaveBeenCalledWith(
+                {},
+                {
+                    pa: 'ra',
+                    me: 'ters'
+                }
+            );
         });
     });
 });

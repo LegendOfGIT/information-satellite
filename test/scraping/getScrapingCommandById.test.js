@@ -1,7 +1,7 @@
 const scrapingCommandMock = jest.fn();
 
 const scrapingCommandJestMock = jest.mock(
-    '../../scraping/commands/scraping-command-a.js',
+    process.cwd() + '/src/scraping/commands/scraping-command-a',
     () => scrapingCommandMock,
     {
         virtual: true

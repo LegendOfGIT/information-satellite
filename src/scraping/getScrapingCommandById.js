@@ -1,6 +1,6 @@
 module.exports = (commandId) => {
     try {
-        return require(`../../scraping/commands/${commandId}.js`);
+        return require(`${process.cwd()}/src/scraping/commands/${commandId}`);
     }
-    catch {}
+    catch { }
 }
