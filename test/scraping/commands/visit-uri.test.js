@@ -15,8 +15,18 @@ const httpClientJestMock = jest.mock(
     () => httpClientMock
 );
 
+const USED_URI_FOR_HTTP_CLIENT_CALL = 'http://oh.hello.co.uk/oh/hello/123';
+
+const getPreparedCommandParametersJestMock = jest.mock(
+    '../../../src/scraping/getPreparedCommandParameters',
+    () => () => ({
+        uri: USED_URI_FOR_HTTP_CLIENT_CALL
+    }));
+
 let context;
 let visitUriPromise;
+
+
 describe('visit-uri', () => {
     afterEach(() => {
         global.console = originalConsole;
@@ -75,7 +85,7 @@ describe('visit-uri', () => {
 
         test('http-client is called with given uri', (done) => {
             visitUriPromise.then(() => {
-                expect(httpClientMock.get).toHaveBeenCalledWith('http://oh.hello.co.uk/oh/hello');
+                expect(httpClientMock.get).toHaveBeenCalledWith(USED_URI_FOR_HTTP_CLIENT_CALL);
                 done();
             });
         });
@@ -86,7 +96,7 @@ describe('visit-uri', () => {
             test('logs a message', (done) => {
                 visitUriPromise.then(() => {
                     expect(consoleMock.log).toHaveBeenCalledWith(
-                        'requested uri "http://oh.hello.co.uk/oh/hello" can not be resolved. abort'
+                        `requested uri "${USED_URI_FOR_HTTP_CLIENT_CALL}" can not be resolved. abort`
                     );
 
                     done();
@@ -100,7 +110,7 @@ describe('visit-uri', () => {
             test('logs a message and stores httpClient response in context object', (done) => {
                 visitUriPromise.then(() => {
                     expect(consoleMock.log).toHaveBeenCalledWith(
-                        'requested uri "http://oh.hello.co.uk/oh/hello" was resolved successfully.'
+                        `requested uri "${USED_URI_FOR_HTTP_CLIENT_CALL}" was resolved successfully.`
                     );
                     expect(context).toEqual({
                         "oh-hello" : "tasty website content"

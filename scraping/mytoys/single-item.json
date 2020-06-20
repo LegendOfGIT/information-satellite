@@ -1,14 +1,14 @@
 {
   "site": "mytoys.de",
 
-  "itemId": "{site}-{request-item-id}",
+  "itemId": "{site}-{request.query.itemId}",
 
   "scraping": [
     {
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "article-search",
-        "uri": "{site}/suche/13550024/"
+        "uri": "http://{template.site}/suche/{request.query.itemId}/"
       }
     }
   ]

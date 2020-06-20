@@ -1,6 +1,6 @@
 const getScrapingCommandById = require('./getScrapingCommandById');
 
-module.exports = (template = {}) => {
+module.exports = (template = {}, itemId) => {
     console.log('Let us scrape!');
 
     if(!template.scraping) {
@@ -10,6 +10,7 @@ module.exports = (template = {}) => {
 
     let context = {};
 
+    const commandPromises = [];
     template.scraping.forEach(templateCommand => {
         const commandId = templateCommand.commandId || '';
         console.log(`apply scraping command "${commandId}"`);
@@ -20,12 +21,23 @@ module.exports = (template = {}) => {
             return;
         }
 
-        console.log(`execute command "${commandId}"`);
-        command(
-            context,
-            templateCommand.parameters
+        const parameters = Object.assign(
+            templateCommand.parameters,
+            {
+                "request.query.itemId": itemId,
+                "template.site": template.site
+            }
         );
+        console.log(`add command "${commandId}" to execution list`);
+        commandPromises.push(new Promise(resolve => {
+            command(
+                context,
+                parameters
+            ).then(() => { resolve(); });
+        }));
     });
-    
-    console.log(context);
+
+    Promise.all(commandPromises).then(() => {
+        console.log('all done.')
+    });
 }

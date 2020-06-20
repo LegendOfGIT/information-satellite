@@ -12,14 +12,19 @@ const applyScrapingTemplateJestMock = jest.mock(
     () => applyScrapingTemplateMock
 );
 
-
 const observe = require('../src/observe');
 
 describe('observe', () => {
     test('calls getScrapingTemplateBySiteAndUseCase with expected arguments', () => {
-        observe('abc', 'item-overview');
+        observe(
+            'abc',
+            'item-overview'
+        );
 
-        expect(getScrapingTemplateBySiteAndUseCaseMock).toHaveBeenCalledWith('abc', 'item-overview');
+        expect(getScrapingTemplateBySiteAndUseCaseMock).toHaveBeenCalledWith(
+            'abc',
+            'item-overview'
+        );
     });
 
     describe('site and use-case DOES NOT match to any template', () => {
@@ -38,13 +43,16 @@ describe('observe', () => {
         });
 
         test('returns no error', () => {
-            expect(observe('abc', 'item-overview')).toEqual({
+            expect(observe('abc', 'item-overview', '08154711')).toEqual({
                 error: ''
-            })
+            });
         });
 
-        test('calls applyScrapingTemplate with found template', () => {
-            expect(applyScrapingTemplateMock).toHaveBeenCalledWith(templateMock);
+        test('calls applyScrapingTemplate with expected parameters', () => {
+            expect(applyScrapingTemplateMock).toHaveBeenCalledWith(
+                templateMock,
+                '08154711'
+            );
         });
     });
 });

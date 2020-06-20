@@ -3,8 +3,10 @@
  */
 
 let consoleMock;
-
-const scrapingCommandMock = jest.fn();
+const scrapingCommandMock = jest.fn(() => new Promise(resolve => {
+    console.log('execute command "c"');
+    resolve();
+}));
 const getScrapingCommandByIdMock = jest.fn((commandId) => {
     if ('c' === commandId) {
         return scrapingCommandMock;
@@ -39,7 +41,7 @@ describe('applyScrapingTemplate', () => {
             ]
         };
 
-        applyScrapingTemplate(scrapingTemplate);
+        applyScrapingTemplate(scrapingTemplate, '123');
     };
 
     describe('applyScrapingTemplate is called without scraping commands', () => {
@@ -84,6 +86,7 @@ describe('applyScrapingTemplate', () => {
     describe('the second scraping command HAS been found', () => {
         beforeEach(() => {
             whenApplyScrapingTemplateIsCalled({
+                site: 'scrape-it.de',
                 scraping: [
                     { commandId: 'a' },
                     {
@@ -109,7 +112,9 @@ describe('applyScrapingTemplate', () => {
                 {},
                 {
                     pa: 'ra',
-                    me: 'ters'
+                    me: 'ters',
+                    'request.query.itemId': '123',
+                    'template.site': 'scrape-it.de'
                 }
             );
         });
