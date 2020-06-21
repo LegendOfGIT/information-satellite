@@ -4,6 +4,8 @@ const getPreparedCommandParameters = require('../getPreparedCommandParameters');
 module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     const { contextId, uri } = parameters;
 
+    console.log('executing command "visit-uri"');
+
     if(!uri) {
         console.log('required parameter "uri" is not given. abort.');
         resolve();
@@ -19,6 +21,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         parameters,
         { uri }
     ));
+
     return httpClient.get(commandParameters.uri)
         .then(response => {
             console.log(`requested uri "${commandParameters.uri}" was resolved successfully.`);

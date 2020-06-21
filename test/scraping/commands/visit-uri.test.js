@@ -26,7 +26,6 @@ const getPreparedCommandParametersJestMock = jest.mock(
 let context;
 let visitUriPromise;
 
-
 describe('visit-uri', () => {
     afterEach(() => {
         global.console = originalConsole;
@@ -55,6 +54,13 @@ describe('visit-uri', () => {
     describe('visitUri is called without arguments', () => {
         beforeEach(() => {
             visitUriIsCalled({});
+        });
+
+        test('logs a startup message', (done) => {
+            visitUriPromise.then(() => {
+                expect(consoleMock.log).toHaveBeenCalledWith('executing command "visit-uri"');
+                done();
+            });
         });
 
         test('logs a message', (done) => {

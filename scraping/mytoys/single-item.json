@@ -10,6 +10,14 @@
         "contextId": "article-search",
         "uri": "http://{template.site}/suche/{request.query.itemId}/"
       }
+    },
+    {
+      "commandId": "visit-link-by-css-query",
+      "parameters": {
+        "contextId": "single-product-view",
+        "sourceContextId": "article-search",
+        "css-query": ".prod-tile__link"
+      }
     }
   ]
 }
