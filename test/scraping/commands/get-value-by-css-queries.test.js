@@ -9,10 +9,15 @@ const originalConsole = global.console;
 let commandPromise;
 
 const elementMock = {
-    attr: jest.fn(() => 'http://i.found-a-link.org')
+    get: jest.fn(() => [{
+        children: [
+            { data: '11,11' }
+        ]
+    }])
 };
 const cssSelectorMock = jest.fn(() => elementMock);
 const cheerioMock = {
+    html: jest.fn((content) => `cheerio.html(${content})`),
     load: jest.fn(() => cssSelectorMock)
 };
 const cheerioJestMock = jest.mock(
@@ -20,14 +25,7 @@ const cheerioJestMock = jest.mock(
     () => cheerioMock
 );
 
-const visitUriCommandPromise = Promise.resolve();
-const visitUriCommandMock = jest.fn(() => visitUriCommandPromise);
-const visitUriCommandJestMock = jest.mock(
-    '../../../src/scraping/commands/visit-uri',
-    () => visitUriCommandMock
-);
-
-describe('visit-link-by-css-query', () => {
+describe('get-value-by-css-queries', () => {
     afterEach(() => {
         global.console = originalConsole;
     });
@@ -40,12 +38,15 @@ describe('visit-link-by-css-query', () => {
         };
         global.console = consoleMock;
 
-        const command = require('../../../src/scraping/commands/visit-link-by-css-query');
+        const command = require('../../../src/scraping/commands/get-value-by-css-queries');
 
         parameters = parameters || {
-            contextId: 'oh-hello',
-            sourceContextId: 'the-source',
-            'css-query': '#oh .hello'
+            contextId: 'price',
+            sourceContextId: 'page',
+            'css-queries': [
+                '#oh',
+                '#hello'
+            ]
         };
 
         commandPromise = command(context, parameters);
@@ -58,7 +59,7 @@ describe('visit-link-by-css-query', () => {
 
         test('logs startup message', (done) => {
             commandPromise.then(() => {
-                expect(consoleMock.log).toHaveBeenCalledWith('executing command "visit-link-by-css-query"');
+                expect(consoleMock.log).toHaveBeenCalledWith('executing command "get-value-by-css-queries"');
                 done();
             });
         });
@@ -88,6 +89,24 @@ describe('visit-link-by-css-query', () => {
         });
     });
 
+    describe('command is called without required argument "css-queries"', () => {
+        beforeEach(() => {
+            commandIsCalled({
+                contextId: 'abc',
+                sourceContextId: 'page'
+            });
+        });
+
+        test('logs a message', (done) => {
+            commandPromise.then(() => {
+                expect(consoleMock.log).toHaveBeenCalledWith(
+                    'required parameter "css-queries" is not given. abort.'
+                );
+                done();
+            });
+        });
+    });
+
     describe('command is called with required arguments', () => {
         describe('source context data DOES NOT exist', () => {
             beforeEach(() => {
@@ -109,50 +128,30 @@ describe('visit-link-by-css-query', () => {
 
         describe('source context data DOES exist', () => {
             const context = {
-                def: 'ghi'
+                page: 'ghi'
             };
 
             beforeEach(() => {
-                commandIsCalled(
-                    {
-                        contextId: 'abc',
-                        sourceContextId: 'def',
-                        'css-query': '#oh .my.god'
-                    },
-                    context
-                );
+                commandIsCalled(undefined, context);
             });
 
             test('cheerio.load is called with value from source context', (done) => {
-                visitUriCommandPromise.then(() => {
+                commandPromise.then(() => {
                     expect(cheerioMock.load).toHaveBeenCalledWith('ghi');
                     done();
                 });
             });
 
-            test('loaded cheerio is called with given css query', (done) => {
-                visitUriCommandPromise.then(() => {
-                    expect(cssSelectorMock).toHaveBeenCalledWith('#oh .my.god');
+            test('loaded cheerio is called with given css queries', (done) => {
+                commandPromise.then(() => {
+                    expect(cssSelectorMock).toHaveBeenCalledWith('#oh');
                     done();
                 });
             });
 
-            test('css query result is called with attribute expected attribute', (done) => {
-                visitUriCommandPromise.then(() => {
-                    expect(elementMock.attr).toHaveBeenCalledWith('href');
-                    done();
-                });
-            });
-
-            test('visit-uri command is called with found link', (done) => {
-                visitUriCommandPromise.then(() => {
-                    expect(visitUriCommandMock).toHaveBeenCalledWith(
-                        context,
-                        {
-                            contextId: 'abc',
-                            uri: 'http://i.found-a-link.org'
-                        }
-                    );
+            test('query result is stored in context object', (done) => {
+                commandPromise.then(() => {
+                    expect(context.price).toBe('11,11');
                     done();
                 });
             });

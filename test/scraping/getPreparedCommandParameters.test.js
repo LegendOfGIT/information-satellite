@@ -28,4 +28,28 @@ describe('getPreparedCommandParameters', () => {
              });
          });
     });
+
+    describe('parameter "uri" does not contain http://', () => {
+        test('parameter "uri" will be prepended with {template.site}', () => {
+            expect(getPreparedCommandParameters({
+                uri: '/my-http-is-missing',
+                'template.site': 'mysite.to'
+            })).toEqual({
+                uri: 'https://mysite.to/my-http-is-missing',
+                'template.site': 'mysite.to'
+            });
+        });
+    });
+
+    describe('parameter "uri" does contain http://', () => {
+        test('parameter "uri" will be prepended with {template.site}', () => {
+            expect(getPreparedCommandParameters({
+                uri: 'http://yoursite.to/my-http-is-not-missing',
+                'template.site': 'mysite.to'
+            })).toEqual({
+                uri: 'http://yoursite.to/my-http-is-not-missing',
+                'template.site': 'mysite.to'
+            });
+        });
+    });
 });

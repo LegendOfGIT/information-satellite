@@ -8,7 +8,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "article-search",
-        "uri": "http://{template.site}/suche/{request.query.itemId}/"
+        "uri": "https://{template.site}/suche/{request.query.itemId}/"
       }
     },
     {
@@ -17,6 +17,14 @@
         "contextId": "single-product-view",
         "sourceContextId": "article-search",
         "css-query": ".prod-tile__link"
+      }
+    },
+    {
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "current-price",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".prod-tile__price-reduced", ".prod-tile__price-regular" ]
       }
     }
   ]

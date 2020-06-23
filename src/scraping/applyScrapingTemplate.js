@@ -10,7 +10,7 @@ module.exports = (template = {}, itemId) => {
 
     let context = {};
 
-    const commandPromises = [];
+    const commands = [];
     template.scraping.forEach(templateCommand => {
         const commandId = templateCommand.commandId || '';
         console.log(`apply scraping command "${commandId}"`);
@@ -29,15 +29,26 @@ module.exports = (template = {}, itemId) => {
             }
         );
         console.log(`add command "${commandId}" to execution list`);
-        commandPromises.push(new Promise(resolve => {
-            command(
-                context,
-                parameters
-            ).then(() => { resolve(); });
-        }));
+        commands.push({
+            command,
+            parameters
+        });
     });
 
-    Promise.all(commandPromises).then(() => {
-        console.log('all done.')
+    const executeNextCommand = () => new Promise(resolve => {
+        const command = commands.pop();
+
+        if(!command){
+            resolve();
+        }
+
+        const promiseFn = command.command;
+
+        promiseFn(context, command.parameters).then(() => {
+            resolve(executeNextCommand());
+        });
     });
+
+    commands.reverse();
+    executeNextCommand().then(() => { console.log(Object.keys(context)); });
 }

@@ -6,12 +6,12 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
 
     console.log('executing command "visit-uri"');
 
-    if(!uri) {
+    if (!uri) {
         console.log('required parameter "uri" is not given. abort.');
         resolve();
     }
 
-    if(!contextId) {
+    if (!contextId) {
         console.log('required parameter "contextId" is not given. abort.');
         resolve();
     }
@@ -19,13 +19,15 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     const commandParameters = getPreparedCommandParameters(Object.assign(
         {},
         parameters,
-        { uri }
+        { uri: uri || '' }
     ));
 
     return httpClient.get(commandParameters.uri)
         .then(response => {
             console.log(`requested uri "${commandParameters.uri}" was resolved successfully.`);
-            context[contextId] = response.data;
+            if (contextId) {
+                context[contextId] = response.data;
+            }
 
             resolve();
         })
