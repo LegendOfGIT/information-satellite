@@ -25,9 +25,6 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
 
     const isLastSeparator = (value, currentIndex) => {
         const restOfValue = value.substring(value.length, currentIndex + 1);
-        if(!restOfValue) {
-            return true;
-        }
 
         return -1 === restOfValue.indexOf('.') && -1 === restOfValue.indexOf(',');
     };
