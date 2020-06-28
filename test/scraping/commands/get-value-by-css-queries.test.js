@@ -148,11 +148,64 @@ describe('get-value-by-css-queries', () => {
                     done();
                 });
             });
+        });
 
-            test('query result is stored in context object', (done) => {
-                commandPromise.then(() => {
-                    expect(context.price).toBe('11,11');
-                    done();
+        const cssSelectResponseTestProvider = [
+            {
+                scenarioName: 'no found children elements',
+                cssElementChildren: [],
+                expectedContent: ''
+            },
+            {
+                scenarioName: 'normal text only',
+                cssElementChildren: [
+                    {
+                        type: 'text',
+                        data: '123 '
+                    },
+                    {
+                        type: 'text',
+                        data: '456'
+                    }
+                ],
+                expectedContent: '123 456'
+            },
+            {
+                scenarioName: 'control characters, different types',
+                cssElementChildren: [
+                    {
+                        type: 'text',
+                        data: '\r\n '
+                    },
+                    {
+                        type: 'element',
+                        data: '<div>'
+                    },
+                    {
+                        type: 'text',
+                        data: '456 \n'
+                    }
+                ],
+                expectedContent: '456 \n'
+            }
+        ];
+
+        cssSelectResponseTestProvider.forEach(item => {
+            const context = {
+                page: 'ghi'
+            };
+
+            beforeEach(() => {
+                elementMock.get = jest.fn(() => [{children: item.cssElementChildren }]);
+                commandIsCalled(undefined, context);
+            });
+
+            describe('CSS selection returns a specific result-set', () => {
+                test(`query result is stored in context object (${item.scenarioName})`, (done) => {
+                    commandPromise.then(() => {
+                        expect(context.price).toBe(item.expectedContent);
+                        done();
+                    });
                 });
             });
         });

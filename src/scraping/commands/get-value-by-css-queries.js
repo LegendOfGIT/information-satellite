@@ -28,9 +28,28 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     }
 
     const getValueFromCssSelect = (cssSelectorResponse) => {
-        return (cssSelectorResponse.get()[0] || {
+        let children = (cssSelectorResponse.get()[0] || {
             children: [{}]
-        }).children[0].data;
+        }).children;
+
+        const childContainsRelevantInformation = (child) => {
+            if ('text' !== child.type) {
+                return false;
+            }
+
+            return child.data
+                .replace('\r', '')
+                .replace('\n', '')
+                .replace(' ', '');
+        };
+
+        children = children.filter(c => childContainsRelevantInformation(c));
+
+        if (0 === children.length) {
+            return '';
+        }
+
+        return children.map(c => c.data).join('') || '';
     };
 
     const cssSelector = cheerio.load(sourceContext);

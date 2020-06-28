@@ -50,5 +50,9 @@ module.exports = (template = {}, itemId) => {
     });
 
     commands.reverse();
-    executeNextCommand().then(() => { console.log(Object.keys(context)); });
+    executeNextCommand().then(() => {
+        console.log(Object.keys(context));
+        console.log(context['price']);
+        console.log(context['current-price']);
+    });
 }

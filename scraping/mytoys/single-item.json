@@ -24,7 +24,29 @@
       "parameters": {
         "contextId": "current-price",
         "sourceContextId": "single-product-view",
-        "css-queries": [ ".prod-tile__price-reduced", ".prod-tile__price-regular" ]
+        "css-queries": [ ".prod-info__price-reduced", ".prod-info__price-regular" ]
+      }
+    },
+    {
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".prod-info__price-old", ".prod-info__price-regular" ]
+      }
+    },
+    {
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "current-price",
+        "sourceContextId": "current-price"
+      }
+    },
+    {
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price",
+        "sourceContextId": "price"
       }
     }
   ]
