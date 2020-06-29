@@ -1,0 +1,72 @@
+{
+  "site": "store.steampowered.com",
+
+  "itemId": "{site}-{request.query.itemId}",
+
+  "scraping": [
+    {
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "single-product-view",
+        "uri": "https://{template.site}/app/{request.query.itemId}"
+      }
+    },
+    {
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "current-price",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".discount_final_price" ]
+      }
+    },
+    {
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".discount_original_price" ]
+      }
+    },
+    {
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "current-price",
+        "sourceContextId": "current-price"
+      }
+    },
+    {
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price",
+        "sourceContextId": "price"
+      }
+    },
+    {
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "product-title",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".apphub_AppName" ]
+      }
+    },
+    {
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "product-description",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".game_description_snippet" ]
+      }
+    },
+    {
+      "commandId": "store-information",
+      "parameters": {
+        "informationIds": [
+          "current-price",
+          "price",
+          "product-description",
+          "product-title"
+        ]
+      }
+    }
+  ]
+}

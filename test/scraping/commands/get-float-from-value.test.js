@@ -96,6 +96,14 @@ describe('get-float-from-value', () => {
             value: '2.123,456',
             expectedFloatValue: 2123.456
         },
+        {
+            value: ',45',
+            expectedFloatValue: 0.45
+        },
+        {
+            value: '.99',
+            expectedFloatValue: 0.99
+        },
     ];
     floatParsingTestProvider.forEach(item => {
         describe(`float is parsed correctly and stored in context (value: ${item.value})`, () => {
