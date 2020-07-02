@@ -58,13 +58,32 @@
       }
     },
     {
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "developer",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ "#developers_list a" ]
+      }
+    },
+    {
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title-image",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".game_header_image_full" ],
+        "attribute-id": "src"
+      }
+    },
+    {
       "commandId": "store-information",
       "parameters": {
         "informationIds": [
           "current-price",
+          "developer",
           "price",
           "product-description",
-          "product-title"
+          "product-title",
+          "title-image"
         ]
       }
     }

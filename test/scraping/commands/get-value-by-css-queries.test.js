@@ -153,40 +153,63 @@ describe('get-value-by-css-queries', () => {
         const cssSelectResponseTestProvider = [
             {
                 scenarioName: 'no found children elements',
-                cssElementChildren: [],
+                cssSelectorResponse: { children: [] },
                 expectedContent: ''
             },
             {
                 scenarioName: 'normal text only',
-                cssElementChildren: [
-                    {
-                        type: 'text',
-                        data: '123 '
-                    },
-                    {
-                        type: 'text',
-                        data: '456'
-                    }
-                ],
+                cssSelectorResponse: {
+                    children: [
+                        {
+                            type: 'text',
+                            data: '123 '
+                        },
+                        {
+                            type: 'text',
+                            data: '456'
+                        }
+                    ]
+                },
                 expectedContent: '123 456'
             },
             {
                 scenarioName: 'control characters, different types',
-                cssElementChildren: [
-                    {
-                        type: 'text',
-                        data: '\r\n '
-                    },
-                    {
-                        type: 'element',
-                        data: '<div>'
-                    },
-                    {
-                        type: 'text',
-                        data: '456 \n'
-                    }
-                ],
+                cssSelectorResponse: {
+                    children:[
+                        {
+                            type: 'text',
+                            data: '\r\n '
+                        },
+                        {
+                            type: 'element',
+                            data: '<div>'
+                        },
+                        {
+                            type: 'text',
+                            data: '456 \n'
+                        }
+                    ]
+                },
                 expectedContent: '456 \n'
+            },
+            {
+                scenarioName: 'value from attribute',
+                parameters: {
+                    contextId: 'price',
+                    sourceContextId: 'page',
+                    'attribute-id': 'abc',
+                    'css-queries': [
+                        '#oh',
+                        '#hello'
+                    ]
+                },
+                cssSelectorResponse: {
+                    attribs: {
+                        abc: 'cde \n'
+                    },
+                    children:[]
+                },
+                expectedContent: 'cde \n'
             }
         ];
 
@@ -196,8 +219,8 @@ describe('get-value-by-css-queries', () => {
             };
 
             beforeEach(() => {
-                elementMock.get = jest.fn(() => [{children: item.cssElementChildren }]);
-                commandIsCalled(undefined, context);
+                elementMock.get = jest.fn(() => [item.cssSelectorResponse]);
+                commandIsCalled(item.parameters, context);
             });
 
             describe('CSS selection returns a specific result-set', () => {

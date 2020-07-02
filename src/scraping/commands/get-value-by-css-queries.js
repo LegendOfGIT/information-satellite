@@ -27,8 +27,16 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         resolve();
     }
 
+    const attributeId = parameters['attribute-id'] || '';
+
     const getValueFromCssSelect = (cssSelectorResponse) => {
-        let children = (cssSelectorResponse.get()[0] || {
+        const firstResult = cssSelectorResponse.get()[0];
+
+        if (attributeId && firstResult.attribs[attributeId]) {
+            return firstResult.attribs[attributeId];
+        }
+
+        let children = (firstResult || {
             children: [{}]
         }).children;
 

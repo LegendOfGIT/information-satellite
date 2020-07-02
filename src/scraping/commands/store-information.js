@@ -1,3 +1,5 @@
+const getValueWithoutIrrelevantContent = require('../getValueWithoutIrrelevantContent');
+
 module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     const { informationIds } = parameters;
 
@@ -10,7 +12,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
 
     let informationToStore = {};
     informationIds.forEach(informationId => {
-        informationToStore[informationId] = context[informationId];
+        informationToStore[informationId] = getValueWithoutIrrelevantContent(context[informationId]);
     });
 
     console.log(informationToStore);

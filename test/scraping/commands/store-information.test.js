@@ -8,6 +8,14 @@ const originalConsole = global.console;
 
 let commandPromise;
 
+jest.mock('../../../src/scraping/getValueWithoutIrrelevantContent', () => (value) => {
+     if ('string' !== typeof value) {
+         return value;
+     }
+
+     return `${value} without irrelevant content`;
+});
+
 describe('store-information', () => {
     afterEach(() => {
         global.console = originalConsole;
@@ -64,11 +72,11 @@ describe('store-information', () => {
             });
         });
 
-        test('http-client is called with given uri', (done) => {
+        test('the content to store is logged into console', (done) => {
             commandPromise.then(() => {
                 expect(console.log).toHaveBeenCalledWith({
                     price: 123.45,
-                    'product-title': 'toaster'
+                    'product-title': 'toaster without irrelevant content'
                 });
                 done();
             });
