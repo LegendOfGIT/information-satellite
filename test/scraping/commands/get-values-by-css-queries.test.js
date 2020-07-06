@@ -24,7 +24,7 @@ const getValuesFromCssSelectorResponseJestMock = jest.mock(
     () => () => getValuesFromCssSelectorResponseMock
 );
 
-describe('get-value-by-css-queries', () => {
+describe('get-values-by-css-queries', () => {
     afterEach(() => {
         global.console = originalConsole;
     });
@@ -37,7 +37,7 @@ describe('get-value-by-css-queries', () => {
         };
         global.console = consoleMock;
 
-        const command = require('../../../src/scraping/commands/get-value-by-css-queries');
+        const command = require('../../../src/scraping/commands/get-values-by-css-queries');
 
         parameters = parameters || {
             contextId: 'price',
@@ -58,7 +58,7 @@ describe('get-value-by-css-queries', () => {
 
         test('logs startup message', (done) => {
             commandPromise.then(() => {
-                expect(consoleMock.log).toHaveBeenCalledWith('executing command "get-value-by-css-queries"');
+                expect(consoleMock.log).toHaveBeenCalledWith('executing command "get-values-by-css-queries"');
                 done();
             });
         });
@@ -158,7 +158,7 @@ describe('get-value-by-css-queries', () => {
             {
                 scenarioName: 'multiple values from css selector response',
                 valuesFromCssSelectorResponse: ['abc', undefined, 'def'],
-                expectedContent: 'abc'
+                expectedContent: ['abc', 'def']
             }
         ];
 
@@ -175,7 +175,7 @@ describe('get-value-by-css-queries', () => {
             describe('CSS selection returns a specific result-set', () => {
                 test(`query result is stored in context object (${item.scenarioName})`, (done) => {
                     commandPromise.then(() => {
-                        expect(context.price).toBe(item.expectedContent);
+                        expect(context.price).toEqual(item.expectedContent);
                         done();
                     });
                 });

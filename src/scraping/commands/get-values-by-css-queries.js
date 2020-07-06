@@ -2,7 +2,7 @@ const cheerio = require('cheerio');
 const getValuesFromCssSelectorResponse = require('../processing/getValuesFromCssSelectorResponse');
 
 module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
-    console.log('executing command "get-value-by-css-queries"')
+    console.log('executing command "get-values-by-css-queries"')
 
     const { contextId, sourceContextId } = parameters;
     const cssQueries = parameters['css-queries'];
@@ -37,7 +37,8 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         }
 
         const valuesFromCssSelector = getValuesFromCssSelectorResponse(cssSelector(cssQuery), attributeId);
-        context[contextId] = 0 === valuesFromCssSelector.length ? undefined : valuesFromCssSelector[0];
+        const values = valuesFromCssSelector.filter(item => item);
+        context[contextId] = 0 === values.length ? undefined : values;
     });
 
     resolve();

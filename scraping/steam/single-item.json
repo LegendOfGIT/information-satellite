@@ -68,9 +68,26 @@
     {
       "commandId": "get-value-by-css-queries",
       "parameters": {
+        "contextId": "publisher",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".dev_row:nth-of-type(2) a" ]
+      }
+    },
+    {
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
         "contextId": "title-image",
         "sourceContextId": "single-product-view",
         "css-queries": [ ".game_header_image_full" ],
+        "attribute-id": "src"
+      }
+    },
+    {
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "product-images",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".highlight_strip_item img" ],
         "attribute-id": "src"
       }
     },
@@ -82,7 +99,9 @@
           "developer",
           "price",
           "product-description",
+          "product-images",
           "product-title",
+          "publisher",
           "title-image"
         ]
       }
