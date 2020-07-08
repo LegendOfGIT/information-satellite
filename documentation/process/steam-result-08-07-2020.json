@@ -1,0 +1,28 @@
+{
+  "current-price": 9.99,
+  "developer": 'Paradox Development Studio',
+  "price": 39.99,
+  "product-description": 'Victory is at your fingertips! Your ability to lead your nation is your supreme weapon, the strategy game Hearts of Iron IV lets you take command of any nation in World War II; the most engaging conflict in
+  world history.',
+  "product-images": [
+    'https://steamcdn-a.akamaihd.net/steam/apps/256665194/movie.184x123.jpg?t=1591306471',
+    'https://steamcdn-a.akamaihd.net/steam/apps/256664316/movie.184x123.jpg?t=1591306479',
+    'https://steamcdn-a.akamaihd.net/steam/apps/394360/ss_c5f3c3cacb3ed43f9757b39add492fcf14b5790f.116x65.jpg?t=1593098332',
+    'https://steamcdn-a.akamaihd.net/steam/apps/394360/ss_c5f3c3cacb3ed43f9757b39add492fcf14b5790f.600x338.jpg?t=1593098332',
+    'https://steamcdn-a.akamaihd.net/steam/apps/394360/ss_9d61ffe52d82e99a759bd28db0dd3fa66607f858.116x65.jpg?t=1593098332',
+    'https://steamcdn-a.akamaihd.net/steam/apps/394360/ss_9d61ffe52d82e99a759bd28db0dd3fa66607f858.600x338.jpg?t=1593098332',
+    'https://steamcdn-a.akamaihd.net/steam/apps/394360/ss_3732cd647cdead38985c913ac9f3e85e7a773bea.116x65.jpg?t=1593098332',
+    'https://steamcdn-a.akamaihd.net/steam/apps/394360/ss_3732cd647cdead38985c913ac9f3e85e7a773bea.600x338.jpg?t=1593098332',
+    'https://steamcdn-a.akamaihd.net/steam/apps/394360/ss_069f40f225ea9302a6b4acf0af3c5d85001dcac6.116x65.jpg?t=1593098332',
+    'https://steamcdn-a.akamaihd.net/steam/apps/394360/ss_069f40f225ea9302a6b4acf0af3c5d85001dcac6.600x338.jpg?t=1593098332',
+    'https://steamcdn-a.akamaihd.net/steam/apps/394360/ss_69944e7f38e81c03d864fcb9f3d8d05572408b1e.116x65.jpg?t=1593098332',
+    'https://steamcdn-a.akamaihd.net/steam/apps/394360/ss_69944e7f38e81c03d864fcb9f3d8d05572408b1e.600x338.jpg?t=1593098332',
+    'https://steamcdn-a.akamaihd.net/steam/apps/394360/ss_4e91ca77b617a94929f36f174abd7bc35a5b031c.116x65.jpg?t=1593098332',
+    'https://steamcdn-a.akamaihd.net/steam/apps/394360/ss_4e91ca77b617a94929f36f174abd7bc35a5b031c.600x338.jpg?t=1593098332',
+    'https://steamcdn-a.akamaihd.net/steam/apps/394360/ss_6943397bc5d79087d1ebc1d209f2c8b5b1b8569d.116x65.jpg?t=1593098332',
+    'https://steamcdn-a.akamaihd.net/steam/apps/394360/ss_6943397bc5d79087d1ebc1d209f2c8b5b1b8569d.600x338.jpg?t=1593098332'
+  ],
+  "product-title": 'Hearts of Iron IV',
+  "publisher": 'Paradox Interactive',
+  "title-image": 'https://steamcdn-a.akamaihd.net/steam/apps/394360/header.jpg?t=1593098332'
+}

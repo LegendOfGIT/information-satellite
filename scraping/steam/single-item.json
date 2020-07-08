@@ -5,6 +5,7 @@
 
   "scraping": [
     {
+      "comment": "single-product-view",
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "single-product-view",
@@ -12,6 +13,7 @@
       }
     },
     {
+      "comment": "current-price",
       "commandId": "get-value-by-css-queries",
       "parameters": {
         "contextId": "current-price",
@@ -20,6 +22,7 @@
       }
     },
     {
+      "comment": "price",
       "commandId": "get-value-by-css-queries",
       "parameters": {
         "contextId": "price",
@@ -28,6 +31,7 @@
       }
     },
     {
+      "comment": "current-price to float",
       "commandId": "get-float-from-value",
       "parameters": {
         "contextId": "current-price",
@@ -35,6 +39,7 @@
       }
     },
     {
+      "comment": "price to float",
       "commandId": "get-float-from-value",
       "parameters": {
         "contextId": "price",
@@ -42,6 +47,7 @@
       }
     },
     {
+      "comment": "product-title",
       "commandId": "get-value-by-css-queries",
       "parameters": {
         "contextId": "product-title",
@@ -50,6 +56,7 @@
       }
     },
     {
+      "comment": "product-description",
       "commandId": "get-value-by-css-queries",
       "parameters": {
         "contextId": "product-description",
@@ -58,6 +65,7 @@
       }
     },
     {
+      "comment": "developer",
       "commandId": "get-value-by-css-queries",
       "parameters": {
         "contextId": "developer",
@@ -66,6 +74,7 @@
       }
     },
     {
+      "comment": "publisher",
       "commandId": "get-value-by-css-queries",
       "parameters": {
         "contextId": "publisher",
@@ -74,6 +83,7 @@
       }
     },
     {
+      "comment": "title-image",
       "commandId": "get-value-by-css-queries",
       "parameters": {
         "contextId": "title-image",
@@ -83,6 +93,7 @@
       }
     },
     {
+      "comment": "product-images (116x65)",
       "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-images",
@@ -92,6 +103,18 @@
       }
     },
     {
+      "comment": "add 600x338 versions of product-images",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "product-images",
+        "sourceContextId": "product-images",
+        "replacements": {
+          "116x65": "600x338"
+        }
+      }
+    },
+    {
+      "comment": "store scraped information",
       "commandId": "store-information",
       "parameters": {
         "informationIds": [

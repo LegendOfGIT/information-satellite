@@ -35,17 +35,21 @@ module.exports = (template = {}, itemId) => {
         });
     });
 
-    const executeNextCommand = () => new Promise(resolve => {
+    const executeNextCommand = (currentCommandIndex) => new Promise(resolve => {
         const command = commands.pop();
 
         if(!command){
             resolve();
         }
 
+        currentCommandIndex = currentCommandIndex || 1;
+
         const promiseFn = command.command;
 
         promiseFn(context, command.parameters).then(() => {
-            resolve(executeNextCommand());
+            console.log(`executed command ${currentCommandIndex} of ${commands.length + currentCommandIndex}`);
+            currentCommandIndex++;
+            resolve(executeNextCommand(currentCommandIndex));
         });
     });
 
