@@ -95,35 +95,9 @@ describe('clone-items-and-modify-clones', () => {
                 'Happy !!!',
             ],
             expectedItems: [
-                'oh hi Mark !',
                 ' hi Greg ?!?',
-                'bye Mark ...',
                 'bye Greg ...',
-                'Happy !!!',
                 'Happy ?!??!??!?'
-            ]
-        },
-        {
-            scenarioName: 'cloning and replacing + discard duplications',
-            parameters: {
-                contextId: 'items-with-clones',
-                sourceContextId: 'items',
-                replacements: {
-                    "oh": "",
-                    "Mark": "Greg",
-                    "!": "?!?"
-                }
-            },
-            items: [
-                'hi Louis',
-                'bye Mark ...',
-                '123 see',
-            ],
-            expectedItems: [
-                'hi Louis',
-                'bye Mark ...',
-                'bye Greg ...',
-                '123 see'
             ]
         }
     ];

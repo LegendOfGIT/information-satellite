@@ -9,57 +9,57 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "single-product-view",
-        "uri": "https://{template.site}/app/{request.query.itemId}"
+        "uri": "https://{template.site}/app/{request.query.itemId}?l=german"
       }
     },
     {
-      "comment": "current-price",
+      "comment": "price-current",
       "commandId": "get-value-by-css-queries",
       "parameters": {
-        "contextId": "current-price",
+        "contextId": "price-current",
         "sourceContextId": "single-product-view",
-        "css-queries": [ ".discount_final_price" ]
+        "css-queries": [ ".game_area_purchase_game_wrapper:not(.dynamic_bundle_description) .discount_final_price", ".game_area_purchase_game_wrapper:not(.dynamic_bundle_description) .game_purchase_price" ]
       }
     },
     {
-      "comment": "price",
+      "comment": "price-initial",
       "commandId": "get-value-by-css-queries",
       "parameters": {
-        "contextId": "price",
+        "contextId": "price-initial",
         "sourceContextId": "single-product-view",
-        "css-queries": [ ".discount_original_price" ]
+        "css-queries": [ ".game_area_purchase_game_wrapper:not(.dynamic_bundle_description) .game_purchase_price", ".game_area_purchase_game_wrapper:not(.dynamic_bundle_description) .discount_original_price" ]
       }
     },
     {
-      "comment": "current-price to float",
+      "comment": "price-current to float",
       "commandId": "get-float-from-value",
       "parameters": {
-        "contextId": "current-price",
-        "sourceContextId": "current-price"
+        "contextId": "price-current",
+        "sourceContextId": "price-current"
       }
     },
     {
-      "comment": "price to float",
+      "comment": "price-initial to float",
       "commandId": "get-float-from-value",
       "parameters": {
-        "contextId": "price",
-        "sourceContextId": "price"
+        "contextId": "price-initial",
+        "sourceContextId": "price-initial"
       }
     },
     {
-      "comment": "product-title",
+      "comment": "title",
       "commandId": "get-value-by-css-queries",
       "parameters": {
-        "contextId": "product-title",
+        "contextId": "title",
         "sourceContextId": "single-product-view",
         "css-queries": [ ".apphub_AppName" ]
       }
     },
     {
-      "comment": "product-description",
+      "comment": "description",
       "commandId": "get-value-by-css-queries",
       "parameters": {
-        "contextId": "product-description",
+        "contextId": "description",
         "sourceContextId": "single-product-view",
         "css-queries": [ ".game_description_snippet" ]
       }
@@ -93,24 +93,33 @@
       }
     },
     {
-      "comment": "product-images (116x65)",
+      "comment": "images-small (116x65)",
       "commandId": "get-values-by-css-queries",
       "parameters": {
-        "contextId": "product-images",
+        "contextId": "images-small",
         "sourceContextId": "single-product-view",
         "css-queries": [ ".highlight_strip_item img" ],
         "attribute-id": "src"
       }
     },
     {
-      "comment": "add 600x338 versions of product-images",
+      "comment": "add 600x338 versions of images-small",
       "commandId": "clone-items-and-modify-clones",
       "parameters": {
-        "contextId": "product-images",
-        "sourceContextId": "product-images",
+        "contextId": "images-big",
+        "sourceContextId": "images-small",
         "replacements": {
           "116x65": "600x338"
         }
+      }
+    },
+    {
+      "comment": "tags",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "tags",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".popular_tags a" ]
       }
     },
     {
@@ -118,13 +127,15 @@
       "commandId": "store-information",
       "parameters": {
         "informationIds": [
-          "current-price",
+          "description",
           "developer",
-          "price",
-          "product-description",
-          "product-images",
-          "product-title",
+          "images-big",
+          "images-small",
+          "price-current",
+          "price-initial",
           "publisher",
+          "tags",
+          "title",
           "title-image"
         ]
       }

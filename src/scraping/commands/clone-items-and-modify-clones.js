@@ -20,21 +20,17 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         resolve();
     }
 
-    const itemsWithClones = [];
+    const items = [];
     sourceContext.forEach(item => {
-        itemsWithClones.push(item);
-
         let clonedItem = item;
         for (const [key, value] of Object.entries(replacements)) {
             clonedItem = clonedItem.replace(new RegExp(key,"g"), value);
         }
 
-        if (!itemsWithClones.includes(clonedItem)) {
-            itemsWithClones.push(clonedItem);
-        }
+        items.push(clonedItem);
     });
 
-    context[contextId] = itemsWithClones;
+    context[contextId] = items;
 
     resolve();
 });
