@@ -5,6 +5,14 @@
 
   "scraping": [
     {
+      "comment": "link",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "link",
+        "value": "https://{template.site}/app/{request.query.itemId}?l=german"
+      }
+    },
+    {
       "comment": "single-product-view",
       "commandId": "visit-uri",
       "parameters": {
@@ -123,6 +131,24 @@
       }
     },
     {
+      "comment": "suitable-age",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "suitable-age",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".game_rating_icon img"],
+        "attribute-id": "src"
+      }
+    },
+    {
+      "comment": "suitable-age to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "suitable-age",
+        "sourceContextId": "suitable-age"
+      }
+    },
+    {
       "comment": "store scraped information",
       "commandId": "store-information",
       "parameters": {
@@ -131,9 +157,11 @@
           "developer",
           "images-big",
           "images-small",
+          "link",
           "price-current",
           "price-initial",
           "publisher",
+          "suitable-age",
           "tags",
           "title",
           "title-image"

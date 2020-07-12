@@ -1,0 +1,41 @@
+{
+  "description": 'Spielen Sie als einer von 20 historischen Anführern einschließlich Friedrich Barbarossa.',
+  "developer": 'Firaxis Games',
+  "images-big": [
+    'https://steamcdn-a.akamaihd.net/steam/apps/256672695/movie.184x123.jpg?t=1476737061',
+    'https://steamcdn-a.akamaihd.net/steam/apps/289070/ss_36c63ebeb006b246cb740fdafeb41bb20e3b330d.600x338.jpg?t=1590082071',
+    'https://steamcdn-a.akamaihd.net/steam/apps/289070/ss_cf53258cb8c4d283e52cf8dce3edf8656f83adc6.600x338.jpg?t=1590082071',
+    'https://steamcdn-a.akamaihd.net/steam/apps/289070/ss_f501156a69223131ee8b12452f3003698334e964.600x338.jpg?t=1590082071',
+    'https://steamcdn-a.akamaihd.net/steam/apps/289070/ss_2be9153a2633e671c283e2dbcec64e2e4543f66f.600x338.jpg?t=1590082071',
+    'https://steamcdn-a.akamaihd.net/steam/apps/289070/ss_a4b07a0fbdd09e35b5ec3a4726239b884f1f1f7d.600x338.jpg?t=1590082071',
+    'https://steamcdn-a.akamaihd.net/steam/apps/289070/ss_fd6bbe6791ee8ab68f8a91455fa3c25b4dd9bca7.600x338.jpg?t=1590082071'
+  ],
+  "images-small": [
+    'https://steamcdn-a.akamaihd.net/steam/apps/256672695/movie.184x123.jpg?t=1476737061',
+    'https://steamcdn-a.akamaihd.net/steam/apps/289070/ss_36c63ebeb006b246cb740fdafeb41bb20e3b330d.116x65.jpg?t=1590082071',
+    'https://steamcdn-a.akamaihd.net/steam/apps/289070/ss_cf53258cb8c4d283e52cf8dce3edf8656f83adc6.116x65.jpg?t=1590082071',
+    'https://steamcdn-a.akamaihd.net/steam/apps/289070/ss_f501156a69223131ee8b12452f3003698334e964.116x65.jpg?t=1590082071',
+    'https://steamcdn-a.akamaihd.net/steam/apps/289070/ss_2be9153a2633e671c283e2dbcec64e2e4543f66f.116x65.jpg?t=1590082071',
+    'https://steamcdn-a.akamaihd.net/steam/apps/289070/ss_a4b07a0fbdd09e35b5ec3a4726239b884f1f1f7d.116x65.jpg?t=1590082071',
+    'https://steamcdn-a.akamaihd.net/steam/apps/289070/ss_fd6bbe6791ee8ab68f8a91455fa3c25b4dd9bca7.116x65.jpg?t=1590082071'
+  ],
+  "link": 'https://store.steampowered.com/app/289070?l=german',
+  "price-current": 59.99,
+  "price-initial": 59.99,
+  "publisher": '2K',
+  "suitable-age": 12,
+  "tags": [
+    'Strategie',        'Rundenstrategie',
+    'Geschichte',       'Mehrspieler',
+    'Einzelspieler',    'Rundenbasiert',
+    'Globalstrategie',  '4X',
+    'Krieg',            'Simulation',
+    'Taktik',           'Aufbaustrategie',
+    'Guter Soundtrack', 'modifizierbar',
+    'Online-Koop',      'Koop',
+    'Aufbausimulation', 'Management',
+    'Hexfeld',          'atmosphärisch'
+  ],
+  "title": 'Sid Meier’s Civilization® VI',
+  "title-image": 'https://steamcdn-a.akamaihd.net/steam/apps/289070/header_german.jpg?t=1590082071'
+}
