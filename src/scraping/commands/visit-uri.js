@@ -19,6 +19,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     const commandParameters = getPreparedCommandParameters(Object.assign(
         {},
         parameters,
+        context,
         { uri: uri || '' }
     ));
 

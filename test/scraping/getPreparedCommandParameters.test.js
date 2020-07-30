@@ -20,11 +20,15 @@ describe('getPreparedCommandParameters', () => {
              expect(getPreparedCommandParameters({
                  stays: 'the same',
                  takes: 'from {stays} and {takesFrom}!',
-                 takesFrom: 'all from {stays}'
+                 takesFrom: 'all from {stays}',
+                 it: [ 'is', 'an', 'array' ],
+                 bool: true
              })).toEqual({
                  stays: 'the same',
                  takes: 'from the same and all from {stays}!',
-                 takesFrom: 'all from the same'
+                 takesFrom: 'all from the same',
+                 it: [ 'is', 'an', 'array' ],
+                 bool: true
              });
          });
     });

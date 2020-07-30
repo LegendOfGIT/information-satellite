@@ -1,7 +1,7 @@
 module.exports = (parameters) => {
     const preparedParameters = {};
 
-    const hasAtLeastOneReplacer = (value) => -1 !== (value || '').indexOf('{');
+    const hasAtLeastOneReplacer = (value) => 'string' === typeof value && -1 !== (value || '').indexOf('{');
 
     const isUriParameterAndDoesNotStartWithHttpS = (key, value) => (
         'uri' === key && !RegExp(/^https?:\/\//).test(value)
