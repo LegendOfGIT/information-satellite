@@ -98,6 +98,11 @@ describe('observe-information', () => {
 
         test('the content to observe is logged into console', (done) => {
             commandPromise.then(() => {
+                expect(console.log).toHaveBeenCalledWith({
+                    price: 123.45,
+                    'product-title': 'toaster without irrelevant content'
+                });
+
                 expect(console.log).toHaveBeenCalledWith('information successfully sent to observation');
                 done();
             });

@@ -16,6 +16,13 @@ jest.mock('../../../src/scraping/getValueWithoutIrrelevantContent', () => (value
      return `${value} without irrelevant content`;
 });
 
+jest.doMock(
+    '../../../src/scraping/getPreparedCommandParameters',
+    () => () => ({
+        'template.itemId': 'nice-site-123'
+    })
+);
+
 describe('store-information', () => {
     afterEach(() => {
         global.console = originalConsole;
@@ -75,6 +82,7 @@ describe('store-information', () => {
         test('the content to store is logged into console', (done) => {
             commandPromise.then(() => {
                 expect(console.log).toHaveBeenCalledWith({
+                    itemId: 'nice-site-123',
                     price: 123.45,
                     'product-title': 'toaster without irrelevant content'
                 });

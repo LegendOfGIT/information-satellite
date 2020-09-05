@@ -86,6 +86,7 @@ describe('applyScrapingTemplate', () => {
     describe('the second scraping command HAS been found', () => {
         beforeEach(() => {
             whenApplyScrapingTemplateIsCalled({
+                itemId: '{template.site}-id',
                 site: 'scrape-it.de',
                 scraping: [
                     { commandId: 'a' },
@@ -114,6 +115,7 @@ describe('applyScrapingTemplate', () => {
                     pa: 'ra',
                     me: 'ters',
                     'request.query.itemId': '123',
+                    'template.itemId': '{template.site}-id',
                     'template.site': 'scrape-it.de'
                 }
             );

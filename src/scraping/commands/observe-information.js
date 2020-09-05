@@ -16,6 +16,8 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         informationToObserve[informationId] = getValueWithoutIrrelevantContent(context[informationId]);
     });
 
+    console.log(informationToObserve);
+
     httpClient.put(
         'http://127.0.0.1:3001/observable-items',
         informationToObserve

@@ -10,14 +10,14 @@ let httpClientGetPromise;
 const httpClientMock = {
     get: jest.fn(() => httpClientGetPromise)
 };
-const httpClientJestMock = jest.mock(
+jest.doMock(
     'axios',
     () => httpClientMock
 );
 
 const USED_URI_FOR_HTTP_CLIENT_CALL = 'http://oh.hello.co.uk/oh/hello/123';
 
-const getPreparedCommandParametersJestMock = jest.mock(
+jest.doMock(
     '../../../src/scraping/getPreparedCommandParameters',
     () => () => ({
         uri: USED_URI_FOR_HTTP_CLIENT_CALL

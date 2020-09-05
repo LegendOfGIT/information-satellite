@@ -25,6 +25,7 @@ module.exports = (template = {}, itemId) => {
             templateCommand.parameters,
             {
                 "request.query.itemId": itemId,
+                "template.itemId": template.itemId,
                 "template.site": template.site
             }
         );

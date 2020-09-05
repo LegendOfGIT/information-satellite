@@ -1,5 +1,5 @@
 {
-  "site": "store.steampowered.com",
+  "site": "mueller.de",
 
   "scraping": [
     {
@@ -7,7 +7,7 @@
       "commandId": "generate-random-number",
       "parameters": {
         "contextId": "random-page-number",
-        "maximum": "100"
+        "maximum": "20"
       }
     },
     {
@@ -15,7 +15,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://{template.site}/search/?filter=ut1&category1=998&os=?l=german&page={random-page-number}"
+        "uri": "https://{template.site}/multi-media/games/?p={random-page-number}"
       }
     },
     {
@@ -23,18 +23,28 @@
       "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "css-queries": [ "#search_resultsRows a"],
-        "attribute-id": "data-ds-appid",
+        "css-queries": [ ".mu-product-list__items a"],
+        "attribute-id": "href",
         "sourceContextId": "product-overview"
       }
     },
-
+    {
+      "comment": "add 600x338 versions of images-small",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "images-big",
+        "sourceContextId": "images-small",
+        "replacements": {
+          "116x65": "600x338"
+        }
+      }
+    },
     {
       "comment": "site",
       "commandId": "set-context-value",
       "parameters": {
         "contextId": "site",
-        "value": "steam"
+        "value": "mueller"
       }
     },
     {

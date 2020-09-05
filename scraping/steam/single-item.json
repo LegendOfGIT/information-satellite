@@ -1,7 +1,7 @@
 {
   "site": "store.steampowered.com",
 
-  "itemId": "{site}-{request.query.itemId}",
+  "itemId": "{template.site}-{request.query.itemId}",
 
   "scraping": [
     {
