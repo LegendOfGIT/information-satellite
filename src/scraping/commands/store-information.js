@@ -1,6 +1,8 @@
 const getValueWithoutIrrelevantContent = require('../getValueWithoutIrrelevantContent');
 const getPreparedCommandParameters = require('../getPreparedCommandParameters');
 
+const httpClient = require('axios');
+
 module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     const { informationIds } = parameters;
 
@@ -22,6 +24,11 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         informationToStore[informationId] = getValueWithoutIrrelevantContent(context[informationId]);
     });
     informationToStore['itemId'] = commandParameters['template.itemId'];
+
+    httpClient.put(
+        'http://127.0.0.1:3002/information-item',
+        informationToStore
+    )
     console.log(informationToStore);
 
     resolve();

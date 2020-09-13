@@ -23,6 +23,16 @@ jest.doMock(
     })
 );
 
+
+let httpClientPutPromise;
+const httpClientMock = {
+    put: jest.fn(() => httpClientPutPromise)
+};
+jest.doMock(
+    'axios',
+    () => httpClientMock
+);
+
 describe('store-information', () => {
     afterEach(() => {
         global.console = originalConsole;
@@ -76,6 +86,20 @@ describe('store-information', () => {
                 price: 123.45,
                 'product-brand': 'siemens',
                 'product-title': 'toaster'
+            });
+        });
+
+        test('http-client is called with given uri', (done) => {
+            commandPromise.then(() => {
+                expect(httpClientMock.put).toHaveBeenCalledWith(
+                    'http://127.0.0.1:3002/information-item',
+                    {
+                        itemId: 'nice-site-123',
+                        price: 123.45,
+                        'product-title': 'toaster without irrelevant content'
+                    }
+                );
+                done();
             });
         });
 
