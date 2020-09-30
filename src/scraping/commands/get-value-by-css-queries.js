@@ -4,7 +4,7 @@ const getValuesFromCssSelectorResponse = require('../processing/getValuesFromCss
 module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     console.log('executing command "get-value-by-css-queries"')
 
-    const { contextId, sourceContextId } = parameters;
+    const { contextId, mustContain, sourceContextId } = parameters;
     const cssQueries = parameters['css-queries'];
 
     if (!contextId) {
@@ -36,7 +36,11 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
             return;
         }
 
-        const valuesFromCssSelector = getValuesFromCssSelectorResponse(cssSelector(cssQuery), attributeId);
+        const valuesFromCssSelector = getValuesFromCssSelectorResponse(
+            cssSelector(cssQuery),
+            attributeId,
+            mustContain
+        );
         context[contextId] = 0 === valuesFromCssSelector.length ? undefined : valuesFromCssSelector[0];
     });
 

@@ -1,5 +1,12 @@
-module.exports = (cssSelectorResponse, attributeId) => {
+module.exports = (cssSelectorResponse, attributeId, mustContain) => {
     const valuesFromCssSelectorResponse = [];
+
+    const removeControlCharacters = (value) => value
+        .replace(/\r/g, '')
+        .replace('\r', '')
+        .replace(/\n/g, '')
+        .replace('\n', '')
+        .replace(' ', '');
 
     cssSelectorResponse = cssSelectorResponse || { get: () => {} };
     const results = cssSelectorResponse.get() || [];
@@ -7,7 +14,13 @@ module.exports = (cssSelectorResponse, attributeId) => {
         const currentResult = result || { attribs: [] };
 
         if (attributeId && currentResult.attribs[attributeId]) {
+            const value = currentResult.attribs[attributeId].trim();
+            if (mustContain && -1 === value.indexOf(mustContain)) {
+                return;
+            }
+
             valuesFromCssSelectorResponse.push(currentResult.attribs[attributeId].trim());
+
             return;
         }
 
@@ -20,16 +33,17 @@ module.exports = (cssSelectorResponse, attributeId) => {
                 return false;
             }
 
-            return child.data
-                .replace('\r', '')
-                .replace('\n', '')
-                .replace(' ', '');
+            if (mustContain && -1 === child.data.indexOf(mustContain)) {
+                return false;
+            }
+
+            return removeControlCharacters(child.data);
         };
 
         children = children.filter(c => childContainsRelevantInformation(c));
 
         if (children.length > 0) {
-            valuesFromCssSelectorResponse.push((children.map(c => c.data).join('') || '').trim());
+            valuesFromCssSelectorResponse.push((children.map(c => removeControlCharacters(c.data)).join('') || '').trim());
         }
     });
 

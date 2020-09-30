@@ -25,10 +25,10 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     });
     informationToStore['itemId'] = commandParameters['template.itemId'];
 
-    httpClient.put(
-        'http://127.0.0.1:3002/information-item',
-        informationToStore
-    )
+    //httpClient.put(
+    //    'http://127.0.0.1:3002/information-item',
+    //    informationToStore
+    //)
     console.log(informationToStore);
 
     resolve();
