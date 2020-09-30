@@ -84,12 +84,11 @@
     },
     {
       "comment": "title-image",
-      "commandId": "get-value-by-css-queries",
+      "commandId": "get-value-by-regex",
       "parameters": {
         "contextId": "title-image",
-        "sourceContextId": "single-product-view",
-        "css-queries": [ ".game_header_image_full" ],
-        "attribute-id": "src"
+        "sourceContextId": "color-images",
+        "regex": "(https.*.jpg).*MAIN"
       }
     },
     {

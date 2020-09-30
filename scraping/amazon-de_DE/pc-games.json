@@ -1,0 +1,69 @@
+{
+  "site": "amazon.de",
+
+  "scraping": [
+    {
+      "comment": "random-page-number",
+      "commandId": "generate-random-number",
+      "parameters": {
+        "contextId": "random-page-number",
+        "maximum": "20"
+      }
+    },
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "uri": "https://{template.site}/s?k=pc+games&i=videogames&rh=n%3A300992%2Cn%3A301129%2Cn%3A1478865031&dc&page={random-page-number}"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "product-ids",
+        "css-queries": [ ".s-result-item"],
+        "attribute-id": "data-asin",
+        "sourceContextId": "product-overview"
+      }
+    },
+    {
+      "comment": "site",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "site",
+        "value": "amazon-de_DE"
+      }
+    },
+    {
+      "comment": "locale",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "locale",
+        "value": "de-DE"
+      }
+    },
+    {
+      "comment": "usecase",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "usecase",
+        "value": "single-item"
+      }
+    },
+
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    }
+  ]
+}
