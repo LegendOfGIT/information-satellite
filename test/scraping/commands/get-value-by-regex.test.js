@@ -107,31 +107,61 @@ describe('get-value-by-regex', () => {
         });
 
         describe('source context data DOES exist', () => {
-            const context = {
-                page: 'abcdef'
-            };
-
             const regexTestProvider = [
                 {
                     scenarioName: 'no match',
                     regex: 'xy.*z',
                     expectedContent: undefined
+                },
+                {
+                    scenarioName: 'match without group',
+                    regex: 'd.*f',
+                    expectedContent: 'def'
+                },
+                {
+                    scenarioName: 'match with group',
+                    regex: '(ab)(.*)(c)(.*)(f)',
+                    groupIndex: 4,
+                    expectedContent: 'de'
+                },
+                {
+                    scenarioName: 'match with non existing group',
+                    regex: '(ab)(.*)(c)(.*)(f)',
+                    groupIndex: 10,
+                    expectedContent: undefined
+                },
+                {
+                    scenarioName: 'multiple matches',
+                    regex: '/(ab)(.*)(c)(.*)(f)/g',
+                    groupIndex: 1,
+                    expectedContent: undefined
                 }
             ];
 
-            regexTestProvider.forEach(({ expectedContent, regex, scenarioName }) => {
-                beforeEach(() => {
-                    commandIsCalled({
-                        contextId: 'price',
-                        sourceContextId: 'page',
-                        regex
-                    }, context);
-                });
+            regexTestProvider.forEach(({ expectedContent, groupIndex, regex, scenarioName }) => {
+                describe(scenarioName, () => {
+                    let context = {
+                        page: 'abcdefabcdefabcdef'
+                    };
 
-                test(`regex query (${scenarioName})`, (done) => {
-                    commandPromise.then(() => {
-                        expect(context.price).toBe(expectedContent);
-                        done();
+                    beforeEach(() => {
+                        context = {
+                            page: 'abcdef'
+                        };
+
+                        commandIsCalled({
+                            contextId: 'price',
+                            sourceContextId: 'page',
+                            regex,
+                            groupIndex
+                        }, context);
+                    });
+
+                    test('command returns expected value', (done) => {
+                        commandPromise.then(() => {
+                            expect(context.price).toBe(expectedContent);
+                            done();
+                        });
                     });
                 });
             });

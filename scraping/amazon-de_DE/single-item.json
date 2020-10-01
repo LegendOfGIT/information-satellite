@@ -88,7 +88,8 @@
       "parameters": {
         "contextId": "title-image",
         "sourceContextId": "color-images",
-        "regex": "(https.*.jpg).*MAIN"
+        "regex": "\"main\".*(https:.*jpg).*\"MAIN\"",
+        "groupIndex": 1
       }
     },
     {

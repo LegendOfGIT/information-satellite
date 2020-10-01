@@ -1,7 +1,7 @@
 module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     console.log('executing command "get-value-by-regex"')
 
-    const { contextId, regex, sourceContextId } = parameters;
+    const { contextId, groupIndex, regex, sourceContextId } = parameters;
 
     if (!contextId) {
         console.log('required parameter "contextId" is not given. abort.');
@@ -24,14 +24,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         resolve();
     }
 
-    const groupIndex = 1;
-    const value = (sourceContext.match(new RegExp(regex)) || [])[groupIndex];
-    console.log('sourceContext');
-    console.log(sourceContext);
-    console.log('regex');
-    console.log(regex);
-    console.log('value');
-    console.log(value);
+    const value = (sourceContext.match(new RegExp(regex)) || [])[groupIndex || 0];
     if (value) {
         context[contextId] = value;
     }
