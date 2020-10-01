@@ -12,12 +12,12 @@ let commandPromise;
 
 let getValuesByRegexResponseMock = [];
 const getValuesByRegexMock = jest.fn(() => getValuesByRegexResponseMock);
-jest.doMock(
+const abc = jest.mock(
     '../../../src/scraping/processing/getValuesByRegex',
     () => getValuesByRegexMock
 );
 
-describe('get-value-by-regex', () => {
+describe('get-values-by-regex', () => {
     afterEach(() => {
         global.console = originalConsole;
     });
@@ -30,7 +30,7 @@ describe('get-value-by-regex', () => {
         };
         global.console = consoleMock;
 
-        const command = require('../../../src/scraping/commands/get-value-by-regex');
+        const command = require('../../../src/scraping/commands/get-values-by-regex');
 
         parameters = parameters || {
             contextId: 'price',
@@ -49,7 +49,7 @@ describe('get-value-by-regex', () => {
 
         test('logs startup message', (done) => {
             commandPromise.then(() => {
-                expect(consoleMock.log).toHaveBeenCalledWith('executing command "get-value-by-regex"');
+                expect(consoleMock.log).toHaveBeenCalledWith('executing command "get-values-by-regex"');
                 done();
             });
         });
@@ -117,10 +117,15 @@ describe('get-value-by-regex', () => {
         });
 
         describe('source context data DOES exist', () => {
-            test('getValuesByRegex is called with expected arguments', (done) => {
-                const context = {
+            let context;
+
+            beforeEach(() => {
+                context = {
                     page: 'def'
                 };
+            });
+
+            test('getValuesByRegex is called with expected arguments', (done) => {
                 commandIsCalled(undefined, context);
                 commandPromise.then(() => {
                     expect(getValuesByRegexMock).toHaveBeenCalledWith('def', 'b.*e', 3);
@@ -129,22 +134,19 @@ describe('get-value-by-regex', () => {
             })
 
             test('getValuesByRegex returns no values', (done) => {
-                const context = {};
+                getValuesByRegexResponseMock = [];
                 commandIsCalled(undefined, context);
-
                 commandPromise.then(() => {
-                    expect(context.price).toBe(undefined);
+                    expect(context.price).toEqual([]);
                     done();
                 });
             });
 
             test('getValuesByRegex returns values', (done) => {
-                const context = {};
-                getValuesByRegexResponseMock = [ 'oh', 'hello' ];
+                getValuesByRegexResponseMock = ['oh', 'hello'];
                 commandIsCalled(undefined, context);
-
                 commandPromise.then(() => {
-                    expect(context.price).toBe('oh');
+                    expect(context.price).toEqual(['oh', 'hello']);
                     done();
                 });
             });

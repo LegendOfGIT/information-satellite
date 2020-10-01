@@ -93,24 +93,23 @@
       }
     },
     {
-      "comment": "images-small (116x65)",
-      "commandId": "get-values-by-css-queries",
+      "comment": "images-small",
+      "commandId": "get-values-by-regex",
       "parameters": {
         "contextId": "images-small",
-        "sourceContextId": "single-product-view",
-        "css-queries": [ ".highlight_strip_item img" ],
-        "attribute-id": "src"
+        "sourceContextId": "color-images",
+        "regex": "thumb.*?(http.*?jpg)",
+        "groupIndex": 1
       }
     },
     {
-      "comment": "add 600x338 versions of images-small",
-      "commandId": "clone-items-and-modify-clones",
+      "comment": "images-big",
+      "commandId": "get-values-by-regex",
       "parameters": {
         "contextId": "images-big",
-        "sourceContextId": "images-small",
-        "replacements": {
-          "116x65": "600x338"
-        }
+        "sourceContextId": "color-images",
+        "regex": "large.*?(http.*?jpg)",
+        "groupIndex": 1
       }
     },
     {
