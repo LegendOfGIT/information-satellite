@@ -17,6 +17,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     if (!informationIds) {
         console.log('required parameter "informationIds" is not given. abort.');
         resolve();
+        return;
     }
 
     let informationToStore = {};
@@ -24,6 +25,12 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         informationToStore[informationId] = getValueWithoutIrrelevantContent(context[informationId]);
     });
     informationToStore['itemId'] = commandParameters['template.itemId'];
+
+    if (!informationToStore.link) {
+        console.log('required context information "link" is not given. abort.');
+        resolve();
+        return;
+    }
 
     httpClient.put(
         'http://127.0.0.1:3002/information-item',

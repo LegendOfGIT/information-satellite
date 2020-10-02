@@ -39,6 +39,7 @@ describe('store-information', () => {
     });
 
     const commandIsCalled = (parameters, context) => {
+        jest.resetAllMocks();
         context = context || {};
 
         consoleMock = {
@@ -51,6 +52,7 @@ describe('store-information', () => {
         parameters = parameters || {
             contextId: 'oh-hello',
             informationIds: [
+                'link',
                 'price',
                 'product-description',
                 'product-title'
@@ -81,36 +83,65 @@ describe('store-information', () => {
     });
 
     describe('command is called with required parameters', () => {
-        beforeEach(() => {
-            commandIsCalled(undefined, {
-                price: 123.45,
-                'product-brand': 'siemens',
-                'product-title': 'toaster'
+        describe('information "link" is missing in context', () => {
+            beforeEach(() => {
+                commandIsCalled(undefined, {
+                    price: 123.45,
+                    'product-brand': 'siemens',
+                    'product-title': 'toaster'
+                });
+            });
+
+            test('logs a message', (done) => {
+                commandPromise.then(() => {
+                    expect(consoleMock.log).toHaveBeenCalledWith('required context information "link" is not given. abort.');
+                    done();
+                });
+            });
+
+            test('http-client is not called', (done) => {
+                commandPromise.then(() => {
+                    expect(httpClientMock.put).not.toHaveBeenCalled();
+                    done();
+                });
             });
         });
 
-        test('http-client is called with given uri', (done) => {
-            commandPromise.then(() => {
-                expect(httpClientMock.put).toHaveBeenCalledWith(
-                    'http://127.0.0.1:3002/information-item',
-                    {
+        describe('context contains information "link"', () => {
+            beforeEach(() => {
+                commandIsCalled(undefined, {
+                    link: 'http://links.de',
+                    price: 123.45,
+                    'product-brand': 'siemens',
+                    'product-title': 'toaster'
+                });
+            });
+
+            test('http-client is called with given uri', (done) => {
+                commandPromise.then(() => {
+                    expect(httpClientMock.put).toHaveBeenCalledWith(
+                        'http://127.0.0.1:3002/information-item',
+                        {
+                            itemId: 'nice-site-123',
+                            link: 'http://links.de without irrelevant content',
+                            price: 123.45,
+                            'product-title': 'toaster without irrelevant content'
+                        }
+                    );
+                    done();
+                });
+            });
+
+            test('the content to store is logged into console', (done) => {
+                commandPromise.then(() => {
+                    expect(console.log).toHaveBeenCalledWith({
                         itemId: 'nice-site-123',
+                        link: 'http://links.de without irrelevant content',
                         price: 123.45,
                         'product-title': 'toaster without irrelevant content'
-                    }
-                );
-                done();
-            });
-        });
-
-        test('the content to store is logged into console', (done) => {
-            commandPromise.then(() => {
-                expect(console.log).toHaveBeenCalledWith({
-                    itemId: 'nice-site-123',
-                    price: 123.45,
-                    'product-title': 'toaster without irrelevant content'
+                    });
+                    done();
                 });
-                done();
             });
         });
     });
