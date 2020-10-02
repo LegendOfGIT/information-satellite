@@ -1,6 +1,8 @@
-/**
- * global console
- */
+/*
+global
+console
+jest
+*/
 
 let consoleMock;
 
@@ -20,6 +22,7 @@ let httpClientPutPromise;
 const httpClientMock = {
     put: jest.fn(() => httpClientPutPromise)
 };
+
 jest.doMock(
     'axios',
     () => httpClientMock
@@ -31,6 +34,7 @@ describe('observe-information', () => {
     });
 
     const commandIsCalled = (parameters, context, putPromise) => {
+        jest.clearAllMocks();
         context = context || {};
 
         consoleMock = {
@@ -38,7 +42,9 @@ describe('observe-information', () => {
         };
         global.console = consoleMock;
 
-        const visitUri = require('../../../src/scraping/commands/observe-information');
+        httpClientPutPromise = putPromise || Promise.resolve({ data: 'tasty website content' });
+
+        const observeInformation = require('../../../src/scraping/commands/observe-information');
 
         parameters = parameters || {
             contextId: 'oh-hello',
@@ -49,9 +55,7 @@ describe('observe-information', () => {
             ]
         };
 
-        httpClientPutPromise = putPromise || Promise.resolve({ data: 'tasty website content' });
-
-        commandPromise = visitUri(context, parameters);
+        commandPromise = observeInformation(context, parameters);
     };
 
     describe('command is called without arguments', () => {
@@ -72,6 +76,13 @@ describe('observe-information', () => {
                 done();
             });
         });
+
+        test('httpClient is not called', (done) => {
+            commandPromise.then(() => {
+                expect(httpClientMock.put).not.toHaveBeenCalled();
+                done();
+            });
+        })
     });
 
     describe('command is called with required parameters', () => {

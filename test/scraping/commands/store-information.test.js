@@ -23,10 +23,8 @@ jest.doMock(
     })
 );
 
-
-let httpClientPutPromise;
 const httpClientMock = {
-    put: jest.fn(() => httpClientPutPromise)
+    put: jest.fn()
 };
 jest.doMock(
     'axios',
@@ -39,7 +37,7 @@ describe('store-information', () => {
     });
 
     const commandIsCalled = (parameters, context) => {
-        jest.resetAllMocks();
+        jest.clearAllMocks();
         context = context || {};
 
         consoleMock = {
