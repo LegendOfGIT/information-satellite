@@ -9,7 +9,8 @@ fastify.get('/observe/site/:site/use-case/:useCase', async (request, reply) => {
     reply.send(observe(
         request.params.site,
         request.params.useCase,
-        request.query.itemId
+        request.query.itemId,
+        (request.query.navigationPath || '').split(',')
     ));
 })
 

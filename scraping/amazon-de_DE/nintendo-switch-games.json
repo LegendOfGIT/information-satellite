@@ -1,5 +1,5 @@
 {
-  "site": "store.steampowered.com",
+  "site": "amazon.de",
 
   "scraping": [
     {
@@ -7,7 +7,7 @@
       "commandId": "generate-random-number",
       "parameters": {
         "contextId": "random-page-number",
-        "maximum": "100"
+        "maximum": "20"
       }
     },
     {
@@ -15,7 +15,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://{template.site}/search/?filter=ut1&category1=998&os=?l=german&page={random-page-number}"
+        "uri": "https://{template.site}/s?rh=n%3A300992%2Cn%3A%21541708%2Cn%3A12363591031%2Cn%3A12363593031&page={random-page-number}"
       }
     },
     {
@@ -23,18 +23,17 @@
       "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "css-queries": [ "#search_resultsRows a"],
-        "attribute-id": "data-ds-appid",
+        "css-queries": [ ".s-result-item"],
+        "attribute-id": "data-asin",
         "sourceContextId": "product-overview"
       }
     },
-
     {
       "comment": "site",
       "commandId": "set-context-value",
       "parameters": {
         "contextId": "site",
-        "value": "steam"
+        "value": "amazon-de_DE"
       }
     },
     {
@@ -61,7 +60,7 @@
         "value": [
           "MULTIMEDIA",
           "MULTIMEDIA_GAMES",
-          "MULTIMEDIA_GAMES_PC"
+          "MULTIMEDIA_GAMES_NINTENDO_SWITCH"
         ]
       }
     },

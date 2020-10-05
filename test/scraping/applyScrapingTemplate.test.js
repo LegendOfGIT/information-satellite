@@ -14,7 +14,7 @@ const getScrapingCommandByIdMock = jest.fn((commandId) => {
 
     return undefined;
 });
-const getScrapingCommandByIdJestMock = jest.mock(
+jest.doMock(
     '../../src/scraping/getScrapingCommandById',
     () => getScrapingCommandByIdMock
 );
@@ -41,7 +41,7 @@ describe('applyScrapingTemplate', () => {
             ]
         };
 
-        applyScrapingTemplate(scrapingTemplate, '123');
+        applyScrapingTemplate(scrapingTemplate, '123', ['NAVI', 'NAVI_GATION']);
     };
 
     describe('applyScrapingTemplate is called without scraping commands', () => {
@@ -116,6 +116,7 @@ describe('applyScrapingTemplate', () => {
                     me: 'ters',
                     'request.query.itemId': '123',
                     'template.itemId': '{template.site}-id',
+                    'template.navigationPath': [ 'NAVI', 'NAVI_GATION' ],
                     'template.site': 'scrape-it.de'
                 }
             );

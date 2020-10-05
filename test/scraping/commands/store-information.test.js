@@ -19,7 +19,10 @@ jest.mock('../../../src/scraping/getValueWithoutIrrelevantContent', () => (value
 jest.doMock(
     '../../../src/scraping/getPreparedCommandParameters',
     () => () => ({
-        'template.itemId': 'nice-site-123'
+        'template.itemId': 'nice-site-123',
+        'template.navigationPath': [
+            'NA', 'NA_VI', 'NA_VI_GA', 'NA_VI_GA_TION'
+        ]
     })
 );
 
@@ -122,6 +125,9 @@ describe('store-information', () => {
                         {
                             itemId: 'nice-site-123',
                             link: 'http://links.de without irrelevant content',
+                            navigationPath: [
+                                'NA', 'NA_VI', 'NA_VI_GA', 'NA_VI_GA_TION'
+                            ],
                             price: 123.45,
                             'product-title': 'toaster without irrelevant content'
                         }
@@ -135,6 +141,9 @@ describe('store-information', () => {
                     expect(console.log).toHaveBeenCalledWith({
                         itemId: 'nice-site-123',
                         link: 'http://links.de without irrelevant content',
+                        navigationPath: [
+                            'NA', 'NA_VI', 'NA_VI_GA', 'NA_VI_GA_TION'
+                        ],
                         price: 123.45,
                         'product-title': 'toaster without irrelevant content'
                     });

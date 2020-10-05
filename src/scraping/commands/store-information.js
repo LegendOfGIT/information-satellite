@@ -25,6 +25,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         informationToStore[informationId] = getValueWithoutIrrelevantContent(context[informationId]);
     });
     informationToStore['itemId'] = commandParameters['template.itemId'];
+    informationToStore['navigationPath'] = commandParameters['template.navigationPath'];
 
     if (!informationToStore.link) {
         console.log('required context information "link" is not given. abort.');

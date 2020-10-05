@@ -1,6 +1,6 @@
 const getScrapingCommandById = require('./getScrapingCommandById');
 
-module.exports = (template = {}, itemId) => {
+module.exports = (template = {}, itemId, navigationPath) => {
     console.log('Let us scrape!');
 
     if(!template.scraping) {
@@ -26,6 +26,7 @@ module.exports = (template = {}, itemId) => {
             {
                 "request.query.itemId": itemId,
                 "template.itemId": template.itemId,
+                "template.navigationPath": navigationPath,
                 "template.site": template.site
             }
         );

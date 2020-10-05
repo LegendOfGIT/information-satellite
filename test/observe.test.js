@@ -1,13 +1,13 @@
 
 let templateMock;
 const getScrapingTemplateBySiteAndUseCaseMock = jest.fn(() => templateMock);
-const getScrapingTemplateBySiteAndUseCaseJestMock = jest.mock(
+jest.doMock(
     '../src/scraping/getScrapingTemplateBySiteAndUseCase',
     () => getScrapingTemplateBySiteAndUseCaseMock
 );
 
 const applyScrapingTemplateMock = jest.fn();
-const applyScrapingTemplateJestMock = jest.mock(
+jest.doMock(
     '../src/scraping/applyScrapingTemplate',
     () => applyScrapingTemplateMock
 );
@@ -43,7 +43,12 @@ describe('observe', () => {
         });
 
         test('returns no error', () => {
-            expect(observe('abc', 'item-overview', '08154711')).toEqual({
+            expect(observe(
+                'abc',
+                'item-overview',
+                '08154711',
+                [ 'NAVI', 'NAVI_GA', 'NAVI_GA_TION' ]
+            )).toEqual({
                 error: ''
             });
         });
@@ -51,7 +56,8 @@ describe('observe', () => {
         test('calls applyScrapingTemplate with expected parameters', () => {
             expect(applyScrapingTemplateMock).toHaveBeenCalledWith(
                 templateMock,
-                '08154711'
+                '08154711',
+                [ 'NAVI', 'NAVI_GA', 'NAVI_GA_TION' ]
             );
         });
     });
