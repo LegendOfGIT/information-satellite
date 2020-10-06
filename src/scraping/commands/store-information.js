@@ -33,6 +33,12 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         return;
     }
 
+    if (!informationToStore.title) {
+        console.log('required context information "title" is not given. abort.');
+        resolve();
+        return;
+    }
+
     httpClient.put(
         'http://127.0.0.1:3002/information-item',
         informationToStore

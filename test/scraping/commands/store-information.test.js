@@ -56,7 +56,8 @@ describe('store-information', () => {
                 'link',
                 'price',
                 'product-description',
-                'product-title'
+                'product-title',
+                'title'
             ]
         };
 
@@ -107,14 +108,39 @@ describe('store-information', () => {
                 });
             });
         });
+        describe('information "title" is missing in context', () => {
+            beforeEach(() => {
+                commandIsCalled(undefined, {
+                    link: 'http://www.links.de/link',
+                    price: 123.45,
+                    'product-brand': 'siemens',
+                    'product-title': 'toaster'
+                });
+            });
 
-        describe('context contains information "link"', () => {
+            test('logs a message', (done) => {
+                commandPromise.then(() => {
+                    expect(consoleMock.log).toHaveBeenCalledWith('required context information "title" is not given. abort.');
+                    done();
+                });
+            });
+
+            test('http-client is not called', (done) => {
+                commandPromise.then(() => {
+                    expect(httpClientMock.put).not.toHaveBeenCalled();
+                    done();
+                });
+            });
+        });
+
+        describe('context contains required information', () => {
             beforeEach(() => {
                 commandIsCalled(undefined, {
                     link: 'http://links.de',
                     price: 123.45,
                     'product-brand': 'siemens',
-                    'product-title': 'toaster'
+                    'product-title': 'toaster',
+                    title: 'la informacion'
                 });
             });
 
@@ -129,7 +155,8 @@ describe('store-information', () => {
                                 'NA', 'NA_VI', 'NA_VI_GA', 'NA_VI_GA_TION'
                             ],
                             price: 123.45,
-                            'product-title': 'toaster without irrelevant content'
+                            'product-title': 'toaster without irrelevant content',
+                            title: 'la informacion without irrelevant content'
                         }
                     );
                     done();
@@ -145,7 +172,8 @@ describe('store-information', () => {
                             'NA', 'NA_VI', 'NA_VI_GA', 'NA_VI_GA_TION'
                         ],
                         price: 123.45,
-                        'product-title': 'toaster without irrelevant content'
+                        'product-title': 'toaster without irrelevant content',
+                        title: 'la informacion without irrelevant content'
                     });
                     done();
                 });
