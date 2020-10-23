@@ -5,6 +5,14 @@
 
   "scraping": [
     {
+      "comment": "site",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "site",
+        "value": "otto-de_DE"
+      }
+    },
+    {
       "comment": "link",
       "commandId": "set-context-value",
       "parameters": {
@@ -84,6 +92,14 @@
       }
     },
     {
+      "comment": "eans",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "eans",
+        "value": "{ean}"
+      }
+    },
+    {
       "comment": "title-image",
       "commandId": "get-value-by-css-queries",
       "parameters": {
@@ -114,6 +130,17 @@
       }
     },
 
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "navigation-path",
+          "eans",
+          "site"
+        ]
+      }
+    },
     {
       "comment": "store scraped information",
       "commandId": "store-information",
