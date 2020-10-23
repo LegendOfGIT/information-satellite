@@ -1,0 +1,162 @@
+{
+  "site": "amazon.de",
+
+  "itemId": "{template.site}-{request.query.itemId}",
+
+  "scraping": [
+    {
+      "comment": "ean",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "ean",
+        "value": "{request.query.itemId}"
+      }
+    },
+    {
+      "comment": "product-search",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-search",
+        "uri": "https://{template.site}/s?k={request.query.itemId}"
+      }
+    },
+
+    {
+      "comment": "asin",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "asin",
+        "sourceContextId": "product-search",
+        "attribute-id": "data-asin",
+        "css-queries": [ ".s-result-list div" ]
+      }
+    },
+
+    {
+      "comment": "link",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "link",
+        "value": "https://{template.site}/dp/{asin}"
+      }
+    },
+
+    {
+      "comment": "single-product-view",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "single-product-view",
+        "uri": "https://{template.site}/dp/{asin}"
+      }
+    },
+    {
+      "comment": "price-current",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ "#priceblock_ourprice" ]
+      }
+    },
+    {
+      "comment": "price-initial",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".priceBlockStrikePriceString", "#priceblock_ourprice" ]
+      }
+    },
+    {
+      "comment": "price-current to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "price-current"
+      }
+    },
+    {
+      "comment": "price-initial to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "price-initial"
+      }
+    },
+    {
+      "comment": "title",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ "#productTitle" ]
+      }
+    },
+    {
+      "comment": "description",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "description",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ "#feature-bullets .a-list-item" ]
+      }
+    },
+    {
+      "comment": "color-images",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "color-images",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ "script" ],
+        "mustContain": "'colorImages'"
+      }
+    },
+    {
+      "comment": "title-image",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "title-image",
+        "sourceContextId": "color-images",
+        "regex": "\"main\".*(https:.*jpg).*\"MAIN\"",
+        "groupIndex": 1
+      }
+    },
+    {
+      "comment": "images-small",
+      "commandId": "get-values-by-regex",
+      "parameters": {
+        "contextId": "images-small",
+        "sourceContextId": "color-images",
+        "regex": "thumb.*?(http.*?jpg)",
+        "groupIndex": 1
+      }
+    },
+    {
+      "comment": "images-big",
+      "commandId": "get-values-by-regex",
+      "parameters": {
+        "contextId": "images-big",
+        "sourceContextId": "color-images",
+        "regex": "large.*?(http.*?jpg)",
+        "groupIndex": 1
+      }
+    },
+    {
+      "comment": "store scraped information",
+      "commandId": "store-information",
+      "parameters": {
+        "informationIds": [
+          "description",
+          "ean",
+          "images-big",
+          "images-small",
+          "link",
+          "price-current",
+          "price-initial",
+          "title",
+          "title-image"
+        ]
+      }
+    }
+  ]
+}
