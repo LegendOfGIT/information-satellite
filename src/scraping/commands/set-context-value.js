@@ -17,7 +17,8 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
 
     const commandParameters = getPreparedCommandParameters(Object.assign(
         {},
-        parameters
+        parameters,
+        context
     ));
 
     context[contextId] = commandParameters.value;
