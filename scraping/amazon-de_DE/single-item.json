@@ -26,7 +26,7 @@
       "parameters": {
         "contextId": "price-current",
         "sourceContextId": "single-product-view",
-        "css-queries": [ "#priceblock_ourprice" ]
+        "css-queries": [ "#priceblock_ourprice", "#olp-new .a-color-price" ]
       }
     },
     {
@@ -35,7 +35,7 @@
       "parameters": {
         "contextId": "price-initial",
         "sourceContextId": "single-product-view",
-        "css-queries": [ ".priceBlockStrikePriceString", "#priceblock_ourprice" ]
+        "css-queries": [ ".priceBlockStrikePriceString", "#priceblock_ourprice", "#olp-new .a-color-price" ]
       }
     },
     {
