@@ -60,6 +60,16 @@ describe('getValuesByRegex', () => {
             regex: 'abc.*?(abc).*?',
             groupIndex: 1,
             expectedResult: [ 'abc', 'abc' ]
+        },
+        {
+            scenarioName: 'complex regex given (multiple hits in multiple sourceContext entries)',
+            sourceContext: [
+                'abc abcdefabc abcdef abcdef hij',
+                'qwffewfabc abc'
+            ],
+            regex: 'abc.*?(abc).*?',
+            groupIndex: 1,
+            expectedResult: [ 'abc', 'abc', 'abc' ]
         }
     ];
 

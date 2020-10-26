@@ -1,6 +1,3 @@
-const cheerio = require('cheerio');
-const visitUriCommand = require('./visit-uri');
-
 module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     console.log('executing command "get-float-from-value"')
 

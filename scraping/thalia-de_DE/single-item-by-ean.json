@@ -1,23 +1,42 @@
 {
-  "site": "amazon.de",
+  "site": "thalia.de",
 
-  "itemId": "{template.site}-{request.query.itemId}",
+  "itemId": "{template.site}-{ean}",
 
   "scraping": [
     {
-      "comment": "link",
+      "comment": "ean",
       "commandId": "set-context-value",
       "parameters": {
-        "contextId": "link",
-        "value": "https://{template.site}/dp/{request.query.itemId}"
+        "contextId": "ean",
+        "value": "{request.query.itemId}"
       }
     },
+    {
+      "comment": "product-search",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-search",
+        "uri": "https://{template.site}/suche?filterPATHROOT=&sq={request.query.itemId}"
+      }
+    },
+    {
+      "comment": "link",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "link",
+        "sourceContextId": "product-search",
+        "attribute-id": "href",
+        "css-queries": [ ".suchergebnis-liste .suchergebnis a" ]
+      }
+    },
+
     {
       "comment": "single-product-view",
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "single-product-view",
-        "uri": "https://{template.site}/dp/{request.query.itemId}"
+        "uri": "{link}"
       }
     },
     {
@@ -26,7 +45,8 @@
       "parameters": {
         "contextId": "price-current",
         "sourceContextId": "single-product-view",
-        "css-queries": [ "#priceblock_ourprice", "#olp-new .a-color-price" ]
+        "attribute-id": "data-preis-brutto",
+        "css-queries": [ ".artikel-infos" ]
       }
     },
     {
@@ -35,7 +55,8 @@
       "parameters": {
         "contextId": "price-initial",
         "sourceContextId": "single-product-view",
-        "css-queries": [ ".priceBlockStrikePriceString", "#priceblock_ourprice", "#olp-new .a-color-price" ]
+        "attribute-id": "data-preis-liste",
+        "css-queries": [ ".artikel-infos" ]
       }
     },
     {
@@ -60,7 +81,8 @@
       "parameters": {
         "contextId": "title",
         "sourceContextId": "single-product-view",
-        "css-queries": [ "#productTitle" ]
+        "attribute-id": "data-titel",
+        "css-queries": [ ".artikel-infos" ]
       }
     },
     {
@@ -69,55 +91,47 @@
       "parameters": {
         "contextId": "description",
         "sourceContextId": "single-product-view",
-        "css-queries": [ "#feature-bullets .a-list-item" ]
-      }
-    },
-    {
-      "comment": "color-images",
-      "commandId": "get-value-by-css-queries",
-      "parameters": {
-        "contextId": "color-images",
-        "sourceContextId": "single-product-view",
-        "css-queries": [ "script" ],
-        "mustContain": "'colorImages'"
+        "css-queries": [ ".beschreibung .text-infos p" ]
       }
     },
     {
       "comment": "title-image",
-      "commandId": "get-value-by-regex",
+      "commandId": "get-value-by-css-queries",
       "parameters": {
         "contextId": "title-image",
-        "sourceContextId": "color-images",
-        "regex": "\"main\".*(https:.*jpg).*\"MAIN\"",
-        "groupIndex": 1
+        "sourceContextId": "single-product-view",
+        "attribute-id": "src",
+        "css-queries": [ ".previewImgContainer img" ]
       }
     },
     {
       "comment": "images-small",
-      "commandId": "get-values-by-regex",
+      "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "images-small",
-        "sourceContextId": "color-images",
-        "regex": "thumb.*?(http.*?jpg)",
-        "groupIndex": 1
+        "sourceContextId": "single-product-view",
+        "attribute-id": "src",
+        "css-queries": [ ".thumbnails .thumbnail img" ]
       }
     },
     {
       "comment": "images-big",
-      "commandId": "get-values-by-regex",
+      "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "images-big",
-        "sourceContextId": "color-images",
-        "regex": "large.*?(http.*?jpg)",
-        "groupIndex": 1
+        "sourceContextId": "single-product-view",
+        "attribute-id": "data-src",
+        "css-queries": [ ".preview-slides .preview-image" ]
       }
     },
+
     {
       "comment": "store scraped information",
       "commandId": "store-information",
       "parameters": {
         "informationIds": [
           "description",
+          "ean",
           "images-big",
           "images-small",
           "link",

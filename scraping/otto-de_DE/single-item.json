@@ -1,15 +1,23 @@
 {
-  "site": "amazon.de",
+  "site": "otto.de",
 
   "itemId": "{template.site}-{request.query.itemId}",
 
   "scraping": [
     {
+      "comment": "site",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "site",
+        "value": "otto-de_DE"
+      }
+    },
+    {
       "comment": "link",
       "commandId": "set-context-value",
       "parameters": {
         "contextId": "link",
-        "value": "https://{template.site}/dp/{request.query.itemId}"
+        "value": "https://{template.site}/p/{request.query.itemId}"
       }
     },
     {
@@ -17,7 +25,16 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "single-product-view",
-        "uri": "https://{template.site}/dp/{request.query.itemId}"
+        "uri": "https://{template.site}/p/{request.query.itemId}"
+      }
+    },
+    {
+      "comment": "title",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".prd_section .prd_shortInfo__variationName" ]
       }
     },
     {
@@ -26,7 +43,7 @@
       "parameters": {
         "contextId": "price-current",
         "sourceContextId": "single-product-view",
-        "css-queries": [ "#priceblock_ourprice", "#olp-new .a-color-price" ]
+        "css-queries": [ "#reducedPriceAmount", "#normalPriceAmount" ]
       }
     },
     {
@@ -35,7 +52,7 @@
       "parameters": {
         "contextId": "price-initial",
         "sourceContextId": "single-product-view",
-        "css-queries": [ ".priceBlockStrikePriceString", "#priceblock_ourprice", "#olp-new .a-color-price" ]
+        "css-queries": [ "#oldPriceAmount", "#normalPriceAmount" ]
       }
     },
     {
@@ -55,61 +72,73 @@
       }
     },
     {
-      "comment": "title",
-      "commandId": "get-value-by-css-queries",
-      "parameters": {
-        "contextId": "title",
-        "sourceContextId": "single-product-view",
-        "css-queries": [ "#productTitle" ]
-      }
-    },
-    {
       "comment": "description",
-      "commandId": "get-value-by-css-queries",
+      "commandId": "get-value-by-regex",
       "parameters": {
         "contextId": "description",
         "sourceContextId": "single-product-view",
-        "css-queries": [ "#feature-bullets .a-list-item" ]
+        "groupIndex": 1,
+        "regex": "<span>Spielbeschreibung.*?<td>(.*?)<\/td>"
       }
     },
     {
-      "comment": "color-images",
-      "commandId": "get-value-by-css-queries",
+      "comment": "ean",
+      "commandId": "get-value-by-regex",
       "parameters": {
-        "contextId": "color-images",
+        "contextId": "ean",
         "sourceContextId": "single-product-view",
-        "css-queries": [ "script" ],
-        "mustContain": "'colorImages'"
+        "groupIndex": 1,
+        "regex": "\"ean\":\"(.*?)\""
+      }
+    },
+    {
+      "comment": "eans",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "eans",
+        "value": "{ean}"
       }
     },
     {
       "comment": "title-image",
-      "commandId": "get-value-by-regex",
+      "commandId": "get-value-by-css-queries",
       "parameters": {
         "contextId": "title-image",
-        "sourceContextId": "color-images",
-        "regex": "\"main\".*(https:.*jpg).*\"MAIN\"",
-        "groupIndex": 1
+        "sourceContextId": "single-product-view",
+        "attribute-id": "src",
+        "css-queries": [ "#prd_mainProductImage" ]
       }
     },
     {
       "comment": "images-small",
-      "commandId": "get-values-by-regex",
+      "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "images-small",
-        "sourceContextId": "color-images",
-        "regex": "thumb.*?(http.*?jpg)",
-        "groupIndex": 1
+        "sourceContextId": "single-product-view",
+        "attribute-id": "src",
+        "css-queries": [ "#js_prd_verticalImageControlThumbnailList li img" ]
       }
     },
     {
       "comment": "images-big",
-      "commandId": "get-values-by-regex",
+      "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "images-big",
-        "sourceContextId": "color-images",
-        "regex": "large.*?(http.*?jpg)",
-        "groupIndex": 1
+        "sourceContextId": "single-product-view",
+        "attribute-id": "data-image-url",
+        "css-queries": [ ".prd_swiper-slide" ]
+      }
+    },
+
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "navigation-path",
+          "eans",
+          "site"
+        ]
       }
     },
     {
@@ -118,6 +147,7 @@
       "parameters": {
         "informationIds": [
           "description",
+          "ean",
           "images-big",
           "images-small",
           "link",
