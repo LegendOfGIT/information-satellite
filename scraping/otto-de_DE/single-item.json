@@ -71,6 +71,7 @@
         "sourceContextId": "price-initial"
       }
     },
+
     {
       "comment": "description",
       "commandId": "get-value-by-regex",
@@ -78,9 +79,21 @@
         "contextId": "description",
         "sourceContextId": "single-product-view",
         "groupIndex": 1,
-        "regex": "<span>Spielbeschreibung.*?<td>(.*?)<\/td>"
+        "regex": [
+          "<span>Spielbeschreibung.*?<td>(.*?)<\/td>"
+        ]
       }
     },
+    {
+      "comment": "description",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "description",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".js_prd_moreBox__content" ]
+      }
+    },
+
     {
       "comment": "ean",
       "commandId": "get-value-by-regex",
@@ -100,33 +113,32 @@
       }
     },
     {
-      "comment": "title-image",
-      "commandId": "get-value-by-css-queries",
-      "parameters": {
-        "contextId": "title-image",
-        "sourceContextId": "single-product-view",
-        "attribute-id": "src",
-        "css-queries": [ "#prd_mainProductImage" ]
-      }
-    },
-    {
-      "comment": "images-small",
-      "commandId": "get-values-by-css-queries",
-      "parameters": {
-        "contextId": "images-small",
-        "sourceContextId": "single-product-view",
-        "attribute-id": "src",
-        "css-queries": [ "#js_prd_verticalImageControlThumbnailList li img" ]
-      }
-    },
-    {
       "comment": "images-big",
-      "commandId": "get-values-by-css-queries",
+      "commandId": "get-values-by-regex",
       "parameters": {
         "contextId": "images-big",
         "sourceContextId": "single-product-view",
-        "attribute-id": "data-image-url",
-        "css-queries": [ ".prd_swiper-slide" ]
+        "groupIndex": 1,
+        "regex": [ "data-image-url=\"(https.*?)\"" ]
+      }
+    },
+    {
+      "comment": "add small versions of images-big",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "images-small",
+        "sourceContextId": "images-big",
+        "replacements": {
+          "\\?.*": "?$001PICT36$"
+        }
+      }
+    },
+    {
+      "comment": "title-image",
+      "commandId": "get-value-from-array",
+      "parameters": {
+        "contextId": "title-image",
+        "sourceContextId": "images-big"
       }
     },
 

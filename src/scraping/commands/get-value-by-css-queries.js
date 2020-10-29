@@ -10,22 +10,31 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     if (!contextId) {
         console.log('required parameter "contextId" is not given. abort.');
         resolve();
+        return;
+    }
+
+    if (Object.prototype.hasOwnProperty.call(context, contextId)) {
+        resolve();
+        return;
     }
 
     if (!sourceContextId) {
         console.log('required parameter "sourceContextId" is not given. abort.');
         resolve();
+        return;
     }
 
     if (!cssQueries) {
         console.log('required parameter "css-queries" is not given. abort.');
         resolve();
+        return;
     }
 
     const sourceContext = Object.call(context, sourceContextId) ? context[sourceContextId] : '';
     if (!sourceContext) {
         console.log(`context with source context id "${sourceContextId}" does not exist. abort.`);
         resolve();
+        return;
     }
 
     const attributeId = parameters['attribute-id'] || '';
