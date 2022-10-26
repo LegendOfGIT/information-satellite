@@ -23,7 +23,7 @@
       "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "css-queries": [ ".s-result-item"],
+        "css-queries": [ ".s-asin"],
         "attribute-id": "data-asin",
         "sourceContextId": "product-overview"
       }

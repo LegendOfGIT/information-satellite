@@ -39,10 +39,11 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         return;
     }
 
+    informationToStore.updatedOn = new Date();
     httpClient.put(
         'http://127.0.0.1:3002/information-item',
         informationToStore
-    );
+    ).catch(() => {});
     console.log(informationToStore);
 
     resolve();

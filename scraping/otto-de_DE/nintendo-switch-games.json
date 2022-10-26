@@ -23,8 +23,8 @@
       "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "css-queries": [ "#san_searchResult article"],
-        "attribute-id": "data-productid",
+        "css-queries": [ ".product"],
+        "attribute-id": "data-product-id",
         "sourceContextId": "product-overview"
       }
     },

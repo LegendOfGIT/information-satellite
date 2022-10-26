@@ -34,7 +34,7 @@
       "parameters": {
         "contextId": "title",
         "sourceContextId": "single-product-view",
-        "css-queries": [ ".prd_section .prd_shortInfo__variationName" ]
+        "css-queries": [ ".pdp_variation-name" ]
       }
     },
     {
@@ -119,7 +119,7 @@
         "contextId": "images-big",
         "sourceContextId": "single-product-view",
         "groupIndex": 1,
-        "regex": [ "data-image-url=\"(https.*?)\"" ]
+        "regex": [ "data-image-src=\"(https.*?)\"" ]
       }
     },
     {

@@ -5,6 +5,14 @@
 
   "scraping": [
     {
+      "comment": "asin",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "asin",
+        "value": "{request.query.itemId}"
+      }
+    },
+    {
       "comment": "link",
       "commandId": "set-context-value",
       "parameters": {
@@ -117,6 +125,7 @@
       "commandId": "store-information",
       "parameters": {
         "informationIds": [
+          "asin",
           "description",
           "images-big",
           "images-small",
