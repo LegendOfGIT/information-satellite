@@ -43,7 +43,7 @@
       "parameters": {
         "contextId": "price-current",
         "sourceContextId": "single-product-view",
-        "css-queries": [ "#reducedPriceAmount", "#normalPriceAmount" ]
+        "css-queries": [ ".pdp_price__retail-price .pl_headline300" ]
       }
     },
     {
@@ -52,7 +52,7 @@
       "parameters": {
         "contextId": "price-initial",
         "sourceContextId": "single-product-view",
-        "css-queries": [ "#oldPriceAmount", "#normalPriceAmount" ]
+        "css-queries": [ ".pdp_price__strike-through-price", ".pdp_price__retail-price" ]
       }
     },
     {
@@ -71,7 +71,6 @@
         "sourceContextId": "price-initial"
       }
     },
-
     {
       "comment": "description",
       "commandId": "get-value-by-regex",
@@ -91,6 +90,53 @@
         "contextId": "description",
         "sourceContextId": "single-product-view",
         "css-queries": [ ".js_prd_moreBox__content" ]
+      }
+    },
+
+    {
+      "comment": "usk-age",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "minimumAge",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "<span>USK-Freigabe.*?<td>(.*?)<\/td>"
+        ]
+      }
+    },
+    {
+      "comment": "minimumAge",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "minimumAge",
+        "sourceContextId": "minimumAge"
+      }
+    },
+
+    {
+      "comment": "genre",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "genre",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "<span>.*?genre.*?<td>(.*?)<\/td>"
+        ]
+      }
+    },
+
+    {
+      "comment": "publisher",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "publisher",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "<span>Publisher.*?<td>(.*?)<\/td>"
+        ]
       }
     },
 
@@ -162,9 +208,12 @@
           "ean",
           "images-big",
           "images-small",
+          "genre",
           "link",
+          "minimumAge",
           "price-current",
           "price-initial",
+          "publisher",
           "title",
           "title-image"
         ]
