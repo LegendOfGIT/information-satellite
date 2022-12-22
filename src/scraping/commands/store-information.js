@@ -41,7 +41,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
 
     informationToStore.updatedOn = new Date();
     httpClient.put(
-        'http://127.0.0.1:3002/information-item',
+        'http://127.0.0.1:3002/api/information-item',
         informationToStore
     ).catch(() => {});
     console.log(informationToStore);

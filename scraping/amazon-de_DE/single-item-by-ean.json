@@ -36,7 +36,7 @@
         "contextId": "asin",
         "sourceContextId": "product-search",
         "attribute-id": "data-asin",
-        "css-queries": [ ".s-result-list .s-result-item" ]
+        "css-queries": [ ".s-asin" ]
       }
     },
 
@@ -149,12 +149,35 @@
         "groupIndex": 1
       }
     },
+
+    {
+      "comment": "usk-age",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "minimumAge",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "<span>.*USK ab(.*)<\/span>"
+        ]
+      }
+    },
+    {
+      "comment": "minimumAge",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "minimumAge",
+        "sourceContextId": "minimumAge",
+        "defaultValue": 0
+      }
+    },
+
     {
       "comment": "store scraped information",
       "commandId": "store-information",
       "parameters": {
         "informationIds": [
-          "asins",
+          "asin",
           "description",
           "ean",
           "images-big",
@@ -163,7 +186,8 @@
           "price-current",
           "price-initial",
           "title",
-          "title-image"
+          "title-image",
+          "minimumAge"
         ]
       }
     }

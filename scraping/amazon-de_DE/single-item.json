@@ -71,6 +71,29 @@
         "css-queries": [ "#productTitle" ]
       }
     },
+
+    {
+      "comment": "usk-age",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "minimumAge",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "<span>.*USK ab(.*)<\/span>"
+        ]
+      }
+    },
+    {
+      "comment": "minimumAge",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "minimumAge",
+        "sourceContextId": "minimumAge",
+        "defaultValue": 0
+      }
+    },
+
     {
       "comment": "description",
       "commandId": "get-value-by-css-queries",
@@ -133,7 +156,8 @@
           "price-current",
           "price-initial",
           "title",
-          "title-image"
+          "title-image",
+          "minimumAge"
         ]
       }
     }

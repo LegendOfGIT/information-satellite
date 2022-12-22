@@ -52,7 +52,7 @@
       "parameters": {
         "contextId": "price-initial",
         "sourceContextId": "single-product-view",
-        "css-queries": [ ".pdp_price__strike-through-price", ".pdp_price__retail-price" ]
+        "css-queries": [ ".pdp_price__strike-through-price", ".pdp_price__retail-price", ".pdp_price__retail-price .pl_headline300" ]
       }
     },
     {
@@ -110,7 +110,54 @@
       "commandId": "get-float-from-value",
       "parameters": {
         "contextId": "minimumAge",
-        "sourceContextId": "minimumAge"
+        "sourceContextId": "minimumAge",
+        "defaultValue": 0
+      }
+    },
+
+    {
+      "comment": "multiplayer",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "multiplayer",
+        "value": false
+      }
+    },
+    {
+      "comment": "maximum players offline >> multiplayer",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "multiplayer",
+        "sourceContextId": "single-product-view",
+        "setValueOnMatch": true,
+        "regex": [
+          "Anzahl Spieler \\(offline\\).*?bis zu(.*?)<\\/td>"
+        ]
+      }
+    },
+    {
+      "comment": "maximum players online >> multiplayer",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "multiplayer",
+        "sourceContextId": "single-product-view",
+        "setValueOnMatch": true,
+        "regex": [
+          "Anzahl Spieler \\(online\\).*?(bis zu|Multi)(.*?)<\\/td>"
+        ]
+      }
+    },
+
+    {
+      "comment": "genre-subgenre",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "genre-subgenre",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "genre.*?<\\/td><td>(.*?)<\\/td>+?"
+        ]
       }
     },
 
@@ -119,10 +166,25 @@
       "commandId": "get-value-by-regex",
       "parameters": {
         "contextId": "genre",
-        "sourceContextId": "single-product-view",
+        "sourceContextId": "genre-subgenre",
         "groupIndex": 1,
         "regex": [
-          "<span>.*?genre.*?<td>(.*?)<\/td>"
+          "(.*?)(<br.?\\/>)(.*?)(<br.?\\/>)",
+          "(.*?)(-|<br.?\\/>).*?(.*)",
+          "(.*)"
+        ]
+      }
+    },
+    {
+      "comment": "subgenre",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "subgenre",
+        "sourceContextId": "genre-subgenre",
+        "groupIndex": 3,
+        "regex": [
+          "(.*?)(<br.?\\/>)(.*?)(<br.?\\/>)",
+          "(.*?)(-|<br.?\\/>).*?(.*)"
         ]
       }
     },
@@ -211,9 +273,11 @@
           "genre",
           "link",
           "minimumAge",
+          "multiplayer",
           "price-current",
           "price-initial",
           "publisher",
+          "subgenre",
           "title",
           "title-image"
         ]
