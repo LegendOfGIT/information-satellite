@@ -32,7 +32,8 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         informationToObserve
     ).then(() => {
         console.log('information successfully sent to observation');
-    });
+    })
+    .catch(() => {});
 
     resolve();
 });

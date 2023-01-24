@@ -23,7 +23,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     }
 
     sourceContext = Array.isArray(sourceContext) ? sourceContext : [ sourceContext ];
-    if (sourceContext.length > index + 1) {
+    if (sourceContext.length > index) {
         context[contextId] = sourceContext[index];
     }
 

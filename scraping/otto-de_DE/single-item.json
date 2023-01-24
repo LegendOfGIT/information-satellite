@@ -43,7 +43,7 @@
       "parameters": {
         "contextId": "price-current",
         "sourceContextId": "single-product-view",
-        "css-queries": [ "#reducedPriceAmount", "#normalPriceAmount" ]
+        "css-queries": [ ".pdp_price__retail-price .pl_headline300" ]
       }
     },
     {
@@ -52,7 +52,7 @@
       "parameters": {
         "contextId": "price-initial",
         "sourceContextId": "single-product-view",
-        "css-queries": [ "#oldPriceAmount", "#normalPriceAmount" ]
+        "css-queries": [ ".pdp_price__strike-through-price", ".pdp_price__retail-price", ".pdp_price__retail-price .pl_headline300" ]
       }
     },
     {
@@ -71,7 +71,6 @@
         "sourceContextId": "price-initial"
       }
     },
-
     {
       "comment": "description",
       "commandId": "get-value-by-regex",
@@ -91,6 +90,115 @@
         "contextId": "description",
         "sourceContextId": "single-product-view",
         "css-queries": [ ".js_prd_moreBox__content" ]
+      }
+    },
+
+    {
+      "comment": "usk-age",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "minimumAge",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "<span>USK-Freigabe.*?<td>(.*?)<\/td>"
+        ]
+      }
+    },
+    {
+      "comment": "minimumAge",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "minimumAge",
+        "sourceContextId": "minimumAge",
+        "defaultValue": 0
+      }
+    },
+
+    {
+      "comment": "multiplayer",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "multiplayer",
+        "value": false
+      }
+    },
+    {
+      "comment": "maximum players offline >> multiplayer",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "multiplayer",
+        "sourceContextId": "single-product-view",
+        "setValueOnMatch": true,
+        "regex": [
+          "Anzahl Spieler \\(offline\\).*?bis zu(.*?)<\\/td>"
+        ]
+      }
+    },
+    {
+      "comment": "maximum players online >> multiplayer",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "multiplayer",
+        "sourceContextId": "single-product-view",
+        "setValueOnMatch": true,
+        "regex": [
+          "Anzahl Spieler \\(online\\).*?(bis zu|Multi)(.*?)<\\/td>"
+        ]
+      }
+    },
+
+    {
+      "comment": "genre-subgenre",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "genre-subgenre",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "genre.*?<\\/td><td>(.*?)<\\/td>+?"
+        ]
+      }
+    },
+
+    {
+      "comment": "genre",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "genre",
+        "sourceContextId": "genre-subgenre",
+        "groupIndex": 1,
+        "regex": [
+          "(.*?)(<br.?\\/>)(.*?)(<br.?\\/>)",
+          "(.*?)(-|<br.?\\/>).*?(.*)",
+          "(.*)"
+        ]
+      }
+    },
+    {
+      "comment": "subgenre",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "subgenre",
+        "sourceContextId": "genre-subgenre",
+        "groupIndex": 3,
+        "regex": [
+          "(.*?)(<br.?\\/>)(.*?)(<br.?\\/>)",
+          "(.*?)(-|<br.?\\/>).*?(.*)"
+        ]
+      }
+    },
+
+    {
+      "comment": "publisher",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "publisher",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "<span>Publisher.*?<td>(.*?)<\/td>"
+        ]
       }
     },
 
@@ -162,9 +270,14 @@
           "ean",
           "images-big",
           "images-small",
+          "genre",
           "link",
+          "minimumAge",
+          "multiplayer",
           "price-current",
           "price-initial",
+          "publisher",
+          "subgenre",
           "title",
           "title-image"
         ]

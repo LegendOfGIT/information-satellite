@@ -13,7 +13,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         return;
     }
 
-    if (Object.prototype.hasOwnProperty.call(context, contextId)) {
+    if (Object.prototype.hasOwnProperty.call(context, contextId) && context[contextId] != `{${contextId}}`) {
         resolve();
         return;
     }
@@ -41,7 +41,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
 
     const cssSelector = cheerio.load(sourceContext);
     cssQueries.forEach(cssQuery => {
-        if(context[contextId]) {
+        if(context[contextId] && context[contextId] != `{${contextId}}`) {
             return;
         }
 

@@ -1,7 +1,7 @@
 module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     console.log('executing command "get-float-from-value"')
 
-    const { contextId, sourceContextId } = parameters;
+    const { contextId, defaultValue, sourceContextId } = parameters;
 
     if (!contextId) {
         console.log('required parameter "contextId" is not given. abort.');
@@ -16,7 +16,8 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     const sourceContext = Object.call(context, sourceContextId) ? context[sourceContextId] : '';
 
     if (!sourceContext) {
-        console.log(`context with source context id "${sourceContextId}" does not exist. abort.`);
+        console.log(`context with source context id "${sourceContextId}" does not exist.`);
+        context[contextId] = defaultValue;
         resolve();
     }
 
@@ -42,7 +43,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     }
 
     const newValue = parseFloat(americanFormattedValue);
-    context[contextId] = isNaN(newValue) ? undefined : parseFloat(americanFormattedValue);
+    context[contextId] = isNaN(newValue) ? defaultValue : parseFloat(americanFormattedValue);
 
     resolve();
 });
