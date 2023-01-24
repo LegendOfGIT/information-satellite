@@ -23,7 +23,13 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         { uri: uri || '' }
     ));
 
-    return httpClient.get(commandParameters.uri)
+    const options = {
+        "headers": {
+            "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36",
+            "Accept-Language": 'de-DE, de;q=0.5'
+        }
+    };
+    return httpClient.get(commandParameters.uri, options)
         .then(response => {
             console.log(`requested uri "${commandParameters.uri}" was resolved successfully.`);
             if (contextId) {
