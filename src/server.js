@@ -1,3 +1,4 @@
+const configuration = require('./configuration/app-config')();
 const fastify = require('fastify')({
     logger: true
 });
@@ -14,7 +15,7 @@ fastify.get('/observe/site/:site/use-case/:useCase', async (request, reply) => {
     ));
 })
 
-fastify.listen(3000, (err, address) => {
+fastify.listen({ host: configuration.application.host, port: 3000 }, (err, address) => {
     if (err) throw err
     fastify.log.info(`server listening on ${address}`)
 });

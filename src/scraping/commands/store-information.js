@@ -1,3 +1,4 @@
+const configuration = require('../../configuration/app-config')();
 const getValueWithoutIrrelevantContent = require('../getValueWithoutIrrelevantContent');
 const getPreparedCommandParameters = require('../getPreparedCommandParameters');
 
@@ -41,7 +42,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
 
     informationToStore.updatedOn = new Date();
     httpClient.put(
-        'http://127.0.0.1:3002/information-item',
+        `http://${configuration.services.warehouse.host}:3002/information-item`,
         informationToStore
     ).catch(() => {});
     console.log(informationToStore);
