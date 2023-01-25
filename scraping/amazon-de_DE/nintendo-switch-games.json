@@ -15,7 +15,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://www.{template.site}/gp/bestsellers/videogames/12363591031/ref=zg_bs_nav_videogames_1&page={random-page-number}"
+        "uri": "https://www.{template.site}/gp/bestsellers/videogames/12363591031/ref=zg_bs_nav_videogames_1?pg={random-page-number}"
       }
     },
     {
