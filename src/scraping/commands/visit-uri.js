@@ -1,17 +1,5 @@
-const exec = require('child_process').exec;
-const request = require('request');
+const httpClient = require('axios');
 const getPreparedCommandParameters = require('../getPreparedCommandParameters');
-
-const generateString = (length) => {
-    const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let result = '';
-    const charactersLength = characters.length;
-    for ( let i = 0; i < length; i++ ) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-
-    return result;
-};
 
 module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     const { contextId, uri } = parameters;
@@ -35,22 +23,23 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         { uri: uri || '' }
     ));
 
-    const args = ' -H "User-Agent: '+ generateString(8) +'" ' + commandParameters.uri;
+    const options = {
+        "headers": {
+            "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1",
+            "Accept-Language": 'de-DE,de;q=0.9,en-US;q=0.8,en;q=0.7'
+        }
+    };
+    return httpClient.get(commandParameters.uri, options)
+        .then(response => {
+            console.log(`requested uri "${commandParameters.uri}" was resolved successfully.`);
+            if (contextId) {
+                context[contextId] = response.data;
+            }
 
-    console.log('visit url: ' + commandParameters.uri);
-
-    exec('curl ' + args, function (error, stdout, stderr) {
-
-      if (error !== null) {
-        resolve();
-        return;
-      }
-
-      if (contextId) {
-          context[contextId] = stdout;
-      }
-      console.log(stdout.indexOf('data-asin'));
-
-      resolve();
-    });
+            resolve();
+        })
+        .catch(() => {
+            console.log(`requested uri "${commandParameters.uri}" can not be resolved. abort`);
+            resolve();
+        });
 });
