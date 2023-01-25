@@ -38,7 +38,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     var args = ' -H "User-Agent: '+ generateString(8) +'" ' + commandParameters.uri;
 
     exec('curl ' + args, function (error, stdout, stderr) {
-      console.log(error);
+      console.log(stdout.indexOf('s-asin'));
 
       if (error !== null) {
         resolve();
