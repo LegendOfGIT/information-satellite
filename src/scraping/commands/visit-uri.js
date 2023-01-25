@@ -41,6 +41,8 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
             "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"
         }
     };
+    
+    console.log(options);
     return httpClient.get(commandParameters.uri, options)
         .then(response => {
             console.log(`requested uri "${commandParameters.uri}" was resolved successfully.`);
