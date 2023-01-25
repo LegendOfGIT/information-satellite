@@ -1,6 +1,17 @@
 const httpClient = require('axios');
 const getPreparedCommandParameters = require('../getPreparedCommandParameters');
 
+const generateString = (length) => {
+    const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = ' ';
+    const charactersLength = characters.length;
+    for ( let i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+
+    return result;
+};
+
 module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     const { contextId, uri } = parameters;
 
@@ -25,7 +36,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
 
     const options = {
         "headers": {
-            "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1",
+            "User-Agent": generateString(8),
             "Accept-Language": "de-DE,de;q=0.9,en-US;q=0.8,en;q=0.7",
             "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"
         }
