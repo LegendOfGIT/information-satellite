@@ -1,3 +1,4 @@
+const exec = require('child_process').exec;
 const request = require('request');
 const getPreparedCommandParameters = require('../getPreparedCommandParameters');
 
@@ -34,29 +35,21 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         { uri: uri || '' }
     ));
 
-    request(
-        {
-            headers: {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36'
-            },
-            uri: commandParameters.uri,
-            method: 'GET'
-        },
-        function (err, res, body) {
-            console.log(err);
-            console.log(res);
+    var args = ' -H "User-Agent: '+ generateString(8) +'" ' + commandParameters.uri;
 
-            if (err) {
-                console.log(`requested uri "${commandParameters.uri}" can not be resolved. abort`);
-                resolve();
-                return;
-            }
+    exec('curl ' + args, function (error, stdout, stderr) {
+      console.log('stdout: ' + stdout);
+      console.log('stderr: ' + stderr);
+      if (error !== null) {
+        console.log('exec error: ' + error);
+        resolve();
+        return;
+      }
 
-            if (contextId) {
-                context[contextId] = body;
-            }
+      if (contextId) {
+          context[contextId] = stdout;
+      }
 
-            resolve();
-        }
-    );
+      resolve();
+    });
 });
