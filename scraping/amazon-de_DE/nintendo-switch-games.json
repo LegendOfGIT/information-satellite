@@ -15,7 +15,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://www.{template.site}/s?k=nintendo+switch+games&page={random-page-number}"
+        "uri": "https://www.{template.site}/gp/bestsellers/videogames/12363591031/ref=zg_bs_nav_videogames_1&page={random-page-number}"
       }
     },
     {
@@ -23,8 +23,8 @@
       "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "css-queries": [ ".s-asin"],
-        "attribute-id": "data-asin",
+        "css-queries": [ ".p13n-sc-uncoverable-faceout"],
+        "attribute-id": "id",
         "sourceContextId": "product-overview"
       }
     },
