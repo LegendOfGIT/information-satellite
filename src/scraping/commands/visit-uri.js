@@ -49,7 +49,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
       if (contextId) {
           context[contextId] = stdout;
       }
-      console.log(stdout.indexOf('s-asin'));
+      console.log(stdout.indexOf('data-asin'));
 
       resolve();
     });
