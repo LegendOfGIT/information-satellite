@@ -35,10 +35,11 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         { uri: uri || '' }
     ));
 
-    var args = ' -H "User-Agent: '+ generateString(8) +'" ' + commandParameters.uri;
+    const args = ' -H "User-Agent: '+ generateString(8) +'" ' + commandParameters.uri;
+
+    console.log('visit url: ' + commandParameters.uri);
 
     exec('curl ' + args, function (error, stdout, stderr) {
-
 
       if (error !== null) {
         resolve();
@@ -48,7 +49,6 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
       if (contextId) {
           context[contextId] = stdout;
       }
-    console.log(context[contextId]);
 
       resolve();
     });
