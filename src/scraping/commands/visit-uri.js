@@ -34,7 +34,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         { uri: uri || '' }
     ));
 
-    return httpClient({ url: commandParameters.uri, method: 'GET', headers: { "User-Agent": generateString(8) }})
+    return httpClient({ url: commandParameters.uri, method: 'GET', headers: { "User-Agent": generateString(8), Pragma: 'no-cache', 'Upgrade-Insecure-Requests': 1 }})
         .then(response => {
             console.log(`requested uri "${commandParameters.uri}" was resolved successfully.`);
             if (contextId) {
