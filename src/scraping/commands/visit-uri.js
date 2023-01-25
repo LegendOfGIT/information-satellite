@@ -34,7 +34,8 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         { uri: uri || '' }
     ));
 
-    return httpClient({ url: commandParameters.uri, method: 'GET', headers: { 'Accept': '*/*', 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36' }})
+    delete axios.defaults.headers.common["Accept"];
+    return httpClient({ url: commandParameters.uri, method: 'GET', headers: { 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36' }})
         .then(response => {
             console.log(`requested uri "${commandParameters.uri}" was resolved successfully.`);
             if (contextId) {
