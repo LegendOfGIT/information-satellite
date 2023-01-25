@@ -44,7 +44,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         }, 
         function (err, res, body) {
             console.log(err);
-            console.log(body);
+            console.log(res);
             
             if (err) {
                 console.log(`requested uri "${commandParameters.uri}" can not be resolved. abort`);
