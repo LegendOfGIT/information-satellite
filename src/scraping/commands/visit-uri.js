@@ -1,4 +1,4 @@
-const request = require('request');
+const { curly } = require('node-libcurl');
 const getPreparedCommandParameters = require('../getPreparedCommandParameters');
 
 const generateString = (length) => {
@@ -34,30 +34,20 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         { uri: uri || '' }
     ));
 
-    request(
-        {
-            headers: {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36'
-            },
-            uri: commandParameters.uri,
-            method: 'GET'
-        }, 
-        function (err, res, body) {
-            console.log(err);
-            console.log(res);
-            
-            if (err) {
-                console.log(`requested uri "${commandParameters.uri}" can not be resolved. abort`);
-                resolve();
-                return;
-            }
-            
-            if (contextId) {
-                context[contextId] = body;
-            }
-            
-            resolve();
+    curly.get(commandParameters.uri, {
+      httpHeader: [
+        'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36'
+      ]
+    })
+    .then(body => {
+        if (contextId) {
+            context[contextId] = body;
         }
-    );
+        resolve();
+    })
+    .catch(e => {
+        console.log(`requested uri "${commandParameters.uri}" can not be resolved. abort`);
+        resolve();
+    });
 });
 
