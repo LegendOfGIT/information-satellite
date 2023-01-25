@@ -38,6 +38,8 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     var args = ' -H "User-Agent: '+ generateString(8) +'" ' + commandParameters.uri;
 
     exec('curl ' + args, function (error, stdout, stderr) {
+        console.log(stdout.substring(1, 300));
+
       if (error !== null) {
         resolve();
         return;
