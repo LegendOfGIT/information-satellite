@@ -15,7 +15,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://{template.site}/s?rh=n%3A300992%2Cn%3A%21541708%2Cn%3A12363591031%2Cn%3A12363593031&page={random-page-number}"
+        "uri": "https://www.{template.site}/s?rh=n%3A300992%2Cn%3A%21541708%2Cn%3A12363591031%2Cn%3A12363593031&page={random-page-number}"
       }
     },
     {
