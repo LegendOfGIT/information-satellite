@@ -38,7 +38,8 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
 
             resolve();
         })
-        .catch(() => {
+        .catch((e) => {
+            console.log(e);
             console.log(`requested uri "${commandParameters.uri}" can not be resolved. abort`);
             resolve();
         });
