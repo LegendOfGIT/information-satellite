@@ -45,7 +45,7 @@
       "commandId": "set-context-value",
       "parameters": {
         "contextId": "link",
-        "value": "https://{template.site}/dp/{asin}"
+        "value": "https://www.{template.site}/dp/{asin}"
       }
     },
 

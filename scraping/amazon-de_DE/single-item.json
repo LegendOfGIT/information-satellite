@@ -25,7 +25,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "single-product-view",
-        "uri": "https://{template.site}/dp/{request.query.itemId}"
+        "uri": "https://www.{template.site}/dp/{request.query.itemId}"
       }
     },
     {
