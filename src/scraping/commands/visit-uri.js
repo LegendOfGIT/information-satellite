@@ -9,11 +9,13 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     if (!uri) {
         console.log('required parameter "uri" is not given. abort.');
         resolve();
+        return;
     }
 
     if (!contextId) {
         console.log('required parameter "contextId" is not given. abort.');
         resolve();
+        return;
     }
 
     const commandParameters = getPreparedCommandParameters(Object.assign(
@@ -22,6 +24,13 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         context,
         { uri: uri || '' }
     ));
+
+    console.log('visit uri: ' + commandParameters.uri);
+    if (/{.*?}/.test(commandParameters.uri)) {
+        console.log('at least one uri argument was not resolved. abort');
+        resolve();
+        return;
+    }
 
     const options = {
         headers: {
