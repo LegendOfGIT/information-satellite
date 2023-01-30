@@ -1,14 +1,22 @@
 {
-  "site": "thalia.de",
+  "site": "amazon.de",
 
-  "itemId": "{template.site}-{ean}",
+  "itemId": "{template.site}-{asin}",
 
   "scraping": [
     {
-      "comment": "ean",
+      "comment": "asin",
       "commandId": "set-context-value",
       "parameters": {
-        "contextId": "ean",
+        "contextId": "asin",
+        "value": "{asin}"
+      }
+    },
+    {
+      "comment": "gtin",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "gtin",
         "value": "{request.query.itemId}"
       }
     },
@@ -17,17 +25,27 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-search",
-        "uri": "https://{template.site}/suche?filterPATHROOT=&sq={request.query.itemId}"
+        "uri": "https://{template.site}/s?k={request.query.itemId}"
       }
     },
+
     {
-      "comment": "link",
+      "comment": "asin",
       "commandId": "get-value-by-css-queries",
       "parameters": {
-        "contextId": "link",
+        "contextId": "asin",
         "sourceContextId": "product-search",
-        "attribute-id": "href",
-        "css-queries": [ ".suchergebnis-liste .suchergebnis a" ]
+        "attribute-id": "data-asin",
+        "css-queries": [ ".s-asin" ]
+      }
+    },
+
+    {
+      "comment": "link",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "link",
+        "value": "https://www.{template.site}/dp/{asin}"
       }
     },
 
@@ -36,7 +54,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "single-product-view",
-        "uri": "{link}"
+        "uri": "https://{template.site}/dp/{asin}"
       }
     },
     {
@@ -45,8 +63,7 @@
       "parameters": {
         "contextId": "price-current",
         "sourceContextId": "single-product-view",
-        "attribute-id": "data-preis-brutto",
-        "css-queries": [ ".artikel-infos" ]
+        "css-queries": [ "#priceblock_ourprice", "#olp-new .a-color-price" ]
       }
     },
     {
@@ -55,8 +72,7 @@
       "parameters": {
         "contextId": "price-initial",
         "sourceContextId": "single-product-view",
-        "attribute-id": "data-preis-liste",
-        "css-queries": [ ".artikel-infos" ]
+        "css-queries": [ ".priceBlockStrikePriceString", "#priceblock_ourprice", "#olp-new .a-color-price" ]
       }
     },
     {
@@ -81,8 +97,7 @@
       "parameters": {
         "contextId": "title",
         "sourceContextId": "single-product-view",
-        "attribute-id": "data-titel",
-        "css-queries": [ ".artikel-infos" ]
+        "css-queries": [ "#productTitle" ]
       }
     },
     {
@@ -91,37 +106,69 @@
       "parameters": {
         "contextId": "description",
         "sourceContextId": "single-product-view",
-        "css-queries": [ ".beschreibung .text-infos p" ]
+        "css-queries": [ "#feature-bullets .a-list-item" ]
+      }
+    },
+    {
+      "comment": "color-images",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "color-images",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ "script" ],
+        "mustContain": "'colorImages'"
       }
     },
     {
       "comment": "title-image",
-      "commandId": "get-value-by-css-queries",
+      "commandId": "get-value-by-regex",
       "parameters": {
         "contextId": "title-image",
-        "sourceContextId": "single-product-view",
-        "attribute-id": "src",
-        "css-queries": [ ".previewImgContainer img" ]
+        "sourceContextId": "color-images",
+        "regex": "\"main\".*(https:.*jpg).*\"MAIN\"",
+        "groupIndex": 1
       }
     },
     {
       "comment": "images-small",
-      "commandId": "get-values-by-css-queries",
+      "commandId": "get-values-by-regex",
       "parameters": {
         "contextId": "images-small",
-        "sourceContextId": "single-product-view",
-        "attribute-id": "src",
-        "css-queries": [ ".thumbnails .thumbnail img" ]
+        "sourceContextId": "color-images",
+        "regex": "thumb.*?(http.*?jpg)",
+        "groupIndex": 1
       }
     },
     {
       "comment": "images-big",
-      "commandId": "get-values-by-css-queries",
+      "commandId": "get-values-by-regex",
       "parameters": {
         "contextId": "images-big",
+        "sourceContextId": "color-images",
+        "regex": "large.*?(http.*?jpg)",
+        "groupIndex": 1
+      }
+    },
+
+    {
+      "comment": "usk-age",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "minimumAge",
         "sourceContextId": "single-product-view",
-        "attribute-id": "data-src",
-        "css-queries": [ ".preview-slides .preview-image" ]
+        "groupIndex": 1,
+        "regex": [
+          "<span>.*USK ab(.*)<\/span>"
+        ]
+      }
+    },
+    {
+      "comment": "minimumAge",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "minimumAge",
+        "sourceContextId": "minimumAge",
+        "defaultValue": 0
       }
     },
 
@@ -130,15 +177,17 @@
       "commandId": "store-information",
       "parameters": {
         "informationIds": [
+          "asin",
           "description",
-          "ean",
+          "gtin",
           "images-big",
           "images-small",
           "link",
           "price-current",
           "price-initial",
           "title",
-          "title-image"
+          "title-image",
+          "minimumAge"
         ]
       }
     }

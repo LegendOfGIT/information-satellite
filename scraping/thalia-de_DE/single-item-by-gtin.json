@@ -1,22 +1,14 @@
 {
-  "site": "amazon.de",
+  "site": "thalia.de",
 
-  "itemId": "{template.site}-{asin}",
+  "itemId": "{template.site}-{gtin}",
 
   "scraping": [
     {
-      "comment": "asin",
+      "comment": "gtin",
       "commandId": "set-context-value",
       "parameters": {
-        "contextId": "asin",
-        "value": "{asin}"
-      }
-    },
-    {
-      "comment": "ean",
-      "commandId": "set-context-value",
-      "parameters": {
-        "contextId": "ean",
+        "contextId": "gtin",
         "value": "{request.query.itemId}"
       }
     },
@@ -25,27 +17,17 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-search",
-        "uri": "https://{template.site}/s?k={request.query.itemId}"
+        "uri": "https://{template.site}/suche?filterPATHROOT=&sq={request.query.itemId}"
       }
     },
-
-    {
-      "comment": "asin",
-      "commandId": "get-value-by-css-queries",
-      "parameters": {
-        "contextId": "asin",
-        "sourceContextId": "product-search",
-        "attribute-id": "data-asin",
-        "css-queries": [ ".s-asin" ]
-      }
-    },
-
     {
       "comment": "link",
-      "commandId": "set-context-value",
+      "commandId": "get-value-by-css-queries",
       "parameters": {
         "contextId": "link",
-        "value": "https://www.{template.site}/dp/{asin}"
+        "sourceContextId": "product-search",
+        "attribute-id": "href",
+        "css-queries": [ ".suchergebnis-liste .suchergebnis a" ]
       }
     },
 
@@ -54,7 +36,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "single-product-view",
-        "uri": "https://{template.site}/dp/{asin}"
+        "uri": "{link}"
       }
     },
     {
@@ -63,7 +45,8 @@
       "parameters": {
         "contextId": "price-current",
         "sourceContextId": "single-product-view",
-        "css-queries": [ "#priceblock_ourprice", "#olp-new .a-color-price" ]
+        "attribute-id": "data-preis-brutto",
+        "css-queries": [ ".artikel-infos" ]
       }
     },
     {
@@ -72,7 +55,8 @@
       "parameters": {
         "contextId": "price-initial",
         "sourceContextId": "single-product-view",
-        "css-queries": [ ".priceBlockStrikePriceString", "#priceblock_ourprice", "#olp-new .a-color-price" ]
+        "attribute-id": "data-preis-liste",
+        "css-queries": [ ".artikel-infos" ]
       }
     },
     {
@@ -97,7 +81,8 @@
       "parameters": {
         "contextId": "title",
         "sourceContextId": "single-product-view",
-        "css-queries": [ "#productTitle" ]
+        "attribute-id": "data-titel",
+        "css-queries": [ ".artikel-infos" ]
       }
     },
     {
@@ -106,69 +91,37 @@
       "parameters": {
         "contextId": "description",
         "sourceContextId": "single-product-view",
-        "css-queries": [ "#feature-bullets .a-list-item" ]
-      }
-    },
-    {
-      "comment": "color-images",
-      "commandId": "get-value-by-css-queries",
-      "parameters": {
-        "contextId": "color-images",
-        "sourceContextId": "single-product-view",
-        "css-queries": [ "script" ],
-        "mustContain": "'colorImages'"
+        "css-queries": [ ".beschreibung .text-infos p" ]
       }
     },
     {
       "comment": "title-image",
-      "commandId": "get-value-by-regex",
+      "commandId": "get-value-by-css-queries",
       "parameters": {
         "contextId": "title-image",
-        "sourceContextId": "color-images",
-        "regex": "\"main\".*(https:.*jpg).*\"MAIN\"",
-        "groupIndex": 1
+        "sourceContextId": "single-product-view",
+        "attribute-id": "src",
+        "css-queries": [ ".previewImgContainer img" ]
       }
     },
     {
       "comment": "images-small",
-      "commandId": "get-values-by-regex",
+      "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "images-small",
-        "sourceContextId": "color-images",
-        "regex": "thumb.*?(http.*?jpg)",
-        "groupIndex": 1
+        "sourceContextId": "single-product-view",
+        "attribute-id": "src",
+        "css-queries": [ ".thumbnails .thumbnail img" ]
       }
     },
     {
       "comment": "images-big",
-      "commandId": "get-values-by-regex",
+      "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "images-big",
-        "sourceContextId": "color-images",
-        "regex": "large.*?(http.*?jpg)",
-        "groupIndex": 1
-      }
-    },
-
-    {
-      "comment": "usk-age",
-      "commandId": "get-value-by-regex",
-      "parameters": {
-        "contextId": "minimumAge",
         "sourceContextId": "single-product-view",
-        "groupIndex": 1,
-        "regex": [
-          "<span>.*USK ab(.*)<\/span>"
-        ]
-      }
-    },
-    {
-      "comment": "minimumAge",
-      "commandId": "get-float-from-value",
-      "parameters": {
-        "contextId": "minimumAge",
-        "sourceContextId": "minimumAge",
-        "defaultValue": 0
+        "attribute-id": "data-src",
+        "css-queries": [ ".preview-slides .preview-image" ]
       }
     },
 
@@ -177,17 +130,15 @@
       "commandId": "store-information",
       "parameters": {
         "informationIds": [
-          "asin",
           "description",
-          "ean",
+          "gtin",
           "images-big",
           "images-small",
           "link",
           "price-current",
           "price-initial",
           "title",
-          "title-image",
-          "minimumAge"
+          "title-image"
         ]
       }
     }

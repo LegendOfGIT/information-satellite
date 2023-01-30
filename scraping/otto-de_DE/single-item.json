@@ -203,21 +203,21 @@
     },
 
     {
-      "comment": "ean",
+      "comment": "gtin",
       "commandId": "get-value-by-regex",
       "parameters": {
-        "contextId": "ean",
+        "contextId": "gtin",
         "sourceContextId": "single-product-view",
         "groupIndex": 1,
-        "regex": "\"ean\":\"(.*?)\""
+        "regex": "gtin13\": \"(.*?)\""
       }
     },
     {
-      "comment": "eans",
+      "comment": "gtins",
       "commandId": "set-context-value",
       "parameters": {
-        "contextId": "eans",
-        "value": "{ean}"
+        "contextId": "gtins",
+        "value": "{gtin}"
       }
     },
     {
@@ -256,7 +256,7 @@
       "parameters": {
         "informationIds": [
           "navigation-path",
-          "eans",
+          "gtins",
           "site"
         ]
       }
@@ -267,7 +267,7 @@
       "parameters": {
         "informationIds": [
           "description",
-          "ean",
+          "gtin",
           "images-big",
           "images-small",
           "genre",
