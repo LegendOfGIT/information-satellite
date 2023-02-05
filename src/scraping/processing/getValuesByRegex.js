@@ -1,4 +1,4 @@
-module.exports = (sourceContext, regex, groupIndex) => {
+module.exports = (sourceContext, regex, groupIndex, flags = 'sg') => {
     sourceContext = Array.isArray(sourceContext) ? sourceContext : [sourceContext];
 
     if (!sourceContext || !regex) {
@@ -8,7 +8,7 @@ module.exports = (sourceContext, regex, groupIndex) => {
     let values = [];
 
     sourceContext.forEach((sourceContextItem) => {
-        const matches = sourceContextItem.matchAll(new RegExp(regex, 'g'));
+        const matches = sourceContextItem.matchAll(new RegExp(regex, flags));
         for (let match of matches) {
             values.push(match[groupIndex || 0]);
         }

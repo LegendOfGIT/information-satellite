@@ -71,6 +71,71 @@
         "sourceContextId": "price-initial"
       }
     },
+
+    {
+      "comment": "weight-in-grams",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "weight-in-grams",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "Gewicht:(.*)g<\\/li>"
+        ]
+      }
+    },
+    {
+      "comment": "weight-in-grams to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "weight-in-grams",
+        "sourceContextId": "weight-in-grams"
+      }
+    },
+
+    {
+      "comment": "width-in-mm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "width-in-mm",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "Breite:(.*)mm<\\/li>"
+        ]
+      }
+    },
+    {
+      "comment": "width-in-mm to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "width-in-mm",
+        "sourceContextId": "width-in-mm"
+      }
+    },
+
+    {
+      "comment": "diameter-in-cm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "diameter-in-cm",
+        "flags": "sg",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "Größe:(.*?)<\\/span>"
+        ]
+      }
+    },
+    {
+      "comment": "diameter-in-cm to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "diameter-in-cm",
+        "sourceContextId": "diameter-in-cm"
+      }
+    },
+
     {
       "comment": "description",
       "commandId": "get-value-by-regex",
@@ -89,7 +154,7 @@
       "parameters": {
         "contextId": "description",
         "sourceContextId": "single-product-view",
-        "css-queries": [ ".js_prd_moreBox__content" ]
+        "css-queries": [ ".js_prd_moreBox__content", ".pdp_description__text-expander" ]
       }
     },
 
@@ -201,6 +266,19 @@
         ]
       }
     },
+    {
+      "comment": "material",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "material",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "Material:(.*?)<\/li>"
+        ]
+      }
+    },
+
 
     {
       "comment": "gtin",
@@ -267,11 +345,13 @@
       "parameters": {
         "informationIds": [
           "description",
+          "diameter-in-cm",
           "gtin",
           "images-big",
           "images-small",
           "genre",
           "link",
+          "material",
           "minimumAge",
           "multiplayer",
           "price-current",
@@ -279,7 +359,9 @@
           "publisher",
           "subgenre",
           "title",
-          "title-image"
+          "title-image",
+          "weight-in-grams",
+          "width-in-mm"
         ]
       }
     }
