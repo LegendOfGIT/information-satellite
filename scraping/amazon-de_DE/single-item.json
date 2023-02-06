@@ -34,7 +34,7 @@
       "parameters": {
         "contextId": "price-current",
         "sourceContextId": "single-product-view",
-        "css-queries": [ "#priceblock_ourprice", "#olp-new .a-color-price" ]
+        "css-queries": [ "#priceblock_ourprice", "#olp-new .a-color-price", ".priceToPay .a-offscreen" ]
       }
     },
     {
@@ -43,7 +43,7 @@
       "parameters": {
         "contextId": "price-initial",
         "sourceContextId": "single-product-view",
-        "css-queries": [ ".priceBlockStrikePriceString", "#priceblock_ourprice", "#olp-new .a-color-price" ]
+        "css-queries": [ ".priceBlockStrikePriceString", "#priceblock_ourprice", "#olp-new .a-color-price", ".basisPrice .a-offscreen" ]
       }
     },
     {
@@ -91,6 +91,63 @@
         "contextId": "minimumAge",
         "sourceContextId": "minimumAge",
         "defaultValue": 0
+      }
+    },
+
+    {
+      "comment": "make",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "make",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "Marke<.*?<span.*?>(.*?)<\\/span>"
+        ]
+      }
+    },
+    {
+      "comment": "material",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "material",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "Metallstempel <.*?<td.*?>(.*?)<\\/td>"
+        ]
+      }
+    },
+    {
+      "comment": "length-in-cm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "length-in-cm",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "Länge <.*?<td.*>(.*?)cm <\\/td>"
+        ]
+      }
+    },
+    {
+      "comment": "length-in-cm to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "length-in-cm",
+        "sourceContextId": "length-in-cm"
+      }
+    },
+    {
+      "comment": "lock-type",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "lock-type",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "Verschluss.<.*?<td.*?>(.*?)<\\/td>"
+        ]
       }
     },
 
@@ -152,7 +209,11 @@
           "description",
           "images-big",
           "images-small",
+          "length-in-cm",
           "link",
+          "lock-type",
+          "make",
+          "material",
           "price-current",
           "price-initial",
           "title",
