@@ -17,7 +17,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-search",
-        "uri": "https://{template.site}/suche?filterPATHROOT=&sq={request.query.itemId}"
+        "uri": "https://{template.site}/suche?sq={request.query.itemId}"
       }
     },
     {
