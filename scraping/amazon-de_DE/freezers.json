@@ -15,7 +15,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://{template.site}/gp/bestsellers/videogames/1478865031/ref=zg_bs_nav_videogames_2_301129?pg={random-page-number}"
+        "uri": "https://{template.site}/gp/bestsellers/appliances/1399937031/ref=zg_bs_nav_appliances_2_13528201031?pg={random-page-number}"
       }
     },
     {
@@ -58,9 +58,9 @@
       "parameters": {
         "contextId": "navigation-path",
         "value": [
-          "MULTIMEDIA",
-          "MULTIMEDIA_GAMES",
-          "MULTIMEDIA_GAMES_PC"
+          "ELECTRONICS_AND_COMPUTERS",
+          "ELECTRONICS_AND_COMPUTERS_LARGE_APPLIANCES",
+          "ELECTRONICS_AND_COMPUTERS_LARGE_APPLIANCES_FRIDGES_AND_FREEZERS"
         ]
       }
     },

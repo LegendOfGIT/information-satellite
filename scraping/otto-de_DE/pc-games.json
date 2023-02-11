@@ -1,13 +1,13 @@
 {
-  "site": "amazon.de",
+  "site": "otto.de",
 
   "scraping": [
     {
-      "comment": "random-page-number",
+      "comment": "random-item-number",
       "commandId": "generate-random-number",
       "parameters": {
-        "contextId": "random-page-number",
-        "maximum": "20"
+        "contextId": "random-item-number",
+        "maximum": "40"
       }
     },
     {
@@ -15,7 +15,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://{template.site}/gp/bestsellers/videogames/1478865031/ref=zg_bs_nav_videogames_2_301129?pg={random-page-number}"
+        "uri": "https://{template.site}/technik/gaming/pc-gaming/pc-spiele/"
       }
     },
     {
@@ -23,8 +23,8 @@
       "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "css-queries": [ ".s-asin"],
-        "attribute-id": "data-asin",
+        "css-queries": [ "#san_searchResult article"],
+        "attribute-id": "data-productid",
         "sourceContextId": "product-overview"
       }
     },
@@ -33,7 +33,7 @@
       "commandId": "set-context-value",
       "parameters": {
         "contextId": "site",
-        "value": "amazon-de_DE"
+        "value": "otto-de_DE"
       }
     },
     {

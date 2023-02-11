@@ -15,7 +15,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://{template.site}/gp/bestsellers/videogames/1478865031/ref=zg_bs_nav_videogames_2_301129?pg={random-page-number}"
+        "uri": "https://{template.site}/gp/bestsellers/videogames/2583844031/ref=zg_bs_nav_videogames_1?pg={random-page-number}"
       }
     },
     {
@@ -60,7 +60,7 @@
         "value": [
           "MULTIMEDIA",
           "MULTIMEDIA_GAMES",
-          "MULTIMEDIA_GAMES_PC"
+          "MULTIMEDIA_GAMES_PLAYSTATION_4"
         ]
       }
     },
