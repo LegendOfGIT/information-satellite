@@ -23,8 +23,8 @@
       "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "css-queries": [ ".s-asin"],
-        "attribute-id": "data-asin",
+        "css-queries": [ ".p13n-sc-uncoverable-faceout"],
+        "attribute-id": "id",
         "sourceContextId": "product-overview"
       }
     },
