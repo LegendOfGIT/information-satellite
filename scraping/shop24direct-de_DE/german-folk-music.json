@@ -7,7 +7,7 @@
       "commandId": "generate-random-number",
       "parameters": {
         "contextId": "random-item-number",
-        "maximum": "30"
+        "maximum": "20"
       }
     },
     {
@@ -15,7 +15,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://{template.site}/katalog/musik/klassik?audio_format=36&cat=1308&tag_product=93&p={random-item-number}"
+        "uri": "https://{template.site}/katalog/musik?cat=256&tag_product=93&audio_format=36&p={random-item-number}"
       }
     },
     {
