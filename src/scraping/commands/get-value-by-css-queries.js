@@ -1,11 +1,18 @@
 const cheerio = require('cheerio');
 const getValuesFromCssSelectorResponse = require('../processing/getValuesFromCssSelectorResponse');
+const getPreparedCommandParameters = require("../getPreparedCommandParameters");
 
 module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     console.log('executing command "get-value-by-css-queries"')
 
-    const { contextId, mustContain, sourceContextId } = parameters;
-    const cssQueries = parameters['css-queries'];
+    const commandParameters = getPreparedCommandParameters(Object.assign(
+        {},
+        parameters,
+        context
+    ));
+
+    const { contextId, mustContain, sourceContextId } = commandParameters;
+    const cssQueries = commandParameters['css-queries'];
 
     if (!contextId) {
         console.log('required parameter "contextId" is not given. abort.');
@@ -37,8 +44,9 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         return;
     }
 
-    const attributeId = parameters['attribute-id'] || '';
+    const attributeId = commandParameters['attribute-id'] || '';
 
+    console.log(mustContain);
     const cssSelector = cheerio.load(sourceContext);
     cssQueries.forEach(cssQuery => {
         if(context[contextId] && context[contextId] != `{${contextId}}`) {
@@ -50,6 +58,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
             attributeId,
             mustContain
         );
+
         context[contextId] = 0 === valuesFromCssSelector.length ? undefined : valuesFromCssSelector[0];
     });
 
