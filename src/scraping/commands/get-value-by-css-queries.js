@@ -46,7 +46,6 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
 
     const attributeId = commandParameters['attribute-id'] || '';
 
-    console.log(mustContain);
     const cssSelector = cheerio.load(sourceContext);
     cssQueries.forEach(cssQuery => {
         if(context[contextId] && context[contextId] != `{${contextId}}`) {
