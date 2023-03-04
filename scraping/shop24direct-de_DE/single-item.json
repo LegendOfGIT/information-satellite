@@ -56,12 +56,98 @@
     },
 
     {
+      "comment": "amount of media",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "amountOfMedia",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "<th.*Anzahl der Medien.*\\s.*<td.*?>(.*?)<\\/td>"
+        ]
+      }
+    },
+    {
+      "comment": "amount of media to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "amountOfMedia",
+        "sourceContextId": "amountOfMedia"
+      }
+    },
+
+    {
+      "comment": "amount of songs",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "amountOfSongs",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "<th.*Titelanzahl.*\\s.*<td.*?>(.*?)<\\/td>"
+        ]
+      }
+    },
+    {
+      "comment": "amount of songs to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "amountOfSongs",
+        "sourceContextId": "amountOfSongs"
+      }
+    },
+
+    {
+      "comment": "playtime length in minutes",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "playtimeLengthInMinutes",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "<th.*Spielzeit.*\\s.*<td.*?>(.*?)<\\/td>"
+        ]
+      }
+    },
+    {
+      "comment": "playtime length in minutes to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "playtimeLengthInMinutes",
+        "sourceContextId": "playtimeLengthInMinutes"
+      }
+    },
+
+    {
+      "comment": "interpret",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "interpret",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "<th.*Interpret.*\\s.*<td><a.*?>(.*?)<\\/a>"
+        ]
+      }
+    },
+
+    {
       "comment": "title",
       "commandId": "get-value-by-css-queries",
       "parameters": {
         "contextId": "title",
         "sourceContextId": "single-product-view",
         "css-queries": [ ".page-title > h1" ]
+      }
+    },
+
+    {
+      "comment": "title",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "title",
+        "sourceContextId": "title",
+        "value": "{interpret} - {title}"
       }
     },
 
@@ -132,9 +218,13 @@
       "commandId": "store-information",
       "parameters": {
         "informationIds": [
+          "amountOfMedia",
+          "amountOfSongs",
           "description",
           "ean",
+          "interpret",
           "link",
+          "playtimeLengthInMinutes",
           "price-current",
           "price-initial",
           "title",
