@@ -1,0 +1,139 @@
+{
+  "site": "dress-for-less.de",
+
+  "itemId": "{template.site}-{request.query.itemId}",
+
+  "scraping": [
+    {
+      "comment": "product-search",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-search",
+        "uri": "https://{template.site}/search?q={request.query.itemId}"
+      }
+    },
+
+    {
+      "comment": "link",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "link",
+        "sourceContextId": "product-search",
+        "attribute-id": "href",
+        "css-queries": [ ".image-container > a" ]
+      }
+    },
+
+    {
+      "comment": "single-product-view",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "single-product-view",
+        "uri": "https://{template.site}{link}"
+      }
+    },
+
+    {
+      "comment": "link",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "link",
+        "value": "{current-uri}"
+      }
+    },
+
+    {
+      "comment": "title",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ "head > title" ]
+      }
+    },
+    {
+      "comment": "title",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "title",
+        "sourceContextId": "title",
+        "groupIndex": 1,
+        "regex": [
+          "(.*) \\|"
+        ]
+      }
+    },
+
+    {
+      "comment": "title-image",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title-image",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "src",
+        "css-queries": [ "#pdpCarousel-0 .picture__image" ]
+      }
+    },
+    {
+      "comment": "description",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "description",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "\"description\":\"(.*?)\""
+        ]
+      }
+    },
+    {
+      "comment": "price-current",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".priceinclude__savings .sales .value" ]
+      }
+    },
+    {
+      "comment": "price-initial",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".priceinclude__promoitem .strike-through .value" ]
+      }
+    },
+    {
+      "comment": "price-current to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "price-current"
+      }
+    },
+    {
+      "comment": "price-initial to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "price-initial"
+      }
+    },
+
+    {
+      "comment": "store scraped information",
+      "commandId": "store-information",
+      "parameters": {
+        "informationIds": [
+          "description",
+          "link",
+          "price-current",
+          "price-initial",
+          "title",
+          "title-image"
+        ]
+      }
+    }
+  ]
+}
