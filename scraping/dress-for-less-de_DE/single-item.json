@@ -43,6 +43,15 @@
     },
 
     {
+      "comment": "merchant article number",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "mean",
+        "value": "dfl.{request.query.itemId}"
+      }
+    },
+
+    {
       "comment": "title",
       "commandId": "get-value-by-css-queries",
       "parameters": {
@@ -128,6 +137,7 @@
         "informationIds": [
           "description",
           "link",
+          "mean",
           "price-current",
           "price-initial",
           "title",
