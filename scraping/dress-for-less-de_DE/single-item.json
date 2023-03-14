@@ -29,7 +29,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "single-product-view",
-        "uri": "https://{template.site}{link}"
+        "uri": "https://www.{template.site}{link}"
       }
     },
 
