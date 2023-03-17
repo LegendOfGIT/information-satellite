@@ -1,0 +1,86 @@
+{
+  "site": "biggreensmile.de",
+
+  "scraping": [
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "uri": "https://www.{template.site}/departments/gesichtspflege.aspx?deptid=C2&pagesize=all"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "product-ids",
+        "css-queries": [ ".product-title > a"],
+        "attribute-id": "href",
+        "sourceContextId": "product-overview"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "product-ids",
+        "replacements": {
+          ".*?productid=": ""
+        },
+        "sourceContextId": "product-ids"
+      }
+    },
+
+    {
+      "comment": "site",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "site",
+        "value": "big-green-smile-de_DE"
+      }
+    },
+    {
+      "comment": "locale",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "locale",
+        "value": "de-DE"
+      }
+    },
+    {
+      "comment": "usecase",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "usecase",
+        "value": "single-item"
+      }
+    },
+    {
+      "comment": "navigation-path",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "navigation-path",
+        "value": [
+          "BEAUTY_CARE",
+          "BEAUTY_CARE_SKIN_CARE",
+          "BEAUTY_CARE_SKIN_CARE_FACE_CARE"
+        ]
+      }
+    },
+
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    }
+  ]
+}

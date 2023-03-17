@@ -1,0 +1,125 @@
+{
+  "site": "biggreensmile.de",
+
+  "itemId": "{template.site}-{request.query.itemId}",
+
+  "scraping": [
+    {
+      "comment": "single-product-view",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "single-product-view",
+        "uri": "https://{template.site}/search.aspx?q={request.query.itemId}"
+      }
+    },
+
+    {
+      "comment": "link",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "attribute-id": "content",
+        "contextId": "link",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ "meta[property='og:url']" ]
+      }
+    },
+
+    {
+      "comment": "gtin",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "gtin",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "\"gtin\": \"(.*?)\""
+        ]
+      }
+    },
+
+    {
+      "comment": "title",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ "span[itemprop=name]" ]
+      }
+    },
+
+    {
+      "comment": "title-image",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title-image",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "src",
+        "css-queries": [ "img[itemprop=image]" ]
+      }
+    },
+    {
+      "comment": "description",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "description",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "src",
+        "css-queries": [ "span[itemprop=description] h3", "span[itemprop=description] p" ]
+      }
+    },
+
+    {
+      "comment": "price-current",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "src",
+        "css-queries": [ ".new-price span" ]
+      }
+    },
+    {
+      "comment": "price-initial",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "src",
+        "css-queries": [ ".new-price span span", ".new-price span" ]
+      }
+    },
+
+    {
+      "comment": "price-current to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "price-current"
+      }
+    },
+    {
+      "comment": "price-initial to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "price-initial"
+      }
+    },
+
+    {
+      "comment": "store scraped information",
+      "commandId": "store-information",
+      "parameters": {
+        "informationIds": [
+          "description",
+          "link",
+          "gtin",
+          "price-current",
+          "price-initial",
+          "title",
+          "title-image"
+        ]
+      }
+    }
+  ]
+}
