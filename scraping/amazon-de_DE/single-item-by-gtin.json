@@ -115,7 +115,10 @@
       "parameters": {
         "contextId": "description",
         "sourceContextId": "single-product-view",
-        "css-queries": [ "#feature-bullets .a-list-item" ]
+        "css-queries": [
+          "#productDescription span",
+          "#feature-bullets .a-list-item"
+        ]
       }
     },
     {
