@@ -59,8 +59,8 @@
         "contextId": "navigation-path",
         "value": [
           "FASHION",
-          "FASHION_MEN",
-          "FASHION_MEN_SWEATERS_AND_KNITWEAR"
+          "FASHION_WOMEN",
+          "FASHION_WOMEN_SWEATERS_AND_KNITWEAR"
         ]
       }
     },
