@@ -1,0 +1,140 @@
+{
+  "site": "topparfuemerie.de",
+
+  "itemId": "{template.site}-{request.query.itemId}",
+
+  "scraping": [
+    {
+      "comment": "product-search",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-search",
+        "uri": "https://www.{template.site}/catalogsearch/result/?q={request.query.itemId}"
+      }
+    },
+
+    {
+      "comment": "link",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "link",
+        "sourceContextId": "product-search",
+        "attribute-id": "href",
+        "css-queries": [ ".product-item-info > a" ]
+      }
+    },
+
+    {
+      "comment": "single-product-view",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "single-product-view",
+        "uri": "{link}"
+      }
+    },
+
+    {
+      "comment": "merchant article number",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "mean",
+        "value": "dfl.{request.query.itemId}"
+      }
+    },
+
+    {
+      "comment": "title",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".product-name" ]
+      }
+    },
+    {
+      "comment": "title",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "title",
+        "sourceContextId": "title",
+        "groupIndex": 1,
+        "regex": [
+          "(.*) \\|"
+        ]
+      }
+    },
+
+    {
+      "comment": "title-image",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title-image",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ "meta[itemprop=image]" ]
+      }
+    },
+    {
+      "comment": "description",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "description",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ "div[itemprop=description]" ]
+      }
+    },
+    {
+      "comment": "price-current",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "data-price-amount",
+        "css-queries": [ "span[data-price-type=finalPrice]" ]
+      }
+    },
+    {
+      "comment": "price-initial",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "data-price-amount",
+        "css-queries": [ "span[data-price-type=oldPrice]", "span[data-price-type=finalPrice]" ]
+      }
+    },
+    {
+      "comment": "price-current to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "price-current"
+      }
+    },
+    {
+      "comment": "price-initial to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "price-initial"
+      }
+    },
+
+    {
+      "comment": "store scraped information",
+      "commandId": "store-information",
+      "parameters": {
+        "informationIds": [
+          "description",
+          "link",
+          "mean",
+          "price-current",
+          "price-initial",
+          "title",
+          "title-image"
+        ]
+      }
+    }
+  ]
+}

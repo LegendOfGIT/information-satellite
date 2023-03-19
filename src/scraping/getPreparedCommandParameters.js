@@ -4,11 +4,11 @@ module.exports = (parameters) => {
     const hasAtLeastOneReplacer = (value) => 'string' === typeof value && -1 !== (value || '').indexOf('{');
 
     const isUriParameterAndDoesNotStartWithHttpS = (key, value) => (
-        'uri' === key && !RegExp(/^https?:\/\//).test(value)
+        !RegExp(/^https?:\/\//).test(value)
     );
 
     for (let [key, value] of Object.entries(parameters)) {
-        if(isUriParameterAndDoesNotStartWithHttpS(key, value) && parameters['template.site']){
+        if('uri' === key && -1 === (value || '').indexOf('{') && isUriParameterAndDoesNotStartWithHttpS(key, value) && parameters['template.site']){
             value = `https://{template.site}${value}`;
         }
 
