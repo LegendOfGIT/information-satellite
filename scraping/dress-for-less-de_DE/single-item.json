@@ -84,6 +84,16 @@
       }
     },
     {
+      "comment": "color",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "color",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".color-value" ]
+      }
+    },
+
+    {
       "comment": "description",
       "commandId": "get-value-by-regex",
       "parameters": {
@@ -95,6 +105,80 @@
         ]
       }
     },
+    {
+      "comment": "material",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "material",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "Material: (.*?)</span>"
+        ]
+      }
+    },
+    {
+      "comment": "model",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "model",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "Modell: (.*?)</span>"
+        ]
+      }
+    },
+    {
+      "comment": "fit",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "fit",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "Passform: (.*?)</span>"
+        ]
+      }
+    },
+    {
+      "comment": "fabric",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "fabric",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "Stoff/Muster: (.*?)/.*?</span>"
+        ]
+      }
+    },
+    {
+      "comment": "fabricPattern",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "fabricPattern",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "Stoff/Muster: .*?/(.*?)</span>"
+        ]
+      }
+    },
+
+    {
+      "comment": "seoDescription",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "seoDescription",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "\"description\":\"(.*?)\""
+        ]
+      }
+    },
+
     {
       "comment": "price-current",
       "commandId": "get-value-by-css-queries",
@@ -131,15 +215,32 @@
     },
 
     {
+      "comment": "seoKeywords",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "seoKeywords",
+        "value": "{title}, {fabric}, {fabricPattern}, {color}, {model}, {fit}, {material}"
+      }
+    },
+
+    {
       "comment": "store scraped information",
       "commandId": "store-information",
       "parameters": {
         "informationIds": [
+          "color",
           "description",
+          "fabric",
+          "fabricPattern",
+          "fit",
           "link",
+          "material",
           "mean",
+          "model",
           "price-current",
           "price-initial",
+          "seoDescription",
+          "seoKeywords",
           "title",
           "title-image"
         ]

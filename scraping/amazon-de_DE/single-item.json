@@ -39,7 +39,6 @@
           "#olp-new .a-color-price",
           ".priceToPay .a-offscreen",
           "#corePrice_desktop .a-price > span"
-
         ]
       }
     },
@@ -54,7 +53,8 @@
           "#priceblock_ourprice",
           "#olp-new .a-color-price",
           ".basisPrice .a-offscreen",
-          "#corePrice_desktop .a-price > span"
+          "#corePrice_desktop .a-price > span",
+          ".priceToPay .a-offscreen"
         ]
       }
     },
@@ -81,6 +81,26 @@
         "contextId": "title",
         "sourceContextId": "single-product-view",
         "css-queries": [ "#productTitle" ]
+      }
+    },
+    {
+      "comment": "seoDescription",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "seoDescription",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ "meta[name=description]" ]
+      }
+    },
+    {
+      "comment": "seoKeywords",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "seoKeywords",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ "meta[name=description]" ]
       }
     },
 
@@ -231,6 +251,8 @@
           "material",
           "price-current",
           "price-initial",
+          "seoDescription",
+          "seoKeywords",
           "title",
           "title-image",
           "minimumAge"

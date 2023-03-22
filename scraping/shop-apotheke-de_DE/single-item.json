@@ -90,6 +90,18 @@
         ]
       }
     },
+    {
+      "comment": "seoDescription",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "seoDescription",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "\"description\":\"(.*?)\""
+        ]
+      }
+    },
 
     {
       "comment": "price-current",
@@ -132,6 +144,14 @@
         "sourceContextId": "price-initial"
       }
     },
+    {
+      "comment": "seoKeywords",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "seoKeywords",
+        "value": "{title}, {ean}"
+      }
+    },
 
     {
       "comment": "store scraped information",
@@ -144,6 +164,8 @@
           "ean",
           "price-current",
           "price-initial",
+          "seoDescription",
+          "seoKeywords",
           "title",
           "title-image"
         ]

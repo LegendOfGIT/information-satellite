@@ -85,6 +85,36 @@
       }
     },
     {
+      "comment": "seoDescription",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "seoDescription",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ "div[itemprop=description]" ]
+      }
+    },
+    {
+      "comment": "seoKeywords",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "seoKeywords",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ "meta[name=keywords]" ]
+      }
+    },
+    {
+      "comment": "ingredients",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "ingredients",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ "div[data-dynamic=ingredient]" ]
+      }
+    },
+
+    {
       "comment": "price-current",
       "commandId": "get-value-by-css-queries",
       "parameters": {
@@ -127,10 +157,13 @@
       "parameters": {
         "informationIds": [
           "description",
+          "ingredients",
           "link",
           "mean",
           "price-current",
           "price-initial",
+          "seoDescription",
+          "seoKeywords",
           "title",
           "title-image"
         ]

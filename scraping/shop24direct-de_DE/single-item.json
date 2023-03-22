@@ -179,6 +179,25 @@
       }
     },
     {
+      "comment": "seoDescription",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "seoDescription",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".long-description" ]
+      }
+    },
+    {
+      "comment": "seoKeywords",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "seoKeywords",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ "meta[name=keywords]" ]
+      }
+    },
+    {
       "comment": "price-current",
       "commandId": "get-value-by-css-queries",
       "parameters": {
@@ -227,6 +246,8 @@
           "playtimeLengthInMinutes",
           "price-current",
           "price-initial",
+          "seoDescription",
+          "seoKeywords",
           "title",
           "title-image"
         ]

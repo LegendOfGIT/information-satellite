@@ -66,6 +66,7 @@
         "css-queries": [
           "#priceblock_ourprice",
           "#olp-new .a-color-price",
+          ".priceToPay .a-offscreen",
           "#corePrice_desktop .a-price > span"
         ]
       }
@@ -80,7 +81,9 @@
           ".priceBlockStrikePriceString",
           "#priceblock_ourprice",
           "#olp-new .a-color-price",
-          "#corePrice_desktop .a-price > span"
+          ".basisPrice .a-offscreen",
+          "#corePrice_desktop .a-price > span",
+          ".priceToPay .a-offscreen"
         ]
       }
     },
@@ -163,6 +166,27 @@
     },
 
     {
+      "comment": "seoDescription",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "seoDescription",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ "meta[name=description]" ]
+      }
+    },
+    {
+      "comment": "seoKeywords",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "seoKeywords",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ "meta[name=description]" ]
+      }
+    },
+
+    {
       "comment": "usk-age",
       "commandId": "get-value-by-regex",
       "parameters": {
@@ -197,6 +221,8 @@
           "link",
           "price-current",
           "price-initial",
+          "seoDescription",
+          "seoKeywords",
           "title",
           "title-image",
           "minimumAge"

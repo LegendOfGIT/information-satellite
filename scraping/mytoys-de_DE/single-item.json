@@ -92,6 +92,16 @@
       }
     },
     {
+      "comment": "seoDescription",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "seoDescription",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".prod-descr--long > p" ]
+      }
+    },
+
+    {
       "comment": "price-current",
       "commandId": "get-value-by-css-queries",
       "parameters": {
@@ -125,6 +135,26 @@
         "sourceContextId": "price-initial"
       }
     },
+    {
+      "comment": "material",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "material",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "Material: (.*?)\""
+        ]
+      }
+    },
+    {
+      "comment": "seoKeywords",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "seoKeywords",
+        "value": "{material}, {title}, {ean}"
+      }
+    },
 
     {
       "comment": "store scraped information",
@@ -134,8 +164,11 @@
           "description",
           "ean",
           "link",
+          "material",
           "price-current",
           "price-initial",
+          "seoDescription",
+          "seoKeywords",
           "title",
           "title-image"
         ]
