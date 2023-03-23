@@ -1,5 +1,5 @@
 {
-  "site": "mueller.de",
+  "site": "bisbshop.de",
 
   "scraping": [
     {
@@ -7,7 +7,7 @@
       "commandId": "generate-random-number",
       "parameters": {
         "contextId": "random-page-number",
-        "maximum": "20"
+        "maximum": "3"
       }
     },
     {
@@ -15,36 +15,26 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://{template.site}/multi-media/games/?p={random-page-number}"
+        "uri": "https://www.{template.site}/collections/styling-1?page={random-page-number}"
       }
     },
     {
       "comment": "product-ids",
-      "commandId": "get-values-by-css-queries",
+      "commandId": "get-values-by-regex",
       "parameters": {
         "contextId": "product-ids",
-        "css-queries": [ ".mu-product-list__items a"],
-        "attribute-id": "href",
-        "sourceContextId": "product-overview"
+        "sourceContextId": "product-overview",
+        "regex": "\"sku\":\"(.*?)\"",
+        "groupIndex": 1
       }
     },
-    {
-      "comment": "add 600x338 versions of images-small",
-      "commandId": "clone-items-and-modify-clones",
-      "parameters": {
-        "contextId": "images-big",
-        "sourceContextId": "images-small",
-        "replacements": {
-          "116x65": "600x338"
-        }
-      }
-    },
+
     {
       "comment": "site",
       "commandId": "set-context-value",
       "parameters": {
         "contextId": "site",
-        "value": "mueller"
+        "value": "black-is-beautiful-de_DE"
       }
     },
     {
@@ -63,6 +53,18 @@
         "value": "single-item"
       }
     },
+    {
+      "comment": "navigation-path",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "navigation-path",
+        "value": [
+          "COSMETICS",
+          "COSMETICS_HAIR",
+          "COSMETICS_HAIR_STYLING"
+        ]
+      }
+    },
 
     {
       "comment": "observe scraped information",
@@ -70,6 +72,7 @@
       "parameters": {
         "informationIds": [
           "locale",
+          "navigation-path",
           "product-ids",
           "site",
           "usecase"
