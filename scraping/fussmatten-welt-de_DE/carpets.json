@@ -73,9 +73,9 @@
       "parameters": {
         "contextId": "navigation-path",
         "value": [
-          "HOUSEHOLD",
-          "HOUSEHOLD_ACCESSOIRES",
-          "HOUSEHOLD_ACCESSOIRES_CARPETS"
+          "HOME",
+          "HOME_ACCESSOIRES",
+          "HOME_ACCESSOIRES_CARPETS"
         ]
       }
     },
