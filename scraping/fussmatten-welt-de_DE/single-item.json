@@ -50,6 +50,14 @@
         "value": "fmw.{request.query.itemId}"
       }
     },
+    {
+      "comment": "sku",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "sku",
+        "value": "{request.query.itemId}"
+      }
+    },
 
     {
       "comment": "title",
@@ -168,6 +176,7 @@
           "price-initial",
           "seoDescription",
           "seoKeywords",
+          "sku",
           "title",
           "title-image"
         ]
