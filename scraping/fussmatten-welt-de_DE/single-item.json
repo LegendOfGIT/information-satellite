@@ -1,5 +1,5 @@
 {
-  "site": "topparfuemerie.de",
+  "site": "fussmatten-welt.de",
 
   "itemId": "{template.site}-{request.query.itemId}",
 
@@ -9,7 +9,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-search",
-        "uri": "https://www.{template.site}/catalogsearch/result/?q={request.query.itemId}"
+        "uri": "https://www.{template.site}/search?type=product%2Carticle%2Cpage&options%5Bprefix%5D=last&q=\"{request.query.itemId}\""
       }
     },
 
@@ -20,7 +20,16 @@
         "contextId": "link",
         "sourceContextId": "product-search",
         "attribute-id": "href",
-        "css-queries": [ ".product-item-info > a" ]
+        "css-queries": [ ".product-link" ]
+      }
+    },
+
+    {
+      "comment": "link",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "link",
+        "value": "https://www.{template.site}{link}"
       }
     },
 
@@ -38,7 +47,7 @@
       "commandId": "set-context-value",
       "parameters": {
         "contextId": "mean",
-        "value": "tpf.{request.query.itemId}"
+        "value": "fmw.{request.query.itemId}"
       }
     },
 
@@ -48,19 +57,7 @@
       "parameters": {
         "contextId": "title",
         "sourceContextId": "single-product-view",
-        "css-queries": [ ".product-name" ]
-      }
-    },
-    {
-      "comment": "title",
-      "commandId": "get-value-by-regex",
-      "parameters": {
-        "contextId": "title",
-        "sourceContextId": "title",
-        "groupIndex": 1,
-        "regex": [
-          "(.*) \\|"
-        ]
+        "css-queries": [ ".title" ]
       }
     },
 
@@ -70,18 +67,26 @@
       "parameters": {
         "contextId": "title-image",
         "sourceContextId": "single-product-view",
-        "attribute-id": "content",
-        "css-queries": [ "meta[itemprop=image]" ]
+        "attribute-id": "href",
+        "css-queries": [ ".show-gallery" ]
       }
     },
+    {
+      "comment": "title-image",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "title-image",
+        "value": "https:{title-image}"
+      }
+    },
+
     {
       "comment": "description",
       "commandId": "get-value-by-css-queries",
       "parameters": {
         "contextId": "description",
         "sourceContextId": "single-product-view",
-        "attribute-id": "content",
-        "css-queries": [ "div[itemprop=description]" ]
+        "css-queries": [ ".product-description > p" ]
       }
     },
     {
@@ -91,28 +96,10 @@
         "contextId": "seoDescription",
         "sourceContextId": "single-product-view",
         "attribute-id": "content",
-        "css-queries": [ "div[itemprop=description]" ]
+        "css-queries": [ "meta[property='og:description']" ]
       }
     },
-    {
-      "comment": "seoKeywords",
-      "commandId": "get-value-by-css-queries",
-      "parameters": {
-        "contextId": "seoKeywords",
-        "sourceContextId": "single-product-view",
-        "attribute-id": "content",
-        "css-queries": [ "meta[name=keywords]" ]
-      }
-    },
-    {
-      "comment": "ingredients",
-      "commandId": "get-value-by-css-queries",
-      "parameters": {
-        "contextId": "ingredients",
-        "sourceContextId": "single-product-view",
-        "css-queries": [ "div[data-dynamic=ingredient]" ]
-      }
-    },
+
 
     {
       "comment": "price-current",
@@ -120,8 +107,7 @@
       "parameters": {
         "contextId": "price-current",
         "sourceContextId": "single-product-view",
-        "attribute-id": "data-price-amount",
-        "css-queries": [ "span[data-price-type=finalPrice]" ]
+        "css-queries": [ ".current-price > span" ]
       }
     },
     {
@@ -130,8 +116,7 @@
       "parameters": {
         "contextId": "price-initial",
         "sourceContextId": "single-product-view",
-        "attribute-id": "data-price-amount",
-        "css-queries": [ "span[data-price-type=oldPrice]", "span[data-price-type=finalPrice]" ]
+        "css-queries": [ ".current-price > span" ]
       }
     },
     {
@@ -152,12 +137,31 @@
     },
 
     {
+      "comment": "seoKeywords",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "seoKeywords",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ "meta[name=keywords]" ]
+      }
+    },
+
+    {
+      "comment": "seoKeywords",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "seoKeywords",
+        "value": "{title}"
+      }
+    },
+
+    {
       "comment": "store scraped information",
       "commandId": "store-information",
       "parameters": {
         "informationIds": [
           "description",
-          "ingredients",
           "link",
           "mean",
           "price-current",
