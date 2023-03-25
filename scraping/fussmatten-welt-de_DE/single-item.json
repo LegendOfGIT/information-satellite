@@ -84,6 +84,9 @@
       "commandId": "set-context-value",
       "parameters": {
         "contextId": "title-image",
+        "replacements": {
+          "\\.jpg": "_460x.jpg"
+        },
         "value": "https:{title-image}"
       }
     },

@@ -1,7 +1,7 @@
 const getPreparedCommandParameters = require('../getPreparedCommandParameters');
 
 module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
-    const { contextId, value } = parameters;
+    const { contextId, replacements = {}, value } = parameters;
 
     console.log('executing command "set-context-value"');
 
@@ -22,6 +22,9 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     ));
 
     context[contextId] = commandParameters.value;
+    for (const [key, value] of Object.entries(replacements)) {
+        context[contextId] = context[contextId].replace(new RegExp(key,"g"), value);
+    }
 
     resolve();
 });
