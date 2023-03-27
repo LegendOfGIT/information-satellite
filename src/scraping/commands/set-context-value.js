@@ -26,7 +26,12 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         context[contextId] = context[contextId].replace(new RegExp(key,"g"), value);
     }
 
-    //context[contextId] = (context[contextId] || '').replace(new RegExp('{.*?}',"g"), '');
+    if (Array.isArray(context[contextId])) {
+        resolve();
+        return;
+    }
+
+    context[contextId] = (context[contextId] || '').replace(new RegExp('{.*?}',"g"), '');
 
     resolve();
 });
