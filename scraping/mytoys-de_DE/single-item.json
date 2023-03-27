@@ -82,6 +82,41 @@
         "value": "https:{title-image}"
       }
     },
+
+    {
+      "comment": "images-big",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "images-big",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "data-src",
+        "css-queries": [ ".js-slider-cell" ]
+      }
+    },
+    {
+      "comment": "images-big",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "images-big",
+        "replacements": {
+          "\/\/mytoys": "https://mytoys",
+          "prod-main-zoom": "prod-main"
+        },
+        "sourceContextId": "images-big"
+      }
+    },
+    {
+      "comment": "images-small",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "images-small",
+        "replacements": {
+          "prod-main_xl": "prod-main-thumb_xl"
+        },
+        "sourceContextId": "images-big"
+      }
+    },
+
     {
       "comment": "description",
       "commandId": "get-value-by-css-queries",
@@ -163,6 +198,8 @@
         "informationIds": [
           "description",
           "ean",
+          "images-big",
+          "images-small",
           "link",
           "material",
           "price-current",

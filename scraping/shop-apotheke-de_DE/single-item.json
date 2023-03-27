@@ -78,6 +78,42 @@
         "css-queries": [ ".o-Gallery__image" ]
       }
     },
+
+    {
+      "comment": "images-big",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "images-big",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "srcset",
+        "css-queries": [ ".o-SliderHorizontal__item .a-ResponsiveImage__img" ]
+      }
+    },
+    {
+      "comment": "images-big",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "images-big",
+        "replacements": {
+          ".*?70w,": "",
+          " 93w.*": "",
+          "93x": "600x"
+        },
+        "sourceContextId": "images-big"
+      }
+    },
+    {
+      "comment": "images-small",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "images-small",
+        "replacements": {
+          "600x": "450x"
+        },
+        "sourceContextId": "images-big"
+      }
+    },
+
     {
       "comment": "description",
       "commandId": "get-value-by-regex",
@@ -162,6 +198,8 @@
           "description",
           "link",
           "ean",
+          "images-big",
+          "images-small",
           "price-current",
           "price-initial",
           "seoDescription",

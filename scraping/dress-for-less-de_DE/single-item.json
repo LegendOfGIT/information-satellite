@@ -83,6 +83,41 @@
         "css-queries": [ "#pdpCarousel-0 .picture__image" ]
       }
     },
+
+    {
+      "comment": "images-small",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "images-small",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "data-srcset",
+        "css-queries": [ "ul.carousel-slide-items .carousel-slide-item .picture source" ]
+      }
+    },
+    {
+      "comment": "images-small",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "images-small",
+        "replacements": {
+          "sw=.*": "sw=150"
+        },
+        "sourceContextId": "images-small"
+      }
+    },
+
+    {
+      "comment": "images-big",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "images-big",
+        "replacements": {
+          "sw=.*": "sw=450"
+        },
+        "sourceContextId": "images-small"
+      }
+    },
+
     {
       "comment": "color",
       "commandId": "get-value-by-css-queries",
@@ -233,6 +268,8 @@
           "fabric",
           "fabricPattern",
           "fit",
+          "images-big",
+          "images-small",
           "link",
           "material",
           "mean",

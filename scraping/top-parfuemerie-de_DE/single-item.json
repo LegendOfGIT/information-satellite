@@ -75,6 +75,17 @@
       }
     },
     {
+      "comment": "images-big",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "images-big",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ "meta[itemprop=image]:not(:first-child)" ]
+      }
+    },
+
+    {
       "comment": "description",
       "commandId": "get-value-by-css-queries",
       "parameters": {
@@ -157,6 +168,7 @@
       "parameters": {
         "informationIds": [
           "description",
+          "images-big",
           "ingredients",
           "link",
           "mean",
