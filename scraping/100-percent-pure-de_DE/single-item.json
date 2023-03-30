@@ -1,0 +1,183 @@
+{
+  "site": "100percentpure.de",
+
+  "itemId": "{template.site}-{request.query.itemId}",
+
+  "scraping": [
+    {
+      "comment": "link",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "link",
+        "value": "https://www.{template.site}/{request.query.itemCanonical}"
+      }
+    },
+
+    {
+      "comment": "single-product-view",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "single-product-view",
+        "uri": "{link}"
+      }
+    },
+
+    {
+      "comment": "merchant article number",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "mean",
+        "value": "100pp.{request.query.itemId}"
+      }
+    },
+
+    {
+      "comment": "title",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".product-title" ]
+      }
+    },
+
+    {
+      "comment": "title-image",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title-image",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ "meta[itemprop=image]" ]
+      }
+    },
+    {
+      "comment": "images-big",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "images-big",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "src",
+        "css-queries": [ "#gallery_wrapper img" ]
+      }
+    },
+    {
+      "comment": "images-big",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "images-big",
+        "replacements": {
+          "/xs/": "/lg/"
+        },
+        "sourceContextId": "images-big"
+      }
+    },
+    {
+      "comment": "images-small",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "images-small",
+        "replacements": {
+          "/lg/": "/sm/"
+        },
+        "sourceContextId": "images-big"
+      }
+    },
+
+    {
+      "comment": "description",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "description",
+        "sourceContextId": "single-product-view",
+        "separator": " ",
+        "css-queries": [ ".desc p" ]
+      }
+    },
+    {
+      "comment": "ingredients",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "ingredients",
+        "sourceContextId": "single-product-view",
+        "separator": " ",
+        "css-queries": [ "#tab-Inhaltsstoffe p" ]
+      }
+    },
+    {
+      "comment": "seoDescription",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "seoDescription",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ "div[itemprop=description]" ]
+      }
+    },
+
+    {
+      "comment": "price-current",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".discountWrapper .text-stroke",".price span" ]
+      }
+    },
+    {
+      "comment": "price-initial",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".price span" ]
+      }
+    },
+    {
+      "comment": "price-current to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "price-current"
+      }
+    },
+    {
+      "comment": "price-initial to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "price-initial"
+      }
+    },
+
+    {
+      "comment": "seoKeywords",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "seoKeywords",
+        "value": "{title}"
+      }
+    },
+
+    {
+      "comment": "store scraped information",
+      "commandId": "store-information",
+      "parameters": {
+        "informationIds": [
+          "description",
+          "images-big",
+          "images-small",
+          "ingredients",
+          "link",
+          "mean",
+          "price-current",
+          "price-initial",
+          "seoDescription",
+          "seoKeywords",
+          "title",
+          "title-image"
+        ]
+      }
+    }
+  ]
+}

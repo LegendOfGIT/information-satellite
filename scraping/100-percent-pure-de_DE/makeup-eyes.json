@@ -1,0 +1,222 @@
+{
+  "site": "100percentpure.de",
+
+  "scraping": [
+    {
+      "comment": "site",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "site",
+        "value": "100-percent-pure-de_DE"
+      }
+    },
+    {
+      "comment": "locale",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "locale",
+        "value": "de-DE"
+      }
+    },
+    {
+      "comment": "usecase",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "usecase",
+        "value": "single-item"
+      }
+    },
+    {
+      "comment": "navigation-path",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "navigation-path",
+        "value": [
+          "COSMETICS",
+          "COSMETICS_MAKEUP",
+          "COSMETICS_MAKEUP_EYES"
+        ]
+      }
+    },
+
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "uri": "https://www.{template.site}/Mascara"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "product-ids",
+        "css-queries": [ ".productbox meta[itemprop='image']"],
+        "attribute-id": "content",
+        "sourceContextId": "product-overview"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "product-ids",
+        "replacements": {
+          ".*/product/": "",
+          "/md/": "|",
+          "\\..*": ""
+        },
+        "sourceContextId": "product-ids"
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    },
+
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "uri": "https://www.{template.site}/Eye-Shadow"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "product-ids-eye-shadow",
+        "css-queries": [ ".productbox meta[itemprop='image']"],
+        "attribute-id": "content",
+        "sourceContextId": "product-overview"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "product-ids",
+        "replacements": {
+          ".*/product/": "",
+          "/md/": "|",
+          "\\..*": ""
+        },
+        "sourceContextId": "product-ids-eye-shadow"
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    },
+
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "uri": "https://www.{template.site}/Eyeliner"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "product-ids-eyeliner",
+        "css-queries": [ ".productbox meta[itemprop='image']"],
+        "attribute-id": "content",
+        "sourceContextId": "product-overview"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "product-ids",
+        "replacements": {
+          ".*/product/": "",
+          "/md/": "|",
+          "\\..*": ""
+        },
+        "sourceContextId": "product-ids-eyeliner"
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    },
+
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "uri": "https://www.{template.site}/Augenbrauen"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "product-ids-eyebrows",
+        "css-queries": [ ".productbox meta[itemprop='image']"],
+        "attribute-id": "content",
+        "sourceContextId": "product-overview"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "product-ids",
+        "replacements": {
+          ".*/product/": "",
+          "/md/": "|",
+          "\\..*": ""
+        },
+        "sourceContextId": "product-ids-eyebrows"
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    }
+  ]
+}

@@ -11,7 +11,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         context
     ));
 
-    const { contextId, mustContain, sourceContextId } = commandParameters;
+    const { contextId, mustContain, sourceContextId, separator = undefined } = commandParameters;
     const cssQueries = commandParameters['css-queries'];
 
     if (!contextId) {
@@ -20,7 +20,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         return;
     }
 
-    if (Object.prototype.hasOwnProperty.call(context, contextId) && context[contextId] != `{${contextId}}`) {
+    if (Object.prototype.hasOwnProperty.call(context, contextId) && context[contextId] !== `{${contextId}}`) {
         resolve();
         return;
     }
@@ -48,7 +48,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
 
     const cssSelector = cheerio.load(sourceContext);
     cssQueries.forEach(cssQuery => {
-        if(context[contextId] && context[contextId] != `{${contextId}}`) {
+        if(context[contextId] && context[contextId] !== `{${contextId}}`) {
             return;
         }
 
@@ -58,7 +58,12 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
             mustContain
         );
 
-        context[contextId] = 0 === valuesFromCssSelector.length ? undefined : valuesFromCssSelector[0];
+        context[contextId] =
+            0 === valuesFromCssSelector.length
+                ? undefined
+                : undefined !== separator
+                    ? valuesFromCssSelector.join(separator)
+                    : valuesFromCssSelector[0];
     });
 
     resolve();

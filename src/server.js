@@ -11,6 +11,7 @@ fastify.get('/observe/site/:site/use-case/:useCase', async (request, reply) => {
         request.params.site,
         request.params.useCase,
         request.query.itemId,
+        request.query.itemCanonical,
         (request.query.navigationPath || '').split(',')
     ));
 })

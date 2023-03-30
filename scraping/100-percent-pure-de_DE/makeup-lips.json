@@ -1,0 +1,222 @@
+{
+  "site": "100percentpure.de",
+
+  "scraping": [
+    {
+      "comment": "site",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "site",
+        "value": "100-percent-pure-de_DE"
+      }
+    },
+    {
+      "comment": "locale",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "locale",
+        "value": "de-DE"
+      }
+    },
+    {
+      "comment": "usecase",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "usecase",
+        "value": "single-item"
+      }
+    },
+    {
+      "comment": "navigation-path",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "navigation-path",
+        "value": [
+          "COSMETICS",
+          "COSMETICS_MAKEUP",
+          "COSMETICS_MAKEUP_LIPS"
+        ]
+      }
+    },
+
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "uri": "https://www.{template.site}/Lip-Gloss"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "product-ids-a",
+        "css-queries": [ ".productbox meta[itemprop='image']"],
+        "attribute-id": "content",
+        "sourceContextId": "product-overview"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "product-ids",
+        "replacements": {
+          ".*/product/": "",
+          "/md/": "|",
+          "\\..*": ""
+        },
+        "sourceContextId": "product-ids-a"
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    },
+
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "uri": "https://www.{template.site}/Cocoa-Butter-Matte-Lipstick"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "product-ids-b",
+        "css-queries": [ ".productbox meta[itemprop='image']"],
+        "attribute-id": "content",
+        "sourceContextId": "product-overview"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "product-ids",
+        "replacements": {
+          ".*/product/": "",
+          "/md/": "|",
+          "\\..*": ""
+        },
+        "sourceContextId": "product-ids-b"
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    },
+
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "uri": "https://www.{template.site}/Lip-Glaze"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "product-ids-c",
+        "css-queries": [ ".productbox meta[itemprop='image']"],
+        "attribute-id": "content",
+        "sourceContextId": "product-overview"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "product-ids",
+        "replacements": {
+          ".*/product/": "",
+          "/md/": "|",
+          "\\..*": ""
+        },
+        "sourceContextId": "product-ids-c"
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    },
+
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "uri": "https://www.{template.site}/Pomegranate-Oil-Anti-Aging-Lipstick"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "product-ids-d",
+        "css-queries": [ ".productbox meta[itemprop='image']"],
+        "attribute-id": "content",
+        "sourceContextId": "product-overview"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "product-ids",
+        "replacements": {
+          ".*/product/": "",
+          "/md/": "|",
+          "\\..*": ""
+        },
+        "sourceContextId": "product-ids-d"
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    }
+  ]
+}
