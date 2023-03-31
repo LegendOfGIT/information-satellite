@@ -110,7 +110,7 @@
       "comment": "height in cm",
       "commandId": "get-value-by-regex",
       "parameters": {
-        "contextId": "heightInCm",
+        "contextId": "height-in-cm",
         "sourceContextId": "title",
         "groupIndex": 1,
         "regex": ".* (.*? x) (.*? x) (.*? cm)"
@@ -120,8 +120,8 @@
       "comment": "height in cm",
       "commandId": "get-float-from-value",
       "parameters": {
-        "contextId": "heightInCm",
-        "sourceContextId": "heightInCm"
+        "contextId": "height-in-cm",
+        "sourceContextId": "height-in-cm"
       }
     },
 
@@ -129,7 +129,7 @@
       "comment": "width in cm",
       "commandId": "get-value-by-regex",
       "parameters": {
-        "contextId": "widthInCm",
+        "contextId": "width-in-cm",
         "sourceContextId": "title",
         "groupIndex": 2,
         "regex": ".* (.*? x) (.*? x) (.*? cm)"
@@ -139,8 +139,8 @@
       "comment": "width in cm",
       "commandId": "get-float-from-value",
       "parameters": {
-        "contextId": "widthInCm",
-        "sourceContextId": "widthInCm"
+        "contextId": "width-in-cm",
+        "sourceContextId": "width-in-cm"
       }
     },
 
@@ -148,7 +148,7 @@
       "comment": "length in cm",
       "commandId": "get-value-by-regex",
       "parameters": {
-        "contextId": "lengthInCm",
+        "contextId": "length-in-cm",
         "sourceContextId": "title",
         "groupIndex": 3,
         "regex": ".* (.*? x) (.*? x) (.*? cm)"
@@ -158,8 +158,8 @@
       "comment": "length in cm",
       "commandId": "get-float-from-value",
       "parameters": {
-        "contextId": "lengthInCm",
-        "sourceContextId": "lengthInCm"
+        "contextId": "length-in-cm",
+        "sourceContextId": "length-in-cm"
       }
     },
 
@@ -252,11 +252,11 @@
       "parameters": {
         "informationIds": [
           "description",
-          "heightInCm",
-          "widthInCm",
+          "height-in-cm",
+          "width-in-cm",
           "images-big",
           "images-small",
-          "lengthInCm",
+          "length-in-cm",
           "link",
           "mean",
           "price-current",
