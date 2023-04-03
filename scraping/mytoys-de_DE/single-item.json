@@ -9,7 +9,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-search",
-        "uri": "https://{template.site}/suche/{request.query.itemId}"
+        "uri": "https://{template.site}/suche/{request.query.itemId}/"
       }
     },
 
@@ -170,6 +170,28 @@
         "sourceContextId": "price-initial"
       }
     },
+
+    {
+      "comment": "shipping rate",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "shipping-rate",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 2,
+        "regex": [
+          "shippingRate\":(\\s.*){3}.*\"value\":(.*?),"
+        ]
+      }
+    },
+    {
+      "comment": "shipping rate to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "shipping-rate",
+        "sourceContextId": "shipping-rate"
+      }
+    },
+
     {
       "comment": "material",
       "commandId": "get-value-by-regex",
@@ -206,6 +228,7 @@
           "price-initial",
           "seoDescription",
           "seoKeywords",
+          "shipping-rate",
           "title",
           "title-image"
         ]
