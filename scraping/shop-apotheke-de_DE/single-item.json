@@ -34,6 +34,14 @@
     },
 
     {
+      "comment": "merchant article number",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "mean",
+        "value": "shopapo.{request.query.itemId}"
+      }
+    },
+    {
       "comment": "ean",
       "commandId": "get-value-by-regex",
       "parameters": {
@@ -200,6 +208,7 @@
           "ean",
           "images-big",
           "images-small",
+          "mean",
           "price-current",
           "price-initial",
           "seoDescription",

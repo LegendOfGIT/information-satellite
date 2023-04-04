@@ -42,6 +42,15 @@
         "value": "{current-uri}"
       }
     },
+
+    {
+      "comment": "merchant article number",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "mean",
+        "value": "shop24d.{request.query.itemId}"
+      }
+    },
     {
       "comment": "ean",
       "commandId": "get-value-by-regex",
@@ -243,6 +252,7 @@
           "ean",
           "interpret",
           "link",
+          "mean",
           "playtimeLengthInMinutes",
           "price-current",
           "price-initial",

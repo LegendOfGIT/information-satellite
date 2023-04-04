@@ -41,6 +41,15 @@
         "value": "{current-uri}"
       }
     },
+
+    {
+      "comment": "merchant article number",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "mean",
+        "value": "myt.{request.query.itemId}"
+      }
+    },
     {
       "comment": "ean",
       "commandId": "get-value-by-regex",
@@ -224,6 +233,7 @@
           "images-small",
           "link",
           "material",
+          "mean",
           "price-current",
           "price-initial",
           "seoDescription",
