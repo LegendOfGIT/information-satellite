@@ -19,7 +19,7 @@ module.exports = (parameters) => {
 
         let replacedValue = value;
         for (let [replacementKey, replacementValue] of Object.entries(parameters)) {
-            replacedValue = replacedValue.replace(`{${replacementKey}}`, replacementValue);
+            replacedValue = replacedValue.replace(`{${replacementKey}}`, replacementValue || '');
 
             if (!hasAtLeastOneReplacer(replacedValue)) {
                 break;

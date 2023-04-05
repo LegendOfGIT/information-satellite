@@ -111,6 +111,23 @@
         "css-queries": [ "meta[name=description]" ]
       }
     },
+    {
+      "comment": "author",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "author",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".author a" ]
+      }
+    },
+    {
+      "comment": "title",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "title",
+        "value": "{author} {title}"
+      }
+    },
 
     {
       "comment": "usk-age",
@@ -249,6 +266,7 @@
       "parameters": {
         "informationIds": [
           "asin",
+          "author",
           "description",
           "images-big",
           "images-small",
