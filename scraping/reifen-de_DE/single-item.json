@@ -1,0 +1,311 @@
+{
+  "site": "reifen.de",
+
+  "itemId": "{template.site}-{ean}",
+
+  "scraping": [
+    {
+      "comment": "single-product-view",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "single-product-view",
+        "uri": "https://www.{template.site}/--{request.query.itemId}"
+      }
+    },
+
+    {
+      "comment": "link",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "link",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "href",
+        "css-queries": [ "link[rel=canonical]" ]
+      }
+    },
+
+    {
+      "comment": "merchant article number",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "mean",
+        "value": "reifenDE.{request.query.itemId}"
+      }
+    },
+
+    {
+      "comment": "title",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".product-title" ]
+      }
+    },
+
+    {
+      "comment": "title-image",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title-image",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ "meta[property='og:image']" ]
+      }
+    },
+
+    {
+      "comment": "images-big",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "images-big",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "srcset",
+        "css-queries": [ ".product__picture" ]
+      }
+    },
+    {
+      "comment": "images-big",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "images-big",
+        "replacements": {
+          ".*135w, ": "",
+          " 200w.*": ""
+        },
+        "sourceContextId": "images-big"
+      }
+    },
+
+    {
+      "comment": "height in cm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "height-in-cm",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 2,
+        "regex": "Höhe:(.*\\s){3}.*<span>(.*?)<\\/"
+      }
+    },
+
+    {
+      "comment": "height in cm",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "height-in-cm",
+        "sourceContextId": "height-in-cm"
+      }
+    },
+
+    {
+      "comment": "width in cm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "width-in-cm",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 2,
+        "regex": "Breite:(.*\\s){3}.*<span>(.*?)<\\/"
+      }
+    },
+
+    {
+      "comment": "width in cm",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "width-in-cm",
+        "sourceContextId": "width-in-cm"
+      }
+    },
+
+    {
+      "comment": "diameter in inch",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "diameter-in-inch",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 2,
+        "regex": "Zoll:(.*\\s){3}.*<span>(.*?)<\\/"
+      }
+    },
+    {
+      "comment": "diameter in inch",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "diameter-in-inch",
+        "sourceContextId": "diameter-in-inch"
+      }
+    },
+
+    {
+      "comment": "description",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "description",
+        "sourceContextId": "single-product-view",
+        "separator": ", ",
+        "css-queries": [ ".description ul li", ".description p" ]
+      }
+    },
+
+    {
+      "comment": "seoDescription",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "seoDescription",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ "meta[property='og:description']" ]
+      }
+    },
+
+    {
+      "comment": "seoDescription",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "seoDescription",
+        "sourceContextId": "seoDescription",
+        "groupIndex": 1,
+        "regex": [
+          "(.*?)und mit"
+        ]
+      }
+    },
+
+    {
+      "comment": "price-current",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".product-price-lower p span" ]
+      }
+    },
+    {
+      "comment": "price-initial",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".product-price-lower p span" ]
+      }
+    },
+    {
+      "comment": "price-current to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "price-current"
+      }
+    },
+    {
+      "comment": "price-initial to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "price-initial"
+      }
+    },
+
+    {
+      "comment": "tyre type",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "tyreType",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 2,
+        "regex": "Reifentyp:(.*\\s){3}.*<span>(.*?)<\\/"
+      }
+    },
+
+    {
+      "comment": "manufacturer",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "manufacturer",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ "span[itemprop='manufacturer']" ]
+      }
+    },
+
+    {
+      "comment": "design type",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "designType",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 2,
+        "regex": "Bauart:(.*\\s){3}.*<span>(.*?)<\\/"
+      }
+    },
+
+    {
+      "comment": "tyre speed key",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "speedKey",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 2,
+        "regex": "Geschwindigkeit:(.*\\s){3}.*<span>(.*?)<\\/"
+      }
+    },
+
+    {
+      "comment": "load index",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "loadIndex",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 2,
+        "regex": "Tragfähigkeit:(.*\\s){3}.*<span>(.*?)<\\/"
+      }
+    },
+
+    {
+      "comment": "EAN",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "ean",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 2,
+        "regex": "EAN:(.*\\s){3}.*<span>(.*?)<\\/"
+      }
+    },
+
+    {
+      "comment": "SEO keywords",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "seoKeywords",
+        "value": "{manufacturer}, {tyreType}, {designType}{diameter-in-inch}, {loadIndex}{speedKey}"
+      }
+    },
+
+    {
+      "comment": "store scraped information",
+      "commandId": "store-information",
+      "parameters": {
+        "informationIds": [
+          "description",
+          "designType",
+          "diameter-in-inch",
+          "ean",
+          "height-in-cm",
+          "width-in-cm",
+          "images-big",
+          "link",
+          "loadIndex",
+          "manufacturer",
+          "mean",
+          "price-current",
+          "price-initial",
+          "seoDescription",
+          "seoKeywords",
+          "speedKey",
+          "title",
+          "title-image",
+          "tyreType"
+        ]
+      }
+    }
+  ]
+}
