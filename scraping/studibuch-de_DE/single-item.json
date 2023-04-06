@@ -98,6 +98,17 @@
       }
     },
     {
+      "comment": "title-image",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "title-image",
+        "replacements": {
+          "\/.*?cloudfront.net": "//shop.studibuch.de"
+        },
+        "value": "{title-image}"
+      }
+    },
+    {
       "comment": "check image",
       "commandId": "visit-uri",
       "parameters": {
