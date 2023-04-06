@@ -46,7 +46,8 @@
           "#priceblock_ourprice",
           "#olp-new .a-color-price",
           ".priceToPay .a-offscreen",
-          "#corePrice_desktop .a-price > span"
+          "#corePrice_desktop .a-price > span",
+          "#price"
         ]
       }
     },
@@ -62,7 +63,8 @@
           "#olp-new .a-color-price",
           ".basisPrice .a-offscreen",
           "#corePrice_desktop .a-price > span",
-          ".priceToPay .a-offscreen"
+          ".priceToPay .a-offscreen",
+          "#price"
         ]
       }
     },
@@ -137,7 +139,8 @@
         "sourceContextId": "single-product-view",
         "groupIndex": 1,
         "regex": [
-          "<span>.*USK ab(.*)<\/span>"
+          "<span>.*USK ab(.*)<\/span>",
+          "Altersspektrum.*?<\\/span>.*?<span.*?>(.*?)-.*?<\\/span>"
         ]
       }
     },
@@ -159,10 +162,24 @@
         "sourceContextId": "single-product-view",
         "groupIndex": 1,
         "regex": [
-          "Marke<.*?<span.*?>(.*?)<\\/span>"
+          "Marke<.*?<span.*?>(.*?)<\\/span>",
+          "Marke<\\/span>.*?<span.*?>(.*?)<\\/span>"
         ]
       }
     },
+    {
+      "comment": "colors",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "colors",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "Farbe<\\/span>.*?<span.*?>(.*?)<\\/span>"
+        ]
+      }
+    },
+
     {
       "comment": "material",
       "commandId": "get-value-by-regex",
@@ -171,7 +188,8 @@
         "sourceContextId": "single-product-view",
         "groupIndex": 1,
         "regex": [
-          "Metallstempel <.*?<td.*?>(.*?)<\\/td>"
+          "Metallstempel <.*?<td.*?>(.*?)<\\/td>",
+          "Material<\\/span>.*?<span.*?>(.*?)<\\/span>"
         ]
       }
     },
@@ -214,9 +232,11 @@
       "parameters": {
         "contextId": "description",
         "sourceContextId": "single-product-view",
+        "separator": " ",
         "css-queries": [
           "#productDescription span",
-          "#feature-bullets .a-list-item"
+          "#feature-bullets .a-list-item",
+          "div[data-a-expander-name='book_description_expander'] div p span, div[data-a-expander-name='book_description_expander'] .a-list-item span"
         ]
       }
     },
@@ -267,6 +287,7 @@
         "informationIds": [
           "asin",
           "author",
+          "colors",
           "description",
           "images-big",
           "images-small",
