@@ -93,8 +93,16 @@
       "parameters": {
         "contextId": "title-image",
         "sourceContextId": "single-product-view",
-        "attribute-id": "content",
-        "css-queries": [ "meta[property='og:image']" ]
+        "attribute-id": "src",
+        "css-queries": [ ".image--media img" ]
+      }
+    },
+    {
+      "comment": "check image",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "check-image",
+        "uri": "{title-image}"
       }
     },
 
@@ -228,7 +236,7 @@
       "comment": "store scraped information",
       "commandId": "store-information",
       "parameters": {
-        "requiredProperties": [ "title-image" ],
+        "requiredProperties": [ "check-image" ],
         "informationIds": [
           "amountOfPages",
           "author",
