@@ -228,6 +228,7 @@
       "comment": "store scraped information",
       "commandId": "store-information",
       "parameters": {
+        "requiredProperties": [ "title-image" ],
         "informationIds": [
           "amountOfPages",
           "author",
