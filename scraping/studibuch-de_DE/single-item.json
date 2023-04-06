@@ -93,8 +93,8 @@
       "parameters": {
         "contextId": "title-image",
         "sourceContextId": "single-product-view",
-        "attribute-id": "src",
-        "css-queries": [ ".image--media img" ]
+        "attribute-id": "content",
+        "css-queries": [ "meta[property='og:image']" ]
       }
     },
     {
