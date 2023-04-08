@@ -279,7 +279,14 @@
       }
     },
 
-
+    {
+      "comment": "merchant article number",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "mean",
+        "value": "otto.{request.query.itemId}"
+      }
+    },
     {
       "comment": "gtin",
       "commandId": "get-value-by-regex",
@@ -352,6 +359,7 @@
           "genre",
           "link",
           "material",
+          "mean",
           "minimumAge",
           "multiplayer",
           "price-current",
