@@ -81,7 +81,7 @@
       "commandId": "set-context-value",
       "parameters": {
         "contextId": "mean",
-        "value": "iwmh.{productId}"
+        "value": "iwmh.{request.query.itemId}"
       }
     },
     {
