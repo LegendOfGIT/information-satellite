@@ -123,6 +123,61 @@
     },
 
     {
+      "comment": "number of ratings",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "numberOfRatings",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ "div[data-qa-id='product-rating'] .m-StarRating__superscript" ]
+      }
+    },
+    {
+      "comment": "number of ratings",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "numberOfRatings",
+        "defaultValue": 0,
+        "sourceContextId": "numberOfRatings"
+      }
+    },
+    {
+      "comment": "rating",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "ratingInPercent",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ "div[data-qa-id='product-rating'] .a-visuallyhidden" ]
+      }
+    },
+    {
+      "comment": "rating",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "ratingInPercent",
+        "replacements": {
+          "von.*": ""
+        },
+        "value": "{ratingInPercent}"
+      }
+    },
+    {
+      "comment": "rating",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "ratingInPercent",
+        "sourceContextId": "ratingInPercent"
+      }
+    },
+    {
+      "comment": "rating",
+      "commandId": "get-rule-of-three-value",
+      "parameters": {
+        "maximumValue": 5,
+        "contextId": "ratingInPercent"
+      }
+    },
+
+    {
       "comment": "description",
       "commandId": "get-value-by-regex",
       "parameters": {
@@ -209,8 +264,10 @@
           "images-big",
           "images-small",
           "mean",
+          "numberOfRatings",
           "price-current",
           "price-initial",
+          "ratingInPercent",
           "seoDescription",
           "seoKeywords",
           "title",
