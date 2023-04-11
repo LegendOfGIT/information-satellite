@@ -14,5 +14,13 @@ module.exports = (sourceContext, regex, groupIndex, flags = 'sg') => {
         }
     });
 
+    values = values.map(v => {
+        if (!v) {
+            return v;
+        }
+
+        return v.replaceAll('&apos;', '´');
+    })
+
     return values;
 }

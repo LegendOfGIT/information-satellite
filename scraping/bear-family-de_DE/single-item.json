@@ -1,0 +1,209 @@
+{
+  "site": "bear-family.de",
+
+  "itemId": "{template.site}-{gtin}",
+
+  "scraping": [
+    {
+      "comment": "single product",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "single-product-view",
+        "uri": "https://www.{template.site}/search?sSearch={request.query.itemId}"
+      }
+    },
+    {
+      "comment": "link",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "link",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "href",
+        "css-queries": [ "link[rel='canonical']" ]
+      }
+    },
+
+    {
+      "comment": "merchant article number",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "mean",
+        "value": "bearfam.{request.query.itemId}"
+      }
+    },
+    {
+      "comment": "gtin",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "gtin",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ "span[itemprop='gtin13']" ]
+      }
+    },
+
+    {
+      "comment": "interpret",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "interpret",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ "meta[itemprop='byArtist']" ]
+      }
+    },
+    {
+      "comment": "title",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".content--description .content--title strong" ]
+      }
+    },
+
+    {
+      "comment": "title-image",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title-image",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "data-img-small",
+        "css-queries": [ ".image--element" ]
+      }
+    },
+
+    {
+      "comment": "description",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "description",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ "div[itemprop='description']" ]
+      }
+    },
+    {
+      "comment": "SEO description",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "seoDescription",
+        "value": "{description}"
+      }
+    },
+    {
+      "comment": "seoKeywords",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "seoKeywords",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ "meta[name=keywords]" ]
+      }
+    },
+
+    {
+      "comment": "price-current",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".price--content" ]
+      }
+    },
+    {
+      "comment": "price-initial",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".price--line-through", ".price--content" ]
+      }
+    },
+    {
+      "comment": "price-current to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "price-current"
+      }
+    },
+    {
+      "comment": "price-initial to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "price-initial"
+      }
+    },
+
+    {
+      "comment": "albumTitle",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "albumTitle",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "",
+          ">Albumtitel:<.*?property_value\">(.*?)<"
+        ]
+      }
+    },
+    {
+      "comment": "publisher",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "publisher",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          ">Label<.*?property_value\">.*?<a.*?>(.*?)<"
+        ]
+      }
+    },
+    {
+      "comment": "genre",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "genre",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "Genre.*?property_value\">(.*?)<"
+        ]
+      }
+    },
+    {
+      "comment": "song titles",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "songTitles",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ "tr[itemprop='track'] .song" ]
+      }
+    },
+
+    {
+      "comment": "store scraped information",
+      "commandId": "store-information",
+      "parameters": {
+        "informationIds": [
+          "albumTitle",
+          "description",
+          "genre",
+          "gtin",
+          "interpret",
+          "link",
+          "mean",
+          "price-current",
+          "price-initial",
+          "publisher",
+          "seoDescription",
+          "seoKeywords",
+          "songTitles",
+          "title",
+          "title-image"
+        ]
+      }
+    }
+  ]
+}
