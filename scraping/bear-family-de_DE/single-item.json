@@ -78,7 +78,8 @@
       "parameters": {
         "contextId": "description",
         "sourceContextId": "single-product-view",
-        "css-queries": [ "div[itemprop='description']" ]
+        "separator": " ",
+        "css-queries": [ "div[itemprop='description'], div[itemprop='description'] div" ]
       }
     },
     {
@@ -183,6 +184,54 @@
     },
 
     {
+      "comment": "number of ratings",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "numberOfRatings",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ "meta[itemprop='ratingCount']" ]
+      }
+    },
+    {
+      "comment": "number of ratings",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "numberOfRatings",
+        "defaultValue": 0,
+        "sourceContextId": "numberOfRatings"
+      }
+    },
+
+    {
+      "comment": "rating",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "ratingInPercent",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ "meta[itemprop='ratingValue']" ]
+      }
+    },
+    {
+      "comment": "rating",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "ratingInPercent",
+        "defaultValue": 0,
+        "sourceContextId": "ratingInPercent"
+      }
+    },
+    {
+      "comment": "rating",
+      "commandId": "get-rule-of-three-value",
+      "parameters": {
+        "maximumValue": 10,
+        "contextId": "ratingInPercent"
+      }
+    },
+
+    {
       "comment": "store scraped information",
       "commandId": "store-information",
       "parameters": {
@@ -194,9 +243,11 @@
           "interpret",
           "link",
           "mean",
+          "numberOfRatings",
           "price-current",
           "price-initial",
           "publisher",
+          "ratingInPercent",
           "seoDescription",
           "seoKeywords",
           "songTitles",
