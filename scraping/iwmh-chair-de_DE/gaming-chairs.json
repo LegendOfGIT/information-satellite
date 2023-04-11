@@ -1,0 +1,86 @@
+{
+  "site": "de.iwmhchair.com",
+
+  "scraping": [
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "uri": "https://{template.site}/collections/gaming-chairs"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "product-ids",
+        "css-queries": [ ".grid-product__link"],
+        "attribute-id": "href",
+        "sourceContextId": "product-overview"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "product-ids",
+        "sourceContextId": "product-ids",
+        "replacements": {
+          ".*/products/": ""
+        }
+      }
+    },
+
+    {
+      "comment": "site",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "site",
+        "value": "iwmh-chair-de_DE"
+      }
+    },
+    {
+      "comment": "locale",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "locale",
+        "value": "de-DE"
+      }
+    },
+    {
+      "comment": "usecase",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "usecase",
+        "value": "single-item"
+      }
+    },
+    {
+      "comment": "navigation-path",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "navigation-path",
+        "value": [
+          "HOME",
+          "HOME_FURNITURE",
+          "HOME_FURNITURE_GAMINGCHAIRS"
+        ]
+      }
+    },
+
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    }
+  ]
+}
