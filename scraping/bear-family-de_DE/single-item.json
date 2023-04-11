@@ -230,6 +230,27 @@
         "contextId": "ratingInPercent"
       }
     },
+    {
+      "comment": "images big",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "images-big",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "srcset",
+        "css-queries": [ "img[itemprop='image']" ]
+      }
+    },
+    {
+      "comment": "images big",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "images-big",
+        "replacements": {
+          ",.*": ""
+        },
+        "sourceContextId": "images-big"
+      }
+    },
 
     {
       "comment": "store scraped information",
@@ -240,6 +261,7 @@
           "description",
           "genre",
           "gtin",
+          "images-big",
           "interpret",
           "link",
           "mean",
