@@ -40,6 +40,14 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         httpsAgent: new https.Agent({ rejectUnauthorized: false })
     };
 
+    if (context[contextId]) {
+        context['current-uri'] = commandParameters.uri;
+        console.log(`requested uri "${commandParameters.uri}" was already resolved successfully.`);
+
+        resolve();
+        return;
+    }
+
     return httpClient.get(commandParameters.uri, options)
         .then(response => {
             context['current-uri'] = commandParameters.uri;
