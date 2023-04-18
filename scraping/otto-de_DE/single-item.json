@@ -73,10 +73,10 @@
     },
 
     {
-      "comment": "weight-in-grams",
+      "comment": "weight in grams",
       "commandId": "get-value-by-regex",
       "parameters": {
-        "contextId": "weight-in-grams",
+        "contextId": "weightInG",
         "sourceContextId": "single-product-view",
         "groupIndex": 1,
         "regex": [
@@ -85,11 +85,11 @@
       }
     },
     {
-      "comment": "weight-in-grams to float",
+      "comment": "weight in grams to float",
       "commandId": "get-float-from-value",
       "parameters": {
-        "contextId": "weight-in-grams",
-        "sourceContextId": "weight-in-grams"
+        "contextId": "weightInG",
+        "sourceContextId": "weightInG"
       }
     },
 
@@ -368,7 +368,7 @@
           "subgenre",
           "title",
           "title-image",
-          "weight-in-grams",
+          "weightInG",
           "width-in-mm"
         ]
       }
