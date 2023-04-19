@@ -80,6 +80,14 @@
         "contextId": "title-image"
       }
     },
+    {
+      "comment": "big images",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "images-big",
+        "value": []
+      }
+    },
 
     {
       "comment": "description",
@@ -288,6 +296,7 @@
         "informationIds": [
           "colors",
           "description",
+          "images-big",
           "length-in-cm",
           "link",
           "lock-type",
