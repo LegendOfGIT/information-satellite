@@ -11,7 +11,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         context
     ));
 
-    const { contextId, mustContain, sourceContextId, separator = undefined } = commandParameters;
+    const { contextId, mustContain, sourceContextId, separator = undefined, unique = false } = commandParameters;
     const cssQueries = commandParameters['css-queries'];
 
     if (!contextId) {
@@ -52,11 +52,15 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
             return;
         }
 
-        const valuesFromCssSelector = getValuesFromCssSelectorResponse(
+        let valuesFromCssSelector = getValuesFromCssSelectorResponse(
             cssSelector(cssQuery),
             attributeId,
             mustContain
         );
+
+        if (unique) {
+            valuesFromCssSelector = valuesFromCssSelector.filter((value, index, array) => array.indexOf(value) === index);
+        }
 
         context[contextId] =
             0 === valuesFromCssSelector.length
