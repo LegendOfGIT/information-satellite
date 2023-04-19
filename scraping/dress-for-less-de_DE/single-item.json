@@ -119,16 +119,6 @@
     },
 
     {
-      "comment": "color",
-      "commandId": "get-value-by-css-queries",
-      "parameters": {
-        "contextId": "color",
-        "sourceContextId": "single-product-view",
-        "css-queries": [ ".color-value" ]
-      }
-    },
-
-    {
       "comment": "description",
       "commandId": "get-value-by-regex",
       "parameters": {
@@ -248,6 +238,39 @@
         "sourceContextId": "price-initial"
       }
     },
+    {
+      "comment": "sizes",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "sizes",
+        "sourceContextId": "single-product-view",
+        "separator": ", ",
+        "css-queries": [ ".product-detail__attribute-variations[data-attr='size'] button" ]
+      }
+    },
+    {
+      "comment": "sizes",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "sizes",
+        "replacements": {
+          "-": "/",
+          ", \\+": ""
+        },
+        "value": "{sizes}"
+      }
+    },
+    {
+      "comment": "colors",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "colors",
+        "sourceContextId": "single-product-view",
+        "separator": ", ",
+        "attribute-id": "data-attr-id",
+        "css-queries": [ ".product-detail__attribute-variations[data-attr='color'] button" ]
+      }
+    },
 
     {
       "comment": "seoKeywords",
@@ -263,7 +286,7 @@
       "commandId": "store-information",
       "parameters": {
         "informationIds": [
-          "color",
+          "colors",
           "description",
           "fabric",
           "fabricPattern",
@@ -278,6 +301,7 @@
           "price-initial",
           "seoDescription",
           "seoKeywords",
+          "sizes",
           "title",
           "title-image"
         ]

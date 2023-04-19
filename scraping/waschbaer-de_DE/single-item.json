@@ -235,13 +235,24 @@
         "css-queries": [ ".fl-result .modColorChooser .tooltipp" ]
       }
     },
+    {
+      "comment": "sizes",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "sizes",
+        "sourceContextId": "single-product-view",
+        "separator": ", ",
+        "unique": true,
+        "css-queries": [ ".singleInterationalSize a", ".sizeLabel span", "#size option" ]
+      }
+    },
 
     {
       "comment": "seoKeywords",
       "commandId": "set-context-value",
       "parameters": {
         "contextId": "seoKeywords",
-        "value": "{title}, {sku}"
+        "value": "{title}, Größen: {clothes-sizes}, {sku}"
       }
     },
 
@@ -262,6 +273,7 @@
           "seoDescription",
           "seoKeywords",
           "sku",
+          "sizes",
           "title",
           "title-image"
         ]

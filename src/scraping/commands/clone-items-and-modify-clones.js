@@ -1,7 +1,7 @@
 module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     console.log('executing command "clone-items-and-modify-clones"')
 
-    const { contextId, sourceContextId, replacements = {} } = parameters;
+    const { contextId, sourceContextId, replacements = {}, unique = false } = parameters;
 
     if (!contextId) {
         console.log('required parameter "contextId" is not given. abort.');
@@ -20,7 +20,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         resolve();
     }
 
-    const items = [];
+    let items = [];
     sourceContext.forEach(item => {
         let clonedItem = item;
         for (const [key, value] of Object.entries(replacements)) {
@@ -30,7 +30,9 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         items.push(clonedItem);
     });
 
-    context[contextId] = items;
+    context[contextId] = unique
+        ? items.filter((value, index, array) => array.indexOf(value) === index)
+        : items;
 
     resolve();
 });

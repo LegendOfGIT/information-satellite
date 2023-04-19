@@ -1,13 +1,21 @@
 {
-  "site": "waschbaer.de",
+  "site": "dress-for-less.de",
 
   "scraping": [
+    {
+      "comment": "random-page-number",
+      "commandId": "generate-random-number",
+      "parameters": {
+        "contextId": "random-page-number",
+        "maximum": "700"
+      }
+    },
     {
       "comment": "product-overview",
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://www.{template.site}/shop/frontend/catalog_category/bargain?category=59356&sort=rating"
+        "uri": "https://{template.site}/damen-jacken?start={random-page-number}&sz=30"
       }
     },
     {
@@ -15,31 +23,17 @@
       "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "css-queries": [ ".productlink"],
-        "attribute-id": "href",
+        "css-queries": [ ".product"],
+        "attribute-id": "data-pid",
         "sourceContextId": "product-overview"
       }
     },
-    {
-      "comment": "product-ids",
-      "commandId": "clone-items-and-modify-clones",
-      "parameters": {
-        "contextId": "product-ids",
-        "replacements": {
-          ".*-": "",
-          "\\?.*": ""
-        },
-        "unique": true,
-        "sourceContextId": "product-ids"
-      }
-    },
-
     {
       "comment": "site",
       "commandId": "set-context-value",
       "parameters": {
         "contextId": "site",
-        "value": "waschbaer-de_DE"
+        "value": "dress-for-less-de_DE"
       }
     },
     {
@@ -65,8 +59,8 @@
         "contextId": "navigation-path",
         "value": [
           "FASHION",
-          "FASHION_MEN",
-          "FASHION_MEN_SWEATERS_AND_KNITWEAR"
+          "FASHION_WOMEN",
+          "FASHION_WOMEN_JACKETS"
         ]
       }
     },

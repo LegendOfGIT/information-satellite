@@ -7,7 +7,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://www.{template.site}/shop/frontend/catalog_category/bargain?category=59356&sort=rating"
+        "uri": "https://www.{template.site}/shop/frontend/catalog_category/bargain?category=54240&sort=rating"
       }
     },
     {
@@ -15,7 +15,7 @@
       "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "css-queries": [ ".productlink"],
+        "css-queries": [ ".item .productlink"],
         "attribute-id": "href",
         "sourceContextId": "product-overview"
       }
@@ -64,9 +64,9 @@
       "parameters": {
         "contextId": "navigation-path",
         "value": [
-          "FASHION",
-          "FASHION_MEN",
-          "FASHION_MEN_SWEATERS_AND_KNITWEAR"
+          "LIGHTING",
+          "LIGHTING_INNERLIGHTING",
+          "LIGHTING_INNERLIGHTING_ACCESSOIRES"
         ]
       }
     },
