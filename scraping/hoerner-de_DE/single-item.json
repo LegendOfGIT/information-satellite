@@ -96,7 +96,7 @@
         "contextId": "description",
         "sourceContextId": "single-product-view",
         "separator": " ",
-        "css-queries": [ ".product-short-description span", ".product-short-description p span strong, .product-short-description p" ]
+        "css-queries": [ ".product-short-description p", ".product-short-description span" ]
       }
     },
     {
