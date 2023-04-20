@@ -1,7 +1,7 @@
 {
   "site": "inhofer.de",
 
-  "itemId": "{template.site}-{gtin}",
+  "itemId": "{template.site}-{sku}",
 
   "scraping": [
     {
@@ -331,6 +331,49 @@
       }
     },
     {
+      "comment": "type of wood",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "woodType",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": "Holzart:.*\\W.*\\W.*<span>(.*?)<"
+      }
+    },
+    {
+      "comment": "quality of wood",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "woodQuality",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": "Holzqualität:.*\\W.*\\W.*<span>(.*?)<"
+      }
+    },
+    {
+      "comment": "extendable",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "extendable",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": "ausziehbar:.*\\W.*\\W.*<span>(.*?)<"
+      }
+    },
+    {
+      "comment": "extendable",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "extendable",
+        "replacements": {
+          "Ja": true,
+          "Nein": false
+        },
+        "value": "{extendable}"
+      }
+    },
+
+    {
       "comment": "seasons",
       "commandId": "get-value-by-regex",
       "parameters": {
@@ -395,6 +438,7 @@
         "informationIds": [
           "colors",
           "description",
+          "extendable",
           "height-in-cm",
           "width-in-cm",
           "gtin",
@@ -412,7 +456,9 @@
           "shape",
           "sizes",
           "title",
-          "title-image"
+          "title-image",
+          "woodQuality",
+          "woodType"
         ]
       }
     }

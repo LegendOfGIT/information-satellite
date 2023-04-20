@@ -127,6 +127,7 @@
       "commandId": "get-float-from-value",
       "parameters": {
         "contextId": "numberOfRatings",
+        "defaultValue": 0,
         "sourceContextId": "numberOfRatings"
       }
     },
@@ -157,6 +158,7 @@
       "commandId": "get-float-from-value",
       "parameters": {
         "contextId": "ratingInPercent",
+        "defaultValue": 0,
         "sourceContextId": "ratingInPercent"
       }
     },
