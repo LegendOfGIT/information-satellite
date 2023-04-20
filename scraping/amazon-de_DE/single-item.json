@@ -233,7 +233,7 @@
         "sourceContextId": "single-product-view",
         "groupIndex": 1,
         "regex": [
-          "Farbe<\\/span>.*?<span.*?>(.*?)<\\/span>"
+          "Farbe:<\\/span>.*?<span.*?>(.*?)<\\/span>"
         ]
       }
     },
@@ -324,7 +324,7 @@
       "parameters": {
         "contextId": "images-small",
         "sourceContextId": "color-images",
-        "regex": "thumb.*?(http.*?jpg)",
+        "regex": "thumb.*?(http.*?)\"",
         "groupIndex": 1
       }
     },

@@ -209,7 +209,7 @@
       "parameters": {
         "contextId": "images-small",
         "sourceContextId": "color-images",
-        "regex": "thumb.*?(http.*?jpg)",
+        "regex": "thumb.*?(http.*?)\"",
         "groupIndex": 1
       }
     },
