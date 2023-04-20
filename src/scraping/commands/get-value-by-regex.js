@@ -38,6 +38,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     if (values.length) {
         context[contextId] = setValueOnMatch || values[0];
     }
+    context[contextId] = context[contextId] || '';
 
     resolve();
 });

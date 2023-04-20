@@ -193,16 +193,7 @@
         "mustContain": "'colorImages'"
       }
     },
-    {
-      "comment": "title-image",
-      "commandId": "get-value-by-regex",
-      "parameters": {
-        "contextId": "title-image",
-        "sourceContextId": "color-images",
-        "regex": "\"main\".*(https:.*jpg).*\"MAIN\"",
-        "groupIndex": 1
-      }
-    },
+
     {
       "comment": "images-small",
       "commandId": "get-values-by-regex",
@@ -219,7 +210,17 @@
       "parameters": {
         "contextId": "images-big",
         "sourceContextId": "color-images",
-        "regex": "large.*?(http.*?jpg)",
+        "regex": "large.*?(http.*?)\"",
+        "groupIndex": 1
+      }
+    },
+    {
+      "comment": "title-image",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "title-image",
+        "sourceContextId": "color-images",
+        "regex": "large.*?(http.*?)\"",
         "groupIndex": 1
       }
     },
