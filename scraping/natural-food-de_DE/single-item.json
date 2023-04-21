@@ -69,7 +69,10 @@
         "contextId": "description",
         "sourceContextId": "single-product-view",
         "separator": " ",
-        "css-queries": [ "div[itemprop='description'], div[itemprop='description'] div" ]
+        "css-queries": [
+          "div[itemprop='description'], div[itemprop='description'] div",
+          ".product--description p span"
+        ]
       }
     },
     {
