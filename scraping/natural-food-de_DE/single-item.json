@@ -70,7 +70,7 @@
         "sourceContextId": "single-product-view",
         "separator": " ",
         "css-queries": [
-          "div[itemprop='description'], div[itemprop='description'] div",
+          "div[itemprop='description'], div[itemprop='description'] div, div[itemprop='description'] p, div[itemprop='description'] p strong",
           ".product--description p span",
           ".product--description p"
         ]
