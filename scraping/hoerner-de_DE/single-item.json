@@ -58,8 +58,8 @@
       "parameters": {
         "contextId": "title-image",
         "sourceContextId": "single-product-view",
-        "attribute-id": "content",
-        "css-queries": [ "meta[property='og:image']" ]
+        "attribute-id": "src",
+        "css-queries": [ ".wp-post-image" ]
       }
     },
     {
@@ -68,7 +68,7 @@
       "parameters": {
         "contextId": "title-image",
         "replacements": {
-          "\\.jpg": "-400x400.jpg"
+          "[0-9]{3}x[0-9]{3}": "400x400"
         },
         "value": "{title-image}"
       }
