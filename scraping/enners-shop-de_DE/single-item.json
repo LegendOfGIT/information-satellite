@@ -1,0 +1,431 @@
+{
+  "site": "enners.shop",
+
+  "itemId": "{template.site}-{sku}",
+
+  "scraping": [
+    {
+      "comment": "product-search",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-search",
+        "uri": "https://{template.site}/search?search=\"{request.query.itemId}\""
+      }
+    },
+
+    {
+      "comment": "link",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "link",
+        "sourceContextId": "product-search",
+        "attribute-id": "href",
+        "css-queries": [ ".card-body a" ]
+      }
+    },
+
+    {
+      "comment": "single-product-view",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "single-product-view",
+        "uri": "{link}"
+      }
+    },
+
+    {
+      "comment": "link",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "link",
+        "value": "{current-uri}"
+      }
+    },
+
+    {
+      "comment": "merchant article number",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "mean",
+        "value": "ennshop.{request.query.itemId}"
+      }
+    },
+    {
+      "comment": "ean",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "ean",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": "productEAN\":\"(.*?)\""
+      }
+    },
+    {
+      "comment": "sku",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "sku",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": "productSku\":\"(.*?)\""
+      }
+    },
+
+    {
+      "comment": "title",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".product-detail-name" ]
+      }
+    },
+
+    {
+      "comment": "title-image",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title-image",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "src",
+        "css-queries": [ ".gallery-slider-item img" ]
+      }
+    },
+    {
+      "comment": "title-image",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "title-image",
+        "replacements": {
+          "/media/": "/thumbnail/",
+          ".jpg": "_400x400.jpg",
+          ".JPG": "_400x400.JPG"
+        },
+        "value": "{title-image}"
+      }
+    },
+
+    {
+      "comment": "images-big",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "images-big",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "src",
+        "css-queries": [ ".gallery-slider-item img" ]
+      }
+    },
+    {
+      "comment": "images-big",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "images-big",
+        "replacements": {
+          "/media/": "/thumbnail/",
+          ".jpg": "_400x400.jpg",
+          ".JPG": "_400x400.JPG"
+        },
+        "sourceContextId": "images-big"
+      }
+    },
+
+    {
+      "comment": "measurements in cm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "measurements-in-cm",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "Außenmaße(.*? x.*?[0-9]cm).*?(\\W).*?<\\l",
+          "Außenmaße(.*? x.*?[0-9] cm).*?(\\W).*?<\\l",
+          "Bohlenmaße(.*? x.*?[0-9]cm).*?(\\W).*?<\\l",
+          "Bohlenmaße(.*? x.*?[0-9] cm).*?(\\W).*?<\\l",
+          "Wandaußenmaße(.*? x.*?[0-9]cm).*?(\\W).*?<\\l",
+          "Wandaußenmaße(.*? x.*?[0-9] cm).*?(\\W).*?<\\l"
+        ]
+      }
+    },
+
+    {
+      "comment": "width in cm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "width-in-cm",
+        "sourceContextId": "measurements-in-cm",
+        "groupIndex": 1,
+        "regex": [
+          "(.*? x) (.*? cm)"
+        ]
+      }
+    },
+    {
+      "comment": "width in cm",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "width-in-cm",
+        "sourceContextId": "width-in-cm"
+      }
+    },
+
+    {
+      "comment": "length in cm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "length-in-cm",
+        "sourceContextId": "measurements-in-cm",
+        "groupIndex": 2,
+        "regex": [
+          "(.*? x) (.*? cm)"
+        ]
+      }
+    },
+    {
+      "comment": "length in cm",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "length-in-cm",
+        "sourceContextId": "length-in-cm"
+      }
+    },
+
+    {
+      "comment": "measurements in m",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "measurements-in-m",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "Außenmaße(.*? x.*?[0-9]m).*?(\\W).*?<\\l",
+          "Wandaußenmaße(.*? x.*?[0-9]m).*?(\\W).*?<\\l",
+          "Bohlenmaße(.*? x.*?[0-9]m).*?(\\W).*?<\\l"
+        ]
+      }
+    },
+
+    {
+      "comment": "height in m",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "height-in-m",
+        "sourceContextId": "height-in-m"
+      }
+    },
+
+    {
+      "comment": "width in m",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "width-in-m",
+        "sourceContextId": "measurements-in-m",
+        "groupIndex": 1,
+        "regex": [
+          "(.*? x) (.*?m)"
+        ]
+      }
+    },
+    {
+      "comment": "width in m",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "width-in-m",
+        "sourceContextId": "width-in-m"
+      }
+    },
+
+    {
+      "comment": "length in m",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "length-in-m",
+        "sourceContextId": "measurements-in-m",
+        "groupIndex": 2,
+        "regex": [
+          "(.*? x) (.*?m)"
+        ]
+      }
+    },
+    {
+      "comment": "length in m",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "length-in-m",
+        "sourceContextId": "length-in-m"
+      }
+    },
+
+    {
+      "comment": "height in cm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "height-in-cm",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "Gesamthöhe(.*?[0-9]cm).*?<\\l",
+          "Gesamthöhe(.*?[0-9] cm).*?<\\l",
+          "Wandhöhe(.*?[0-9]cm).*?<\\l",
+          "Wandhöhe(.*?[0-9] cm).*?<\\l"
+        ]
+      }
+    },
+    {
+      "comment": "height in cm",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "height-in-cm",
+        "sourceContextId": "height-in-cm"
+      }
+    },
+
+    {
+      "comment": "height in m",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "height-in-m",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "Gesamthöhe(.*?[0-9]m).*?<\\l",
+          "Wandhöhe(.*?[0-9]m).*?<\\l"
+        ]
+      }
+    },
+    {
+      "comment": "height in m",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "height-in-m",
+        "sourceContextId": "height-in-m"
+      }
+    },
+
+    {
+      "comment": "description",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "description",
+        "sourceContextId": "single-product-view",
+        "separator": " ",
+        "css-queries": [ ".product-detail-description-text div *, .product-detail-description-text ul li" ]
+      }
+    },
+
+    {
+      "comment": "area in square meter",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "area-in-square-m",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          ">Grundfläche(.*?)\\l"
+        ]
+      }
+    },
+    {
+      "comment": "area in square meter",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "area-in-square-m",
+        "sourceContextId": "area-in-square-m"
+      }
+    },
+
+    {
+      "comment": "seoDescription",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "seoDescription",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ "meta[name='description']" ]
+      }
+    },
+
+    {
+      "comment": "price-current",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ ".with-list-price", ".product-detail-price"  ]
+      }
+    },
+    {
+      "comment": "price-initial",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".list-price-price", ".with-list-price", ".product-detail-price" ]
+      }
+    },
+    {
+      "comment": "price-current to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "price-current"
+      }
+    },
+    {
+      "comment": "price-initial to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "price-initial"
+      }
+    },
+    {
+      "comment": "sizes",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "sizes",
+        "sourceContextId": "single-product-view",
+        "separator": ", ",
+        "attribute-id": "title",
+        "css-queries": [ ".product-detail-configurator-option-label" ]
+      }
+    },
+
+    {
+      "comment": "SEO keywords",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "seoKeywords",
+        "value": "{title}, Grundfläche: {area-in-square-m}m², Länge: {length-in-cm}{length-in-m} (c)m, Breite: {width-in-cm}{width-in-m} (c)m, Höhe: {height-in-cm}{height-in-m} (c)m"
+      }
+    },
+
+    {
+      "comment": "store scraped information",
+      "commandId": "store-information",
+      "parameters": {
+        "informationIds": [
+          "description",
+          "ean",
+          "height-in-cm",
+          "height-in-m",
+          "images-big",
+          "length-in-cm",
+          "length-in-m",
+          "link",
+          "mean",
+          "price-current",
+          "price-initial",
+          "seoDescription",
+          "seoKeywords",
+          "sizes",
+          "sku",
+          "title",
+          "title-image",
+          "width-in-cm",
+          "width-in-m"
+        ]
+      }
+    }
+  ]
+}

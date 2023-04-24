@@ -1,4 +1,4 @@
-module.exports = (cssSelectorResponse, attributeId, mustContain) => {
+module.exports = (cssSelectorResponse, attributeId, mustContain, mustNotContain = '') => {
     const valuesFromCssSelectorResponse = [];
 
     const removeControlCharacters = (value) => value
@@ -15,6 +15,10 @@ module.exports = (cssSelectorResponse, attributeId, mustContain) => {
         if (attributeId && currentResult.attribs[attributeId]) {
             const value = currentResult.attribs[attributeId].trim();
             if (mustContain && -1 === value.indexOf(mustContain)) {
+                return;
+            }
+
+            if (mustNotContain && -1 !== value.indexOf(mustNotContain)) {
                 return;
             }
 
