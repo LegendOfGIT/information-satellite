@@ -35,7 +35,7 @@
       "commandId": "set-context-value",
       "parameters": {
         "contextId": "site",
-        "value": "ennersshop-de_DE"
+        "value": "enners-shop-de_DE"
       }
     },
     {
