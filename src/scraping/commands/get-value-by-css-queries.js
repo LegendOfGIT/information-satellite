@@ -70,5 +70,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
                     : valuesFromCssSelector[0];
     });
 
+    context[contextId] = context[contextId] || '';
+
     resolve();
 });
