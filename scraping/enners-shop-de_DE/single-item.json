@@ -387,6 +387,7 @@
         "sourceContextId": "single-product-view",
         "separator": ", ",
         "attribute-id": "title",
+        "mustContain": "m²",
         "css-queries": [ ".product-detail-configurator-option-label" ]
       }
     },
