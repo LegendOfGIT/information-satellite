@@ -60,8 +60,8 @@
       "parameters": {
         "contextId": "title-image",
         "sourceContextId": "single-product-view",
-        "attribute-id": "src",
-        "css-queries": [ ".image-gallery-image" ]
+        "attribute-id": "content",
+        "css-queries": [ "meta[name='og:image']" ]
       }
     },
 
@@ -72,7 +72,7 @@
         "contextId": "images-small",
         "sourceContextId": "single-product-view",
         "attribute-id": "src",
-        "css-queries": [ ".image-gallery-thumbnail-image" ]
+        "css-queries": [ "div[data-test='carousel'] ul li img" ]
       }
     },
     {
@@ -81,8 +81,10 @@
       "parameters": {
         "contextId": "images-small",
         "replacements": {
-          "width=.*": "width=150"
+          "/cdn-cgi": "https://backmarket.de/cdn-cgi",
+          "width%3D.*?\/": "width%3D150/"
         },
+        "unique": true,
         "sourceContextId": "images-small"
       }
     },
@@ -93,66 +95,9 @@
       "parameters": {
         "contextId": "images-big",
         "replacements": {
-          "width=.*": "width=450"
+          "width%3D.*?\/": "width%3D400/"
         },
         "sourceContextId": "images-small"
-      }
-    },
-
-    {
-      "comment": "height in cm",
-      "commandId": "get-value-by-regex",
-      "parameters": {
-        "contextId": "height-in-cm",
-        "sourceContextId": "title",
-        "groupIndex": 1,
-        "regex": ".* (.*? x) (.*? x) (.*? cm)"
-      }
-    },
-    {
-      "comment": "height in cm",
-      "commandId": "get-float-from-value",
-      "parameters": {
-        "contextId": "height-in-cm",
-        "sourceContextId": "height-in-cm"
-      }
-    },
-
-    {
-      "comment": "width in cm",
-      "commandId": "get-value-by-regex",
-      "parameters": {
-        "contextId": "width-in-cm",
-        "sourceContextId": "title",
-        "groupIndex": 2,
-        "regex": ".* (.*? x) (.*? x) (.*? cm)"
-      }
-    },
-    {
-      "comment": "width in cm",
-      "commandId": "get-float-from-value",
-      "parameters": {
-        "contextId": "width-in-cm",
-        "sourceContextId": "width-in-cm"
-      }
-    },
-
-    {
-      "comment": "length in cm",
-      "commandId": "get-value-by-regex",
-      "parameters": {
-        "contextId": "length-in-cm",
-        "sourceContextId": "title",
-        "groupIndex": 3,
-        "regex": ".* (.*? x) (.*? x) (.*? cm)"
-      }
-    },
-    {
-      "comment": "length in cm",
-      "commandId": "get-float-from-value",
-      "parameters": {
-        "contextId": "length-in-cm",
-        "sourceContextId": "length-in-cm"
       }
     },
 
@@ -162,32 +107,41 @@
       "parameters": {
         "contextId": "description",
         "sourceContextId": "single-product-view",
-        "css-queries": [ ".description__text" ]
+        "separator": ", ",
+        "css-queries": [ "span[data-selector='pp-text'] ul li span" ]
+      }
+    },
+    {
+      "comment": "description",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "description",
+        "replacements": {
+          ":,": ":"
+        },
+        "value": "{description}"
       }
     },
 
     {
       "comment": "seoDescription",
-      "commandId": "get-value-by-regex",
+      "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "seoDescription",
         "sourceContextId": "single-product-view",
-        "groupIndex": 1,
-        "regex": [
-          "\"description\":\"(.*?)\""
-        ]
+        "attribute-id": "content",
+        "css-queries": [ "meta[name='description']" ]
       }
     },
     {
       "comment": "seoDescription",
-      "commandId": "get-value-by-regex",
+      "commandId": "set-context-value",
       "parameters": {
         "contextId": "seoDescription",
-        "sourceContextId": "seoDescription",
-        "groupIndex": 1,
-        "regex": [
-          "(.*?)Jetzt bei toom.*"
-        ]
+        "replacements": {
+          "gebraucht bis.*": ""
+        },
+        "value": "{seoDescription}"
       }
     },
 
@@ -197,18 +151,19 @@
       "parameters": {
         "contextId": "price-current",
         "sourceContextId": "single-product-view",
-        "attribute-id": "content",
-        "css-queries": [ "meta[property='product:price:amount']" ]
+        "css-queries": [ "div[data-test='normal-price']" ]
       }
     },
     {
       "comment": "price-initial",
-      "commandId": "get-value-by-css-queries",
+      "commandId": "get-value-by-regex",
       "parameters": {
         "contextId": "price-initial",
         "sourceContextId": "single-product-view",
-        "attribute-id": "content",
-        "css-queries": [ "meta[property='product:price:amount']" ]
+        "groupIndex": 1,
+        "regex": [
+          "priceWhenNew(.*?),curr"
+        ]
       }
     },
     {
@@ -229,13 +184,68 @@
     },
 
     {
-      "comment": "SEO keywords",
+      "comment": "number of ratings",
       "commandId": "get-value-by-css-queries",
       "parameters": {
-        "contextId": "seoKeywords",
+        "contextId": "numberOfRatings",
         "sourceContextId": "single-product-view",
-        "attribute-id": "content",
-        "css-queries": [ "meta[name='keywords']" ]
+        "css-queries": [ "button[data-test='product-page-reviews-count'] .ml-2" ]
+      }
+    },
+    {
+      "comment": "number of ratings",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "numberOfRatings",
+        "defaultValue": 0,
+        "sourceContextId": "numberOfRatings"
+      }
+    },
+
+    {
+      "comment": "rating",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "ratingInPercent",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ "button[data-test='product-page-reviews-count'] .ml-1" ]
+      }
+    },
+    {
+      "comment": "rating",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "ratingInPercent",
+        "replacements": {
+          "/.*": ""
+        },
+        "value": "{ratingInPercent}"
+      }
+    },
+    {
+      "comment": "rating",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "ratingInPercent",
+        "defaultValue": 0,
+        "sourceContextId": "ratingInPercent"
+      }
+    },
+    {
+      "comment": "rating",
+      "commandId": "get-rule-of-three-value",
+      "parameters": {
+        "maximumValue": 5,
+        "contextId": "ratingInPercent"
+      }
+    },
+
+    {
+      "comment": "SEO keywords",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "seoKeywords",
+        "value": "{title}"
       }
     },
 
@@ -245,15 +255,14 @@
       "parameters": {
         "informationIds": [
           "description",
-          "height-in-cm",
-          "width-in-cm",
           "images-big",
           "images-small",
-          "length-in-cm",
           "link",
           "mean",
+          "numberOfRatings",
           "price-current",
           "price-initial",
+          "ratingInPercent",
           "seoDescription",
           "seoKeywords",
           "title",
