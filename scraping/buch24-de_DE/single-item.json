@@ -1,0 +1,248 @@
+{
+  "site": "buch24.de",
+
+  "itemId": "{template.site}-{isbn}",
+
+  "scraping": [
+
+    {
+      "comment": "link",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "link",
+        "value": "https://{template.site}/shopdirekt.cgi?id={request.query.itemId}&p=3"
+      }
+    },
+
+    {
+      "comment": "single-product-view",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "single-product-view",
+        "encoding": "latin1",
+        "uri": "{link}"
+      }
+    },
+
+    {
+      "comment": "merchant article number",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "mean",
+        "value": "buch24.{request.query.itemId}"
+      }
+    },
+    {
+      "comment": "ISBN",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "isbn",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": "ISBN-13:.*\\s.*>(.*?)<"
+      }
+    },
+
+    {
+      "comment": "author",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "author",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": "select=autor.*?><font.*?>(.*?)<"
+      }
+    },
+    {
+      "comment": "publisher",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "publisher",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": "select=vlg.*?><font.*?>(.*?)<"
+      }
+    },
+
+    {
+      "comment": "title",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".product-name h1" ]
+      }
+    },
+
+    {
+      "comment": "title-image",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title-image",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "href",
+        "css-queries": [ "a[data-fancybox='gallery']" ]
+      }
+    },
+    {
+      "comment": "title-image",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "title-image",
+        "value": "https://{template.site}{title-image}"
+      }
+    },
+
+    {
+      "comment": "description",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "description",
+        "sourceContextId": "single-product-view",
+        "separator": " ",
+        "css-queries": [ ".short-description *" ]
+      }
+    },
+
+    {
+      "comment": "seoDescription",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "seoDescription",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ "meta[name='description']" ]
+      }
+    },
+
+    {
+      "comment": "price-current",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".price" ]
+      }
+    },
+    {
+      "comment": "price-initial",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".price" ]
+      }
+    },
+    {
+      "comment": "price-current to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "price-current"
+      }
+    },
+    {
+      "comment": "price-initial to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "price-initial"
+      }
+    },
+
+    {
+      "comment": "SEO keywords",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "seoKeywords",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ "meta[name='keywords']" ]
+      }
+    },
+
+    {
+      "comment": "languages",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "languages",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": "Sprache:.*\\s.*>(.*?)<"
+      }
+    },
+
+    {
+      "comment": "amount of pages",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "amountOfPages",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": "Seiten:.*\\s.*>(.*?)<"
+      }
+    },
+    {
+      "comment": "amount of pages",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "amountOfPages",
+        "sourceContextId": "amountOfPages"
+      }
+    },
+
+    {
+      "comment": "weight in g",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "weightInG",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": "Gewicht:.*\\s.*>(.*?)<"
+      }
+    },
+    {
+      "comment": "weight in g",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "weightInG",
+        "sourceContextId": "weightInG"
+      }
+    },
+    {
+      "comment": "cover type",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "coverType",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": "Format:.*\\s.*>(.*?)<"
+      }
+    },
+
+    {
+      "comment": "store scraped information",
+      "commandId": "store-information",
+      "parameters": {
+        "informationIds": [
+          "amountOfPages",
+          "author",
+          "coverType",
+          "description",
+          "isbn",
+          "languages",
+          "link",
+          "mean",
+          "price-current",
+          "price-initial",
+          "publisher",
+          "seoDescription",
+          "seoKeywords",
+          "title",
+          "title-image",
+          "weightInG"
+        ]
+      }
+    }
+  ]
+}

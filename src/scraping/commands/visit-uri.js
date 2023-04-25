@@ -3,7 +3,7 @@ const getPreparedCommandParameters = require('../getPreparedCommandParameters');
 const https = require('https');
 
 module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
-    const { contextId, uri } = parameters;
+    const { contextId, uri, encoding = 'utf-8' } = parameters;
 
     console.log('executing command "visit-uri"');
 
@@ -37,7 +37,8 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         headers: {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
         },
-        httpsAgent: new https.Agent({ rejectUnauthorized: false })
+        httpsAgent: new https.Agent({ rejectUnauthorized: false }),
+        responseType:'arraybuffer'
     };
 
     if (context[contextId]) {
@@ -54,7 +55,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
 
             console.log(`requested uri "${commandParameters.uri}" was resolved successfully.`);
             if (contextId) {
-                context[contextId] = response.data;
+                context[contextId] = response.data.toString(encoding);
             }
 
             resolve();
