@@ -1,4 +1,4 @@
-module.exports = (cssSelectorResponse, attributeId, mustContain, mustNotContain = '') => {
+module.exports = (cssSelectorResponse, attributeIds, mustContain, mustNotContain = '') => {
     const valuesFromCssSelectorResponse = [];
 
     const removeControlCharacters = (value) => value
@@ -12,19 +12,22 @@ module.exports = (cssSelectorResponse, attributeId, mustContain, mustNotContain 
     results.forEach((result) => {
         const currentResult = result || { attribs: [] };
 
-        if (attributeId && currentResult.attribs[attributeId]) {
-            const value = currentResult.attribs[attributeId].trim();
-            if (mustContain && -1 === value.indexOf(mustContain)) {
+        attributeIds = Array.isArray(attributeIds) ? attributeIds : [attributeIds];
+        for (let attributeId of attributeIds) {
+            if (attributeId && currentResult.attribs[attributeId]) {
+                const value = currentResult.attribs[attributeId].trim();
+                if (mustContain && -1 === value.indexOf(mustContain)) {
+                    return;
+                }
+
+                if (mustNotContain && -1 !== value.indexOf(mustNotContain)) {
+                    return;
+                }
+
+                valuesFromCssSelectorResponse.push(currentResult.attribs[attributeId].trim());
+
                 return;
             }
-
-            if (mustNotContain && -1 !== value.indexOf(mustNotContain)) {
-                return;
-            }
-
-            valuesFromCssSelectorResponse.push(currentResult.attribs[attributeId].trim());
-
-            return;
         }
 
         let children = (currentResult || {

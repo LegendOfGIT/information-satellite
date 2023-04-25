@@ -80,8 +80,8 @@
       "parameters": {
         "contextId": "title-image",
         "sourceContextId": "single-product-view",
-        "attribute-id": "href",
-        "css-queries": [ "a[data-fancybox='gallery']" ]
+        "attribute-id": [ "href", "src" ],
+        "css-queries": [ "a[data-fancybox='gallery']", ".large-image img" ]
       }
     },
     {
@@ -90,6 +90,28 @@
       "parameters": {
         "contextId": "title-image",
         "value": "https://{template.site}{title-image}"
+      }
+    },
+
+    {
+      "comment": "images-big",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "images-big",
+        "sourceContextId": "single-product-view",
+        "attribute-id": [ "href", "src" ],
+        "css-queries": [ "a[data-fancybox='gallery']", ".large-image img" ]
+      }
+    },
+    {
+      "comment": "images-big",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "images-big",
+        "sourceContextId": "images-big",
+        "replacements": {
+          ".*/img/": "https://buch24.de/img/"
+        }
       }
     },
 
@@ -229,6 +251,7 @@
           "author",
           "coverType",
           "description",
+          "images-big",
           "isbn",
           "languages",
           "link",
