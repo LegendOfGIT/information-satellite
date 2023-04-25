@@ -1,0 +1,265 @@
+{
+  "site": "backmarket.de",
+
+  "itemId": "{template.site}-{request.query.itemId}",
+
+  "scraping": [
+    {
+      "comment": "single product view",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "single-product-view",
+        "uri": "https://{template.site}/de-de/p/a/{request.query.itemId}"
+      }
+    },
+
+    {
+      "comment": "link",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "link",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "href",
+        "css-queries": [ "link[rel='canonical']" ]
+      }
+    },
+
+    {
+      "comment": "merchant article number",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "mean",
+        "value": "backmar.{request.query.itemId}"
+      }
+    },
+
+    {
+      "comment": "title",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ "head > title" ]
+      }
+    },
+    {
+      "comment": "title",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "title",
+        "replacements": {
+          "\\|.*": ""
+        },
+        "value": "{title}"
+      }
+    },
+
+    {
+      "comment": "title-image",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title-image",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "src",
+        "css-queries": [ ".image-gallery-image" ]
+      }
+    },
+
+    {
+      "comment": "images-small",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "images-small",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "src",
+        "css-queries": [ ".image-gallery-thumbnail-image" ]
+      }
+    },
+    {
+      "comment": "images-small",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "images-small",
+        "replacements": {
+          "width=.*": "width=150"
+        },
+        "sourceContextId": "images-small"
+      }
+    },
+
+    {
+      "comment": "images-big",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "images-big",
+        "replacements": {
+          "width=.*": "width=450"
+        },
+        "sourceContextId": "images-small"
+      }
+    },
+
+    {
+      "comment": "height in cm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "height-in-cm",
+        "sourceContextId": "title",
+        "groupIndex": 1,
+        "regex": ".* (.*? x) (.*? x) (.*? cm)"
+      }
+    },
+    {
+      "comment": "height in cm",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "height-in-cm",
+        "sourceContextId": "height-in-cm"
+      }
+    },
+
+    {
+      "comment": "width in cm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "width-in-cm",
+        "sourceContextId": "title",
+        "groupIndex": 2,
+        "regex": ".* (.*? x) (.*? x) (.*? cm)"
+      }
+    },
+    {
+      "comment": "width in cm",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "width-in-cm",
+        "sourceContextId": "width-in-cm"
+      }
+    },
+
+    {
+      "comment": "length in cm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "length-in-cm",
+        "sourceContextId": "title",
+        "groupIndex": 3,
+        "regex": ".* (.*? x) (.*? x) (.*? cm)"
+      }
+    },
+    {
+      "comment": "length in cm",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "length-in-cm",
+        "sourceContextId": "length-in-cm"
+      }
+    },
+
+    {
+      "comment": "description",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "description",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".description__text" ]
+      }
+    },
+
+    {
+      "comment": "seoDescription",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "seoDescription",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "\"description\":\"(.*?)\""
+        ]
+      }
+    },
+    {
+      "comment": "seoDescription",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "seoDescription",
+        "sourceContextId": "seoDescription",
+        "groupIndex": 1,
+        "regex": [
+          "(.*?)Jetzt bei toom.*"
+        ]
+      }
+    },
+
+    {
+      "comment": "price-current",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ "meta[property='product:price:amount']" ]
+      }
+    },
+    {
+      "comment": "price-initial",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ "meta[property='product:price:amount']" ]
+      }
+    },
+    {
+      "comment": "price-current to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "price-current"
+      }
+    },
+    {
+      "comment": "price-initial to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "price-initial"
+      }
+    },
+
+    {
+      "comment": "SEO keywords",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "seoKeywords",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ "meta[name='keywords']" ]
+      }
+    },
+
+    {
+      "comment": "store scraped information",
+      "commandId": "store-information",
+      "parameters": {
+        "informationIds": [
+          "description",
+          "height-in-cm",
+          "width-in-cm",
+          "images-big",
+          "images-small",
+          "length-in-cm",
+          "link",
+          "mean",
+          "price-current",
+          "price-initial",
+          "seoDescription",
+          "seoKeywords",
+          "title",
+          "title-image"
+        ]
+      }
+    }
+  ]
+}
