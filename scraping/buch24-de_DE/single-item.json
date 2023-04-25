@@ -241,6 +241,22 @@
         "regex": "Format:.*\\s.*>(.*?)<"
       }
     },
+    {
+      "comment": "tags",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "tags",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".tag_schlagwort a *" ]
+      }
+    },
+    {
+      "comment": "tags",
+      "commandId": "explode-values",
+      "parameters": {
+        "contextId": "tags"
+      }
+    },
 
     {
       "comment": "store scraped information",
@@ -261,6 +277,7 @@
           "publisher",
           "seoDescription",
           "seoKeywords",
+          "tags",
           "title",
           "title-image",
           "weightInG"
