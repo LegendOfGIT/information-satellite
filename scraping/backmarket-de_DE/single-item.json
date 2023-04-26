@@ -107,7 +107,7 @@
       "parameters": {
         "contextId": "description",
         "sourceContextId": "single-product-view",
-        "separator": ", ",
+        "separator": "; ",
         "css-queries": [ "span[data-selector='pp-text'] ul li span" ]
       }
     },
@@ -117,7 +117,7 @@
       "parameters": {
         "contextId": "description",
         "replacements": {
-          ":,": ":"
+          ":;": ":"
         },
         "value": "{description}"
       }
@@ -241,11 +241,319 @@
     },
 
     {
+      "comment": "colors",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "colors",
+        "sourceContextId": "description",
+        "groupIndex": 1,
+        "regex": [
+          "Farbe :(.*?);"
+        ]
+      }
+    },
+    {
+      "comment": "bluetooth version",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "bluetoothVersion",
+        "sourceContextId": "description",
+        "groupIndex": 1,
+        "regex": [
+          "Bluetooth-Version :(.*?);"
+        ]
+      }
+    },
+    {
+      "comment": "model",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "model",
+        "sourceContextId": "description",
+        "groupIndex": 1,
+        "regex": [
+          "Modell :(.*?);"
+        ]
+      }
+    },
+    {
+      "comment": "series",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "series",
+        "sourceContextId": "description",
+        "groupIndex": 1,
+        "regex": [
+          "Serie :(.*?);"
+        ]
+      }
+    },
+    {
+      "comment": "noiseCanceling",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "noiseCanceling",
+        "sourceContextId": "description",
+        "groupIndex": 1,
+        "regex": [
+          "Rauschunterdrückung :(.*?);"
+        ]
+      }
+    },
+    {
+      "comment": "chargingPortType",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "chargingPortType",
+        "sourceContextId": "description",
+        "groupIndex": 1,
+        "regex": [
+          "Ladeanschluss :(.*?);",
+          "Anschlüsse :(.*?);"
+        ]
+      }
+    },
+    {
+      "comment": "processor",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "processor",
+        "sourceContextId": "description",
+        "groupIndex": 1,
+        "regex": [
+          "Prozessor :(.*?);"
+        ]
+      }
+    },
+    {
+      "comment": "voice assistant",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "voiceAssistant",
+        "sourceContextId": "description",
+        "groupIndex": 1,
+        "regex": [
+          "Sprachassistent :(.*?);"
+        ]
+      }
+    },
+    {
+      "comment": "generation",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "generation",
+        "sourceContextId": "description",
+        "groupIndex": 1,
+        "regex": [
+          "Generation :(.*?);"
+        ]
+      }
+    },
+    {
+      "comment": "screensize in inch",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "screensizeInInch",
+        "sourceContextId": "description",
+        "groupIndex": 1,
+        "regex": [
+          "Bildschirmgröße.*?:(.*?);"
+        ]
+      }
+    },
+    {
+      "comment": "screensize in inch",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "screensizeInInch",
+        "sourceContextId": "screensizeInInch"
+      }
+    },
+
+    {
+      "comment": "make",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "make",
+        "sourceContextId": "description",
+        "groupIndex": 1,
+        "regex": [
+          "Marke :(.*?);"
+        ]
+      }
+    },
+    {
+      "comment": "material",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "material",
+        "sourceContextId": "description",
+        "groupIndex": 1,
+        "regex": [
+          "[m|M]aterial :(.*?);"
+        ]
+      }
+    },
+    {
+      "comment": "storageSize",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "storageSize",
+        "sourceContextId": "description",
+        "groupIndex": 1,
+        "regex": [
+          "Speicherkapazität :(.*?);"
+        ]
+      }
+    },
+    {
+      "comment": "operation system",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "operationSystem",
+        "sourceContextId": "description",
+        "groupIndex": 1,
+        "regex": [
+          "Betriebssystem :(.*?);"
+        ]
+      }
+    },
+    {
+      "comment": "dual sim",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "dualSim",
+        "sourceContextId": "description",
+        "groupIndex": 1,
+        "regex": [
+          "Dual-SIM :(.*?);"
+        ]
+      }
+    },
+    {
+      "comment": "resolution",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "resolution",
+        "sourceContextId": "description",
+        "groupIndex": 1,
+        "regex": [
+          "Auflösung :(.*?);"
+        ]
+      }
+    },
+    {
+      "comment": "processorSpeed",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "processorSpeed",
+        "sourceContextId": "description",
+        "groupIndex": 1,
+        "regex": [
+          "CPU-Geschwindigkeit :(.*?);"
+        ]
+      }
+    },
+    {
+      "comment": "ramSize",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "ramSize",
+        "sourceContextId": "description",
+        "groupIndex": 1,
+        "regex": [
+          "Arbeitsspeicher.*?:(.*?);"
+        ]
+      }
+    },
+
+    {
+      "comment": "weight in G",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "weightInG",
+        "sourceContextId": "description",
+        "groupIndex": 1,
+        "regex": [
+          "Gewicht :(.*?) g"
+        ]
+      }
+    },
+    {
+      "comment": "weight in G",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "weightInG",
+        "sourceContextId": "weightInG"
+      }
+    },
+    {
+      "comment": "height in cm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "height-in-cm",
+        "sourceContextId": "description",
+        "groupIndex": 1,
+        "regex": [
+          "Höhe :(.*?) cm;"
+        ]
+      }
+    },
+    {
+      "comment": "height in cm",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "height-in-cm",
+        "sourceContextId": "height-in-cm"
+      }
+    },
+    {
+      "comment": "width in cm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "width-in-cm",
+        "sourceContextId": "description",
+        "groupIndex": 1,
+        "regex": [
+          "Breite :(.*?) cm;"
+        ]
+      }
+    },
+    {
+      "comment": "width in cm",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "width-in-cm",
+        "sourceContextId": "width-in-cm"
+      }
+    },
+    {
+      "comment": "depth in cm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "depth-in-cm",
+        "sourceContextId": "description",
+        "groupIndex": 1,
+        "regex": [
+          "Tiefe :(.*?) cm"
+        ]
+      }
+    },
+    {
+      "comment": "depth in cm",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "depth-in-cm",
+        "sourceContextId": "depth-in-cm"
+      }
+    },
+
+    {
       "comment": "SEO keywords",
       "commandId": "set-context-value",
       "parameters": {
         "contextId": "seoKeywords",
-        "value": "{title}"
+        "value": "{title}, {colors}, {processorSpeed}, {storageSize}, {chargingPortType}"
       }
     },
 
@@ -254,19 +562,41 @@
       "commandId": "store-information",
       "parameters": {
         "informationIds": [
+          "bluetoothVersion",
+          "chargingPortType",
+          "colors",
+          "depth-in-cm",
           "description",
+          "dualSim",
+          "generation",
+          "height-in-cm",
           "images-big",
           "images-small",
           "link",
+          "make",
+          "material",
           "mean",
+          "model",
           "numberOfRatings",
+          "noiseCanceling",
+          "operationSystem",
           "price-current",
           "price-initial",
+          "processor",
+          "processorSpeed",
+          "ramSize",
           "ratingInPercent",
+          "resolution",
+          "screensizeInInch",
           "seoDescription",
           "seoKeywords",
+          "series",
+          "storageSize",
           "title",
-          "title-image"
+          "title-image",
+          "voiceAssistant",
+          "weightInG",
+          "width-in-cm"
         ]
       }
     }
