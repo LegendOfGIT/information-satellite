@@ -143,6 +143,42 @@
       }
     },
     {
+      "comment": "inner material",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "innerMaterial",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "Innenmaterial: (.*?)</span>"
+        ]
+      }
+    },
+    {
+      "comment": "upper material",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "upperMaterial",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "Obermaterial: (.*?)</span>"
+        ]
+      }
+    },
+    {
+      "comment": "sole material",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "soleMaterial",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "Sohlenmaterial: (.*?)</span>"
+        ]
+      }
+    },
+    {
       "comment": "model",
       "commandId": "get-value-by-regex",
       "parameters": {
@@ -244,7 +280,7 @@
       "parameters": {
         "contextId": "sizes",
         "sourceContextId": "single-product-view",
-        "separator": ", ",
+        "separator": "; ",
         "css-queries": [ ".product-detail__attribute-variations[data-attr='size'] button" ]
       }
     },
@@ -255,7 +291,7 @@
         "contextId": "sizes",
         "replacements": {
           "-": "/",
-          ", \\+": ""
+          "; \\+": ""
         },
         "value": "{sizes}"
       }
@@ -269,6 +305,16 @@
         "separator": ", ",
         "attribute-id": "data-attr-id",
         "css-queries": [ ".product-detail__attribute-variations[data-attr='color'] button" ]
+      }
+    },
+    {
+      "comment": "make",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "make",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "alt",
+        "css-queries": [ ".product-detail__brand-image-file" ]
       }
     },
 
@@ -293,7 +339,9 @@
           "fit",
           "images-big",
           "images-small",
+          "innerMaterial",
           "link",
+          "make",
           "material",
           "mean",
           "model",
@@ -301,9 +349,11 @@
           "price-initial",
           "seoDescription",
           "seoKeywords",
+          "soleMaterial",
           "sizes",
           "title",
-          "title-image"
+          "title-image",
+          "upperMaterial"
         ]
       }
     }
