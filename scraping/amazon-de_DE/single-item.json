@@ -104,16 +104,6 @@
       }
     },
     {
-      "comment": "seoKeywords",
-      "commandId": "get-value-by-css-queries",
-      "parameters": {
-        "contextId": "seoKeywords",
-        "sourceContextId": "single-product-view",
-        "attribute-id": "content",
-        "css-queries": [ "meta[name=description]" ]
-      }
-    },
-    {
       "comment": "author",
       "commandId": "get-value-by-css-queries",
       "parameters": {
@@ -338,6 +328,16 @@
         "groupIndex": 1
       }
     },
+
+    {
+      "comment": "seoKeywords",
+      "commandId": "extract-seo-keywords",
+      "parameters": {
+        "contextId": "seoKeywords",
+        "sourceContextId": ["description", "title"]
+      }
+    },
+
     {
       "comment": "store scraped information",
       "commandId": "store-information",

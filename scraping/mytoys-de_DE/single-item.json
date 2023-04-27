@@ -229,14 +229,6 @@
         ]
       }
     },
-    {
-      "comment": "seoKeywords",
-      "commandId": "set-context-value",
-      "parameters": {
-        "contextId": "seoKeywords",
-        "value": "{material}, {title}, {ean}"
-      }
-    },
 
     {
       "comment": "number of ratings",
@@ -302,6 +294,15 @@
       "parameters": {
         "contextId": "minimumAge",
         "sourceContextId": "minimumAge"
+      }
+    },
+
+    {
+      "comment": "seoKeywords",
+      "commandId": "extract-seo-keywords",
+      "parameters": {
+        "contextId": "seoKeywords",
+        "sourceContextId": ["description", "title"]
       }
     },
 

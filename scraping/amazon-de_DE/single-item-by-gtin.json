@@ -236,17 +236,6 @@
       }
     },
     {
-      "comment": "seoKeywords",
-      "commandId": "get-value-by-css-queries",
-      "parameters": {
-        "contextId": "seoKeywords",
-        "sourceContextId": "single-product-view",
-        "attribute-id": "content",
-        "css-queries": [ "meta[name=description]" ]
-      }
-    },
-
-    {
       "comment": "usk-age",
       "commandId": "get-value-by-regex",
       "parameters": {
@@ -265,6 +254,15 @@
         "contextId": "minimumAge",
         "sourceContextId": "minimumAge",
         "defaultValue": 0
+      }
+    },
+
+    {
+      "comment": "seoKeywords",
+      "commandId": "extract-seo-keywords",
+      "parameters": {
+        "contextId": "seoKeywords",
+        "sourceContextId": ["description", "title"]
       }
     },
 
