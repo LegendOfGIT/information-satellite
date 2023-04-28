@@ -188,13 +188,13 @@
         "css-queries": [ ".long-description, .long-description *" ]
       }
     },
+
     {
       "comment": "seoDescription",
-      "commandId": "get-value-by-css-queries",
+      "commandId": "set-context-value",
       "parameters": {
         "contextId": "seoDescription",
-        "sourceContextId": "single-product-view",
-        "css-queries": [ ".long-description" ]
+        "value": "{description}"
       }
     },
 
