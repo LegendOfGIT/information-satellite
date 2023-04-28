@@ -138,18 +138,6 @@
 
     {
       "comment": "description",
-      "commandId": "get-value-by-regex",
-      "parameters": {
-        "contextId": "description",
-        "sourceContextId": "single-product-view",
-        "groupIndex": 1,
-        "regex": [
-          "<span>Spielbeschreibung.*?<td>(.*?)<\/td>"
-        ]
-      }
-    },
-    {
-      "comment": "description",
       "commandId": "get-value-by-css-queries",
       "parameters": {
         "contextId": "description",
