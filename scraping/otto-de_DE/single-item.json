@@ -142,7 +142,12 @@
       "parameters": {
         "contextId": "description",
         "sourceContextId": "single-product-view",
-        "css-queries": [ ".js_prd_moreBox__content", ".pdp_description__text-expander" ]
+        "separator": " ",
+        "css-queries": [
+          ".js_prd_moreBox__content",
+          ".pdp_description__text-expander",
+          ".pdp_selling-points ul li"
+        ]
       }
     },
 
