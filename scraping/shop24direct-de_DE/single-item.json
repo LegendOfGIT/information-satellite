@@ -184,7 +184,8 @@
       "parameters": {
         "contextId": "description",
         "sourceContextId": "single-product-view",
-        "css-queries": [ ".long-description" ]
+        "separator": " ",
+        "css-queries": [ ".long-description, .long-description *" ]
       }
     },
     {
