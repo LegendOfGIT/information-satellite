@@ -40,7 +40,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         'per,' +
         'sämtliche,scheint,schon,sehr,sein,seine,seinem,seinen,sich,sicherlich,sie,siehe,sind,so,sobald,sofern,solche,solchen,soll,sollen,sollte,sollten,somit,sondern,sorgt,sowie,sowohl,später,sprich,statt,' +
         'trotz,' +
-        'über,überhaupt,um,und,uns,unter,usw,' +
+        'über,überhaupt,um,und,uns,unser,unsere,unserer,unter,usw,' +
         'viel,viele,vielen,völlig,vom,von,vor,vorerst,vorher,' +
         'während,war,wäre,waren,warum,was,weil,weitere,weiteren,weiterer,weiteres,weiterhin,welche,welchen,welcher,welches,wenn,wer,werden,wesentlich,wichtige,wichtigsten,wie,wieder,wiederum,will,wir,wird,wirklich,wo,wobei,worden,wurde,wurden,' +
         'z.b,ziemlich,zu,zuerst,zum,zur,zusätzlich,zuvor,zwar,zwecks').split(',');
