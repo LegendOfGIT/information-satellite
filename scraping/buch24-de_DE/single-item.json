@@ -173,17 +173,6 @@
     },
 
     {
-      "comment": "SEO keywords",
-      "commandId": "get-value-by-css-queries",
-      "parameters": {
-        "contextId": "seoKeywords",
-        "sourceContextId": "single-product-view",
-        "attribute-id": "content",
-        "css-queries": [ "meta[name='keywords']" ]
-      }
-    },
-
-    {
       "comment": "languages",
       "commandId": "get-value-by-regex",
       "parameters": {
@@ -255,6 +244,15 @@
       "commandId": "explode-values",
       "parameters": {
         "contextId": "tags"
+      }
+    },
+
+    {
+      "comment": "seoKeywords",
+      "commandId": "extract-seo-keywords",
+      "parameters": {
+        "contextId": "seoKeywords",
+        "sourceContextId": ["description", "title"]
       }
     },
 

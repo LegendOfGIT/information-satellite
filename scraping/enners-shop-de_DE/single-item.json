@@ -393,11 +393,11 @@
     },
 
     {
-      "comment": "SEO keywords",
-      "commandId": "set-context-value",
+      "comment": "seoKeywords",
+      "commandId": "extract-seo-keywords",
       "parameters": {
         "contextId": "seoKeywords",
-        "value": "{title}, Grundfläche: {area-in-square-m}m², Länge: {length-in-cm}{length-in-m} (c)m, Breite: {width-in-cm}{width-in-m} (c)m, Höhe: {height-in-cm}{height-in-m} (c)m"
+        "sourceContextId": ["description", "title"]
       }
     },
 

@@ -178,7 +178,7 @@
         "contextId": "description",
         "sourceContextId": "single-product-view",
         "css-queries": [
-          "#productDescription span",
+          "#productDescription p span, #productDescription span",
           "#feature-bullets .a-list-item"
         ]
       }

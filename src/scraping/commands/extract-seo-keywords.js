@@ -30,12 +30,12 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         'folgende,folgendem,folgenden,folgender,folgendes,folgt,für,' +
         'ganz,gegen,gehen,gemacht,genannte,genannten,gerade,gerne,gibt,gilt,gleich,gleichen,gleichzeitig,' +
         'habe,haben,hält,hat,hatte,hätte,hauptsächlich,her,heutigen,hier,hierbei,hierfür,hin,hingegen,hinzu,hoch,' +
-        'ihn,ihr,ihre,ihren,ihrer,im,immer,immerhin,in,indem,insgesamt,ist,' +
+        'ihn,ihr,ihre,ihren,ihrem,ihrer,im,immer,immerhin,in,indem,insgesamt,ist,' +
         'ja,je,jede,jedem,jeder,jedes,jedoch,jetzt,jeweilige,jeweiligen,jeweils,' +
         'kam,kann,keine,kommen,kommt,können,konnte,könnte,konnten,' +
         'lassen,lässt,lautet,lediglich,leider,letztendlich,letztere,letzteres,liebt,liegt,' +
         'machen,macht,mal,man,mehr,mehrere,meine,meinem,meisten,mich,mit,mithilfe,mittels,möchte,möglich,möglichst,momentan,muss,müssen,musste,' +
-        'nach,nachdem,nächsten,nahezu,nämlich,natürlich,neue,neuen,nicht,nichts,noch,nun,nur,' +
+        'nach,nachdem,nächsten,nahezu,nämlich,natürlich,nein,neue,neuen,nicht,nichts,noch,nun,nur,' +
         'ob,obwohl,oder,oftmals,ohne,' +
         'per,' +
         'sämtliche,scheint,schon,sehr,sein,seine,seinem,seinen,sich,sicherlich,sie,siehe,sind,so,sobald,sofern,solche,solchen,soll,sollen,sollte,sollten,somit,sondern,sorgt,sowie,sowohl,später,sprich,statt,' +
@@ -50,10 +50,13 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         terms = terms.replaceAll(' ' + stopWord + ' ', ' ');
         terms = terms.replaceAll(new RegExp(' ' + stopWord + '(!|\\)|\\.|,|:)', 'g'), '');
     });
-    terms = terms.replaceAll(/(\.|:|,|!)/g, '');
+
+    terms = terms
+        .replaceAll(/(\.|:|,|!|;)/g, '')
+        .replaceAll('-', ' ');
 
     const termCountMap = {};
-    terms.split(' ').filter(term => term.length > 2).forEach(term => {
+    terms.split(' ').filter(term => -1 === stopWords.indexOf(term)).filter(term => term.length > 2).forEach(term => {
         const c = termCountMap[term] ? termCountMap[term] : 0;
         termCountMap[term] = c + 1;
     });

@@ -243,12 +243,13 @@
         "sourceContextId": "price-initial"
       }
     },
+
     {
       "comment": "seoKeywords",
-      "commandId": "set-context-value",
+      "commandId": "extract-seo-keywords",
       "parameters": {
         "contextId": "seoKeywords",
-        "value": "{title}, {ean}"
+        "sourceContextId": ["description", "title"]
       }
     },
 

@@ -420,14 +420,11 @@
     },
 
     {
-      "comment": "SEO keywords",
-      "commandId": "set-context-value",
+      "comment": "seoKeywords",
+      "commandId": "extract-seo-keywords",
       "parameters": {
         "contextId": "seoKeywords",
-        "replacements": {
-          "[ ]+": " "
-        },
-        "value": "{title}, {seasons}, {colors}, {shape}, {material}, {gtin}"
+        "sourceContextId": ["description", "title"]
       }
     },
 

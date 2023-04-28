@@ -320,10 +320,10 @@
 
     {
       "comment": "seoKeywords",
-      "commandId": "set-context-value",
+      "commandId": "extract-seo-keywords",
       "parameters": {
         "contextId": "seoKeywords",
-        "value": "{title}, {fabric}, {fabricPattern}, {color}, {model}, {fit}, {material}"
+        "sourceContextId": ["description", "title"]
       }
     },
 

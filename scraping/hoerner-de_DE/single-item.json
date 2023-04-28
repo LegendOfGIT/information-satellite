@@ -282,10 +282,10 @@
 
     {
       "comment": "seoKeywords",
-      "commandId": "set-context-value",
+      "commandId": "extract-seo-keywords",
       "parameters": {
         "contextId": "seoKeywords",
-        "value": "{title}, {sku}, {lock-type}, {colors}, {material}"
+        "sourceContextId": ["description", "title"]
       }
     },
 

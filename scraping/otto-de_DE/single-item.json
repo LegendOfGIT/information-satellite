@@ -346,6 +346,16 @@
         ]
       }
     },
+
+    {
+      "comment": "seoKeywords",
+      "commandId": "extract-seo-keywords",
+      "parameters": {
+        "contextId": "seoKeywords",
+        "sourceContextId": ["description", "title"]
+      }
+    },
+
     {
       "comment": "store scraped information",
       "commandId": "store-information",
@@ -365,6 +375,7 @@
           "price-current",
           "price-initial",
           "publisher",
+          "seoKeywords",
           "subgenre",
           "title",
           "title-image",

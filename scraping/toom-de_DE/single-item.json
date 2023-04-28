@@ -236,13 +236,11 @@
     },
 
     {
-      "comment": "SEO keywords",
-      "commandId": "get-value-by-css-queries",
+      "comment": "seoKeywords",
+      "commandId": "extract-seo-keywords",
       "parameters": {
         "contextId": "seoKeywords",
-        "sourceContextId": "single-product-view",
-        "attribute-id": "content",
-        "css-queries": [ "meta[name='keywords']" ]
+        "sourceContextId": ["description", "title"]
       }
     },
 

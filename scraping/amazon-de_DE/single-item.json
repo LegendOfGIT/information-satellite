@@ -337,7 +337,7 @@
         "sourceContextId": ["description", "title"]
       }
     },
-
+    
     {
       "comment": "store scraped information",
       "commandId": "store-information",

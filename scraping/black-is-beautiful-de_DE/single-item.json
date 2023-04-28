@@ -167,12 +167,13 @@
         ]
       }
     },
+
     {
       "comment": "seoKeywords",
-      "commandId": "set-context-value",
+      "commandId": "extract-seo-keywords",
       "parameters": {
         "contextId": "seoKeywords",
-        "value": "{title}, {ingredients}"
+        "sourceContextId": ["description", "title"]
       }
     },
 

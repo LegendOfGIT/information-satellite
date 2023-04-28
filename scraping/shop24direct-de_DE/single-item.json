@@ -196,16 +196,7 @@
         "css-queries": [ ".long-description" ]
       }
     },
-    {
-      "comment": "seoKeywords",
-      "commandId": "get-value-by-css-queries",
-      "parameters": {
-        "contextId": "seoKeywords",
-        "sourceContextId": "single-product-view",
-        "attribute-id": "content",
-        "css-queries": [ "meta[name=keywords]" ]
-      }
-    },
+
     {
       "comment": "price-current",
       "commandId": "get-value-by-css-queries",
@@ -238,6 +229,15 @@
       "parameters": {
         "contextId": "price-initial",
         "sourceContextId": "price-initial"
+      }
+    },
+
+    {
+      "comment": "seoKeywords",
+      "commandId": "extract-seo-keywords",
+      "parameters": {
+        "contextId": "seoKeywords",
+        "sourceContextId": ["description", "title"]
       }
     },
 

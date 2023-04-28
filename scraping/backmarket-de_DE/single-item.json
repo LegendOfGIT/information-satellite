@@ -549,11 +549,11 @@
     },
 
     {
-      "comment": "SEO keywords",
-      "commandId": "set-context-value",
+      "comment": "seoKeywords",
+      "commandId": "extract-seo-keywords",
       "parameters": {
         "contextId": "seoKeywords",
-        "value": "{title}, {colors}, {processorSpeed}, {storageSize}, {chargingPortType}"
+        "sourceContextId": ["description", "title"]
       }
     },
 
