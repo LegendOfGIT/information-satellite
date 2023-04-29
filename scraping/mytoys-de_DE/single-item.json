@@ -9,7 +9,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-search",
-        "uri": "https://{template.site}/suche/{request.query.itemId}/"
+        "uri": "https://www.{template.site}/suche/{request.query.itemId}/"
       }
     },
     {
@@ -17,7 +17,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-search",
-        "uri": "https://{template.site}/suche/{request.query.itemId}/"
+        "uri": "https://www.{template.site}/suche/{request.query.itemId}/"
       }
     },
 
