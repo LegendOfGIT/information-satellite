@@ -277,6 +277,16 @@
     },
 
     {
+      "comment": "colors",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "colors",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".prod-info__color-header__color" ]
+      }
+    },
+
+    {
       "comment": "minimum age",
       "commandId": "get-value-by-regex",
       "parameters": {
@@ -311,6 +321,7 @@
       "commandId": "store-information",
       "parameters": {
         "informationIds": [
+          "colors",
           "description",
           "ean",
           "images-big",
