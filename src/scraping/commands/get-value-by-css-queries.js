@@ -55,7 +55,9 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         let valuesFromCssSelector = getValuesFromCssSelectorResponse(
             cssSelector(cssQuery),
             attributeId,
-            mustContain
+            mustContain,
+            '',
+            separator
         );
 
         if (unique) {

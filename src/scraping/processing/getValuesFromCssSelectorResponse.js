@@ -1,4 +1,4 @@
-module.exports = (cssSelectorResponse, attributeIds, mustContain, mustNotContain = '') => {
+module.exports = (cssSelectorResponse, attributeIds, mustContain, mustNotContain = '', separator = undefined) => {
     const valuesFromCssSelectorResponse = [];
 
     const removeControlCharacters = (value) => value
@@ -49,7 +49,7 @@ module.exports = (cssSelectorResponse, attributeIds, mustContain, mustNotContain
         children = children.filter(c => childContainsRelevantInformation(c));
 
         if (children.length > 0) {
-            valuesFromCssSelectorResponse.push((children.map(c => removeControlCharacters(c.data)).join('') || '').trim());
+            valuesFromCssSelectorResponse.push((children.map(c => removeControlCharacters(c.data)).join(separator || '') || '').trim());
         }
     });
 
