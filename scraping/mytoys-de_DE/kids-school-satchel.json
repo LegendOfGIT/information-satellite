@@ -15,7 +15,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://{template.site}/schule-lernen/schulranzen-zubehoer/?page={random-number}"
+        "uri": "https://www.{template.site}/schule-lernen/schulranzen-zubehoer/?page={random-number}"
       }
     },
     {

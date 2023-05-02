@@ -15,7 +15,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://{template.site}/audio-video-games/spielekonsolen-games/videospiele/playstation-5-konsole/?page={random-number}"
+        "uri": "https://www.{template.site}/audio-video-games/spielekonsolen-games/videospiele/playstation-5-konsole/?page={random-number}"
       }
     },
     {

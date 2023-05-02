@@ -15,7 +15,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://{template.site}/spielzeug-spiele/kinderfahrzeuge/roller/?page={random-number}"
+        "uri": "https://www.{template.site}/spielzeug-spiele/kinderfahrzeuge/roller/?page={random-number}"
       }
     },
     {
