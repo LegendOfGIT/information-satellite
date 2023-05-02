@@ -25,7 +25,7 @@
       "commandId": "set-context-value",
       "parameters": {
         "contextId": "link",
-        "value": "https://{template.site}/dp/{request.query.itemId}"
+        "value": "https://{template.site}/dp/{request.query.itemId}?th=1&psc=1"
       }
     },
     {
