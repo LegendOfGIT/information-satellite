@@ -33,7 +33,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "single-product-view",
-        "uri": "https://www.{template.site}/dp/{request.query.itemId}"
+        "uri": "{link}"
       }
     },
     {

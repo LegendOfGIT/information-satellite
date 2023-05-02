@@ -54,7 +54,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "single-product-view",
-        "uri": "https://{template.site}/dp/{asin}"
+        "uri": "{link}"
       }
     },
     {
