@@ -15,7 +15,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://{template.site}/sport-garten/fahrraeder-zubehoer/fahrraeder/?page={random-number}"
+        "uri": "https://www.{template.site}/sport-garten/fahrraeder-zubehoer/fahrraeder/?page={random-number}"
       }
     },
     {
