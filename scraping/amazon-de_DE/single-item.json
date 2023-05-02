@@ -94,6 +94,26 @@
       }
     },
     {
+      "comment": "size",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "size",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ "#inline-twister-dim-title-size_name #inline-twister-expanded-dimension-text-size_name" ]
+      }
+    },
+
+    {
+      "comment": "title",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "title",
+        "value": "{title} {size}"
+      }
+    },
+
+
+    {
       "comment": "seoDescription",
       "commandId": "get-value-by-css-queries",
       "parameters": {
@@ -362,6 +382,7 @@
           "ratingInPercent",
           "seoDescription",
           "seoKeywords",
+          "size",
           "title",
           "title-image",
           "minimumAge"
