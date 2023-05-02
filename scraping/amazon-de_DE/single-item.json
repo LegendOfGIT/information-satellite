@@ -112,7 +112,6 @@
       }
     },
 
-
     {
       "comment": "seoDescription",
       "commandId": "get-value-by-css-queries",
@@ -243,7 +242,8 @@
         "sourceContextId": "single-product-view",
         "groupIndex": 1,
         "regex": [
-          "Farbe:<\\/span>.*?<span.*?>(.*?)<\\/span>"
+          "Farbe:<\\/span>.*?<span.*?>(.*?)<\\/span>",
+          "Farbe:\\W.*?text-color_name.*?>(.*?)<"
         ]
       }
     },
@@ -328,6 +328,18 @@
         "groupIndex": 1
       }
     },
+    {
+      "comment": "images-small",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "images-small",
+        "replacements": {
+          "\\.jpg.*": ".jpg"
+        },
+        "sourceContextId": "images-small"
+      }
+    },
+
     {
       "comment": "images-big",
       "commandId": "get-values-by-regex",

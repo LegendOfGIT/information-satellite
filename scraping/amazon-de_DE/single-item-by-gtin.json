@@ -225,6 +225,18 @@
       }
     },
     {
+      "comment": "images-small",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "images-small",
+        "replacements": {
+          "\\.jpg.*": ".jpg"
+        },
+        "sourceContextId": "images-small"
+      }
+    },
+
+    {
       "comment": "images-big",
       "commandId": "get-values-by-regex",
       "parameters": {
@@ -278,6 +290,33 @@
     },
 
     {
+      "comment": "make",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "make",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "Marke<.*?<span.*?>(.*?)<\\/span>",
+          "Marke<\\/span>.*?<span.*?>(.*?)<\\/span>"
+        ]
+      }
+    },
+    {
+      "comment": "colors",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "colors",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "Farbe:<\\/span>.*?<span.*?>(.*?)<\\/span>",
+          "Farbe:\\W.*?text-color_name.*?>(.*?)<"
+        ]
+      }
+    },
+
+    {
       "comment": "seoKeywords",
       "commandId": "extract-seo-keywords",
       "parameters": {
@@ -293,11 +332,13 @@
         "requiredProperties": [ "title-image" ],
         "informationIds": [
           "asin",
+          "colors",
           "description",
           "gtin",
           "images-big",
           "images-small",
           "link",
+          "make",
           "numberOfRatings",
           "price-current",
           "price-initial",
