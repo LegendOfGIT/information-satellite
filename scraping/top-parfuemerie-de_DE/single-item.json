@@ -154,6 +154,41 @@
     },
 
     {
+      "comment": "amount in ml",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "amountInMl",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ "#size-value" ]
+      }
+    },
+    {
+      "comment": "amount in ml",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "amountInMl",
+        "sourceContextId": "amountInMl"
+      }
+    },
+    {
+      "comment": "price per unit",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "pricePerUnit",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ "#product-price-block-sub-price .price" ]
+      }
+    },
+    {
+      "comment": "price per unit",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "pricePerUnit",
+        "sourceContextId": "pricePerUnit"
+      }
+    },
+
+    {
       "comment": "seoKeywords",
       "commandId": "extract-seo-keywords",
       "parameters": {
@@ -167,6 +202,7 @@
       "commandId": "store-information",
       "parameters": {
         "informationIds": [
+          "amountInMl",
           "description",
           "images-big",
           "ingredients",
@@ -174,6 +210,7 @@
           "mean",
           "price-current",
           "price-initial",
+          "pricePerUnit",
           "seoDescription",
           "seoKeywords",
           "title",

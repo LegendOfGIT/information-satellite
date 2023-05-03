@@ -362,6 +362,24 @@
     },
 
     {
+      "comment": "price per unit",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "pricePerUnit",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".pricePerUnit .a-offscreen" ]
+      }
+    },
+    {
+      "comment": "price per unit",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "pricePerUnit",
+        "sourceContextId": "pricePerUnit"
+      }
+    },
+
+    {
       "comment": "seoKeywords",
       "commandId": "extract-seo-keywords",
       "parameters": {
@@ -391,6 +409,7 @@
           "numberOfRatings",
           "price-current",
           "price-initial",
+          "pricePerUnit",
           "ratingInPercent",
           "seoDescription",
           "seoKeywords",

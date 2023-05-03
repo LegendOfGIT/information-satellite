@@ -174,6 +174,25 @@
     },
 
     {
+      "comment": "length in m",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "length-in-m",
+        "sourceContextId": "description",
+        "groupIndex": 2,
+        "regex": "(l|L)änge von(.*?) m\\."
+      }
+    },
+    {
+      "comment": "length in m",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "length-in-m",
+        "sourceContextId": "length-in-m"
+      }
+    },
+
+    {
       "comment": "seoDescription",
       "commandId": "get-value-by-regex",
       "parameters": {
@@ -255,10 +274,12 @@
           "images-big",
           "images-small",
           "length-in-cm",
+          "length-in-m",
           "link",
           "mean",
           "price-current",
           "price-initial",
+          "pricePerUnit",
           "seoDescription",
           "seoKeywords",
           "title",
