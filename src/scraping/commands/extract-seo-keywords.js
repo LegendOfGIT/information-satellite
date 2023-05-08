@@ -25,9 +25,9 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         'ab,aber,alle,allem,allen,aller,allerdings,als,also,am,an,andere,anderem,anderen,anderer,andernfalls,anders,andersherum,anfangs,anhand,anschließend,ansonsten,anstatt,auch,auf,aufgrund,aus,außerdem,' +
         'befindet,bei,beide,beim,beispielsweise,bereits,besonders,besteht,bestimmte,bestimmten,bestimmter,bevor,bietet,bis,bleiben,bringen,bringt,bsp,bzw,' +
         'cm,' +
-        'd.h,da,dabei,dafür,daher,damit,danach,dann,dar,daran,darauf,daraus,darf,darstellt,darüber,das,dass,davon,dazu,dem,demzufolge,den,denen,denn,der,deren,des,dessen,desto,die,dies,diese,diesem,diesen,dieser,dieses,doch,dort,durch,' +
+        'd.h,da,dabei,dafür,daher,damit,danach,dann,dar,daran,darauf,daraus,darf,darstellt,darüber,das,dass,davon,dazu,dem,demzufolge,den,denen,denn,der,deren,des,dessen,desto,die,dir,dies,diese,diesem,diesen,dieser,dieses,doch,dort,durch,' +
         'ebenfalls,egal,eher,eigenen,eigentlich,ein,eine,einem,einen,einer,eines,einigen,einiges,einmal,einzelnen,enthalten,entscheidend,entweder,er,erstmals,es,etc,etwas,euch,' +
-        'folgende,folgendem,folgenden,folgender,folgendes,folgt,für,' +
+        'fällt,folgende,folgendem,folgenden,folgender,folgendes,folgt,für,' +
         'ganz,gegen,gehen,gemacht,genannte,genannten,gerade,gerne,gibt,gilt,gleich,gleichen,gleichzeitig,' +
         'habe,haben,hält,hat,hatte,hätte,hauptsächlich,her,heutigen,hier,hierbei,hierfür,hin,hingegen,hinzu,hoch,' +
         'ihn,ihr,ihre,ihren,ihrem,ihrer,im,immer,immerhin,in,indem,insgesamt,ist,' +
