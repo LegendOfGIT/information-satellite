@@ -68,6 +68,7 @@
       "parameters": {
         "contextId": "title-image",
         "replacements": {
+          "http:": "https:",
           ".png?": "_450x.png?"
         },
         "value": "{title-image}"
