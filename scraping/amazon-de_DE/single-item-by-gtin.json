@@ -309,9 +309,26 @@
         "contextId": "colors",
         "sourceContextId": "single-product-view",
         "groupIndex": 1,
+        "replacements": {
+          "\"": " "
+        },
         "regex": [
-          "Farbe:<\\/span>.*?<span.*?>(.*?)<\\/span>",
-          "Farbe:\\W.*?text-color_name.*?>(.*?)<"
+          "variationValues.*?color_name.*?\\[(.*?)\\]"
+        ]
+      }
+    },
+    {
+      "comment": "sizes",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "sizes",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "replacements": {
+          "\"": " "
+        },
+        "regex": [
+          "variationValues.*?size_name.*?\\[(.*?)\\]"
         ]
       }
     },
@@ -365,6 +382,7 @@
           "seoDescription",
           "seoKeywords",
           "size",
+          "sizes",
           "title",
           "title-image",
           "minimumAge"

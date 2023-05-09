@@ -3,7 +3,7 @@ const getValuesByRegex = require('../processing/getValuesByRegex');
 module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     console.log('executing command "get-value-by-regex"')
 
-    const { contextId, groupIndex, regex, setValueOnMatch, sourceContextId } = parameters;
+    const { contextId, groupIndex, regex, replacements = {}, setValueOnMatch, sourceContextId } = parameters;
     let { flags } = parameters;
 
     if (!contextId) {
@@ -39,6 +39,9 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         context[contextId] = setValueOnMatch || values[0];
     }
     context[contextId] = context[contextId] || '';
+    for (const [key, value] of Object.entries(replacements)) {
+        context[contextId] = context[contextId].replace(new RegExp(key,"g"), value);
+    }
 
     resolve();
 });
