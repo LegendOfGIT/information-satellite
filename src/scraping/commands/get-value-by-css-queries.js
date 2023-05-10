@@ -11,7 +11,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         context
     ));
 
-    const { contextId, mustContain, sourceContextId, separator = undefined, unique = false } = commandParameters;
+    const { contextId, mustContain, sourceContextId, replacements = {}, separator = undefined, unique = false } = commandParameters;
     const cssQueries = commandParameters['css-queries'];
 
     if (!contextId) {
@@ -73,6 +73,9 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     });
 
     context[contextId] = context[contextId] || '';
+    for (const [key, value] of Object.entries(replacements)) {
+        context[contextId] = context[contextId].replace(new RegExp(key,"g"), value);
+    }
 
     resolve();
 });

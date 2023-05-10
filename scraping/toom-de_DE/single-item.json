@@ -9,7 +9,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-search",
-        "uri": "https://{template.site}/s/{request.query.itemId}"
+        "uri": "https://{template.site}/s/{request.query.itemId}/"
       }
     },
 
@@ -68,6 +68,9 @@
         "contextId": "title-image",
         "sourceContextId": "single-product-view",
         "attribute-id": "src",
+        "replacements": {
+          "width=...": "width=450"
+        },
         "css-queries": [ ".image-gallery-image" ]
       }
     },
