@@ -1,5 +1,5 @@
 {
-  "site": "toom.de",
+  "site": "amazon.de",
 
   "scraping": [
     {
@@ -15,7 +15,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://{template.site}/c/garten-freizeit/gartenmaschinen/rasenmaeher?page={random-page-number}"
+        "uri": "https://{template.site}/gp/bestsellers/garden/4464828031/ref=zg_bs_nav_garden_2_120589031?pg={random-page-number}"
       }
     },
     {
@@ -23,29 +23,17 @@
       "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "css-queries": [ "a[data-testid='m-product-teaser']"],
-        "attribute-id": "href",
+        "css-queries": [ ".p13n-sc-uncoverable-faceout"],
+        "attribute-id": "id",
         "sourceContextId": "product-overview"
       }
     },
-    {
-      "comment": "product-ids",
-      "commandId": "clone-items-and-modify-clones",
-      "parameters": {
-        "contextId": "product-ids",
-        "replacements": {
-          ".*/": ""
-        },
-        "sourceContextId": "product-ids"
-      }
-    },
-
     {
       "comment": "site",
       "commandId": "set-context-value",
       "parameters": {
         "contextId": "site",
-        "value": "toom-de_DE"
+        "value": "amazon-de_DE"
       }
     },
     {
@@ -71,8 +59,8 @@
         "contextId": "navigation-path",
         "value": [
           "HOME",
-          "HOME_TOOLS",
-          "HOME_TOOLS_LAWNMOWERS"
+          "HOME_GARDEN",
+          "HOME_GARDEN_LAWNMOWERS"
         ]
       }
     },
