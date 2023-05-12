@@ -1,0 +1,265 @@
+{
+  "site": "de.haymancoffee.com",
+
+  "itemId": "{template.site}-{sku}",
+
+  "scraping": [
+    {
+      "comment": "single product",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "single-product-view",
+        "uri": "https://{template.site}/Produkte/{request.query.itemId}"
+      }
+    },
+    {
+      "comment": "link",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "link",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "href",
+        "css-queries": [ "link[rel='canonical']" ]
+      }
+    },
+
+    {
+      "comment": "merchant article number",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "mean",
+        "value": "haymancof.{request.query.itemId}"
+      }
+    },
+    {
+      "comment": "sku",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "sku",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": "\"productId\":(.*?),"
+      }
+    },
+
+    {
+      "comment": "title",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".product_name" ]
+      }
+    },
+
+    {
+      "comment": "title-image",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title-image",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ "meta[property='og:image']" ]
+      }
+    },
+
+    {
+      "comment": "size",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "size",
+        "sourceContextId": "single-product-view",
+        "replacements": { "\/.*": "" },
+        "css-queries": [ ".product_section .thumb-changer .label-weight" ]
+      }
+    },
+    {
+      "comment": "sizes",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "sizes",
+        "sourceContextId": "single-product-view",
+        "separator": " ",
+        "replacements": { "\\/.*?oz ": ", ", " , ": ", " },
+        "css-queries": [ ".product_section .thumb-changer .label-weight" ]
+      }
+    },
+    {
+      "comment": "type",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "type",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "data-value",
+        "css-queries": [ ".product_section .select-type .thumb-changer .tooltip" ]
+      }
+    },
+    {
+      "comment": "types",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "types",
+        "sourceContextId": "single-product-view",
+        "separator": ", ",
+        "css-queries": [ ".product_section .select-type .thumb-changer .tooltip" ]
+      }
+    },
+
+    {
+      "comment": "weight in G",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "weightInG",
+        "sourceContextId": "size"
+      }
+    },
+
+    {
+      "comment": "description",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "description",
+        "sourceContextId": "single-product-view",
+        "separator": " ",
+        "css-queries": [
+          "div[itemprop='description'] *"
+        ]
+      }
+    },
+    {
+      "comment": "SEO description",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "seoDescription",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [
+          "meta[name='description']"
+        ]
+      }
+    },
+
+    {
+      "comment": "price-current",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".current_price .money" ]
+      }
+    },
+    {
+      "comment": "price-initial",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".current_price .money" ]
+      }
+    },
+    {
+      "comment": "price-current to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "price-current"
+      }
+    },
+    {
+      "comment": "price-initial to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "price-initial"
+      }
+    },
+
+    {
+      "comment": "images big",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "images-big",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "data-thumb",
+        "css-queries": [ ".product_slider ul li" ]
+      }
+    },
+    {
+      "comment": "images big",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "images-big",
+        "replacements": {
+          "//": "https://",
+          "_1024x1024\\.": "_450x450."
+        },
+        "sourceContextId": "images-big"
+      }
+    },
+    {
+      "comment": "images small",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "images-small",
+        "replacements": {
+          "450x450": "150x150"
+        },
+        "sourceContextId": "images-big"
+      }
+    },
+
+    {
+      "comment": "publisher",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "publisher",
+        "value": "Hayman"
+      }
+    },
+    {
+      "comment": "product type",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "productType",
+        "value": "coffee"
+      }
+    },
+
+    {
+      "comment": "seoKeywords",
+      "commandId": "extract-seo-keywords",
+      "parameters": {
+        "contextId": "seoKeywords",
+        "sourceContextId": ["publisher", "description", "title"]
+      }
+    },
+
+    {
+      "comment": "store scraped information",
+      "commandId": "store-information",
+      "parameters": {
+        "informationIds": [
+          "description",
+          "images-big",
+          "images-small",
+          "link",
+          "mean",
+          "price-current",
+          "price-initial",
+          "productType",
+          "publisher",
+          "seoDescription",
+          "seoKeywords",
+          "size",
+          "sizes",
+          "sku",
+          "title",
+          "title-image",
+          "type",
+          "types",
+          "weightInG"
+        ]
+      }
+    }
+  ]
+}
