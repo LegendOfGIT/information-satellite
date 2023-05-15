@@ -22,7 +22,6 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     }
 
     const stopWords = (
-        '\\u2013,'+
         'ab,aber,alle,allem,allen,aller,allerdings,als,also,am,an,andere,anderem,anderen,anderer,andernfalls,anders,andersherum,anfangs,anhand,anschließend,ansonsten,anstatt,auch,auf,aufgrund,aus,außerdem,' +
         'befindet,bei,beide,beim,beispielsweise,bereits,besonders,besteht,bestimmte,bestimmten,bestimmter,bevor,bietet,bis,bleiben,bringen,bringt,bsp,bzw,' +
         'cm,' +
