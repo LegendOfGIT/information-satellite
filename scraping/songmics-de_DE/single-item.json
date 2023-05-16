@@ -248,7 +248,7 @@
         "contextId": "material",
         "sourceContextId": "single-product-view",
         "groupIndex": 1,
-        "regex": [ "Material der Möbel:(.*?)<\\/span>", "Material:(.*?)(</span>|<br>)" ]
+        "regex": [ "Material der Möbel:(.*?)<", "Material:(.*?)<" ]
       }
     },
 
