@@ -17,7 +17,8 @@
         "contextId": "product-ids",
         "sourceContextId": "product-overview",
         "groupIndex": 1,
-        "regex": "sku\":\"(.*?)\""
+        "regex": "sku\":\"(.*?)\"",
+        "unique": true
       }
     },
 

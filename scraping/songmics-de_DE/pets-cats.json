@@ -3,11 +3,19 @@
 
   "scraping": [
     {
+      "comment": "random-offset-number",
+      "commandId": "generate-random-number",
+      "parameters": {
+        "contextId": "random-offset-number",
+        "maximum": "24"
+      }
+    },
+    {
       "comment": "product-overview",
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://www.{template.site}/collections/gamingstuehle?ref=navimenu4"
+        "uri": "https://www.{template.site}/collections/zubehor-fur-katzen/?q=for_offest%3d{random-offset-number}&sort_by=best-selling"
       }
     },
     {
@@ -53,8 +61,8 @@
         "contextId": "navigation-path",
         "value": [
           "HOME",
-          "HOME_FURNITURE",
-          "HOME_FURNITURE_GAMINGCHAIRS"
+          "HOME_PETS",
+          "HOME_PETS_CATS"
         ]
       }
     },

@@ -248,7 +248,109 @@
         "contextId": "material",
         "sourceContextId": "single-product-view",
         "groupIndex": 1,
-        "regex": [ "Material der Möbel:(.*?)<\\/span>" ]
+        "regex": [ "Material der Möbel:(.*?)<\\/span>", "Material:(.*?)(</span>|<br>)" ]
+      }
+    },
+
+    {
+      "comment": "weight in KG",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "weightInKG",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [ "Gewicht:(.*?)kg.*?<br>" ]
+      }
+    },
+    {
+      "comment": "weight in KG",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "weightInKG",
+        "sourceContextId": "weightInKG"
+      }
+    },
+
+    {
+      "comment": "length in cm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "length-in-cm",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [ "Größe:(.*?) x (.*?) x (.*?) cm.*?L x B x H.*?<br>" ]
+      }
+    },
+    {
+      "comment": "length in cm",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "length-in-cm",
+        "sourceContextId": "length-in-cm"
+      }
+    },
+    {
+      "comment": "width in cm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "width-in-cm",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 2,
+        "regex": [ "Größe:(.*?) x (.*?) x (.*?) cm.*?L x B x H.*?<br>" ]
+      }
+    },
+    {
+      "comment": "width in cm",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "width-in-cm",
+        "sourceContextId": "width-in-cm"
+      }
+    },
+    {
+      "comment": "height in cm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "height-in-cm",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 3,
+        "regex": [ "Größe:(.*?) x (.*?) x (.*?) cm.*?L x B x H.*?<br>" ]
+      }
+    },
+    {
+      "comment": "height in cm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "height-in-cm",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 2,
+        "regex": [ "Größe:(.*?) x (.*?) cm.*?Ø x H.*?<br>" ]
+      }
+    },
+    {
+      "comment": "height in cm",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "height-in-cm",
+        "sourceContextId": "height-in-cm"
+      }
+    },
+    {
+      "comment": "diameter in cm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "diameter-in-cm",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [ "Größe:(.*?) x (.*?) cm.*?Ø x H.*?<br>" ]
+      }
+    },
+    {
+      "comment": "diameter in cm",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "diameter-in-cm",
+        "sourceContextId": "diameter-in-cm"
       }
     },
 
@@ -326,9 +428,12 @@
         "informationIds": [
           "colors",
           "description",
+          "diameter-in-cm",
           "gtin",
+          "height-in-cm",
           "images-big",
           "images-small",
+          "length-in-cm",
           "link",
           "material",
           "mean",
@@ -340,7 +445,9 @@
           "seoKeywords",
           "sku",
           "title",
-          "title-image"
+          "title-image",
+          "weightInKG",
+          "width-in-cm"
         ]
       }
     }
