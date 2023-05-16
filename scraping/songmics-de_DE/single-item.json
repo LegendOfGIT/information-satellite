@@ -329,6 +329,16 @@
     },
     {
       "comment": "height in cm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "height-in-cm",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [ "Rahmenhöhe: ca\\.(.*?) cm.*?<" ]
+      }
+    },
+    {
+      "comment": "height in cm",
       "commandId": "get-float-from-value",
       "parameters": {
         "contextId": "height-in-cm",
