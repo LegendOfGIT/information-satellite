@@ -371,10 +371,10 @@
     },
 
     {
-      "comment": "make",
+      "comment": "brand",
       "commandId": "get-value-by-regex",
       "parameters": {
-        "contextId": "make",
+        "contextId": "brand",
         "sourceContextId": "description",
         "groupIndex": 1,
         "regex": [
@@ -563,6 +563,7 @@
       "parameters": {
         "informationIds": [
           "bluetoothVersion",
+          "brand",
           "chargingPortType",
           "colors",
           "depth-in-cm",
@@ -573,7 +574,6 @@
           "images-big",
           "images-small",
           "link",
-          "make",
           "material",
           "mean",
           "model",

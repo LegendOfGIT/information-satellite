@@ -33,8 +33,8 @@
         "contextId": "navigation-path",
         "value": [
           "COSMETICS",
-          "COSMETICS_MAKEUP",
-          "COSMETICS_MAKEUP_EYES"
+          "COSMETICS_HAIR",
+          "COSMETICS_HAIR_CARE"
         ]
       }
     },
@@ -44,7 +44,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://www.{template.site}/Mascara"
+        "uri": "https://www.{template.site}/Shampoo"
       }
     },
     {
@@ -88,7 +88,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://www.{template.site}/Eye-Shadow"
+        "uri": "https://www.{template.site}/Conditioner"
       }
     },
     {
@@ -132,7 +132,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://www.{template.site}/Eyeliner"
+        "uri": "https://www.{template.site}/Spezialpflege"
       }
     },
     {
@@ -155,50 +155,6 @@
           "\\..*": ""
         },
         "sourceContextId": "product-ids-eyeliner"
-      }
-    },
-    {
-      "comment": "observe scraped information",
-      "commandId": "observe-information",
-      "parameters": {
-        "informationIds": [
-          "locale",
-          "navigation-path",
-          "product-ids",
-          "site",
-          "usecase"
-        ]
-      }
-    },
-
-    {
-      "comment": "product-overview",
-      "commandId": "visit-uri",
-      "parameters": {
-        "contextId": "product-overview",
-        "uri": "https://www.{template.site}/Augenbrauen"
-      }
-    },
-    {
-      "comment": "product-ids",
-      "commandId": "get-values-by-css-queries",
-      "parameters": {
-        "contextId": "product-ids-eyebrows",
-        "css-queries": [ ".productbox meta[itemprop='image']"],
-        "attribute-id": "content",
-        "sourceContextId": "product-overview"
-      }
-    },
-    {
-      "comment": "product-ids",
-      "commandId": "clone-items-and-modify-clones",
-      "parameters": {
-        "contextId": "product-ids",
-        "replacements": {
-          ".*/": "",
-          "\\..*": ""
-        },
-        "sourceContextId": "product-ids-eyebrows"
       }
     },
     {

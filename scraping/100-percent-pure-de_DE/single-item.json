@@ -9,7 +9,7 @@
       "commandId": "set-context-value",
       "parameters": {
         "contextId": "link",
-        "value": "https://www.{template.site}/{request.query.itemCanonical}"
+        "value": "https://www.{template.site}/{request.query.itemId}"
       }
     },
 
@@ -83,6 +83,16 @@
         "sourceContextId": "images-big"
       }
     },
+    {
+      "comment": "teaser-images",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "teaser-images",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "src",
+        "css-queries": [ ".desc p img" ]
+      }
+    },
 
     {
       "comment": "description",
@@ -112,6 +122,24 @@
         "sourceContextId": "single-product-view",
         "attribute-id": "content",
         "css-queries": [ "div[itemprop=description]" ]
+      }
+    },
+    {
+      "comment": "product type",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "productType",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ "a[itemprop='category']" ]
+      }
+    },
+    {
+      "comment": "brand",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "brand",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ "li[itemprop='brand'] span" ]
       }
     },
 
@@ -151,6 +179,54 @@
     },
 
     {
+      "comment": "number of ratings",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "numberOfRatings",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ "meta[itemprop='reviewCount']" ]
+      }
+    },
+    {
+      "comment": "number of ratings",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "numberOfRatings",
+        "defaultValue": 0,
+        "sourceContextId": "numberOfRatings"
+      }
+    },
+
+    {
+      "comment": "rating",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "ratingInPercent",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ "meta[itemprop='ratingValue']" ]
+      }
+    },
+    {
+      "comment": "rating",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "ratingInPercent",
+        "defaultValue": 0,
+        "sourceContextId": "ratingInPercent"
+      }
+    },
+    {
+      "comment": "rating",
+      "commandId": "get-rule-of-three-value",
+      "parameters": {
+        "maximumValue": 5,
+        "contextId": "ratingInPercent"
+      }
+    },
+
+    {
       "comment": "seoKeywords",
       "commandId": "extract-seo-keywords",
       "parameters": {
@@ -164,16 +240,21 @@
       "commandId": "store-information",
       "parameters": {
         "informationIds": [
+          "brand",
           "description",
           "images-big",
           "images-small",
           "ingredients",
           "link",
           "mean",
+          "numberOfRatings",
           "price-current",
           "price-initial",
+          "productType",
+          "ratingInPercent",
           "seoDescription",
           "seoKeywords",
+          "teaser-images",
           "title",
           "title-image"
         ]

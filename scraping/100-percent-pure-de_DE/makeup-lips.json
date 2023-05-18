@@ -63,8 +63,7 @@
       "parameters": {
         "contextId": "product-ids",
         "replacements": {
-          ".*/product/": "",
-          "/md/": "|",
+          ".*/": "",
           "\\..*": ""
         },
         "sourceContextId": "product-ids-a"
@@ -108,8 +107,7 @@
       "parameters": {
         "contextId": "product-ids",
         "replacements": {
-          ".*/product/": "",
-          "/md/": "|",
+          ".*/": "",
           "\\..*": ""
         },
         "sourceContextId": "product-ids-b"
@@ -153,8 +151,7 @@
       "parameters": {
         "contextId": "product-ids",
         "replacements": {
-          ".*/product/": "",
-          "/md/": "|",
+          ".*/": "",
           "\\..*": ""
         },
         "sourceContextId": "product-ids-c"
@@ -198,8 +195,7 @@
       "parameters": {
         "contextId": "product-ids",
         "replacements": {
-          ".*/product/": "",
-          "/md/": "|",
+          ".*/": "",
           "\\..*": ""
         },
         "sourceContextId": "product-ids-d"

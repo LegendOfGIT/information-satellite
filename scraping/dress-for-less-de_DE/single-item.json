@@ -308,10 +308,10 @@
       }
     },
     {
-      "comment": "make",
+      "comment": "brand",
       "commandId": "get-value-by-css-queries",
       "parameters": {
-        "contextId": "make",
+        "contextId": "brand",
         "sourceContextId": "single-product-view",
         "attribute-id": "alt",
         "css-queries": [ ".product-detail__brand-image-file" ]
@@ -333,6 +333,7 @@
       "parameters": {
         "informationIds": [
           "colors",
+          "brand",
           "description",
           "fabric",
           "fabricPattern",
@@ -341,7 +342,6 @@
           "images-small",
           "innerMaterial",
           "link",
-          "make",
           "material",
           "mean",
           "model",

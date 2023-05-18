@@ -290,10 +290,10 @@
     },
 
     {
-      "comment": "make",
+      "comment": "brand",
       "commandId": "get-value-by-regex",
       "parameters": {
-        "contextId": "make",
+        "contextId": "brand",
         "sourceContextId": "single-product-view",
         "groupIndex": 1,
         "regex": [
@@ -367,13 +367,13 @@
         "requiredProperties": [ "title-image" ],
         "informationIds": [
           "asin",
+          "brand",
           "colors",
           "description",
           "gtin",
           "images-big",
           "images-small",
           "link",
-          "make",
           "numberOfRatings",
           "price-current",
           "price-initial",
