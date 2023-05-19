@@ -1,7 +1,7 @@
 {
   "site": "waschbaer.de",
 
-  "itemId": "{template.site}-{sku}",
+  "itemId": "{template.site}-{request.query.itemId}",
 
   "scraping": [
     {
