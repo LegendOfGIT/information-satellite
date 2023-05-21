@@ -3,7 +3,7 @@ const getPreparedCommandParameters = require('../getPreparedCommandParameters');
 const https = require('https');
 
 module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
-    const { contextId, uri, encoding = 'utf-8' } = parameters;
+    const { contextId, uri, encoding = 'utf-8', overwrite = false } = parameters;
 
     console.log('executing command "visit-uri"');
 
@@ -56,7 +56,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         responseType:'arraybuffer'
     };
 
-    if (context[contextId]) {
+    if (!overwrite && context[contextId]) {
         context['current-uri'] = commandParameters.uri;
         console.log(`requested uri "${commandParameters.uri}" was already resolved successfully.`);
 

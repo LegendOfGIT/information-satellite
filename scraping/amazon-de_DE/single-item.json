@@ -119,6 +119,10 @@
         "contextId": "seoDescription",
         "sourceContextId": "single-product-view",
         "attribute-id": "content",
+        "replacements": {
+          "Amazon\\.de.*? - ": "",
+          " - Kostenloser Versand.*": ""
+        },
         "css-queries": [ "meta[name=description]" ]
       }
     },
@@ -230,7 +234,8 @@
         "groupIndex": 1,
         "regex": [
           "Marke<.*?<span.*?>(.*?)<\\/span>",
-          "Marke<\\/span>.*?<span.*?>(.*?)<\\/span>"
+          "Marke<\\/span>.*?<span.*?>(.*?)<\\/span>",
+          "Marke.*?<\\/th.*?<td.*?>\\W.*?&lrm;(.*?)<"
         ]
       }
     },
@@ -245,7 +250,8 @@
           "\"": " "
         },
         "regex": [
-          "variationValues.*?color_name.*?\\[(.*?)\\]"
+          "variationValues.*?color_name.*?\\[(.*?)\\]",
+          "Farbe.*?<\\/th.*?<td.*?>\\W.*?&lrm;(.*?)<"
         ]
       }
     },
@@ -274,7 +280,8 @@
         "groupIndex": 1,
         "regex": [
           "Metallstempel <.*?<td.*?>(.*?)<\\/td>",
-          "Material<\\/span>.*?<span.*?>(.*?)<\\/span>"
+          "Material<\\/span>.*?<span.*?>(.*?)<\\/span>",
+          "Material.*?<\\/th.*?<td.*?>\\W.*?&lrm;(.*?)<"
         ]
       }
     },

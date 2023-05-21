@@ -264,6 +264,10 @@
         "contextId": "seoDescription",
         "sourceContextId": "single-product-view",
         "attribute-id": "content",
+        "replacements": {
+          "Amazon\\.de.*? - ": "",
+          " - Kostenloser Versand.*": ""
+        },
         "css-queries": [ "meta[name=description]" ]
       }
     },
@@ -298,7 +302,8 @@
         "groupIndex": 1,
         "regex": [
           "Marke<.*?<span.*?>(.*?)<\\/span>",
-          "Marke<\\/span>.*?<span.*?>(.*?)<\\/span>"
+          "Marke<\\/span>.*?<span.*?>(.*?)<\\/span>",
+          "Marke.*?<\\/th.*?<td.*?>\\W.*?&lrm;(.*?)<"
         ]
       }
     },
@@ -313,10 +318,26 @@
           "\"": " "
         },
         "regex": [
-          "variationValues.*?color_name.*?\\[(.*?)\\]"
+          "variationValues.*?color_name.*?\\[(.*?)\\]",
+          "Farbe.*?<\\/th.*?<td.*?>\\W.*?&lrm;(.*?)<"
         ]
       }
     },
+    {
+      "comment": "material",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "material",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "Metallstempel <.*?<td.*?>(.*?)<\\/td>",
+          "Material<\\/span>.*?<span.*?>(.*?)<\\/span>",
+          "Material.*?<\\/th.*?<td.*?>\\W.*?&lrm;(.*?)<"
+        ]
+      }
+    },
+
     {
       "comment": "sizes",
       "commandId": "get-value-by-regex",
@@ -374,6 +395,7 @@
           "images-big",
           "images-small",
           "link",
+          "material",
           "numberOfRatings",
           "price-current",
           "price-initial",

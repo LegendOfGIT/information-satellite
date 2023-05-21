@@ -1,21 +1,13 @@
 {
-  "site": "amazon.de",
+  "site": "backmarket.de",
 
   "scraping": [
-    {
-      "comment": "random-page-number",
-      "commandId": "generate-random-number",
-      "parameters": {
-        "contextId": "random-page-number",
-        "maximum": "1"
-      }
-    },
     {
       "comment": "product-overview",
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://{template.site}/gp/bestsellers/kitchen/3311301/ref=zg_bs_nav_kitchen_3_3311261?pg={random-page-number}"
+        "uri": "https://www.{template.site}/de-de/l/bohrmaschine-schraubenzieher/14d7a441-16db-46da-920d-cfa8e3a9e57c"
       }
     },
     {
@@ -23,17 +15,30 @@
       "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "css-queries": [ ".p13n-sc-uncoverable-faceout"],
-        "attribute-id": "id",
+        "css-queries": [ "a.group"],
+        "attribute-id": "href",
         "sourceContextId": "product-overview"
       }
     },
+    {
+      "comment": "product-ids",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "product-ids",
+        "replacements": {
+          ".*/": "",
+          "#.*": ""
+        },
+        "sourceContextId": "product-ids"
+      }
+    },
+
     {
       "comment": "site",
       "commandId": "set-context-value",
       "parameters": {
         "contextId": "site",
-        "value": "amazon-de_DE"
+        "value": "backmarket-de_DE"
       }
     },
     {
@@ -59,8 +64,8 @@
         "contextId": "navigation-path",
         "value": [
           "HOME",
-          "HOME_COOKINGANDBAKING",
-          "HOME_COOKINGANDBAKING_BAKINGSUPPLIES"
+          "HOME_TOOLS",
+          "HOME_TOOLS_DRILLINGMACHINES"
         ]
       }
     },

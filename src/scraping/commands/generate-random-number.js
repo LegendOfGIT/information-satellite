@@ -1,5 +1,5 @@
 module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
-    const { contextId, maximum } = parameters;
+    const { contextId, maximum, minimum = 1 } = parameters;
 
     console.log('executing command "generate-random-number"');
 
@@ -13,7 +13,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         resolve();
     }
 
-    context[contextId] = Math.floor(Math.random() * Math.floor(maximum - 1)) + 1;
+    context[contextId] = Math.floor(Math.random() * Math.floor(maximum - 1)) + minimum;
 
     resolve();
 });

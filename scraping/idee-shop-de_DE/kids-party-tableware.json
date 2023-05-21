@@ -32,9 +32,9 @@
       "parameters": {
         "contextId": "navigation-path",
         "value": [
-          "HOME",
-          "HOME_COOKINGANDBAKING",
-          "HOME_COOKINGANDBAKING_BAKINGSUPPLIES"
+          "KIDS",
+          "KIDS_PARTY",
+          "KIDS_PARTY_TABLEWARE"
         ]
       }
     },
@@ -43,16 +43,17 @@
       "comment": "product-overview",
       "commandId": "visit-uri",
       "parameters": {
-        "contextId": "product-overview",
-        "uri": "https://www.{template.site}/party/backen/?p=1&o=8&n=12"
+        "contextId": "product-overview-top-seller",
+        "uri": "https://www.{template.site}/party/party-dekoration/tischdekoration/?p=1&o=8&n=12"
       }
     },
+
     {
       "comment": "product-ids",
       "commandId": "get-values-by-regex",
       "parameters": {
         "contextId": "product-ids",
-        "sourceContextId": "product-overview",
+        "sourceContextId": "product-overview-top-seller",
         "groupIndex": 1,
         "regex": [
           "\"id\": \"(.*?)\""
@@ -72,14 +73,13 @@
         ]
       }
     },
-
     {
       "comment": "random-page-number",
       "commandId": "generate-random-number",
       "parameters": {
         "contextId": "random-page-number",
         "minimum": 2,
-        "maximum": 5
+        "maximum": 15
       }
     },
     {
@@ -88,9 +88,10 @@
       "parameters": {
         "contextId": "product-overview",
         "overwrite": true,
-        "uri": "https://www.{template.site}/party/backen/?p={random-page-number}&o=8&n=12"
+        "uri": "https://www.{template.site}/party/party-dekoration/tischdekoration/?p={random-page-number}&o=8&n=12"
       }
     },
+
     {
       "comment": "product-ids",
       "commandId": "get-values-by-regex",

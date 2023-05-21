@@ -4,7 +4,7 @@ const getValuesFromCssSelectorResponse = require('../processing/getValuesFromCss
 module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     console.log('executing command "get-values-by-css-queries"')
 
-    const { contextId, mustContain, mustNotContain, sourceContextId } = parameters;
+    const { contextId, mustContain, mustNotContain, sourceContextId, overwriteValues = false } = parameters;
     const cssQueries = parameters['css-queries'];
 
     if (!contextId) {
@@ -32,7 +32,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
 
     const cssSelector = cheerio.load(sourceContext);
     cssQueries.forEach(cssQuery => {
-        if(context[contextId]) {
+        if (!overwriteValues && context[contextId]) {
             return;
         }
 

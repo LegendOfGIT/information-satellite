@@ -1,5 +1,5 @@
 {
-  "site": "idee-shop.com",
+  "site": "amazon.de",
 
   "scraping": [
     {
@@ -7,7 +7,7 @@
       "commandId": "set-context-value",
       "parameters": {
         "contextId": "site",
-        "value": "idee-shop-de_DE"
+        "value": "amazon-de_DE"
       }
     },
     {
@@ -32,9 +32,9 @@
       "parameters": {
         "contextId": "navigation-path",
         "value": [
-          "HOME",
-          "HOME_COOKINGANDBAKING",
-          "HOME_COOKINGANDBAKING_BAKINGSUPPLIES"
+          "ELECTRONICS_AND_COMPUTERS",
+          "ELECTRONICS_AND_COMPUTERS_HOME",
+          "ELECTRONICS_AND_COMPUTERS_HOME_FULLYAUTOMATICCOFFEEMACHINES"
         ]
       }
     },
@@ -44,19 +44,17 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://www.{template.site}/party/backen/?p=1&o=8&n=12"
+        "uri": "https://{template.site}/gp/bestsellers/kitchen/13909981/ref=zg_bs_nav_kitchen_4_13528250031"
       }
     },
     {
       "comment": "product-ids",
-      "commandId": "get-values-by-regex",
+      "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "sourceContextId": "product-overview",
-        "groupIndex": 1,
-        "regex": [
-          "\"id\": \"(.*?)\""
-        ]
+        "css-queries": [ ".p13n-sc-uncoverable-faceout"],
+        "attribute-id": "id",
+        "sourceContextId": "product-overview"
       }
     },
     {
@@ -79,7 +77,7 @@
       "parameters": {
         "contextId": "random-page-number",
         "minimum": 2,
-        "maximum": 5
+        "maximum": 4
       }
     },
     {
@@ -88,20 +86,18 @@
       "parameters": {
         "contextId": "product-overview",
         "overwrite": true,
-        "uri": "https://www.{template.site}/party/backen/?p={random-page-number}&o=8&n=12"
+        "uri": "https://{template.site}/gp/bestsellers/kitchen/13909981/ref=zg_bs_nav_kitchen_4_13528250031?pg={random-page-number}"
       }
     },
     {
       "comment": "product-ids",
-      "commandId": "get-values-by-regex",
+      "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "sourceContextId": "product-overview",
-        "groupIndex": 1,
+        "css-queries": [ ".p13n-sc-uncoverable-faceout"],
+        "attribute-id": "id",
         "overwriteValues": true,
-        "regex": [
-          "\"id\": \"(.*?)\""
-        ]
+        "sourceContextId": "product-overview"
       }
     },
     {
