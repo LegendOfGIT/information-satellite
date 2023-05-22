@@ -298,10 +298,10 @@
     },
 
     {
-      "comment": "publisher",
+      "comment": "manufacturer",
       "commandId": "get-value-by-regex",
       "parameters": {
-        "contextId": "publisher",
+        "contextId": "manufacturer",
         "sourceContextId": "single-product-view",
         "groupIndex": 1,
         "regex": [
@@ -356,12 +356,12 @@
           "images-small",
           "ingredients",
           "intakeType",
+          "manufacturer",
           "mean",
           "numberOfRatings",
           "price-current",
           "price-initial",
           "pricePerUnit",
-          "publisher",
           "ratingInPercent",
           "seoDescription",
           "seoKeywords",
