@@ -121,7 +121,8 @@
         "attribute-id": "content",
         "replacements": {
           "Amazon\\.de.*? - ": "",
-          " - Kostenloser Versand.*": ""
+          " - Kostenloser Versand.*": "",
+          "bei Amazon.*": "bei WeWanna shop!"
         },
         "css-queries": [ "meta[name=description]" ]
       }
@@ -220,8 +221,7 @@
       "commandId": "get-float-from-value",
       "parameters": {
         "contextId": "minimumAge",
-        "sourceContextId": "minimumAge",
-        "defaultValue": 0
+        "sourceContextId": "minimumAge"
       }
     },
 
@@ -236,6 +236,20 @@
           "Marke<.*?<span.*?>(.*?)<\\/span>",
           "Marke<\\/span>.*?<span.*?>(.*?)<\\/span>",
           "Marke.*?<\\/th.*?<td.*?>\\W.*?&lrm;(.*?)<"
+        ]
+      }
+    },
+    {
+      "comment": "suitableFor",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "suitableFor",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "Zielgruppe<.*?<span.*?>(.*?)<\\/span>",
+          "Zielgruppe<\\/span>.*?<span.*?>(.*?)<\\/span>",
+          "Zielgruppe.*?<\\/th.*?<td.*?>\\W.*?&lrm;(.*?)<"
         ]
       }
     },
@@ -439,6 +453,7 @@
           "seoKeywords",
           "size",
           "sizes",
+          "suitableFor",
           "title",
           "title-image",
           "minimumAge"
