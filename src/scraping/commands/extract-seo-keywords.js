@@ -53,7 +53,9 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
 
     terms = terms
         .replaceAll(/(\.|:|,|!|;|'|")/g, '')
-        .replaceAll('-', ' ');
+        .replaceAll('-', ' ')
+        .replaceAll('&amp;', ' ')
+        .replaceAll('&amp', ' ');
 
     const termCountMap = {};
     terms.split(' ').filter(term => -1 === stopWords.indexOf(term)).filter(term => term.length > 2).forEach(term => {

@@ -245,6 +245,96 @@
     },
 
     {
+      "comment": "size",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "size",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "value\":\"(.*?)\".*?package_size"
+        ]
+      }
+    },
+    {
+      "comment": "size in ml",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "sizeInMl",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "value\":\"(.*?) ml\".*?package_size"
+        ]
+      }
+    },
+    {
+      "comment": "size in ml",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "sizeInMl",
+        "sourceContextId": "sizeInMl"
+      }
+    },
+    {
+      "comment": "price per unit",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "pricePerUnit",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "basePrice.*?amount\":(.*?),"
+        ]
+      }
+    },
+    {
+      "comment": "price per unit",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "pricePerUnit",
+        "sourceContextId": "pricePerUnit"
+      }
+    },
+
+    {
+      "comment": "publisher",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "publisher",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "manufacturer\":\"(.*?)\""
+        ]
+      }
+    },
+    {
+      "comment": "intakeType",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "intakeType",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "pharmaForm\":\"(.*?)\""
+        ]
+      }
+    },
+    {
+      "comment": "ingredients",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "ingredients",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "ingredients\":\"(.*?)\""
+        ]
+      }
+    },
+
+    {
       "comment": "seoKeywords",
       "commandId": "extract-seo-keywords",
       "parameters": {
@@ -264,13 +354,19 @@
           "ean",
           "images-big",
           "images-small",
+          "ingredients",
+          "intakeType",
           "mean",
           "numberOfRatings",
           "price-current",
           "price-initial",
+          "pricePerUnit",
+          "publisher",
           "ratingInPercent",
           "seoDescription",
           "seoKeywords",
+          "size",
+          "sizeInMl",
           "title",
           "title-image"
         ]
