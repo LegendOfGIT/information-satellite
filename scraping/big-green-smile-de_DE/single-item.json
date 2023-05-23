@@ -12,6 +12,14 @@
         "uri": "https://{template.site}/search.aspx?q={request.query.itemId}"
       }
     },
+    {
+      "comment": "single-product-view",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "single-product-view",
+        "uri": "https://{template.site}/search.aspx?q={request.query.itemId}"
+      }
+    },
 
     {
       "comment": "link",
@@ -21,6 +29,15 @@
         "contextId": "link",
         "sourceContextId": "single-product-view",
         "css-queries": [ "meta[property='og:url']" ]
+      }
+    },
+    {
+      "comment": "single-product-view",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "single-product-view",
+        "overwrite": true,
+        "uri": "{link}"
       }
     },
 
@@ -51,7 +68,7 @@
       "parameters": {
         "contextId": "title",
         "sourceContextId": "single-product-view",
-        "css-queries": [ "span[itemprop=name]" ]
+        "css-queries": [ ".main-title #lblName" ]
       }
     },
 
@@ -72,7 +89,12 @@
         "contextId": "description",
         "sourceContextId": "single-product-view",
         "attribute-id": "src",
-        "css-queries": [ "span[itemprop=description] h3", "span[itemprop=description] p" ]
+        "separator": " ",
+        "css-queries": [
+          "span[itemprop=description] h3",
+          "span[itemprop=description] p",
+          ".product-desc p, .product-desc p span, .product-desc ul li"
+        ]
       }
     },
 
@@ -83,6 +105,9 @@
         "contextId": "seoDescription",
         "sourceContextId": "single-product-view",
         "attribute-id": "content",
+        "replacements": {
+          "findest Du hier im.*": "findest du hier bei WeWanna shop!"
+        },
         "css-queries": [ "meta[name=description]" ]
       }
     },
@@ -126,6 +151,77 @@
     },
 
     {
+      "comment": "teaser images",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "teaser-images",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "src",
+        "unique": true,
+        "css-queries": [ ".criteria-list-inner .cc-item img" ]
+      }
+    },
+    {
+      "comment": "brand",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "brand",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "\"Brand\".*?: \"(.*?)\""
+        ]
+      }
+    },
+    {
+      "comment": "ingredients",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "ingredients",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ "#divProductIngredients" ]
+      }
+    },
+    {
+      "comment": "size",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "size",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ "#divProductContents" ]
+      }
+    },
+    {
+      "comment": "price per unit",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "pricePerUnit",
+        "sourceContextId": "single-product-view",
+        "replacements": {
+          "\/.*": ""
+        },
+        "css-queries": [ "#lblPricePerUnit" ]
+      }
+    },
+    {
+      "comment": "price per unit",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "pricePerUnit",
+        "sourceContextId": "pricePerUnit"
+      }
+    },
+    {
+      "comment": "shopCategory",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "shopCategory",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".breadcrumbs li:last-child a" ]
+      }
+    },
+
+    {
       "comment": "seoKeywords",
       "commandId": "extract-seo-keywords",
       "parameters": {
@@ -139,14 +235,20 @@
       "commandId": "store-information",
       "parameters": {
         "informationIds": [
+          "brand",
           "description",
           "link",
           "mean",
           "gtin",
+          "ingredients",
           "price-current",
           "price-initial",
+          "pricePerUnit",
+          "shopCategory",
+          "size",
           "seoDescription",
           "seoKeywords",
+          "teaser-images",
           "title",
           "title-image"
         ]

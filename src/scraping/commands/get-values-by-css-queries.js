@@ -4,7 +4,7 @@ const getValuesFromCssSelectorResponse = require('../processing/getValuesFromCss
 module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     console.log('executing command "get-values-by-css-queries"')
 
-    const { contextId, mustContain, mustNotContain, sourceContextId, overwriteValues = false } = parameters;
+    const { contextId, mustContain, mustNotContain, sourceContextId, overwriteValues = false, unique = false } = parameters;
     const cssQueries = parameters['css-queries'];
 
     if (!contextId) {
@@ -42,7 +42,8 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
             mustContain,
             mustNotContain
         );
-        const values = valuesFromCssSelector.filter(item => item);
+        let values = valuesFromCssSelector.filter(item => item);
+        values = unique ? values.filter((value, index, array) => array.indexOf(value) === index) : values;
         context[contextId] = 0 === values.length ? undefined : values;
     });
 
