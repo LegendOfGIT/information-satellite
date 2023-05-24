@@ -81,9 +81,9 @@
       "parameters": {
         "contextId": "navigation-path",
         "value": [
-          "COSMETICS",
-          "COSMETICS_WOMEN",
-          "COSMETICS_WOMEN_FRAGRANCES"
+          "BEAUTY_CARE",
+          "BEAUTY_CARE_FRAGRANCES",
+          "BEAUTY_CARE_FRAGRANCES_WOMEN"
         ]
       }
     },
