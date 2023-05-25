@@ -32,9 +32,9 @@
       "parameters": {
         "contextId": "navigation-path",
         "value": [
-          "COSMETICS",
-          "COSMETICS_MAKEUP",
-          "COSMETICS_MAKEUP_LIPS"
+          "BEAUTY_CARE",
+          "BEAUTY_CARE_MAKEUP",
+          "BEAUTY_CARE_MAKEUP_LIPS"
         ]
       }
     },

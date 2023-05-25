@@ -32,9 +32,9 @@
       "parameters": {
         "contextId": "navigation-path",
         "value": [
-          "COSMETICS",
-          "COSMETICS_HAIR",
-          "COSMETICS_HAIR_CARE"
+          "BEAUTY_CARE",
+          "BEAUTY_CARE_HAIR",
+          "BEAUTY_CARE_HAIR_CARE"
         ]
       }
     },
