@@ -1,7 +1,7 @@
 {
   "site": "timber-taste.de",
 
-  "itemId": "{template.site}-{sku}",
+  "itemId": "{template.site}-{ean}",
 
   "scraping": [
     {
@@ -49,11 +49,10 @@
     },
     {
       "comment": "sku",
-      "commandId": "get-value-by-css-queries",
+      "commandId": "set-context-value",
       "parameters": {
         "contextId": "sku",
-        "sourceContextId": "single-product-view",
-        "css-queries": [ "span[itemprop='sku']" ]
+        "value": "{request.query.itemId}"
       }
     },
     {
