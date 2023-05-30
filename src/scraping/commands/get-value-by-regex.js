@@ -3,8 +3,15 @@ const getValuesByRegex = require('../processing/getValuesByRegex');
 module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     console.log('executing command "get-value-by-regex"')
 
-    const { contextId, groupIndex, regex, replacements = {}, setValueOnMatch, sourceContextId } = parameters;
-    let { flags } = parameters;
+    const {
+        contextId,
+        flags,
+        groupIndex,
+        regex,
+        replacements = {},
+        setValueOnMatch,
+        sourceContextId
+    } = parameters;
 
     if (!contextId) {
         console.log('required parameter "contextId" is not given. abort.');

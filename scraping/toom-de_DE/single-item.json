@@ -76,13 +76,25 @@
     },
 
     {
+      "comment": "data properties",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "dataProperties",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "data-props",
+        "decodeUri": true,
+        "css-queries": [ "#root" ]
+      }
+    },
+
+    {
       "comment": "images-small",
       "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "images-small",
         "sourceContextId": "single-product-view",
         "attribute-id": "src",
-        "css-queries": [ ".image-gallery-thumbnail-image" ]
+        "css-queries": [ ".image-gallery-thumbnail-image", ".image-gallery-image" ]
       }
     },
     {
@@ -96,7 +108,6 @@
         "sourceContextId": "images-small"
       }
     },
-
     {
       "comment": "images-big",
       "commandId": "clone-items-and-modify-clones",
@@ -110,13 +121,51 @@
     },
 
     {
+      "comment": "depth in cm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "depth-in-cm",
+        "sourceContextId": "dataProperties",
+        "groupIndex": 1,
+        "regex": "mca_tiefe.*?value\":\"(.*?) cm\""
+      }
+    },
+    {
+      "comment": "depth in cm",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "depth-in-cm",
+        "sourceContextId": "depth-in-cm"
+      }
+    },
+
+    {
+      "comment": "width in cm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "width-in-cm",
+        "sourceContextId": "dataProperties",
+        "groupIndex": 1,
+        "regex": "mca_breite.*?value\":\"(.*?) cm\""
+      }
+    },
+    {
+      "comment": "width in cm",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "width-in-cm",
+        "sourceContextId": "width-in-cm"
+      }
+    },
+
+    {
       "comment": "height in cm",
       "commandId": "get-value-by-regex",
       "parameters": {
         "contextId": "height-in-cm",
-        "sourceContextId": "title",
+        "sourceContextId": "dataProperties",
         "groupIndex": 1,
-        "regex": ".* (.*? x) (.*? x) (.*? cm)"
+        "regex": "mca_hoehe.*?value\":\"(.*?) cm\""
       }
     },
     {
@@ -128,24 +177,7 @@
       }
     },
 
-    {
-      "comment": "width in cm",
-      "commandId": "get-value-by-regex",
-      "parameters": {
-        "contextId": "width-in-cm",
-        "sourceContextId": "title",
-        "groupIndex": 2,
-        "regex": ".* (.*? x) (.*? x) (.*? cm)"
-      }
-    },
-    {
-      "comment": "width in cm",
-      "commandId": "get-float-from-value",
-      "parameters": {
-        "contextId": "width-in-cm",
-        "sourceContextId": "width-in-cm"
-      }
-    },
+
 
     {
       "comment": "length in cm",
@@ -172,7 +204,16 @@
       "parameters": {
         "contextId": "description",
         "sourceContextId": "single-product-view",
-        "css-queries": [ ".description__text" ]
+        "css-queries": [ ".description__text, .description__text *" ]
+      }
+    },
+    {
+      "comment": "teaser texts",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "teaser-texts",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".description__list .description__list-item" ]
       }
     },
 
@@ -192,6 +233,70 @@
       "parameters": {
         "contextId": "length-in-m",
         "sourceContextId": "length-in-m"
+      }
+    },
+
+    {
+      "comment": "suitable for",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "suitableFor",
+        "sourceContextId": "dataProperties",
+        "groupIndex": 1,
+        "replacements": {
+          "\\|": ", "
+        },
+        "regex": "mca_anwendungsbereich.*?value\":\"(.*?)\""
+      }
+    },
+    {
+      "comment": "product type",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "productType",
+        "sourceContextId": "dataProperties",
+        "groupIndex": 1,
+        "regex": "mca_artikeltyp.*?value\":\"(.*?)\""
+      }
+    },
+    {
+      "comment": "model",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "model",
+        "sourceContextId": "dataProperties",
+        "groupIndex": 1,
+        "regex": "mca_modell\".*?value\":\"(.*?)\""
+      }
+    },
+    {
+      "comment": "material",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "material",
+        "sourceContextId": "dataProperties",
+        "groupIndex": 1,
+        "regex": "mca_material\".*?value\":\"(.*?)\""
+      }
+    },
+    {
+      "comment": "brand",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "brand",
+        "sourceContextId": "dataProperties",
+        "groupIndex": 1,
+        "regex": "mca_marke\".*?value\":\"(.*?)\""
+      }
+    },
+    {
+      "comment": "series",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "series",
+        "sourceContextId": "dataProperties",
+        "groupIndex": 1,
+        "regex": "mca_serie\".*?value\":\"(.*?)\""
       }
     },
 
@@ -271,6 +376,8 @@
       "commandId": "store-information",
       "parameters": {
         "informationIds": [
+          "brand",
+          "depth-in-cm",
           "description",
           "height-in-cm",
           "width-in-cm",
@@ -279,12 +386,18 @@
           "length-in-cm",
           "length-in-m",
           "link",
+          "material",
           "mean",
+          "model",
           "price-current",
           "price-initial",
           "pricePerUnit",
+          "productType",
           "seoDescription",
           "seoKeywords",
+          "series",
+          "suitableFor",
+          "teaser-texts",
           "title",
           "title-image"
         ]
