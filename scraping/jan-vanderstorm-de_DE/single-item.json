@@ -1,0 +1,323 @@
+{
+  "site": "janvanderstorm.de",
+
+  "itemId": "{template.site}-{gtin}",
+
+  "scraping": [
+    {
+      "comment": "link",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "link",
+        "value": "https://{template.site}/{request.query.itemId}.html"
+      }
+    },
+
+    {
+      "comment": "single-product-view",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "single-product-view",
+        "uri": "{link}"
+      }
+    },
+
+    {
+      "comment": "merchant article number",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "mean",
+        "value": "janvander.{request.query.itemId}"
+      }
+    },
+    {
+      "comment": "gtin",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "gtin",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "\"gtin13\": \"(.*?)\""
+        ]
+      }
+    },
+
+    {
+      "comment": "title",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".productTitle" ]
+      }
+    },
+
+    {
+      "comment": "title-image",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title-image",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "replacements": {
+          "height=.*?&": "height=450&",
+          "width=.*?&": "width=450&"
+        },
+        "css-queries": [ "meta[property='og:image']" ]
+      }
+    },
+
+    {
+      "comment": "images-small",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "images-small",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "data-src",
+        "css-queries": [ ".more-pic img" ]
+      }
+    },
+    {
+      "comment": "images-small",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "images-small",
+        "replacements": {
+          "height=.*?&": "height=150&",
+          "width=.*?&": "width=150&"
+        },
+        "sourceContextId": "images-small"
+      }
+    },
+
+    {
+      "comment": "images-big",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "images-big",
+        "replacements": {
+          "height=.*?&": "height=450&",
+          "width=.*?&": "width=450&"
+        },
+        "sourceContextId": "images-small"
+      }
+    },
+
+    {
+      "comment": "description",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "description",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "\"description\": \"(.*?)\""
+        ]
+      }
+    },
+
+    {
+      "comment": "material",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "material",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "Material: (.*?);"
+        ]
+      }
+    },
+
+    {
+      "comment": "seoDescription",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "seoDescription",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "replacements": {
+          "im Online Shop von.*?bestellen": "bei WeWanna shop! finden und im Online Shop von JAN VANDERSTORM bestellen"
+        },
+        "css-queries": [ "meta[name='description']" ]
+      }
+    },
+
+    {
+      "comment": "price-current",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".prices .price" ]
+      }
+    },
+    {
+      "comment": "price-initial",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".pricebox .price-del", ".prices .price" ]
+      }
+    },
+    {
+      "comment": "price-current to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "price-current"
+      }
+    },
+    {
+      "comment": "price-initial to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "price-initial"
+      }
+    },
+    {
+      "comment": "sizes",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "sizes",
+        "sourceContextId": "single-product-view",
+        "separator": "; ",
+        "attibute-id": "data-international-size-eu",
+        "css-queries": [ ".js-international-value" ]
+      }
+    },
+    {
+      "comment": "sizes",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "sizes",
+        "replacements": {
+          "-": "/",
+          "; \\+": ""
+        },
+        "value": "{sizes}"
+      }
+    },
+    {
+      "comment": "colors",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "colors",
+        "sourceContextId": "single-product-view",
+        "separator": ", ",
+        "attribute-id": "title",
+        "css-queries": [ ".siblings .sibling" ]
+      }
+    },
+
+    {
+      "comment": "brand",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "brand",
+        "value": "Jan Vanderstorm"
+      }
+    },
+    {
+      "comment": "teaser texts",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "teaser-texts",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".bullet-points li" ]
+      }
+    },
+
+    {
+      "comment": "number of ratings",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "numberOfRatings",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "\"reviewCount\": \"(.*?)\""
+        ]
+      }
+    },
+    {
+      "comment": "number of ratings",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "numberOfRatings",
+        "defaultValue": 0,
+        "sourceContextId": "numberOfRatings"
+      }
+    },
+
+    {
+      "comment": "rating",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "ratingInPercent",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "\"ratingValue\": \"(.*?)\""
+        ]
+      }
+    },
+    {
+      "comment": "rating",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "ratingInPercent",
+        "defaultValue": 0,
+        "sourceContextId": "ratingInPercent"
+      }
+    },
+    {
+      "comment": "rating",
+      "commandId": "get-rule-of-three-value",
+      "parameters": {
+        "maximumValue": 5,
+        "contextId": "ratingInPercent"
+      }
+    },
+
+    {
+      "comment": "seoKeywords",
+      "commandId": "extract-seo-keywords",
+      "parameters": {
+        "contextId": "seoKeywords",
+        "sourceContextId": ["description", "title"]
+      }
+    },
+
+    {
+      "comment": "store scraped information",
+      "commandId": "store-information",
+      "parameters": {
+        "informationIds": [
+          "colors",
+          "brand",
+          "description",
+          "gtin",
+          "images-big",
+          "images-small",
+          "link",
+          "material",
+          "mean",
+          "numberOfRatings",
+          "price-current",
+          "price-initial",
+          "ratingInPercent",
+          "seoDescription",
+          "seoKeywords",
+          "sizes",
+          "teaser-texts",
+          "title",
+          "title-image"
+        ]
+      }
+    }
+  ]
+}
