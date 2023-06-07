@@ -123,7 +123,8 @@
       "parameters": {
         "contextId": "description",
         "sourceContextId": "single-product-view",
-        "css-queries": [ ".cxm-seo-text-desc p" ]
+        "separator": ". ",
+        "css-queries": [ ".cxm-seo-text-desc p", ".cxm-detail-description div, .cxm-detail-description div p" ]
       }
     },
 
@@ -203,6 +204,15 @@
         "regex": "Seitenzahl:.*\\s.*>(.*?)<"
       }
     },
+    {
+      "comment": "amount of pages",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "amountOfPages",
+        "sourceContextId": "amountOfPages"
+      }
+    },
+
     {
       "comment": "publisher",
       "commandId": "get-value-by-regex",
