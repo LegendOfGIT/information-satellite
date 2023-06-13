@@ -1,0 +1,290 @@
+{
+  "site": "quelle.de",
+
+  "itemId": "{template.site}-{ean}",
+
+  "scraping": [
+    {
+      "comment": "site",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "site",
+        "value": "quelle-de_DE"
+      }
+    },
+    {
+      "comment": "single-product-view",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "single-product-view",
+        "uri": "https://www.{template.site}/p/{request.query.itemId}"
+      }
+    },
+    {
+      "comment": "title",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ "[data-testid='headline__component']" ]
+      }
+    },
+    {
+      "comment": "link",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "link",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "href",
+        "css-queries": [ "link[rel='canonical']" ]
+      }
+    },
+    {
+      "comment": "single-product-view",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "single-product-view",
+        "overwrite": true,
+        "uri": "{link}"
+      }
+    },
+
+    {
+      "comment": "price-current",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".kMikPo span", ".bCaozJ span" ]
+      }
+    },
+    {
+      "comment": "price-initial",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".gkDkCq", ".bCaozJ span" ]
+      }
+    },
+    {
+      "comment": "price-current to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "price-current"
+      }
+    },
+    {
+      "comment": "price-initial to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "price-initial"
+      }
+    },
+
+    {
+      "comment": "color",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "color",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "Farbe<.*?cwljT.*?<div>(.*?)<"
+        ]
+      }
+    },
+    {
+      "comment": "width-in-cm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "width-in-cm",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "Breite<.*?cwljT.*?<div>(.*?) cm<"
+        ]
+      }
+    },
+    {
+      "comment": "width-in-cm to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "width-in-cm",
+        "sourceContextId": "width-in-cm"
+      }
+    },
+    {
+      "comment": "height-in-cm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "height-in-cm",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "Höhe<.*?cwljT.*?<div>(.*?) cm<"
+        ]
+      }
+    },
+    {
+      "comment": "height-in-cm to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "height-in-cm",
+        "sourceContextId": "height-in-cm"
+      }
+    },
+    {
+      "comment": "depth-in-cm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "depth-in-cm",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "Tiefe<.*?cwljT.*?<div>(.*?) cm<"
+        ]
+      }
+    },
+    {
+      "comment": "depth-in-cm to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "depth-in-cm",
+        "sourceContextId": "depth-in-cm"
+      }
+    },
+
+    {
+      "comment": "description",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "description",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "\"description\": \"(.*?)\""
+        ]
+      }
+    },
+
+    {
+      "comment": "material",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "material",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "replacements": {
+          "<\/div><div>": ", ",
+          "<\/div>": ""
+        },
+        "regex": [
+          "Material<.*?cwljT.*?<div>(.*?)<div class"
+        ]
+      }
+    },
+
+    {
+      "comment": "merchant article number",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "mean",
+        "value": "quelle.{request.query.itemId}"
+      }
+    },
+    {
+      "comment": "ean",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "ean",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": "ean\\\\\":\\\\\"(.*?)\\\\\""
+      }
+    },
+
+    {
+      "comment": "images-big",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "images-big",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "src",
+        "css-queries": [ "[data-testid='thumbnail'] img" ]
+      }
+    },
+    {
+      "comment": "images-big",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "images-big",
+        "sourceContextId": "images-big",
+        "replacements": {
+          "\\?.*": ""
+        }
+      }
+    },
+
+    {
+      "comment": "images-small",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "images-small",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "src",
+        "css-queries": [ "[data-testid='thumbnail'] img" ]
+      }
+    },
+
+    {
+      "comment": "title-image",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title-image",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "src",
+        "replacements": {
+          "\\?.*": ""
+        },
+        "css-queries": [ "[data-testid='thumbnail'] img" ]
+      }
+    },
+
+    {
+      "comment": "seoKeywords",
+      "commandId": "extract-seo-keywords",
+      "parameters": {
+        "contextId": "seoKeywords",
+        "sourceContextId": ["description", "title"]
+      }
+    },
+
+    {
+      "comment": "store scraped information",
+      "commandId": "store-information",
+      "parameters": {
+        "informationIds": [
+          "color",
+          "description",
+          "depth-in-cm",
+          "ean",
+          "height-in-cm",
+          "images-big",
+          "images-small",
+          "link",
+          "material",
+          "mean",
+          "price-current",
+          "price-initial",
+          "seoKeywords",
+          "title",
+          "title-image",
+          "width-in-cm"
+        ]
+      }
+    }
+  ]
+}
