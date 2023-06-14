@@ -44,7 +44,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://www.{template.site}/mode/damen/waesche-bademode/bademode/?o=novelty"
+        "uri": "https://www.{template.site}/mode/kinder/waesche-bademode/maedchen/bademode/?o=novelty"
       }
     },
     {
