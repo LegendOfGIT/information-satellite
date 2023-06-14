@@ -90,9 +90,22 @@
       "parameters": {
         "contextId": "color",
         "sourceContextId": "single-product-view",
+        "groupIndex": 2,
+        "regex": [
+          "Farbe<.*?(cwljT|dcRYcK).*?>(.*?)<|Farbe<.*?cwljT.*?<div>(.*?)<",
+          "Farbe<.*?(cwljT).*?<div>(.*?)<"
+        ]
+      }
+    },
+    {
+      "comment": "lock-type",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "lock-type",
+        "sourceContextId": "single-product-view",
         "groupIndex": 1,
         "regex": [
-          "Farbe<.*?cwljT.*?<div>(.*?)<"
+          "Art Verschluss<.*?cwljT.*?<div>(.*?)<"
         ]
       }
     },
@@ -158,6 +171,48 @@
     },
 
     {
+      "comment": "length-in-m",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "length-in-m",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "drvUIR.*?>Länge<.*?cwljT.*?<div>(.*?) m<"
+        ]
+      }
+    },
+    {
+      "comment": "length-in-m to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "length-in-m",
+        "sourceContextId": "length-in-m"
+      }
+    },
+
+    {
+      "comment": "weight-in-kg",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "weightInKG",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "drvUIR.*?>Gewicht<.*?cwljT.*?<div>(.*?) kg<"
+        ]
+      }
+    },
+    {
+      "comment": "weight-in-kg to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "weightInKG",
+        "sourceContextId": "weightInKG"
+      }
+    },
+
+    {
       "comment": "description",
       "commandId": "get-value-by-regex",
       "parameters": {
@@ -182,7 +237,24 @@
           "<\/div>": ""
         },
         "regex": [
-          "Material<.*?cwljT.*?<div>(.*?)<div class"
+          "drvUIR.*?>Material<.*?cwljT.*?<div>(.*?)(<div class|<span)",
+          "drvUIR.*?>Material Gehäuse<.*?cwljT.*?<div>(.*?)(<div class|<span)"
+        ]
+      }
+    },
+    {
+      "comment": "type of grinder",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "grinderType",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "replacements": {
+          "<\/div><div>": ", ",
+          "<\/div>": ""
+        },
+        "regex": [
+          "drvUIR.*?>Art des Mahlwerks<.*?cwljT.*?<div>(.*?)(<div class|<span)"
         ]
       }
     },
@@ -254,6 +326,58 @@
     },
 
     {
+      "comment": "number of ratings",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "numberOfRatings",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "\"reviewCount\": \"(.*?)\""
+        ]
+      }
+    },
+    {
+      "comment": "number of ratings",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "numberOfRatings",
+        "defaultValue": 0,
+        "sourceContextId": "numberOfRatings"
+      }
+    },
+
+    {
+      "comment": "rating",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "ratingInPercent",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "\"ratingValue\": \"(.*?)\""
+        ]
+      }
+    },
+    {
+      "comment": "rating",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "ratingInPercent",
+        "defaultValue": 0,
+        "sourceContextId": "ratingInPercent"
+      }
+    },
+    {
+      "comment": "rating",
+      "commandId": "get-rule-of-three-value",
+      "parameters": {
+        "maximumValue": 5,
+        "contextId": "ratingInPercent"
+      }
+    },
+
+    {
       "comment": "seoKeywords",
       "commandId": "extract-seo-keywords",
       "parameters": {
@@ -271,17 +395,23 @@
           "description",
           "depth-in-cm",
           "ean",
+          "grinderType",
           "height-in-cm",
           "images-big",
           "images-small",
+          "length-in-m",
           "link",
+          "lock-type",
           "material",
           "mean",
+          "numberOfRatings",
           "price-current",
           "price-initial",
+          "ratingInPercent",
           "seoKeywords",
           "title",
           "title-image",
+          "weightInKG",
           "width-in-cm"
         ]
       }
