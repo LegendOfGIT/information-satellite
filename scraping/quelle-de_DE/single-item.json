@@ -213,6 +213,40 @@
     },
 
     {
+      "comment": "minimumAge",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "minimumAge",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "drvUIR.*?>USK-Freigabe<.*?cwljT.*?<div>(.*?)<"
+        ]
+      }
+    },
+    {
+      "comment": "minimumAge",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "minimumAge",
+        "sourceContextId": "minimumAge"
+      }
+    },
+
+    {
+      "comment": "genre",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "genre",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "drvUIR.*?>Spielgenre<.*?cwljT.*?<div>(.*?)<"
+        ]
+      }
+    },
+
+    {
       "comment": "description",
       "commandId": "get-value-by-regex",
       "parameters": {
@@ -407,6 +441,7 @@
           "description",
           "depth-in-cm",
           "ean",
+          "genre",
           "grinderType",
           "height-in-cm",
           "images-big",
@@ -416,6 +451,7 @@
           "lock-type",
           "material",
           "mean",
+          "minimumAge",
           "numberOfRatings",
           "price-current",
           "price-initial",
