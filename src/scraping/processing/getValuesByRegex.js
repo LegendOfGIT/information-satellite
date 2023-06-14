@@ -19,7 +19,7 @@ module.exports = (sourceContext, regex, groupIndex, flags = 'sg') => {
             return v;
         }
 
-        return v.replaceAll('&apos;', '´');
+        return v.replaceAll('&apos;', '´').replaceAll('&quot;', '"');
     })
 
     return values;
