@@ -245,6 +245,64 @@
         ]
       }
     },
+    {
+      "comment": "model",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "model",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "drvUIR.*?>Modellbezeichnung<.*?cwljT.*?<div>(.*?)<"
+        ]
+      }
+    },
+
+    {
+      "comment": "annual consumption in kWh",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "annualConsumptionInKWH",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "drvUIR.*?>Jährlicher Energieverbrauch<.*?cwljT.*?<div>(.*?) kWh<"
+        ]
+      }
+    },
+    {
+      "comment": "annual consumption in kWh",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "annualConsumptionInKWH",
+        "sourceContextId": "annualConsumptionInKWH"
+      }
+    },
+
+    {
+      "comment": "minimum energy efficiency class",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "minimumEnergyEfficiencyClass",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "drvUIR.*?>Skala Energieeffizienzklasse<.*?cwljT.*?<div>(.*?) bis (.*?)<"
+        ]
+      }
+    },
+    {
+      "comment": "maximum energy efficiency class",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "maximumEnergyEfficiencyClass",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 2,
+        "regex": [
+          "drvUIR.*?>Skala Energieeffizienzklasse<.*?cwljT.*?<div>(.*?) bis (.*?)<"
+        ]
+      }
+    },
 
     {
       "comment": "description",
@@ -437,6 +495,7 @@
       "commandId": "store-information",
       "parameters": {
         "informationIds": [
+          "annualConsumptionInKWH",
           "brand",
           "color",
           "description",
@@ -451,8 +510,11 @@
           "link",
           "lock-type",
           "material",
+          "maximumEnergyEfficiencyClass",
           "mean",
+          "model",
           "minimumAge",
+          "minimumEnergyEfficiencyClass",
           "numberOfRatings",
           "price-current",
           "price-initial",
