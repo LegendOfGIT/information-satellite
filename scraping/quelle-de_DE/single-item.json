@@ -378,6 +378,17 @@
     },
 
     {
+      "comment": "brand",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "brand",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": "brand\\\\\":.*?name\\\\\":\\\\\"(.*?)\\\\\""
+      }
+    },
+
+    {
       "comment": "seoKeywords",
       "commandId": "extract-seo-keywords",
       "parameters": {
@@ -391,6 +402,7 @@
       "commandId": "store-information",
       "parameters": {
         "informationIds": [
+          "brand",
           "color",
           "description",
           "depth-in-cm",
