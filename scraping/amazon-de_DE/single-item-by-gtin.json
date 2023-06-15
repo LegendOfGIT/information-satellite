@@ -63,11 +63,16 @@
       "parameters": {
         "contextId": "price-current",
         "sourceContextId": "single-product-view",
+        "replacements": {
+          ".*von": ""
+        },
         "css-queries": [
           "#priceblock_ourprice",
           "#olp-new .a-color-price",
           ".priceToPay .a-offscreen",
-          "#corePrice_desktop .a-price > span"
+          "#corePrice_desktop .a-price > span",
+          "#price",
+          "#style_name_1_price .olpWrapper"
         ]
       }
     },
@@ -77,13 +82,18 @@
       "parameters": {
         "contextId": "price-initial",
         "sourceContextId": "single-product-view",
+        "replacements": {
+          ".*von": ""
+        },
         "css-queries": [
           ".priceBlockStrikePriceString",
           "#priceblock_ourprice",
           "#olp-new .a-color-price",
           ".basisPrice .a-offscreen",
           "#corePrice_desktop .a-price > span",
-          ".priceToPay .a-offscreen"
+          ".priceToPay .a-offscreen",
+          "#price",
+          "#style_name_1_price .olpWrapper"
         ]
       }
     },
