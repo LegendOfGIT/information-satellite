@@ -3,7 +3,7 @@ const getValuesByRegex = require('../processing/getValuesByRegex');
 module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     console.log('executing command "get-values-by-regex"')
 
-    const { contextId, groupIndex, regex, sourceContextId, unique = false } = parameters;
+    const { contextId, groupIndex, regex, replacements = {}, separator = undefined, sourceContextId, unique = false } = parameters;
 
     if (!contextId) {
         console.log('required parameter "contextId" is not given. abort.');
@@ -28,13 +28,19 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
 
     let values = getValuesByRegex(sourceContext, regex, groupIndex);
 
+    values = values.map(value => {
+        for (const [key, replacementValue] of Object.entries(replacements)) {
+            value = value.replace(new RegExp(key,"g"), replacementValue);
+        }
+        return value;
+    })
+
     if (unique) {
         values = values.filter((value, index, array) => array.indexOf(value) === index);
     }
     if (values) {
-        context[contextId] = values;
+        context[contextId] = separator ? values.join(separator) : values;
     }
-
 
     resolve();
 });

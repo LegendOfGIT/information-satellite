@@ -97,6 +97,67 @@
         ]
       }
     },
+
+    {
+      "comment": "sizes",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "sizes",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "displayName\\\\\":\\\\\"Größe\\\\\".*?values.*?\\[(.*?)\\]"
+        ]
+      }
+    },
+    {
+      "comment": "sizes",
+      "commandId": "get-values-by-regex",
+      "parameters": {
+        "contextId": "sizes",
+        "sourceContextId": "sizes",
+        "groupIndex": 1,
+        "replacements": {
+          ".*?\\(": "",
+          "\\)": ""
+        },
+        "separator": "; ",
+        "regex": [
+          "displayText\\\\\":\\\\\"(.*?)\\\\\""
+        ]
+      }
+    },
+
+    {
+      "comment": "colors",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "colors",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "displayName\\\\\":\\\\\"Farbe\\\\\".*?values.*?\\[(.*?)\\]"
+        ]
+      }
+    },
+    {
+      "comment": "colors",
+      "commandId": "get-values-by-regex",
+      "parameters": {
+        "contextId": "colors",
+        "sourceContextId": "colors",
+        "groupIndex": 1,
+        "replacements": {
+          ".*?\\(": "",
+          "\\)": ""
+        },
+        "separator": ", ",
+        "regex": [
+          "displayText\\\\\":\\\\\"(.*?)\\\\\""
+        ]
+      }
+    },
+
     {
       "comment": "lock-type",
       "commandId": "get-value-by-regex",
@@ -498,6 +559,7 @@
           "annualConsumptionInKWH",
           "brand",
           "color",
+          "colors",
           "description",
           "depth-in-cm",
           "ean",
@@ -520,6 +582,7 @@
           "price-initial",
           "ratingInPercent",
           "seoKeywords",
+          "sizes",
           "title",
           "title-image",
           "weightInKG",
