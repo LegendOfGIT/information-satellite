@@ -277,7 +277,8 @@
         "replacements": {
           "Amazon\\.de.*? - ": "",
           " - Kostenloser Versand.*": "",
-          "bei Amazon.*": "bei WeWanna shop!"
+          "bei Amazon.*": "bei WeWanna shop!",
+          ": Amazon.*": ""
         },
         "css-queries": [ "meta[name=description]" ]
       }
