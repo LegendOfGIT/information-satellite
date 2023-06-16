@@ -432,6 +432,7 @@
       "comment": "store scraped information",
       "commandId": "store-information",
       "parameters": {
+        "requiredProperties": [ "sku" ],
         "informationIds": [
           "colors",
           "description",
@@ -451,6 +452,7 @@
           "seoDescription",
           "seoKeywords",
           "shape",
+          "sku",
           "sizes",
           "title",
           "title-image",
