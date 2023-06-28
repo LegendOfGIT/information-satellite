@@ -33,8 +33,8 @@
         "contextId": "navigation-path",
         "value": [
           "GROCERIES",
-          "GROCERIES_DRINKS",
-          "GROCERIES_DRINKS_TEA"
+          "GROCERIES_FOOD",
+          "GROCERIES_FOOD_SPICES"
         ]
       }
     },
@@ -44,7 +44,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://www.{template.site}/feinkost-kaffee-tee/?p=1&o=2&n=48&f=12861"
+        "uri": "https://www.{template.site}/feinkost-gewuerze/?p=1&o=2&n=48"
       }
     },
     {

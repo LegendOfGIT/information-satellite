@@ -34,7 +34,7 @@
         "value": [
           "GROCERIES",
           "GROCERIES_DRINKS",
-          "GROCERIES_DRINKS_CHAMPAIGN"
+          "GROCERIES_DRINKS_COFFEE"
         ]
       }
     },
@@ -44,7 +44,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://www.{template.site}/sekt-und-champagner-champagner/?p=1&o=2&n=48"
+        "uri": "https://www.{template.site}/feinkost-kaffee-tee/?p=1&o=2&n=48&f=12853"
       }
     },
     {

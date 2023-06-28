@@ -163,8 +163,8 @@
       "parameters": {
         "contextId": "color",
         "sourceContextId": "single-product-view",
-        "groupIndex": 1,
-        "regex": "Weinfarbe<.*?<td.*?>(.*?)<\\/td"
+        "groupIndex": 2,
+        "regex": "product--properties-label.*?Weinfarbe(.*?)<.*?<td.*?>(.*?)<\\/td"
       }
     },
 
@@ -174,8 +174,8 @@
       "parameters": {
         "contextId": "countryOfOrigin",
         "sourceContextId": "single-product-view",
-        "groupIndex": 1,
-        "regex": "Herkunftsland<.*?<td.*?>(.*?)<\\/td"
+        "groupIndex": 2,
+        "regex": "product--properties-label.*?Herkunftsland(.*?)<.*?<td.*?>(.*?)<\\/td"
       }
     },
     {
@@ -184,8 +184,8 @@
       "parameters": {
         "contextId": "regionOfOrigin",
         "sourceContextId": "single-product-view",
-        "groupIndex": 1,
-        "regex": "Region<.*?<td.*?>(.*?)<\\/td"
+        "groupIndex": 2,
+        "regex": "product--properties-label.*?Region(.*?)<.*?<td.*?>(.*?)<\\/td"
       }
     },
     {
@@ -194,8 +194,8 @@
       "parameters": {
         "contextId": "tasteType",
         "sourceContextId": "single-product-view",
-        "groupIndex": 1,
-        "regex": "Geschmack<.*?<td.*?>(.*?)<\\/td"
+        "groupIndex": 2,
+        "regex": "product--properties-label.*?Geschmack(.*?)<.*?<td.*?>(.*?)<\\/td"
       }
     },
     {
@@ -204,8 +204,8 @@
       "parameters": {
         "contextId": "grapeVariety",
         "sourceContextId": "single-product-view",
-        "groupIndex": 1,
-        "regex": "Rebsorten<.*?<td.*?>(.*?)<\\/td"
+        "groupIndex": 2,
+        "regex": "product--properties-label.*?Rebsorten(.*?)<.*?<td.*?>(.*?)<\\/td"
       }
     },
     {
@@ -214,8 +214,8 @@
       "parameters": {
         "contextId": "finishTaste",
         "sourceContextId": "single-product-view",
-        "groupIndex": 1,
-        "regex": "Abgang<.*?<td.*?>(.*?)<\\/td"
+        "groupIndex": 2,
+        "regex": "product--properties-label.*?Abgang(.*?)<.*?<td.*?>(.*?)<\\/td"
       }
     },
     {
@@ -224,8 +224,8 @@
       "parameters": {
         "contextId": "flavours",
         "sourceContextId": "single-product-view",
-        "groupIndex": 1,
-        "regex": "Aromen am Gaumen<.*?<td.*?>(.*?)<\\/td"
+        "groupIndex": 2,
+        "regex": "product--properties-label.*?Aromen am Gaumen(.*?)<.*?<td.*?>(.*?)<\\/td"
       }
     },
     {
@@ -234,8 +234,8 @@
       "parameters": {
         "contextId": "fragrances",
         "sourceContextId": "single-product-view",
-        "groupIndex": 1,
-        "regex": "Aromen in der Nase<.*?<td.*?>(.*?)<\\/td"
+        "groupIndex": 2,
+        "regex": "product--properties-label.*?Aromen in der Nase(.*?)<.*?<td.*?>(.*?)<\\/td"
       }
     },
     {
@@ -244,8 +244,11 @@
       "parameters": {
         "contextId": "alcoholContentInPpt",
         "sourceContextId": "single-product-view",
-        "groupIndex": 1,
-        "regex": "Alkoholgehalt.*?<.*?<td.*?>(.*?)<\/td"
+        "groupIndex": 2,
+        "replacements": {
+          "vol.*": ""
+        },
+        "regex": "product--properties-label.*?Alkoholgehalt(.*?)<.*?<td.*?>(.*?)<\/td"
       }
     },
     {
@@ -262,8 +265,8 @@
       "parameters": {
         "contextId": "manufacturer",
         "sourceContextId": "single-product-view",
-        "groupIndex": 1,
-        "regex": "Hersteller.*?<.*?<td.*?>(.*?)<\\/td"
+        "groupIndex": 2,
+        "regex": "product--properties-label.*?Hersteller(.*?)<.*?<td.*?>(.*?)<\\/td"
       }
     },
     {
@@ -272,8 +275,8 @@
       "parameters": {
         "contextId": "allergenic",
         "sourceContextId": "single-product-view",
-        "groupIndex": 1,
-        "regex": "Allergene.*?<.*?<td.*?>(.*?)<\\/td"
+        "groupIndex": 2,
+        "regex": "product--properties-label.*?Allergene(.*?)<.*?<td.*?>(.*?)<\\/td"
       }
     },
 

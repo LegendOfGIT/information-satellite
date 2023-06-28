@@ -34,7 +34,7 @@
         "value": [
           "GROCERIES",
           "GROCERIES_DRINKS",
-          "GROCERIES_DRINKS_COFFEE"
+          "GROCERIES_DRINKS_TEA"
         ]
       }
     },
@@ -44,7 +44,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://www.{template.site}/feinkost-kaffee-tee/?p=1&o=2&n=48&f=12853"
+        "uri": "https://www.{template.site}/feinkost-kaffee-tee/?p=1&o=2&n=48&f=12861"
       }
     },
     {
