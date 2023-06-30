@@ -263,6 +263,21 @@
       }
     },
     {
+      "comment": "color",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "color",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "replacements": {
+          "\"": " "
+        },
+        "regex": [
+          "selected_variations.*?color_name\":\"(.*?)\""
+        ]
+      }
+    },
+    {
       "comment": "colors",
       "commandId": "get-value-by-regex",
       "parameters": {
@@ -444,6 +459,7 @@
           "asin",
           "author",
           "brand",
+          "color",
           "colors",
           "description",
           "images-big",
