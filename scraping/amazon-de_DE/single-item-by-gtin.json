@@ -429,6 +429,7 @@
         "informationIds": [
           "asin",
           "brand",
+          "color",
           "colors",
           "description",
           "gtin",
