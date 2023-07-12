@@ -297,6 +297,17 @@
       }
     },
     {
+      "comment": "color",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "color",
+        "sourceContextId": "single-product-view",
+        "separator": ", ",
+        "attribute-id": "data-attr-id",
+        "css-queries": [ ".product-detail__attribute-variations[data-attr='color'] button.selected" ]
+      }
+    },
+    {
       "comment": "colors",
       "commandId": "get-value-by-css-queries",
       "parameters": {
@@ -332,6 +343,7 @@
       "commandId": "store-information",
       "parameters": {
         "informationIds": [
+          "color",
           "colors",
           "brand",
           "description",
