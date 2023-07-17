@@ -187,6 +187,7 @@
       "parameters": {
         "contextId": "multiplayer",
         "sourceContextId": "single-product-view",
+        "defaultValue": false,
         "setValueOnMatch": true,
         "regex": [
           "Anzahl Spieler \\(offline\\).*?bis zu(.*?)<\\/td>"

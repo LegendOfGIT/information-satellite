@@ -1,0 +1,368 @@
+{
+  "site": "messmer.de",
+
+  "itemId": "{template.site}-{sku}",
+
+  "scraping": [
+    {
+      "comment": "product-search",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-search",
+        "uri": "https://www.{template.site}/search?search=\"{request.query.itemId}\""
+      }
+    },
+
+    {
+      "comment": "link",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "link",
+        "sourceContextId": "product-search",
+        "attribute-id": "href",
+        "css-queries": [ ".product-image-link" ]
+      }
+    },
+
+    {
+      "comment": "single-product-view",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "single-product-view",
+        "uri": "{link}"
+      }
+    },
+
+    {
+      "comment": "link",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "link",
+        "value": "{current-uri}"
+      }
+    },
+
+    {
+      "comment": "merchant article number",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "mean",
+        "value": "mess.{request.query.itemId}"
+      }
+    },
+    {
+      "comment": "sku",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "sku",
+        "value": "{request.query.itemId}"
+      }
+    },
+
+    {
+      "comment": "title",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ "head > title" ]
+      }
+    },
+    {
+      "comment": "title",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "title",
+        "replacements": {
+          "[ ]+":  " ",
+          "\\|.*": ""
+        },
+        "value": "{title}"
+      }
+    },
+
+    {
+      "comment": "title-image",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title-image",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ "meta[property='og:image']" ]
+      }
+    },
+
+    {
+      "comment": "images-big",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "images-big",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "src",
+        "css-queries": [ ".gallery-slider-item img", ".gallery-slider-single-image img" ]
+      }
+    },
+
+    {
+      "comment": "description",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "description",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ "div[itemprop='description']" ]
+      }
+    },
+
+    {
+      "comment": "SEO description",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "seoDescription",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ "meta[name='description']" ]
+      }
+    },
+    {
+      "comment": "SEO description",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "seoDescription",
+        "replacements": {
+          "[ ]+": " ",
+          "Jetzt bei.*": ""
+        },
+        "value": "{seoDescription}"
+      }
+    },
+
+    {
+      "comment": "price-current",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [
+          ".product-detail-main .with-list-price",
+          ".product-detail-main .list-price-price",
+          ".product-detail-main .product-detail-price"
+        ]
+      }
+    },
+    {
+      "comment": "price-initial",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [
+          ".product-detail-main .list-price-price",
+          ".product-detail-main .product-detail-price"
+        ]
+      }
+    },
+    {
+      "comment": "price-current to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "price-current"
+      }
+    },
+    {
+      "comment": "price-initial to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "price-initial"
+      }
+    },
+
+    {
+      "comment": "seoKeywords",
+      "commandId": "extract-seo-keywords",
+      "parameters": {
+        "contextId": "seoKeywords",
+        "sourceContextId": ["description", "title"]
+      }
+    },
+
+    {
+      "comment": "brand",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "brand",
+        "value": "Meßmer"
+      }
+    },
+    {
+      "comment": "manufacturer",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "manufacturer",
+        "value": "Meßmer"
+      }
+    },
+
+    {
+      "comment": "price per unit",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "pricePerUnit",
+        "sourceContextId": "single-product-view",
+        "replacements": {
+          "\/.*": ""
+        },
+        "css-queries": [ ".product-detail-main .price-unit-reference-content" ]
+      }
+    },
+    {
+      "comment": "price per unit",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "pricePerUnit",
+        "sourceContextId": "pricePerUnit"
+      }
+    },
+
+    {
+      "comment": "weight in kg",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "weightInKG",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".product-detail-main .price-unit-content" ]
+      }
+    },
+    {
+      "comment": "weight in kg",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "weightInKG",
+        "sourceContextId": "weightInKG"
+      }
+    },
+
+    {
+      "comment": "ingredients",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "ingredients",
+        "sourceContextId": "single-product-view",
+        "separator": " ",
+        "css-queries": [ ".product-detail-ingredients-text, .product-detail-ingredients-text div" ]
+      }
+    },
+
+    {
+      "comment": "seasons",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "seasons",
+        "sourceContextId": "single-product-view",
+        "setValueOnMatch": "Winter",
+        "css-queries": [ ".product-detail-content .is-winter_tea" ]
+      }
+    },
+    {
+      "comment": "seasons",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "seasons",
+        "sourceContextId": "single-product-view",
+        "setValueOnMatch": "Frühling, Sommer",
+        "css-queries": [ ".product-detail-content .is-cold_tea" ]
+      }
+    },
+
+    {
+      "comment": "seasons",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "isBio",
+        "sourceContextId": "single-product-view",
+        "setValueOnMatch": true,
+        "css-queries": [ ".product-detail-content .is-bio_tea" ]
+      }
+    },
+
+    {
+      "comment": "number of ratings",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "numberOfRatings",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ "meta[itemprop='ratingCount']" ]
+      }
+    },
+    {
+      "comment": "number of ratings",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "numberOfRatings",
+        "defaultValue": 0,
+        "sourceContextId": "numberOfRatings"
+      }
+    },
+
+    {
+      "comment": "rating",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "ratingInPercent",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ "meta[itemprop='ratingValue']" ]
+      }
+    },
+    {
+      "comment": "rating",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "ratingInPercent",
+        "defaultValue": 0,
+        "sourceContextId": "ratingInPercent"
+      }
+    },
+    {
+      "comment": "rating",
+      "commandId": "get-rule-of-three-value",
+      "parameters": {
+        "maximumValue": 5,
+        "contextId": "ratingInPercent"
+      }
+    },
+
+    {
+      "comment": "store scraped information",
+      "commandId": "store-information",
+      "parameters": {
+        "informationIds": [
+          "brand",
+          "description",
+          "images-big",
+          "ingredients",
+          "isBio",
+          "link",
+          "manufacturer",
+          "mean",
+          "numberOfRatings",
+          "price-current",
+          "price-initial",
+          "pricePerUnit",
+          "ratingInPercent",
+          "seasons",
+          "seoDescription",
+          "seoKeywords",
+          "sku",
+          "title",
+          "title-image",
+          "weightInKG"
+        ]
+      }
+    }
+  ]
+}

@@ -18,10 +18,9 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         sourceContextId,
         replacements = {},
         separator = undefined,
+        setValueOnMatch = undefined,
         unique = false
     } = commandParameters;
-
-    const cssQueries = commandParameters['css-queries'];
 
     if (!contextId) {
         console.log('required parameter "contextId" is not given. abort.');
@@ -29,7 +28,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         return;
     }
 
-    if (Object.prototype.hasOwnProperty.call(context, contextId) && context[contextId] !== `{${contextId}}`) {
+    if (Object.prototype.hasOwnProperty.call(context, contextId) && context[contextId].length > 0  && context[contextId] !== `{${contextId}}`) {
         resolve();
         return;
     }
@@ -40,6 +39,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         return;
     }
 
+    const cssQueries = commandParameters['css-queries'];
     if (!cssQueries) {
         console.log('required parameter "css-queries" is not given. abort.');
         resolve();
@@ -57,7 +57,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
 
     const cssSelector = cheerio.load(sourceContext);
     cssQueries.forEach(cssQuery => {
-        if(context[contextId] && context[contextId] !== `{${contextId}}`) {
+        if (context[contextId] && context[contextId].length > 0 && context[contextId] !== `{${contextId}}`) {
             return;
         }
 
@@ -82,6 +82,10 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     });
 
     context[contextId] = context[contextId] || '';
+    if (context[contextId].length > 0 && setValueOnMatch) {
+        context[contextId] = setValueOnMatch;
+    }
+
     if (decodeUri) {
         context[contextId] = decodeURIComponent(context[contextId]);
     }
