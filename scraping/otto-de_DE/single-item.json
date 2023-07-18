@@ -272,6 +272,176 @@
         ]
       }
     },
+    {
+      "comment": "Annual consumption",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "annualConsumptionInKWH",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          ">Jährlicher Energieverbrauch.*?<td>(.*?)<"
+        ]
+      }
+    },
+    {
+      "comment": "Annual consumption",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "annualConsumptionInKWH",
+        "sourceContextId": "annualConsumptionInKWH"
+      }
+    },
+    {
+      "comment": "color",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "color",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          ">Farbe Front.*?<td>(.*?)<"
+        ]
+      }
+    },
+    {
+      "comment": "model",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "model",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          ">Modellbezeichnung.*?<td>(.*?)<"
+        ]
+      }
+    },
+    {
+      "comment": "minimum energy efficiency class",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "minimumEnergyEfficiencyClass",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          ">Energieeffizienzklasse.*?<td>.*?\\((.*?) bis (.*?)\\)<"
+        ]
+      }
+    },
+    {
+      "comment": "maximum energy efficiency class",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "maximumEnergyEfficiencyClass",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 2,
+        "regex": [
+          ">Energieeffizienzklasse.*?<td>.*?\\((.*?) bis (.*?)\\)<"
+        ]
+      }
+    },
+    {
+      "comment": "drawer amount",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "drawerAmount",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          ">Anzahl .*?chubladen.*?<td>(.*?)<"
+        ]
+      }
+    },
+    {
+      "comment": "drawer amount",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "drawerAmount",
+        "sourceContextId": "drawerAmount"
+      }
+    },
+    {
+      "comment": "height in cm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "height-in-cm",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          ">Höhe.*?<td>(.*?) cm<"
+        ]
+      }
+    },
+    {
+      "comment": "height in cm",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "height-in-cm",
+        "sourceContextId": "height-in-cm"
+      }
+    },
+    {
+      "comment": "width in cm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "width-in-cm",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          ">Breite.*?<td>(.*?) cm<"
+        ]
+      }
+    },
+    {
+      "comment": "width in cm",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "width-in-cm",
+        "sourceContextId": "width-in-cm"
+      }
+    },
+
+    {
+      "comment": "length in cm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "length-in-cm",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 2,
+        "regex": [
+          ">(Länge|Tiefe).*?<td>(.*?) cm<"
+        ]
+      }
+    },
+    {
+      "comment": "length in cm",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "length-in-cm",
+        "sourceContextId": "length-in-cm"
+      }
+    },
+
+    {
+      "comment": "weight in KG",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "weightInKG",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          ">Gewicht.*?<td>(.*?) kg<"
+        ]
+      }
+    },
+    {
+      "comment": "weight in KG",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "weightInKG",
+        "sourceContextId": "weightInKG"
+      }
+    },
 
     {
       "comment": "merchant article number",
@@ -306,6 +476,10 @@
         "contextId": "images-big",
         "sourceContextId": "single-product-view",
         "groupIndex": 1,
+        "replacements": {
+          "$": "?",
+          "\\?.*": "?h=450&w=450&sm=clamp&upscale=true&fmt=auto"
+        },
         "regex": [ "data-image-src=\"(https.*?)\"" ]
       }
     },
@@ -316,7 +490,8 @@
         "contextId": "images-small",
         "sourceContextId": "images-big",
         "replacements": {
-          "\\?.*": "?$001PICT36$"
+          "$": "?",
+          "\\?.*": "?h=150&w=150&sm=clamp&upscale=true&fmt=auto"
         }
       }
     },
@@ -355,16 +530,24 @@
       "commandId": "store-information",
       "parameters": {
         "informationIds": [
+          "annualConsumptionInKWH",
+          "color",
           "description",
           "diameter-in-cm",
+          "drawerAmount",
           "gtin",
+          "height-in-cm",
           "images-big",
           "images-small",
           "genre",
+          "length-in-cm",
           "link",
           "material",
+          "maximumEnergyEfficiencyClass",
           "mean",
           "minimumAge",
+          "minimumEnergyEfficiencyClass",
+          "model",
           "multiplayer",
           "price-current",
           "price-initial",
@@ -373,7 +556,9 @@
           "subgenre",
           "title",
           "title-image",
+          "weightInKG",
           "weightInG",
+          "width-in-cm",
           "width-in-mm"
         ]
       }
