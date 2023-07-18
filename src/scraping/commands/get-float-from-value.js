@@ -1,7 +1,7 @@
 module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     console.log('executing command "get-float-from-value"')
 
-    const { contextId, defaultValue, sourceContextId } = parameters;
+    const { contextId, defaultValue, sourceContextId, multiplyBy = undefined } = parameters;
 
     if (!contextId) {
         console.log('required parameter "contextId" is not given. abort.');
@@ -44,6 +44,10 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
 
     const newValue = parseFloat(americanFormattedValue);
     context[contextId] = isNaN(newValue) ? defaultValue : parseFloat(americanFormattedValue);
+
+    if (context[contextId] && multiplyBy) {
+        context[contextId] = Number.parseFloat((context[contextId] * multiplyBy).toFixed(2));
+    }
 
     resolve();
 });

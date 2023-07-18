@@ -40,7 +40,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         if (value) {
             return value;
         }
-    }).filter(v => v);
+    }).filter(v => v && v !== 'null');
 
     if (values.length) {
         context[contextId] = setValueOnMatch || values[0];
