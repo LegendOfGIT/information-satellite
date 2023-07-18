@@ -76,7 +76,7 @@
       "commandId": "generate-random-number",
       "parameters": {
         "contextId": "random-item-number",
-        "maximum": 100
+        "maximum": 150
       }
     },
     {
@@ -85,7 +85,7 @@
       "parameters": {
         "contextId": "product-overview",
         "overwrite": true,
-        "uri": "https://{template.site}/haushalt/gefrierschraenke/?l=l&o={random-item-number}"
+        "uri": "https://{template.site}/haushalt/gefrierschraenke/?l=gq&o={random-item-number}"
       }
     },
     {

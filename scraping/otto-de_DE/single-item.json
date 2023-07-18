@@ -80,7 +80,7 @@
         "sourceContextId": "single-product-view",
         "groupIndex": 1,
         "regex": [
-          "Gewicht:(.*)g<\\/li>"
+          "Gewicht:(.*)g<"
         ]
       }
     },
@@ -146,6 +146,7 @@
         "css-queries": [
           ".js_prd_moreBox__content",
           ".pdp_description__text-expander",
+          ".pdp_description__text-expander p",
           ".pdp_selling-points ul li"
         ]
       }
@@ -268,7 +269,8 @@
         "sourceContextId": "single-product-view",
         "groupIndex": 1,
         "regex": [
-          "Material:(.*?)<\/li>"
+          "Material:(.*?)<\/li>",
+          ">Material.*?<td>(.*?)<"
         ]
       }
     },
@@ -300,7 +302,20 @@
         "sourceContextId": "single-product-view",
         "groupIndex": 1,
         "regex": [
-          ">Farbe Front.*?<td>(.*?)<"
+          ">Farbe Front.*?<td>(.*?)<",
+          ">Farbe.*?<td>(.*?)<"
+        ]
+      }
+    },
+    {
+      "comment": "lock type",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "lock-type",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          ">Verschlussart.*?<td>(.*?)<"
         ]
       }
     },
@@ -444,6 +459,27 @@
     },
 
     {
+      "comment": "pump pressure in bar",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "pumpPressureInBar",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          ">Pumpendruck.*?<td>(.*?) bar<"
+        ]
+      }
+    },
+    {
+      "comment": "pump pressure in bar",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "pumpPressureInBar",
+        "sourceContextId": "pumpPressureInBar"
+      }
+    },
+
+    {
       "comment": "merchant article number",
       "commandId": "set-context-value",
       "parameters": {
@@ -505,6 +541,62 @@
     },
 
     {
+      "comment": "number of ratings",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "numberOfRatings",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ "span[data-target='allreviewscount']" ]
+      }
+    },
+    {
+      "comment": "number of ratings",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "numberOfRatings",
+        "defaultValue": 0,
+        "sourceContextId": "numberOfRatings"
+      }
+    },
+
+    {
+      "comment": "rating",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "ratingInPercent",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".cr_ratingContainer h1" ]
+      }
+    },
+    {
+      "comment": "rating",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "ratingInPercent",
+        "defaultValue": 0,
+        "sourceContextId": "ratingInPercent"
+      }
+    },
+    {
+      "comment": "rating",
+      "commandId": "get-rule-of-three-value",
+      "parameters": {
+        "maximumValue": 5,
+        "contextId": "ratingInPercent"
+      }
+    },
+
+    {
+      "comment": "teaser texts",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "teaser-texts",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".pdp_selling-points ul li" ]
+      }
+    },
+
+    {
       "comment": "observe scraped information",
       "commandId": "observe-information",
       "parameters": {
@@ -541,6 +633,7 @@
           "images-small",
           "genre",
           "length-in-cm",
+          "lock-type",
           "link",
           "material",
           "maximumEnergyEfficiencyClass",
@@ -549,11 +642,15 @@
           "minimumEnergyEfficiencyClass",
           "model",
           "multiplayer",
+          "numberOfRatings",
           "price-current",
           "price-initial",
           "publisher",
+          "pumpPressureInBar",
+          "ratingInPercent",
           "seoKeywords",
           "subgenre",
+          "teaser-texts",
           "title",
           "title-image",
           "weightInKG",

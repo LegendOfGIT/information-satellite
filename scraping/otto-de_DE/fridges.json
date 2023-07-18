@@ -3,32 +3,6 @@
 
   "scraping": [
     {
-      "comment": "random-item-number",
-      "commandId": "generate-random-number",
-      "parameters": {
-        "contextId": "random-item-number",
-        "maximum": "100"
-      }
-    },
-    {
-      "comment": "product-overview",
-      "commandId": "visit-uri",
-      "parameters": {
-        "contextId": "product-overview",
-        "uri": "https://{template.site}/haushalt/kuehlschraenke/?l=l&o={random-item-number}"
-      }
-    },
-    {
-      "comment": "product-ids",
-      "commandId": "get-values-by-css-queries",
-      "parameters": {
-        "contextId": "product-ids",
-        "css-queries": [ "#san_searchResult article"],
-        "attribute-id": "data-product-id",
-        "sourceContextId": "product-overview"
-      }
-    },
-    {
       "comment": "site",
       "commandId": "set-context-value",
       "parameters": {
@@ -65,6 +39,66 @@
       }
     },
 
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "uri": "https://{template.site}/haushalt/kuehlschraenke/?sortiertnach=neuheiten"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "product-ids",
+        "css-queries": [ ".san_searchResult article"],
+        "attribute-id": "data-product-id",
+        "sourceContextId": "product-overview"
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    },
+
+    {
+      "comment": "random-item-number",
+      "commandId": "generate-random-number",
+      "parameters": {
+        "contextId": "random-item-number",
+        "maximum": 1200
+      }
+    },
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "overwrite": true,
+        "uri": "https://{template.site}/haushalt/kuehlschraenke/?l=gq&o={random-item-number}"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "product-ids",
+        "css-queries": [ ".san_searchResult article"],
+        "attribute-id": "data-product-id",
+        "overwriteValues": true,
+        "sourceContextId": "product-overview"
+      }
+    },
     {
       "comment": "observe scraped information",
       "commandId": "observe-information",

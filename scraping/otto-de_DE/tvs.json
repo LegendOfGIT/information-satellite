@@ -32,9 +32,9 @@
       "parameters": {
         "contextId": "navigation-path",
         "value": [
-          "FASHION",
-          "FASHION_WOMEN",
-          "FASHION_WOMEN_JEWELRY"
+          "ELECTRONICS_AND_COMPUTERS",
+          "ELECTRONICS_AND_COMPUTERS_HOME",
+          "ELECTRONICS_AND_COMPUTERS_HOME_TVS"
         ]
       }
     },
@@ -44,7 +44,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://{template.site}/damen/accessoires/schmuck/?sortiertnach=neuheiten"
+        "uri": "https://{template.site}/technik/fernseher/?sortiertnach=neuheiten"
       }
     },
     {
@@ -76,7 +76,7 @@
       "commandId": "generate-random-number",
       "parameters": {
         "contextId": "random-item-number",
-        "maximum": 90000
+        "maximum": 600
       }
     },
     {
@@ -85,7 +85,7 @@
       "parameters": {
         "contextId": "product-overview",
         "overwrite": true,
-        "uri": "https://{template.site}/damen/accessoires/schmuck/?l=gq&o={random-item-number}"
+        "uri": "https://{template.site}/technik/fernseher/?l=gq&o={random-item-number}"
       }
     },
     {
