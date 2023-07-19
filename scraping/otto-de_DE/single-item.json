@@ -80,7 +80,8 @@
         "sourceContextId": "single-product-view",
         "groupIndex": 1,
         "regex": [
-          "Gewicht:(.*)g<"
+          "Gewicht:(.*)g<",
+          ">Gewicht.*?<td>(.*?)<"
         ]
       }
     },
@@ -459,6 +460,53 @@
     },
 
     {
+      "comment": "screensize in inch",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "screensizeInInch",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          ">Bildschirmdiagonale in Zoll.*?<td>(.*?) &#34;<"
+        ]
+      }
+    },
+    {
+      "comment": "screensize in inch",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "screensizeInInch",
+        "sourceContextId": "screensizeInInch"
+      }
+    },
+
+    {
+      "comment": "resolution",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "resolution",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          ">Bildschirmauflösung.*?<td>(.*?)<"
+        ]
+      }
+    },
+
+    {
+      "comment": "storage size",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "storageSize",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          ">Speichergröße.*?<td>(.*?)<"
+        ]
+      }
+    },
+
+    {
       "comment": "pump pressure in bar",
       "commandId": "get-value-by-regex",
       "parameters": {
@@ -476,6 +524,27 @@
       "parameters": {
         "contextId": "pumpPressureInBar",
         "sourceContextId": "pumpPressureInBar"
+      }
+    },
+
+    {
+      "comment": "battery life in hours",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "batteryLifeInHours",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          ">Akkulaufzeit.*?<td>(.*?) Std.<"
+        ]
+      }
+    },
+    {
+      "comment": "battery life in hours",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "batteryLifeInHours",
+        "sourceContextId": "batteryLifeInHours"
       }
     },
 
@@ -623,6 +692,7 @@
       "parameters": {
         "informationIds": [
           "annualConsumptionInKWH",
+          "batteryLifeInHours",
           "color",
           "description",
           "diameter-in-cm",
@@ -648,7 +718,10 @@
           "publisher",
           "pumpPressureInBar",
           "ratingInPercent",
+          "resolution",
+          "screensizeInInch",
           "seoKeywords",
+          "storageSize",
           "subgenre",
           "teaser-texts",
           "title",
