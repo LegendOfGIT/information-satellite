@@ -507,6 +507,19 @@
     },
 
     {
+      "comment": "speed key",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "speedKey",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          ">Geschwindigkeitsindex.*?<td>(.*?)<"
+        ]
+      }
+    },
+
+    {
       "comment": "pump pressure in bar",
       "commandId": "get-value-by-regex",
       "parameters": {
@@ -656,6 +669,17 @@
     },
 
     {
+      "comment": "brand",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "brand",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": "Brand\", \"name\": \"(.*?)\""
+      }
+    },
+
+    {
       "comment": "teaser texts",
       "commandId": "get-values-by-css-queries",
       "parameters": {
@@ -693,6 +717,7 @@
         "informationIds": [
           "annualConsumptionInKWH",
           "batteryLifeInHours",
+          "brand",
           "color",
           "description",
           "diameter-in-cm",
@@ -721,6 +746,7 @@
           "resolution",
           "screensizeInInch",
           "seoKeywords",
+          "speedKey",
           "storageSize",
           "subgenre",
           "teaser-texts",
