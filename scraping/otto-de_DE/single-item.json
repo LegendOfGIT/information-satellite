@@ -80,8 +80,9 @@
         "sourceContextId": "single-product-view",
         "groupIndex": 1,
         "regex": [
-          "Gewicht:(.*)g<",
-          ">Gewicht.*?<td>(.*?)<"
+          "Gewicht:.*?ca.(.*?)g<",
+          "Gewicht:(.*?)g<",
+          ">Gewicht.*?<td>(.*?) g<"
         ]
       }
     },
@@ -329,6 +330,18 @@
         "groupIndex": 1,
         "regex": [
           ">Modellbezeichnung.*?<td>(.*?)<"
+        ]
+      }
+    },
+    {
+      "comment": "size",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "size",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          ">Größe.*?<td>(.*?)<"
         ]
       }
     },
@@ -746,6 +759,7 @@
           "resolution",
           "screensizeInInch",
           "seoKeywords",
+          "size",
           "speedKey",
           "storageSize",
           "subgenre",

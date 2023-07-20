@@ -20,6 +20,7 @@ module.exports = (sourceContext, regex, groupIndex, flags = 'sg') => {
         }
 
         return v.replaceAll('\\u0026', '&').replaceAll('\\u003C', '<').replaceAll('\\u003E', '>').replaceAll('&apos;', '´')
+            .replaceAll('&#43;', '+')
             .replaceAll('&nbsp;', ' ').replaceAll('&ndash;', '-')
             .replaceAll('&quot;', '"').replaceAll('&amp;', '&')
             .replaceAll('&auml;', 'ä').replaceAll('&Auml;', 'Ä')
