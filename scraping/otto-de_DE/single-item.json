@@ -473,6 +473,69 @@
     },
 
     {
+      "comment": "Maximum velocity in Kmh",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "maximumVelocityInKmh",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          ">Höchstgeschwindigkeit.*?<td>(.*?)<"
+        ]
+      }
+    },
+    {
+      "comment": "Maximum velocity in Kmh",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "maximumVelocityInKmh",
+        "sourceContextId": "maximumVelocityInKmh"
+      }
+    },
+
+    {
+      "comment": "Battery range in Km",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "batteryRangeInKm",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          ">Reichweite Akku.*?<td>(.*?)<"
+        ]
+      }
+    },
+    {
+      "comment": "Battery range in Km",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "batteryRangeInKm",
+        "sourceContextId": "batteryRangeInKm"
+      }
+    },
+
+    {
+      "comment": "Battery charging time in hours",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "batteryChargingTimeInHours",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          ">Ladezeit Akku.*?<td>(.*?)<"
+        ]
+      }
+    },
+    {
+      "comment": "Battery charging time in hours",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "batteryChargingTimeInHours",
+        "sourceContextId": "batteryChargingTimeInHours"
+      }
+    },
+
+    {
       "comment": "screensize in inch",
       "commandId": "get-value-by-regex",
       "parameters": {
@@ -729,7 +792,9 @@
       "parameters": {
         "informationIds": [
           "annualConsumptionInKWH",
+          "batteryChargingTimeInHours",
           "batteryLifeInHours",
+          "batteryRangeInKm",
           "brand",
           "color",
           "description",
@@ -746,6 +811,7 @@
           "material",
           "maximumEnergyEfficiencyClass",
           "mean",
+          "maximumVelocityInKmh",
           "minimumAge",
           "minimumEnergyEfficiencyClass",
           "model",
