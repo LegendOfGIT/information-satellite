@@ -390,6 +390,26 @@
       }
     },
     {
+      "comment": "key amount",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "keyAmount",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          ">Anzahl Tasten.*?<td>(.*?)<"
+        ]
+      }
+    },
+    {
+      "comment": "key amount",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "keyAmount",
+        "sourceContextId": "keyAmount"
+      }
+    },
+    {
       "comment": "height in cm",
       "commandId": "get-value-by-regex",
       "parameters": {
@@ -800,6 +820,7 @@
           "description",
           "diameter-in-cm",
           "drawerAmount",
+          "keyAmount",
           "gtin",
           "height-in-cm",
           "images-big",
