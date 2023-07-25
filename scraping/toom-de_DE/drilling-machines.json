@@ -70,9 +70,9 @@
       "parameters": {
         "contextId": "navigation-path",
         "value": [
-          "HOME",
-          "HOME_TOOLS",
-          "HOME_TOOLS_DRILLINGMACHINES"
+          "DIY",
+          "DIY_TOOLS",
+          "DIY_TOOLS_DRILLINGMACHINES"
         ]
       }
     },
