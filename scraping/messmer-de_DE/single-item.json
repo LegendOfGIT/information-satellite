@@ -278,7 +278,7 @@
     },
 
     {
-      "comment": "seasons",
+      "comment": "is bio",
       "commandId": "get-value-by-css-queries",
       "parameters": {
         "contextId": "isBio",

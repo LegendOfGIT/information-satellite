@@ -329,6 +329,18 @@
     },
 
     {
+      "comment": "is bio",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "isBio",
+        "sourceContextId": "single-product-view",
+        "setValueOnMatch": true,
+        "attribute-id": "data-atmos-tooltip",
+        "css-queries": [ ".short-icon[data-atmos-tooltip='Bio']" ]
+      }
+    },
+
+    {
       "comment": "seoKeywords",
       "commandId": "extract-seo-keywords",
       "parameters": {
@@ -352,6 +364,7 @@
           "flavours",
           "grapeVariety",
           "gtin",
+          "isBio",
           "link",
           "manufacturer",
           "mean",

@@ -206,6 +206,14 @@
         "css-queries": [ ".Hersteller_table td:nth-child(2) p" ]
       }
     },
+    {
+      "comment": "is bio",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "isBio",
+        "value": true
+      }
+    },
 
     {
       "comment": "seoKeywords",
@@ -224,6 +232,7 @@
           "description",
           "images-big",
           "ingredients",
+          "isBio",
           "link",
           "mean",
           "numberOfRatings",

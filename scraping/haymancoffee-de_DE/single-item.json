@@ -209,6 +209,17 @@
     },
 
     {
+      "comment": "is bio",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "isBio",
+        "sourceContextId": "single-product-view",
+        "setValueOnMatch": true,
+        "regex": "Bio-Origin"
+      }
+    },
+
+    {
       "comment": "publisher",
       "commandId": "set-context-value",
       "parameters": {
@@ -242,6 +253,7 @@
           "description",
           "images-big",
           "images-small",
+          "isBio",
           "link",
           "mean",
           "price-current",

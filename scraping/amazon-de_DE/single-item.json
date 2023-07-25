@@ -273,7 +273,9 @@
           "\"": " "
         },
         "regex": [
-          "selected_variations.*?color_name\":\"(.*?)\""
+          "selected_variations.*?color_name\":\"(.*?)\"",
+          "variationValues.*?color_name.*?\\[(.*?)\\]",
+          "Farbe.*?<\\/th.*?<td.*?>\\W.*?&lrm;(.*?)<"
         ]
       }
     },
@@ -387,18 +389,10 @@
         "contextId": "images-small",
         "sourceContextId": "color-images",
         "regex": "thumb.*?(http.*?)\"",
-        "groupIndex": 1
-      }
-    },
-    {
-      "comment": "images-small",
-      "commandId": "clone-items-and-modify-clones",
-      "parameters": {
-        "contextId": "images-small",
         "replacements": {
           "\\.jpg.*": ".jpg"
         },
-        "sourceContextId": "images-small"
+        "groupIndex": 1
       }
     },
 

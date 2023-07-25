@@ -308,6 +308,19 @@
     },
 
     {
+      "comment": "is bio",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "isBio",
+        "sourceContextId": "title",
+        "setValueOnMatch": true,
+        "regex": [
+          "Bio|Organic"
+        ]
+      }
+    },
+
+    {
       "comment": "seoKeywords",
       "commandId": "extract-seo-keywords",
       "parameters": {
@@ -326,6 +339,7 @@
           "ean",
           "images-big",
           "images-small",
+          "isBio",
           "link",
           "material",
           "mean",

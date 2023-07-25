@@ -224,6 +224,14 @@
         "value": "PlantLife"
       }
     },
+    {
+      "comment": "is bio",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "isBio",
+        "value": true
+      }
+    },
 
     {
       "comment": "seoKeywords",
@@ -242,6 +250,7 @@
           "description",
           "images-big",
           "images-small",
+          "isBio",
           "link",
           "mean",
           "numberOfRatings",
