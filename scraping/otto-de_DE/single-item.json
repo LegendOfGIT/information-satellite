@@ -306,6 +306,7 @@
         "groupIndex": 1,
         "regex": [
           ">Farbe Front.*?<td>(.*?)<",
+          ">Farbe<\\/span>.*?<td>(.*?)<",
           ">Farbe.*?<td>(.*?)<",
           "Farbe:(.*?)<br \\/>"
         ]
