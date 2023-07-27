@@ -1,0 +1,116 @@
+{
+  "site": "otto.de",
+
+  "scraping": [
+    {
+      "comment": "site",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "site",
+        "value": "otto-de_DE"
+      }
+    },
+    {
+      "comment": "locale",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "locale",
+        "value": "de-DE"
+      }
+    },
+    {
+      "comment": "usecase",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "usecase",
+        "value": "single-item"
+      }
+    },
+    {
+      "comment": "navigation-path",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "navigation-path",
+        "value": [
+          "SPORTS",
+          "SPORTS_EXERCISE",
+          "SPORTS_EXERCISE_EQUIPMENT"
+        ]
+      }
+    },
+
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "uri": "https://{template.site}/?selektion=(und.(ist.sortiment.sportausruestung).(oder.(sind.kategorien.boards.balance-boards).(sind.kategorien.boards.faszienboards).(sind.kategorien.fitness-tracker).(sind.kategorien.fitnessbaender).(sind.kategorien.gewichtssaecke).(sind.kategorien.gewichtswesten).(sind.kategorien.griffe.liegestuetzgriffe).(sind.kategorien.haltegriffe).(sind.kategorien.hantel-zughilfen).(sind.kategorien.kissen.balancekissen).(sind.kategorien.manschetten.gewichtsmanschetten).(sind.kategorien.nackenpolster).(sind.kategorien.pads.balance-pads).(sind.kategorien.reifen.hula-hoop-reifen).(sind.kategorien.ringe.pilatesringe).(sind.kategorien.rollen.massagerollen).(sind.kategorien.rollen.pilatesrollen).(sind.kategorien.seile.springseile).(sind.kategorien.stangen.klimmzugstangen).(sind.kategorien.sticks).(sind.kategorien.trainer.fusstrainer).(sind.kategorien.trainer.ganzkoerpertrainer).(sind.kategorien.trainer.gleichgewichtstrainer).(sind.kategorien.trainer.handtrainer).(sind.kategorien.trainer.koordinationsleitern).(sind.kategorien.trainer.slingtrainer).(sind.kategorien.turngeraete)).(~.(v.1)))&sortiertnach=neuheiten"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "product-ids",
+        "css-queries": [ ".san_searchResult article"],
+        "attribute-id": "data-product-id",
+        "sourceContextId": "product-overview"
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    },
+
+    {
+      "comment": "random-item-number",
+      "commandId": "generate-random-number",
+      "parameters": {
+        "contextId": "random-item-number",
+        "maximum": 2500
+      }
+    },
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "overwrite": true,
+        "uri": "https://{template.site}/?selektion=(und.(ist.sortiment.sportausruestung).(oder.(sind.kategorien.boards.balance-boards).(sind.kategorien.boards.faszienboards).(sind.kategorien.fitness-tracker).(sind.kategorien.fitnessbaender).(sind.kategorien.gewichtssaecke).(sind.kategorien.gewichtswesten).(sind.kategorien.griffe.liegestuetzgriffe).(sind.kategorien.haltegriffe).(sind.kategorien.hantel-zughilfen).(sind.kategorien.kissen.balancekissen).(sind.kategorien.manschetten.gewichtsmanschetten).(sind.kategorien.nackenpolster).(sind.kategorien.pads.balance-pads).(sind.kategorien.reifen.hula-hoop-reifen).(sind.kategorien.ringe.pilatesringe).(sind.kategorien.rollen.massagerollen).(sind.kategorien.rollen.pilatesrollen).(sind.kategorien.seile.springseile).(sind.kategorien.stangen.klimmzugstangen).(sind.kategorien.sticks).(sind.kategorien.trainer.fusstrainer).(sind.kategorien.trainer.ganzkoerpertrainer).(sind.kategorien.trainer.gleichgewichtstrainer).(sind.kategorien.trainer.handtrainer).(sind.kategorien.trainer.koordinationsleitern).(sind.kategorien.trainer.slingtrainer).(sind.kategorien.turngeraete)).(~.(v.1)))&l=gq&o={random-item-number}"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "product-ids",
+        "css-queries": [ ".san_searchResult article"],
+        "attribute-id": "data-product-id",
+        "overwriteValues": true,
+        "sourceContextId": "product-overview"
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    }
+  ]
+}

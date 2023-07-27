@@ -13,7 +13,6 @@ module.exports = (template = {}, itemId, itemCanonical, navigationPath) => {
     const commands = [];
     template.scraping.forEach(templateCommand => {
         const commandId = templateCommand.commandId || '';
-        console.log(`apply scraping command "${commandId}"`);
 
         const command = getScrapingCommandById(commandId);
         if (!command) {
@@ -31,7 +30,6 @@ module.exports = (template = {}, itemId, itemCanonical, navigationPath) => {
                 "template.site": template.site
             }
         );
-        console.log(`add command "${commandId}" to execution list`);
         commands.push({
             command,
             parameters
