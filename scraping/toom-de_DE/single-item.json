@@ -299,7 +299,16 @@
         "regex": "mca_serie\".*?value\":\"(.*?)\""
       }
     },
-
+    {
+      "comment": "color",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "color",
+        "sourceContextId": "dataProperties",
+        "groupIndex": 1,
+        "regex": "Farbe\".*?value\":\"(.*?)\""
+      }
+    },
     {
       "comment": "seoDescription",
       "commandId": "get-value-by-regex",
@@ -377,6 +386,7 @@
       "parameters": {
         "informationIds": [
           "brand",
+          "color",
           "depth-in-cm",
           "description",
           "height-in-cm",
