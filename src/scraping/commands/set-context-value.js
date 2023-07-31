@@ -31,7 +31,10 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         return;
     }
 
-    context[contextId] = (context[contextId] || '').replace(new RegExp('{.*?}',"g"), '');
+    const contextValue = (context[contextId] || '');
+    context[contextId] = 'string' === typeof contextValue
+        ? (context[contextId] || '').replace(new RegExp('{.*?}',"g"), '')
+        : contextValue;
 
     resolve();
 });
