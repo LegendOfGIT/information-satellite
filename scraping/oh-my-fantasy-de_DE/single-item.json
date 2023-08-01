@@ -228,6 +228,15 @@
     },
 
     {
+      "comment": "for adults",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "isForAdults",
+        "value": true
+      }
+    },
+
+    {
       "comment": "store scraped information",
       "commandId": "store-information",
       "parameters": {
@@ -238,6 +247,7 @@
           "images-big",
           "images-small",
           "ingredients",
+          "isForAdults",
           "link",
           "mean",
           "price-current",

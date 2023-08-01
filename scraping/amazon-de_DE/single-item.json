@@ -443,7 +443,18 @@
         "sourceContextId": ["description", "title"]
       }
     },
-    
+
+    {
+      "comment": "is for adults",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "isForAdults",
+        "sourceContextId": "single-product-view",
+        "regex": "Nr\\..*?in <a.*?>Erotik.*?<\\/a>",
+        "setValueOnMatch": true
+      }
+    },
+
     {
       "comment": "store scraped information",
       "commandId": "store-information",
@@ -458,6 +469,7 @@
           "description",
           "images-big",
           "images-small",
+          "isForAdults",
           "length-in-cm",
           "link",
           "lock-type",
