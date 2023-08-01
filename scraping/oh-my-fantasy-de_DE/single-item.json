@@ -1,0 +1,255 @@
+{
+  "site": "ohmyfantasy.com",
+
+  "itemId": "{template.site}-{gtin}",
+
+  "scraping": [
+    {
+      "comment": "single product",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "single-product-view",
+        "uri": "https://www.{template.site}/products/{request.query.itemId}"
+      }
+    },
+    {
+      "comment": "link",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "link",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "href",
+        "css-queries": [ "link[rel='canonical']" ]
+      }
+    },
+
+    {
+      "comment": "merchant article number",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "mean",
+        "value": "ohmyfan.{request.query.itemId}"
+      }
+    },
+
+    {
+      "comment": "sku",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "sku",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "\"sku\": \"(.*?)\""
+        ]
+      }
+    },
+    {
+      "comment": "gtin",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "gtin",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "\"gtin12\": (.*?),"
+        ]
+      }
+    },
+
+
+    {
+      "comment": "title",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".product__title h1" ]
+      }
+    },
+
+    {
+      "comment": "title-image",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title-image",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "replacements": {
+          "v=.*": "width=450"
+        },
+        "css-queries": [ "meta[property='og:image:secure_url']" ]
+      }
+    },
+
+    {
+      "comment": "description",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "description",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "<h3>Produktinformation.*?\\W<p.*?>(.*?)<\\/p>"
+        ]
+      }
+    },
+
+    {
+      "comment": "brand",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "brand",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "\"brand\":\"(.*?)\""
+        ]
+      }
+    },
+
+    {
+      "comment": "SEO description",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "seoDescription",
+        "value": "{description}"
+      }
+    },
+
+    {
+      "comment": "price-current",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "single-product-view",
+        "css-queries": [
+          ".product__info-wrapper .price__sale .price-item--sale",
+          ".product__info-wrapper .price__regular .price-item--regular"
+        ]
+      }
+    },
+    {
+      "comment": "price-initial",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "single-product-view",
+        "mustContain": "€",
+        "css-queries": [
+          ".product__info-wrapper .price__sale .price-item--regular",
+          ".product__info-wrapper .price__regular .price-item--regular"
+        ]
+      }
+    },
+    {
+      "comment": "price-current to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "price-current"
+      }
+    },
+    {
+      "comment": "price-initial to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "price-initial"
+      }
+    },
+    {
+      "comment": "images big",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "images-big",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "src",
+        "css-queries": [ ".product__media img" ]
+      }
+    },
+    {
+      "comment": "images big",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "images-big",
+        "replacements": {
+          "\/\/": "https://",
+          "width=.*": "width=450"
+        },
+        "sourceContextId": "images-big"
+      }
+    },
+    {
+      "comment": "images small",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "images-small",
+        "replacements": {
+          "width=.*": "width=150"
+        },
+        "sourceContextId": "images-big"
+      }
+    },
+
+    {
+      "comment": "ingredients",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "ingredients",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "<h3.*?>Inhaltsstoffe.*?\\W<p.*?>(.*?)<\\/p>"
+        ]
+      }
+    },
+
+    {
+      "comment": "teaser texts",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "teaser-texts",
+        "sourceContextId": "single-product-view",
+        "css-queries": [
+          ".station-tabs-local-above .usp-list--element",
+          ".station-tabs-local-above ul li"
+        ]
+      }
+    },
+
+    {
+      "comment": "seoKeywords",
+      "commandId": "extract-seo-keywords",
+      "parameters": {
+        "contextId": "seoKeywords",
+        "sourceContextId": ["description", "title"]
+      }
+    },
+
+    {
+      "comment": "store scraped information",
+      "commandId": "store-information",
+      "parameters": {
+        "informationIds": [
+          "brand",
+          "description",
+          "gtin",
+          "images-big",
+          "images-small",
+          "ingredients",
+          "link",
+          "mean",
+          "price-current",
+          "price-initial",
+          "seoDescription",
+          "seoKeywords",
+          "sku",
+          "teaser-texts",
+          "title",
+          "title-image"
+        ]
+      }
+    }
+  ]
+}
