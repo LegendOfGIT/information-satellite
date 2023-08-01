@@ -50,9 +50,9 @@
       "parameters": {
         "contextId": "gtin",
         "sourceContextId": "single-product-view",
-        "groupIndex": 1,
+        "groupIndex": 2,
         "regex": [
-          "\"gtin12\": (.*?),"
+          "\"(gtin12|gtin13)\": (.*?),"
         ]
       }
     },
