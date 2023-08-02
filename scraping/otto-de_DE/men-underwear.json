@@ -1,5 +1,5 @@
 {
-  "site": "ohmyfantasy.com",
+  "site": "otto.de",
 
   "scraping": [
     {
@@ -7,7 +7,7 @@
       "commandId": "set-context-value",
       "parameters": {
         "contextId": "site",
-        "value": "oh-my-fantasy-de_DE"
+        "value": "otto-de_DE"
       }
     },
     {
@@ -32,9 +32,9 @@
       "parameters": {
         "contextId": "navigation-path",
         "value": [
-          "BEAUTY_CARE",
-          "BEAUTY_CARE_EROTIC",
-          "BEAUTY_CARE_EROTIC_MASSAGES"
+          "FASHION",
+          "FASHION_MEN",
+          "FASHION_MEN_UNDERWEAR"
         ]
       }
     },
@@ -44,7 +44,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://{template.site}/collections/massage?sort_by=created-descending&filter.v.price.gte=&filter.v.price.lte="
+        "uri": "https://{template.site}/herren/mode/waesche/unterhosen/?sortiertnach=neuheiten"
       }
     },
     {
@@ -52,23 +52,9 @@
       "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "css-queries": [ ".product-grid-container .full-unstyled-link"],
-        "attribute-id": "href",
-        "mustContain": "\/products",
-        "unique": true,
+        "css-queries": [ ".san_searchResult article"],
+        "attribute-id": "data-product-id",
         "sourceContextId": "product-overview"
-      }
-    },
-    {
-      "comment": "product-ids",
-      "commandId": "clone-items-and-modify-clones",
-      "parameters": {
-        "contextId": "product-ids",
-        "replacements": {
-          ".*/": "",
-          "\\?.*":  ""
-        },
-        "sourceContextId": "product-ids"
       }
     },
     {
@@ -86,11 +72,11 @@
     },
 
     {
-      "comment": "random-page-number",
+      "comment": "random-item-number",
       "commandId": "generate-random-number",
       "parameters": {
-        "contextId": "random-page-number",
-        "maximum": 3
+        "contextId": "random-item-number",
+        "maximum": 6100
       }
     },
     {
@@ -99,7 +85,7 @@
       "parameters": {
         "contextId": "product-overview",
         "overwrite": true,
-        "uri": "https://{template.site}/collections/massage?page={random-page-number}&sort_by=best-selling"
+        "uri": "https://{template.site}/herren/mode/waesche/unterhosen/?l=gq&o={random-item-number}"
       }
     },
     {
@@ -107,27 +93,12 @@
       "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "css-queries": [ ".product-grid-container .full-unstyled-link"],
-        "attribute-id": "href",
-        "mustContain": "\/products",
+        "css-queries": [ ".san_searchResult article"],
+        "attribute-id": "data-product-id",
         "overwriteValues": true,
-        "unique": true,
         "sourceContextId": "product-overview"
       }
     },
-    {
-      "comment": "product-ids",
-      "commandId": "clone-items-and-modify-clones",
-      "parameters": {
-        "contextId": "product-ids",
-        "replacements": {
-          ".*/": "",
-          "\\?.*":  ""
-        },
-        "sourceContextId": "product-ids"
-      }
-    },
-
     {
       "comment": "observe scraped information",
       "commandId": "observe-information",

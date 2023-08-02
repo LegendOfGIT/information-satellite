@@ -1,5 +1,5 @@
 {
-  "site": "ohmyfantasy.com",
+  "site": "amazon.de",
 
   "scraping": [
     {
@@ -7,7 +7,7 @@
       "commandId": "set-context-value",
       "parameters": {
         "contextId": "site",
-        "value": "oh-my-fantasy-de_DE"
+        "value": "amazon-de_DE"
       }
     },
     {
@@ -32,9 +32,9 @@
       "parameters": {
         "contextId": "navigation-path",
         "value": [
-          "BEAUTY_CARE",
-          "BEAUTY_CARE_EROTIC",
-          "BEAUTY_CARE_EROTIC_MASSAGES"
+          "FASHION",
+          "FASHION_MEN",
+          "FASHION_MEN_UNDERWEAR"
         ]
       }
     },
@@ -44,7 +44,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://{template.site}/collections/massage?sort_by=created-descending&filter.v.price.gte=&filter.v.price.lte="
+        "uri": "https://{template.site}/gp/bestsellers/fashion/1981400031/ref=zg_bs_nav_fashion_3_1981298031"
       }
     },
     {
@@ -52,25 +52,12 @@
       "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "css-queries": [ ".product-grid-container .full-unstyled-link"],
-        "attribute-id": "href",
-        "mustContain": "\/products",
-        "unique": true,
+        "css-queries": [ ".p13n-sc-uncoverable-faceout"],
+        "attribute-id": "id",
         "sourceContextId": "product-overview"
       }
     },
-    {
-      "comment": "product-ids",
-      "commandId": "clone-items-and-modify-clones",
-      "parameters": {
-        "contextId": "product-ids",
-        "replacements": {
-          ".*/": "",
-          "\\?.*":  ""
-        },
-        "sourceContextId": "product-ids"
-      }
-    },
+
     {
       "comment": "observe scraped information",
       "commandId": "observe-information",
@@ -90,7 +77,8 @@
       "commandId": "generate-random-number",
       "parameters": {
         "contextId": "random-page-number",
-        "maximum": 3
+        "minimum": 2,
+        "maximum": 8
       }
     },
     {
@@ -99,7 +87,7 @@
       "parameters": {
         "contextId": "product-overview",
         "overwrite": true,
-        "uri": "https://{template.site}/collections/massage?page={random-page-number}&sort_by=best-selling"
+        "uri": "https://{template.site}/gp/bestsellers/fashion/1981400031/ref=zg_bs_nav_fashion_3_1981298031?pg={random-page-number}"
       }
     },
     {
@@ -107,24 +95,10 @@
       "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "css-queries": [ ".product-grid-container .full-unstyled-link"],
-        "attribute-id": "href",
-        "mustContain": "\/products",
+        "css-queries": [ ".p13n-sc-uncoverable-faceout"],
+        "attribute-id": "id",
         "overwriteValues": true,
-        "unique": true,
         "sourceContextId": "product-overview"
-      }
-    },
-    {
-      "comment": "product-ids",
-      "commandId": "clone-items-and-modify-clones",
-      "parameters": {
-        "contextId": "product-ids",
-        "replacements": {
-          ".*/": "",
-          "\\?.*":  ""
-        },
-        "sourceContextId": "product-ids"
       }
     },
 

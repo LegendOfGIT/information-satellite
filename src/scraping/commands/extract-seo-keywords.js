@@ -52,7 +52,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     });
 
     terms = terms
-        .replaceAll(/(\.|:|,|!|;|'|")/g, '')
+        .replaceAll(/(\.|:|,|!|;|'|"|“)/g, '')
         .replaceAll('-', ' ')
         .replaceAll('&amp;', ' ')
         .replaceAll('&amp', ' ');
