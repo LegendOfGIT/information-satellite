@@ -270,7 +270,8 @@
           "Amazon\\.de.*? - ": "",
           " - Kostenloser Versand.*": "",
           "bei Amazon.*": "bei WeWanna shop!",
-          ": Amazon.*": ""
+          ": Amazon.*": "",
+          "Gratis Lieferung ab.*": ""
         },
         "css-queries": [ "meta[name=description]" ]
       }
