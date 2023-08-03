@@ -1,0 +1,95 @@
+{
+  "site": "buch24.de",
+
+  "scraping": [
+    {
+      "comment": "site",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "site",
+        "value": "buch24-de_DE"
+      }
+    },
+    {
+      "comment": "locale",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "locale",
+        "value": "de-DE"
+      }
+    },
+    {
+      "comment": "usecase",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "usecase",
+        "value": "single-item"
+      }
+    },
+    {
+      "comment": "navigation-path",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "navigation-path",
+        "value": [
+          "MULTIMEDIA",
+          "MULTIMEDIA_BOOKS",
+          "MULTIMEDIA_BOOKS_SCIENCEFICTION"
+        ]
+      }
+    },
+
+    {
+      "comment": "random-product-offset",
+      "commandId": "generate-random-number",
+      "parameters": {
+        "contextId": "random-product-offset",
+        "maximum": 2500
+      }
+    },
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "uri": "https://{template.site}/shopdirekt.cgi?id=22733&p=2&t=&h=&kid=0&klid=2&sid=30&nav=2928_1477_22727_22445_22733&limit=20&offset={random-product-offset}"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "product-ids",
+        "css-queries": [ ".products-grid .product-item a"],
+        "attribute-id": "href",
+        "mustContain": "shopdirekt",
+        "sourceContextId": "product-overview"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "product-ids",
+        "replacements": {
+          ".*?(\\?|&)id=": "",
+          "&.*": ""
+        },
+        "sourceContextId": "product-ids"
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    }
+  ]
+}
