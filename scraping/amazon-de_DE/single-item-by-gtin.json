@@ -72,7 +72,8 @@
           ".priceToPay .a-offscreen",
           "#corePrice_desktop .a-price > span",
           "#price",
-          "#style_name_1_price .olpWrapper"
+          "#style_name_1_price .olpWrapper",
+          ".a-price-whole"
         ]
       }
     },
@@ -93,7 +94,8 @@
           "#corePrice_desktop .a-price > span",
           ".priceToPay .a-offscreen",
           "#price",
-          "#style_name_1_price .olpWrapper"
+          "#style_name_1_price .olpWrapper",
+          ".a-price-whole"
         ]
       }
     },

@@ -1,12 +1,12 @@
 const getPreparedCommandParameters = require('../getPreparedCommandParameters');
 
 module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
-    const { contextId, replacements = {}, value } = parameters;
+    const { contextId, contextIdIfFlag, replacements = {}, value, valueOnFalse, valueOnTrue } = parameters;
 
     console.log('executing command "set-context-value"');
 
-    if (!value) {
-        console.log('required parameter "value" is not given. abort.');
+    if (!value && !valueOnFalse && !valueOnTrue) {
+        console.log('required parameter "value | valueOnFalse | valueOnTrue" is not given. abort.');
         resolve();
     }
 
@@ -21,7 +21,11 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         context
     ));
 
-    context[contextId] = commandParameters.value;
+    context[contextId] =
+        contextIdIfFlag
+            ? true === commandParameters[contextIdIfFlag] ? commandParameters.valueOnTrue : commandParameters.valueOnFalse
+            : commandParameters.value;
+
     for (const [key, value] of Object.entries(replacements)) {
         context[contextId] = context[contextId].replace(new RegExp(key,"g"), value);
     }
