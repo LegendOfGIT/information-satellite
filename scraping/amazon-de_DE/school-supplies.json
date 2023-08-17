@@ -1,0 +1,142 @@
+{
+  "site": "amazon.de",
+
+  "scraping": [
+    {
+      "comment": "site",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "site",
+        "value": "amazon-de_DE"
+      }
+    },
+    {
+      "comment": "locale",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "locale",
+        "value": "de-DE"
+      }
+    },
+    {
+      "comment": "usecase",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "usecase",
+        "value": "single-item"
+      }
+    },
+    {
+      "comment": "navigation-path",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "navigation-path",
+        "value": [
+          "KIDS",
+          "KIDS_SCHOOL",
+          "KIDS_SCHOOL_SUPPLIES"
+        ]
+      }
+    },
+
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "uri": "https://www.{template.site}/gp/bestsellers/officeproduct/9518117031/ref=zg_bs_nav_officeproduct_2_197751031"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "product-ids",
+        "css-queries": [ ".p13n-sc-uncoverable-faceout"],
+        "attribute-id": "id",
+        "sourceContextId": "product-overview"
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    },
+
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "overwrite": true,
+        "uri": "https://www.{template.site}/gp/bestsellers/officeproduct/202832031/ref=pd_zg_hrsr_officeproduct"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "product-ids",
+        "css-queries": [ ".p13n-sc-uncoverable-faceout"],
+        "attribute-id": "id",
+        "overwriteValues": true,
+        "sourceContextId": "product-overview"
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    },
+
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "overwrite": true,
+        "uri": "https://www.{template.site}/gp/bestsellers/officeproduct/202801031/ref=zg_bs_unv_officeproduct_4_202803031_2"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "product-ids",
+        "css-queries": [ ".p13n-sc-uncoverable-faceout"],
+        "attribute-id": "id",
+        "overwriteValues": true,
+        "sourceContextId": "product-overview"
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    }
+  ]
+}
