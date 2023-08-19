@@ -1,5 +1,5 @@
 {
-  "site": "otto.de",
+  "site": "amazon.de",
 
   "scraping": [
     {
@@ -7,7 +7,7 @@
       "commandId": "set-context-value",
       "parameters": {
         "contextId": "site",
-        "value": "otto-de_DE"
+        "value": "amazon-de_DE"
       }
     },
     {
@@ -32,9 +32,9 @@
       "parameters": {
         "contextId": "navigation-path",
         "value": [
-          "MUSIC",
-          "MUSIC_INSTRUMENTS",
-          "MUSIC_INSTRUMENTS_GUITARS"
+          "ELECTRONICS_AND_COMPUTERS",
+          "ELECTRONICS_AND_COMPUTERS_EROTIC",
+          "ELECTRONICS_AND_COMPUTERS_EROTIC_VIBRATORS"
         ]
       }
     },
@@ -44,7 +44,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://{template.site}/musikinstrumente/gitarre/e-gitarre/?sortiertnach=neuheiten"
+        "uri": "https://{template.site}/gp/bestsellers/drugstore/64856031/ref=zg_bs_unv_drugstore_4_11633373031_2"
       }
     },
     {
@@ -52,11 +52,12 @@
       "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "css-queries": [ ".san_searchResult article"],
-        "attribute-id": "data-product-id",
+        "css-queries": [ ".p13n-sc-uncoverable-faceout"],
+        "attribute-id": "id",
         "sourceContextId": "product-overview"
       }
     },
+
     {
       "comment": "observe scraped information",
       "commandId": "observe-information",
@@ -72,11 +73,12 @@
     },
 
     {
-      "comment": "random-item-number",
+      "comment": "random-page-number",
       "commandId": "generate-random-number",
       "parameters": {
-        "contextId": "random-item-number",
-        "maximum": 150
+        "contextId": "random-page-number",
+        "minimum": 2,
+        "maximum": 8
       }
     },
     {
@@ -85,7 +87,7 @@
       "parameters": {
         "contextId": "product-overview",
         "overwrite": true,
-        "uri": "https://{template.site}/musikinstrumente/gitarre/e-gitarre/?l=gq&o={random-item-number}"
+        "uri": "https://{template.site}/gp/bestsellers/drugstore/64856031/ref=zg_bs_unv_drugstore_4_11633373031_2?pg={random-page-number}"
       }
     },
     {
@@ -93,46 +95,13 @@
       "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "css-queries": [ ".san_searchResult article"],
-        "attribute-id": "data-product-id",
+        "css-queries": [ ".p13n-sc-uncoverable-faceout"],
+        "attribute-id": "id",
         "overwriteValues": true,
         "sourceContextId": "product-overview"
-      }
-    },
-    {
-      "comment": "observe scraped information",
-      "commandId": "observe-information",
-      "parameters": {
-        "informationIds": [
-          "locale",
-          "navigation-path",
-          "product-ids",
-          "site",
-          "usecase"
-        ]
       }
     },
 
-    {
-      "comment": "product-overview",
-      "commandId": "visit-uri",
-      "parameters": {
-        "contextId": "product-overview",
-        "overwrite": true,
-        "uri": "https://{template.site}/suche/gitarrenverstärker"
-      }
-    },
-    {
-      "comment": "product-ids",
-      "commandId": "get-values-by-css-queries",
-      "parameters": {
-        "contextId": "product-ids",
-        "css-queries": [ ".san_searchResult article"],
-        "attribute-id": "data-product-id",
-        "overwriteValues": true,
-        "sourceContextId": "product-overview"
-      }
-    },
     {
       "comment": "observe scraped information",
       "commandId": "observe-information",

@@ -1,5 +1,5 @@
 {
-  "site": "otto.de",
+  "site": "ohmyfantasy.com",
 
   "scraping": [
     {
@@ -7,7 +7,7 @@
       "commandId": "set-context-value",
       "parameters": {
         "contextId": "site",
-        "value": "otto-de_DE"
+        "value": "oh-my-fantasy-de_DE"
       }
     },
     {
@@ -32,9 +32,9 @@
       "parameters": {
         "contextId": "navigation-path",
         "value": [
-          "MUSIC",
-          "MUSIC_INSTRUMENTS",
-          "MUSIC_INSTRUMENTS_GUITARS"
+          "ELECTRONICS_AND_COMPUTERS",
+          "ELECTRONICS_AND_COMPUTERS_EROTIC",
+          "ELECTRONICS_AND_COMPUTERS_EROTIC_VIBRATORS"
         ]
       }
     },
@@ -44,7 +44,8 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://{template.site}/musikinstrumente/gitarre/e-gitarre/?sortiertnach=neuheiten"
+        "overwrite": true,
+        "uri": "https://{template.site}/collections/vibratoren?sort_by=created-descending"
       }
     },
     {
@@ -52,11 +53,27 @@
       "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "css-queries": [ ".san_searchResult article"],
-        "attribute-id": "data-product-id",
+        "css-queries": [ ".product-grid-container .full-unstyled-link"],
+        "attribute-id": "href",
+        "mustContain": "\/products",
+        "overwriteValues": true,
+        "unique": true,
         "sourceContextId": "product-overview"
       }
     },
+    {
+      "comment": "product-ids",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "product-ids",
+        "replacements": {
+          ".*/": "",
+          "\\?.*":  ""
+        },
+        "sourceContextId": "product-ids"
+      }
+    },
+
     {
       "comment": "observe scraped information",
       "commandId": "observe-information",
@@ -72,11 +89,61 @@
     },
 
     {
-      "comment": "random-item-number",
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "overwrite": true,
+        "uri": "https://{template.site}/collections/vibratoren?sort_by=best-selling"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "product-ids",
+        "css-queries": [ ".product-grid-container .full-unstyled-link"],
+        "attribute-id": "href",
+        "mustContain": "\/products",
+        "overwriteValues": true,
+        "unique": true,
+        "sourceContextId": "product-overview"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "product-ids",
+        "replacements": {
+          ".*/": "",
+          "\\?.*":  ""
+        },
+        "sourceContextId": "product-ids"
+      }
+    },
+
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    },
+
+    {
+      "comment": "random-page-number",
       "commandId": "generate-random-number",
       "parameters": {
-        "contextId": "random-item-number",
-        "maximum": 150
+        "contextId": "random-page-number",
+        "minimum": 2,
+        "maximum": 50
       }
     },
     {
@@ -85,7 +152,7 @@
       "parameters": {
         "contextId": "product-overview",
         "overwrite": true,
-        "uri": "https://{template.site}/musikinstrumente/gitarre/e-gitarre/?l=gq&o={random-item-number}"
+        "uri": "https://{template.site}/collections/vibratoren?page={random-page-number}&sort_by=best-selling"
       }
     },
     {
@@ -93,46 +160,27 @@
       "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "css-queries": [ ".san_searchResult article"],
-        "attribute-id": "data-product-id",
+        "css-queries": [ ".product-grid-container .full-unstyled-link"],
+        "attribute-id": "href",
+        "mustContain": "\/products",
         "overwriteValues": true,
+        "unique": true,
         "sourceContextId": "product-overview"
       }
     },
     {
-      "comment": "observe scraped information",
-      "commandId": "observe-information",
+      "comment": "product-ids",
+      "commandId": "clone-items-and-modify-clones",
       "parameters": {
-        "informationIds": [
-          "locale",
-          "navigation-path",
-          "product-ids",
-          "site",
-          "usecase"
-        ]
+        "contextId": "product-ids",
+        "replacements": {
+          ".*/": "",
+          "\\?.*":  ""
+        },
+        "sourceContextId": "product-ids"
       }
     },
 
-    {
-      "comment": "product-overview",
-      "commandId": "visit-uri",
-      "parameters": {
-        "contextId": "product-overview",
-        "overwrite": true,
-        "uri": "https://{template.site}/suche/gitarrenverstärker"
-      }
-    },
-    {
-      "comment": "product-ids",
-      "commandId": "get-values-by-css-queries",
-      "parameters": {
-        "contextId": "product-ids",
-        "css-queries": [ ".san_searchResult article"],
-        "attribute-id": "data-product-id",
-        "overwriteValues": true,
-        "sourceContextId": "product-overview"
-      }
-    },
     {
       "comment": "observe scraped information",
       "commandId": "observe-information",
