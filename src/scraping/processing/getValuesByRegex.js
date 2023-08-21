@@ -1,4 +1,4 @@
-module.exports = (sourceContext, regex, groupIndex, flags = 'sg') => {
+module.exports = (sourceContext, regex, groupIndex, flags = 'sg', tagReplacer = '') => {
     sourceContext = Array.isArray(sourceContext) ? sourceContext : [sourceContext];
 
     if (!sourceContext || !regex) {
@@ -26,7 +26,7 @@ module.exports = (sourceContext, regex, groupIndex, flags = 'sg') => {
             .replaceAll('&auml;', 'ä').replaceAll('&Auml;', 'Ä')
             .replaceAll('&ouml;', 'ö').replaceAll('&Ouml;', 'Ö')
             .replaceAll('&uuml;', 'ü').replaceAll('&Uuml;', 'Ü')
-            .replaceAll(/<.*?>/g, '');
+            .replaceAll(/<.*?>/g, tagReplacer);
     })
 
     return values;
