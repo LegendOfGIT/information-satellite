@@ -52,16 +52,6 @@
     },
 
     {
-      "comment": "title",
-      "commandId": "get-value-by-css-queries",
-      "parameters": {
-        "contextId": "title",
-        "sourceContextId": "single-product-view",
-        "css-queries": [ "head > title" ]
-      }
-    },
-
-    {
       "comment": "title-image",
       "commandId": "get-value-by-css-queries",
       "parameters": {
@@ -84,6 +74,17 @@
         "attribute-id": "data-props",
         "decodeUri": true,
         "css-queries": [ "#root" ]
+      }
+    },
+
+    {
+      "comment": "title",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "title",
+        "sourceContextId": "dataProperties",
+        "groupIndex": 1,
+        "regex": "basic_info.*?name\":\"(.*?)\""
       }
     },
 
@@ -345,6 +346,17 @@
       }
     },
     {
+      "comment": "price-current",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "dataProperties",
+        "groupIndex": 1,
+        "regex": "meta_price\":(.*?)(,|})"
+      }
+    },
+
+    {
       "comment": "price-initial",
       "commandId": "get-value-by-css-queries",
       "parameters": {
@@ -354,6 +366,17 @@
         "css-queries": [ "meta[property='product:price:amount']" ]
       }
     },
+    {
+      "comment": "price-initial",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "dataProperties",
+        "groupIndex": 1,
+        "regex": "meta_price\":(.*?)(,|})"
+      }
+    },
+
     {
       "comment": "price-current to float",
       "commandId": "get-float-from-value",

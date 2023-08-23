@@ -1,0 +1,409 @@
+{
+  "site": "shop-saunaloft.de",
+
+  "itemId": "{template.site}-{ean}",
+
+  "scraping": [
+    {
+      "comment": "site",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "site",
+        "value": "saunaloft-de_DE"
+      }
+    },
+    {
+      "comment": "single-product-view",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "single-product-view",
+        "uri": "https://{template.site}/search?search={request.query.itemId}"
+      }
+    },
+    {
+      "comment": "link",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "link",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "href",
+        "css-queries": [ "link[rel='canonical']" ]
+      }
+    },
+    {
+      "comment": "title",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".product-detail-name" ]
+      }
+    },
+    {
+      "comment": "price-current",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".product-detail-main .product-detail-price-container .product-detail-price" ]
+      }
+    },
+    {
+      "comment": "price-initial",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "single-product-view",
+        "css-queries": [
+          ".product-detail-main .product-detail-price-container .list-price-price",
+          ".product-detail-main .product-detail-price-container .product-detail-price"
+        ]
+      }
+    },
+    {
+      "comment": "price-current to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "price-current"
+      }
+    },
+    {
+      "comment": "price-initial to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "price-initial"
+      }
+    },
+
+    {
+      "comment": "google data",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "googleData",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ "script[type='application/ld+json']" ]
+      }
+    },
+
+    {
+      "comment": "description",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "description",
+        "sourceContextId": "googleData",
+        "groupIndex": 1,
+        "replacements": {
+          "Produktbeschreibung:": "",
+          "\\\\n": " ",
+          "\\\\/": " ",
+          "Technische Daten:.*": "",
+          "Technische Details:.*": ""},
+        "regex": [
+          "\"description\":\"(.*?)\""
+        ]
+      }
+    },
+
+    {
+      "comment": "color",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "color",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "<b>Farbe<\/b>:(.*?)<"
+        ]
+      }
+    },
+    {
+      "comment": "material",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "material",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "<b>Material Kabine<\/b>:(.*?)<"
+        ]
+      }
+    },
+    {
+      "comment": "user amount",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "userAmount",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "<b>Anwenderplätze<\/b>:(.*?)<"
+        ]
+      }
+    },
+    {
+      "comment": "user amount",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "userAmount",
+        "sourceContextId": "userAmount"
+      }
+    },
+    {
+      "comment": "total consumption in W",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "totalConsumptionInW",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "<b>Gesamtleistung<\/b>:(.*?)<"
+        ]
+      }
+    },
+    {
+      "comment": "total consumption in W",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "totalConsumptionInW",
+        "sourceContextId": "totalConsumptionInW"
+      }
+    },
+
+    {
+      "comment": "minimum temperature in degrees",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "minimumTemperatureInDegrees",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "<b>Temperatureinstellung<\/b>:(.*?) - (.*?)<"
+        ]
+      }
+    },
+    {
+      "comment": "minimum temperature in degrees",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "minimumTemperatureInDegrees",
+        "sourceContextId": "minimumTemperatureInDegrees"
+      }
+    },
+
+    {
+      "comment": "maximum temperature in degrees",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "maximumTemperatureInDegrees",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 2,
+        "regex": [
+          "<b>Temperatureinstellung<\/b>:(.*?) - (.*?)<"
+        ]
+      }
+    },
+    {
+      "comment": "maximum temperature in degrees",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "maximumTemperatureInDegrees",
+        "sourceContextId": "maximumTemperatureInDegrees"
+      }
+    },
+
+    {
+      "comment": "measurementsBTH",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "measurementsBTH",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "Stellmaß \\(BxTxH\\):(.*?)cm.*?<"
+        ]
+      }
+    },
+
+    {
+      "comment": "height in cm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "height-in-cm",
+        "sourceContextId": "measurementsBTH",
+        "groupIndex": 3,
+        "regex": [
+          "(.*?)x(.*?)x(.*)"
+        ]
+      }
+    },
+    {
+      "comment": "height in cm",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "height-in-cm",
+        "sourceContextId": "height-in-cm"
+      }
+    },
+
+    {
+      "comment": "width in cm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "width-in-cm",
+        "sourceContextId": "measurementsBTH",
+        "groupIndex": 1,
+        "regex": [
+          "(.*?)x(.*?)x(.*)"
+        ]
+      }
+    },
+    {
+      "comment": "width in cm",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "width-in-cm",
+        "sourceContextId": "width-in-cm"
+      }
+    },
+
+    {
+      "comment": "length in cm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "length-in-cm",
+        "sourceContextId": "measurementsBTH",
+        "groupIndex": 2,
+        "regex": [
+          "(.*?)x(.*?)x(.*)"
+        ]
+      }
+    },
+    {
+      "comment": "length in cm",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "length-in-cm",
+        "sourceContextId": "length-in-cm"
+      }
+    },
+
+    {
+      "comment": "merchant article number",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "mean",
+        "value": "saunaloft.{request.query.itemId}"
+      }
+    },
+    {
+      "comment": "ean",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "ean",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": "\"productEAN\":\"(.*?)\""
+      }
+    },
+
+    {
+      "comment": "images",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "images",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "srcset",
+        "css-queries": [ ".gallery-slider-thumbnails .gallery-slider-thumbnails-item-inner img" ]
+      }
+    },
+
+    {
+      "comment": "images-big",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "images-big",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "src",
+        "css-queries": [ ".gallery-slider-thumbnails .gallery-slider-thumbnails-item-inner img" ]
+      }
+    },
+    {
+      "comment": "images-big",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "images-big",
+        "sourceContextId": "images",
+        "regex": ".*(https:\\/\\/.*?(600x600|800x800)\\.(jpg|png))"
+      }
+    },
+    {
+      "comment": "images-small",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "images-small",
+        "sourceContextId": "images",
+        "regex": ".*(https:\\/\\/.*?(200x200|400x400)\\.(jpg|png))"
+      }
+    },
+    {
+      "comment": "title-image",
+      "commandId": "get-value-from-array",
+      "parameters": {
+        "contextId": "title-image",
+        "sourceContextId": "images-big"
+      }
+    },
+
+    {
+      "comment": "brand",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "brand",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ "meta[property='product:brand']" ]
+      }
+    },
+
+    {
+      "comment": "seoKeywords",
+      "commandId": "extract-seo-keywords",
+      "parameters": {
+        "contextId": "seoKeywords",
+        "sourceContextId": ["description", "title"]
+      }
+    },
+
+    {
+      "comment": "store scraped information",
+      "commandId": "store-information",
+      "parameters": {
+        "informationIds": [
+          "brand",
+          "color",
+          "description",
+          "ean",
+          "height-in-cm",
+          "images-big",
+          "images-small",
+          "length-in-cm",
+          "link",
+          "material",
+          "maximumTemperatureInDegrees",
+          "mean",
+          "minimumTemperatureInDegrees",
+          "price-current",
+          "price-initial",
+          "seoKeywords",
+          "userAmount",
+          "title",
+          "title-image",
+          "totalConsumptionInW",
+          "width-in-cm"
+        ]
+      }
+    }
+  ]
+}
