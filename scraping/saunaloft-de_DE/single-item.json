@@ -335,7 +335,7 @@
       "parameters": {
         "contextId": "images-big",
         "sourceContextId": "images",
-        "regex": ".*(https:\\/\\/.*?(600x600|800x800)\\.(jpg|JPG|jpeg|JPEG|png|PNG))"
+        "regex": ".*(https:\\/\\/.*?(600x600|800x800)\\.(jpg|JPG|jpeg|JPEG|png|PNG|webp|WEBP))"
       }
     },
     {
@@ -344,7 +344,7 @@
       "parameters": {
         "contextId": "images-small",
         "sourceContextId": "images",
-        "regex": ".*(https:\\/\\/.*?(200x200|400x400)\\.(jpg|JPG|jpeg|JPEG|png|PNG))"
+        "regex": ".*(https:\\/\\/.*?(200x200|400x400)\\.(jpg|JPG|jpeg|JPEG|png|PNG|webp|WEBP))"
       }
     },
     {
