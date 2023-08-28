@@ -1,0 +1,265 @@
+{
+  "site": "medimops.de",
+
+  "itemId": "{template.site}-{ean}",
+
+  "scraping": [
+    {
+      "comment": "site",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "site",
+        "value": "medimops-de_DE"
+      }
+    },
+    {
+      "comment": "single-product-view",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "single-product-view",
+        "uri": "https://{template.site}/{request.query.itemId}.html"
+      }
+    },
+    {
+      "comment": "title",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".detail-page__title h1" ]
+      }
+    },
+
+    {
+      "comment": "link",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "link",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "href",
+        "css-queries": [ "link[rel='canonical']" ]
+      }
+    },
+    {
+      "comment": "price-current",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".detail-page__price-container .price-box__price-line .price-box__price" ]
+      }
+    },
+    {
+      "comment": "price-initial",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "single-product-view",
+        "css-queries": [
+          ".detail-page__price-container .price-box__savings .stroke",
+          ".detail-page__price-container .price-box__price-line .price-box__price"
+        ]
+      }
+    },
+    {
+      "comment": "price-current to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "price-current"
+      }
+    },
+    {
+      "comment": "price-initial to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "price-initial"
+      }
+    },
+
+    {
+      "comment": "description",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "description",
+        "sourceContextId": "single-product-view",
+        "css-queries": [
+          ".product-description__text .static-content"
+        ]
+      }
+    },
+
+    {
+      "comment": "usk-age",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "minimumAge",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          ">FSK.*?:.*?<dd.*?>(.*?)<"
+        ]
+      }
+    },
+    {
+      "comment": "minimumAge",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "minimumAge",
+        "sourceContextId": "minimumAge",
+        "defaultValue": 0
+      }
+    },
+
+    {
+      "comment": "publisher",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "publisher",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          ">Label.*?:.*?<dd.*?>(.*?)<"
+        ]
+      }
+    },
+
+    {
+      "comment": "merchant article number",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "mean",
+        "value": "medimops.{request.query.itemId}"
+      }
+    },
+    {
+      "comment": "ean",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "ean",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          ">EAN / ISBN-.*?:.*?<dd.*?>(.*?)<"
+        ]
+      }
+    },
+
+    {
+      "comment": "images-big",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "images-big",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "src",
+        "mustContain": "/product/",
+        "css-queries": [ ".detail-page__image" ]
+      }
+    },
+    {
+      "comment": "title-image",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title-image",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "src",
+        "mustContain": "/product/",
+        "css-queries": [ ".detail-page__image" ]
+      }
+    },
+
+    {
+      "comment": "brand",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "brand",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          ">Marke.*?:.*?<dd.*?>(.*?)<"
+        ]
+      }
+    },
+    {
+      "comment": "mediaType",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "mediaType",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          ">Medium.*?:.*?<dd.*?>(.*?)<"
+        ]
+      }
+    },
+    {
+      "comment": "model",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "model",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          ">Edition.*?:.*?<dd.*?>(.*?)<"
+        ]
+      }
+    },
+
+    {
+      "comment": "teaser texts",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "teaser-texts",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".detail-page__variant-checkmarks li" ]
+      }
+    },
+
+    {
+      "comment": "product condition",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "productCondition",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".variant-select__condition" ]
+      }
+    },
+
+    {
+      "comment": "seoKeywords",
+      "commandId": "extract-seo-keywords",
+      "parameters": {
+        "contextId": "seoKeywords",
+        "sourceContextId": ["title"]
+      }
+    },
+
+    {
+      "comment": "store scraped information",
+      "commandId": "store-information",
+      "parameters": {
+        "requiredProperties": [ "title-image" ],
+        "informationIds": [
+          "brand",
+          "description",
+          "ean",
+          "images-big",
+          "link",
+          "mean",
+          "mediaType",
+          "minimumAge",
+          "model",
+          "price-current",
+          "price-initial",
+          "publisher",
+          "productCondition",
+          "seoKeywords",
+          "teaser-texts",
+          "title",
+          "title-image"
+        ]
+      }
+    }
+  ]
+}
