@@ -341,6 +341,25 @@
     },
 
     {
+      "comment": "amount in stock",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "amountInStock",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".ebrstock-available-col .delivery--text strong" ]
+      }
+    },
+    {
+      "comment": "amount in stock",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "amountInStock",
+        "defaultValue": 0,
+        "sourceContextId": "amountInStock"
+      }
+    },
+
+    {
       "comment": "seoKeywords",
       "commandId": "extract-seo-keywords",
       "parameters": {
@@ -356,6 +375,7 @@
         "informationIds": [
           "alcoholContentInPpt",
           "allergenic",
+          "amountInStock",
           "color",
           "countryOfOrigin",
           "description",
