@@ -52,7 +52,7 @@
           "#corePrice_desktop .a-price > span",
           "#price",
           "#style_name_1_price .olpWrapper",
-          ".a-price-whole"
+          "#ppd .a-price-whole"
         ]
       }
     },
@@ -74,7 +74,7 @@
           ".priceToPay .a-offscreen",
           "#price",
           "#style_name_1_price .olpWrapper",
-          ".a-price-whole"
+          "#ppd .a-price-whole"
         ]
       }
     },
