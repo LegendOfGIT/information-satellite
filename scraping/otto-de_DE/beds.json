@@ -52,8 +52,9 @@
       "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "css-queries": [ ".san_searchResult article"],
+        "css-queries": [ "#reptile-tilelist article"],
         "attribute-id": "data-product-id",
+        "overwriteValues": true,
         "sourceContextId": "product-overview"
       }
     },
@@ -93,7 +94,7 @@
       "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "css-queries": [ ".san_searchResult article"],
+        "css-queries": [ "#reptile-tilelist article"],
         "attribute-id": "data-product-id",
         "overwriteValues": true,
         "sourceContextId": "product-overview"
@@ -119,7 +120,7 @@
       "parameters": {
         "contextId": "product-overview",
         "overwrite": true,
-        "uri": "https://{template.site}/moebel/betten/futonbetten/?sortiertnach=neuheiten"
+        "uri": "https://{template.site}/moebel/betten/futonbetten"
       }
     },
     {
@@ -127,7 +128,7 @@
       "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "css-queries": [ ".san_searchResult article"],
+        "css-queries": [ "#reptile-tilelist article"],
         "attribute-id": "data-product-id",
         "overwriteValues": true,
         "sourceContextId": "product-overview"

@@ -33,8 +33,8 @@
         "contextId": "navigation-path",
         "value": [
           "VEHICLES",
-          "VEHICLES_CARS",
-          "VEHICLES_CARS_SUMMERTYRES"
+          "VEHICLES_MOTORCYCLES",
+          "VEHICLES_MOTORCYCLES_QUADS"
         ]
       }
     },
@@ -44,7 +44,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://{template.site}/auto/autoreifen/?jahreszeit=sommerreifen&sortiertnach=neuheiten"
+        "uri": "https://{template.site}/kraftraeder/quads/?sortiertnach=neuheiten"
       }
     },
     {
@@ -54,49 +54,6 @@
         "contextId": "product-ids",
         "css-queries": [ "#reptile-tilelist article"],
         "attribute-id": "data-product-id",
-        "overwriteValues": true,
-        "sourceContextId": "product-overview"
-      }
-    },
-    {
-      "comment": "observe scraped information",
-      "commandId": "observe-information",
-      "parameters": {
-        "informationIds": [
-          "locale",
-          "navigation-path",
-          "product-ids",
-          "site",
-          "usecase"
-        ]
-      }
-    },
-
-    {
-      "comment": "random-item-number",
-      "commandId": "generate-random-number",
-      "parameters": {
-        "contextId": "random-item-number",
-        "maximum": 500
-      }
-    },
-    {
-      "comment": "product-overview",
-      "commandId": "visit-uri",
-      "parameters": {
-        "contextId": "product-overview",
-        "overwrite": true,
-        "uri": "https://{template.site}/auto/autoreifen/?jahreszeit=sommerreifen&l=gq&o={random-item-number}"
-      }
-    },
-    {
-      "comment": "product-ids",
-      "commandId": "get-values-by-css-queries",
-      "parameters": {
-        "contextId": "product-ids",
-        "css-queries": [ "#reptile-tilelist article"],
-        "attribute-id": "data-product-id",
-        "overwriteValues": true,
         "sourceContextId": "product-overview"
       }
     },

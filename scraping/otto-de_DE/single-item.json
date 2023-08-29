@@ -789,14 +789,24 @@
     },
 
     {
-      "comment": "observe scraped information",
-      "commandId": "observe-information",
+      "comment": "amount in stock",
+      "commandId": "get-value-by-regex",
       "parameters": {
-        "informationIds": [
-          "navigation-path",
-          "gtins",
-          "site"
+        "contextId": "amountInStock",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "\"hd_Stock\":\\[\"(.*?)\"\\]"
         ]
+      }
+    },
+    {
+      "comment": "amount in stock",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "amountInStock",
+        "defaultValue": 0,
+        "sourceContextId": "amountInStock"
       }
     },
 
@@ -814,6 +824,7 @@
       "commandId": "store-information",
       "parameters": {
         "informationIds": [
+          "amountInStock",
           "annualConsumptionInKWH",
           "batteryChargingTimeInHours",
           "batteryLifeInHours",

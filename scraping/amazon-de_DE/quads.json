@@ -1,5 +1,5 @@
 {
-  "site": "otto.de",
+  "site": "amazon.de",
 
   "scraping": [
     {
@@ -7,7 +7,7 @@
       "commandId": "set-context-value",
       "parameters": {
         "contextId": "site",
-        "value": "otto-de_DE"
+        "value": "amazon-de_DE"
       }
     },
     {
@@ -33,8 +33,8 @@
         "contextId": "navigation-path",
         "value": [
           "VEHICLES",
-          "VEHICLES_CARS",
-          "VEHICLES_CARS_SUMMERTYRES"
+          "VEHICLES_MOTORCYCLES",
+          "VEHICLES_MOTORCYCLES_QUADS"
         ]
       }
     },
@@ -44,7 +44,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://{template.site}/auto/autoreifen/?jahreszeit=sommerreifen&sortiertnach=neuheiten"
+        "uri": "https://{template.site}/gp/bestsellers/automotive/634955031/ref=zg_bs_nav_automotive_3_634953031"
       }
     },
     {
@@ -52,9 +52,8 @@
       "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "css-queries": [ "#reptile-tilelist article"],
-        "attribute-id": "data-product-id",
-        "overwriteValues": true,
+        "css-queries": [ ".p13n-sc-uncoverable-faceout"],
+        "attribute-id": "id",
         "sourceContextId": "product-overview"
       }
     },
@@ -73,11 +72,12 @@
     },
 
     {
-      "comment": "random-item-number",
+      "comment": "random-page-number",
       "commandId": "generate-random-number",
       "parameters": {
-        "contextId": "random-item-number",
-        "maximum": 500
+        "contextId": "random-page-number",
+        "minimum": 2,
+        "maximum": 8
       }
     },
     {
@@ -86,7 +86,7 @@
       "parameters": {
         "contextId": "product-overview",
         "overwrite": true,
-        "uri": "https://{template.site}/auto/autoreifen/?jahreszeit=sommerreifen&l=gq&o={random-item-number}"
+        "uri": "https://{template.site}/gp/bestsellers/automotive/634955031/ref=zg_bs_nav_automotive_3_634953031?pg={random-page-number}"
       }
     },
     {
@@ -94,8 +94,8 @@
       "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "css-queries": [ "#reptile-tilelist article"],
-        "attribute-id": "data-product-id",
+        "css-queries": [ ".p13n-sc-uncoverable-faceout"],
+        "attribute-id": "id",
         "overwriteValues": true,
         "sourceContextId": "product-overview"
       }
