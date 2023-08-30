@@ -19,6 +19,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         replacements = {},
         separator = undefined,
         setValueOnMatch = undefined,
+        setValueOnMiss = undefined,
         unique = false
     } = commandParameters;
 
@@ -84,6 +85,9 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     context[contextId] = context[contextId] || '';
     if (context[contextId].length > 0 && setValueOnMatch) {
         context[contextId] = setValueOnMatch;
+    }
+    if (context[contextId].length === 0 && setValueOnMiss !== undefined) {
+        context[contextId] = setValueOnMiss;
     }
 
     if (decodeUri) {

@@ -23,7 +23,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
 
     context[contextId] =
         contextIdIfFlag
-            ? true === commandParameters[contextIdIfFlag] ? commandParameters.valueOnTrue : commandParameters.valueOnFalse
+            ? true === commandParameters[contextIdIfFlag] || commandParameters[contextIdIfFlag] > 0 ? commandParameters.valueOnTrue : commandParameters.valueOnFalse
             : commandParameters.value;
 
     for (const [key, value] of Object.entries(replacements)) {

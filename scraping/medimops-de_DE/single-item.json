@@ -20,15 +20,6 @@
         "uri": "https://{template.site}/{request.query.itemId}.html"
       }
     },
-    {
-      "comment": "title",
-      "commandId": "get-value-by-css-queries",
-      "parameters": {
-        "contextId": "title",
-        "sourceContextId": "single-product-view",
-        "css-queries": [ ".detail-page__title h1" ]
-      }
-    },
 
     {
       "comment": "link",
@@ -120,7 +111,8 @@
         "sourceContextId": "single-product-view",
         "groupIndex": 1,
         "regex": [
-          ">Label.*?:.*?<dd.*?>(.*?)<"
+          ">Label.*?:.*?<dd.*?>(.*?)<",
+          ">Herausgeber.*?:.*?<dd.*?>(.*?)<"
         ]
       }
     },
@@ -207,6 +199,40 @@
     },
 
     {
+      "comment": "amount of pages",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "amountOfPages",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          ">Seitenzahl.*?:.*?<dd.*?>(.*?)<"
+        ]
+      }
+    },
+    {
+      "comment": "amount of pages",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "amountOfPages",
+        "sourceContextId": "amountOfPages",
+        "defaultValue": 0
+      }
+    },
+    {
+      "comment": "published on",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "publishedOn",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          ">Erscheinungsdatum.*?:.*?<dd.*?>(.*?)<"
+        ]
+      }
+    },
+
+    {
       "comment": "teaser texts",
       "commandId": "get-values-by-css-queries",
       "parameters": {
@@ -225,13 +251,63 @@
         "css-queries": [ ".variant-select__condition" ]
       }
     },
+    {
+      "comment": "manufacturer",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "manufacturer",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".detail-page__manufacturer-link" ]
+      }
+    },
+
+    {
+      "comment": "author",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "author",
+        "contextIdIfFlag": "amountOfPages",
+        "valueOnFalse": "",
+        "valueOnTrue": "{manufacturer}"
+      }
+    },
+    {
+      "comment": "manufacturer",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "manufacturer",
+        "contextIdIfFlag": "amountOfPages",
+        "valueOnFalse": "{manufacturer}",
+        "valueOnTrue": ""
+      }
+    },
+    {
+      "comment": "title",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".detail-page__title h1" ]
+      }
+    },
+
+    {
+      "comment": "title",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "title",
+        "contextIdIfFlag": "amountOfPages",
+        "valueOnFalse": "{title}",
+        "valueOnTrue": "{author} - {title}"
+      }
+    },
 
     {
       "comment": "seoKeywords",
       "commandId": "extract-seo-keywords",
       "parameters": {
         "contextId": "seoKeywords",
-        "sourceContextId": ["title"]
+        "sourceContextId": [ "author", "title"]
       }
     },
 
@@ -241,17 +317,21 @@
       "parameters": {
         "requiredProperties": [ "title-image" ],
         "informationIds": [
+          "amountOfPages",
+          "author",
           "brand",
           "description",
           "ean",
           "images-big",
           "link",
+          "manufacturer",
           "mean",
           "mediaType",
           "minimumAge",
           "model",
           "price-current",
           "price-initial",
+          "publishedOn",
           "publisher",
           "productCondition",
           "seoKeywords",
