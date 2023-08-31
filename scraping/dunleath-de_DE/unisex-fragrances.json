@@ -45,7 +45,7 @@
       "parameters": {
         "contextId": "product-overview",
         "overwrite": true,
-        "uri": "https://{template.site}/de/collections/unisex-perfumes?sort_by=created-descending"
+        "uri": "https://{template.site}/collections/parfums-unisex?sort_by=created-descending"
       }
     },
     {
@@ -78,7 +78,7 @@
       "parameters": {
         "contextId": "product-overview",
         "overwrite": true,
-        "uri": "https://{template.site}/de/collections/unisex-perfumes?sort_by=best-selling"
+        "uri": "https://{template.site}/collections/parfums-unisex?sort_by=best-selling"
       }
     },
     {
@@ -121,7 +121,7 @@
       "parameters": {
         "contextId": "product-overview",
         "overwrite": true,
-        "uri": "https://{template.site}/de/collections/unisex-perfumes?sort_by=best-selling&page={random-page-number}"
+        "uri": "https://{template.site}/collections/parfums-unisex?sort_by=best-selling&page={random-page-number}"
       }
     },
     {

@@ -9,7 +9,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-search",
-        "uri": "https://www.{template.site}/de/search?q=\"{request.query.itemId}\""
+        "uri": "https://www.{template.site}/search?q=\"{request.query.itemId}\""
       }
     },
     {
