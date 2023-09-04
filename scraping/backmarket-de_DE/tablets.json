@@ -33,8 +33,8 @@
         "contextId": "navigation-path",
         "value": [
           "ELECTRONICS_AND_COMPUTERS",
-          "ELECTRONICS_AND_COMPUTERS_WEARABLES",
-          "ELECTRONICS_AND_COMPUTERS_WEARABLES_SMARTWATCHES"
+          "ELECTRONICS_AND_COMPUTERS_COMPUTERS",
+          "ELECTRONICS_AND_COMPUTERS_COMPUTERS_TABLETS"
         ]
       }
     },
