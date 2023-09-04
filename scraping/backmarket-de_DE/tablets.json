@@ -33,8 +33,8 @@
         "contextId": "navigation-path",
         "value": [
           "ELECTRONICS_AND_COMPUTERS",
-          "ELECTRONICS_AND_COMPUTERS_PHONES",
-          "ELECTRONICS_AND_COMPUTERS_PHONES_SMARTPHONESCELLPHONES"
+          "ELECTRONICS_AND_COMPUTERS_WEARABLES",
+          "ELECTRONICS_AND_COMPUTERS_WEARABLES_SMARTWATCHES"
         ]
       }
     },
@@ -44,7 +44,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://www.{template.site}/de-de/l/smartphones/6c290010-c0c2-47a4-b68a-ac2ec2b64dca"
+        "uri": "https://www.{template.site}/de-de/l/tablet/5a3cfa21-b588-49b1-b4e9-2636bec68ada"
       }
     },
     {
@@ -89,7 +89,7 @@
       "parameters": {
         "contextId": "random-page-number",
         "minimum": 2,
-        "maximum": 20
+        "maximum": 10
       }
     },
     {
@@ -98,7 +98,7 @@
       "parameters": {
         "contextId": "product-overview",
         "overwrite": true,
-        "uri": "https://www.{template.site}/de-de/l/smartphones/6c290010-c0c2-47a4-b68a-ac2ec2b64dca?page={random-page-number}"
+        "uri": "https://www.{template.site}/de-de/l/tablet/5a3cfa21-b588-49b1-b4e9-2636bec68ada?page={random-page-number}"
       }
     },
     {

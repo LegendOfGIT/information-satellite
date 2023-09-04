@@ -184,6 +184,16 @@
     },
 
     {
+      "comment": "product condition",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "productCondition",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ "[data-qa *='grades-'] .bg-secondary-selected .text-primary" ]
+      }
+    },
+
+    {
       "comment": "number of ratings",
       "commandId": "get-value-by-css-queries",
       "parameters": {
@@ -584,6 +594,7 @@
           "price-initial",
           "processor",
           "processorSpeed",
+          "productCondition",
           "ramSize",
           "ratingInPercent",
           "resolution",
