@@ -192,6 +192,14 @@
         "css-queries": [ "[data-qa *='grades-'] .bg-secondary-selected .text-primary" ]
       }
     },
+    {
+      "comment": "productCondition",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "productCondition",
+        "value": "Gebraucht - {productCondition}"
+      }
+    },
 
     {
       "comment": "number of ratings",
