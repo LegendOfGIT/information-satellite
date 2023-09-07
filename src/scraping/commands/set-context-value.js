@@ -21,9 +21,10 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         context
     ));
 
+    const contextIfValue = commandParameters[contextIdIfFlag];
     context[contextId] =
         contextIdIfFlag
-            ? true === commandParameters[contextIdIfFlag] || commandParameters[contextIdIfFlag] > 0 ? commandParameters.valueOnTrue : commandParameters.valueOnFalse
+            ? true === contextIfValue || contextIfValue > 0 || ('string' === typeof contextIfValue && contextIfValue !== '') ? commandParameters.valueOnTrue : commandParameters.valueOnFalse
             : commandParameters.value;
 
     for (const [key, value] of Object.entries(replacements)) {

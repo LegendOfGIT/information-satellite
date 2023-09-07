@@ -77,24 +77,13 @@
     },
 
     {
-      "comment": "title-image",
-      "commandId": "get-value-by-css-queries",
-      "parameters": {
-        "contextId": "title-image",
-        "sourceContextId": "single-product-view",
-        "attribute-id": "href",
-        "css-queries": [ ".o-Gallery__image" ]
-      }
-    },
-
-    {
       "comment": "images-big",
       "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "images-big",
         "sourceContextId": "single-product-view",
         "attribute-id": "srcset",
-        "css-queries": [ ".o-SliderHorizontal__item .a-ResponsiveImage__img" ]
+        "css-queries": [ "[data-qa-id*='product-image'] picture img" ]
       }
     },
     {
@@ -103,9 +92,8 @@
       "parameters": {
         "contextId": "images-big",
         "replacements": {
-          ".*?70w,": "",
-          " 93w.*": "",
-          "93x": "600x"
+          " 400w.*": "",
+          "400x0": "600x0"
         },
         "sourceContextId": "images-big"
       }
@@ -116,8 +104,17 @@
       "parameters": {
         "contextId": "images-small",
         "replacements": {
-          "600x": "450x"
+          "600x0": "150x0"
         },
+        "sourceContextId": "images-big"
+      }
+    },
+
+    {
+      "comment": "title-image",
+      "commandId": "get-value-from-array",
+      "parameters": {
+        "contextId": "title-image",
         "sourceContextId": "images-big"
       }
     },
@@ -128,7 +125,7 @@
       "parameters": {
         "contextId": "numberOfRatings",
         "sourceContextId": "single-product-view",
-        "css-queries": [ "div[data-qa-id='product-rating'] .m-StarRating__superscript" ]
+        "css-queries": [ "[class *= 'ProductHeadRatingAndQuestions_old_product-head-rating-and-questions__link']" ]
       }
     },
     {
@@ -146,7 +143,7 @@
       "parameters": {
         "contextId": "ratingInPercent",
         "sourceContextId": "single-product-view",
-        "css-queries": [ "div[data-qa-id='product-rating'] .a-visuallyhidden" ]
+        "css-queries": [ "[class *= 'ProductReviewsRatingSummary_old_product-reviews-rating-summary__average-rating___']" ]
       }
     },
     {
@@ -204,26 +201,22 @@
 
     {
       "comment": "price-current",
-      "commandId": "get-value-by-regex",
+      "commandId": "get-value-by-css-queries",
       "parameters": {
         "contextId": "price-current",
         "sourceContextId": "single-product-view",
-        "groupIndex": 2,
-        "regex": [
-          "entry-price.*?(<span.*?>)(.*?)<"
-        ]
+        "css-queries": [ "[class *= 'ProductBuyBox_old_product-buy-box__inner'] [class *= 'ProductPageVariantDetails_old_product-page-variant-details__display-price']" ]
       }
     },
     {
       "comment": "price-initial",
-      "commandId": "get-value-by-regex",
+      "commandId": "get-value-by-css-queries",
       "parameters": {
         "contextId": "price-initial",
         "sourceContextId": "single-product-view",
-        "groupIndex": 2,
-        "regex": [
-          "a-PriceOld--price.*?(<span.*?>)(.*?)<",
-          "entry-price.*?(<span.*?>)(.*?)<"
+        "css-queries": [
+          "[class *= 'ProductBuyBox_old_product-buy-box__inner'] [class *= 'ProductPageVariantDetails_old_product-page-variant-details__strike-through-price']",
+          "[class *= 'ProductBuyBox_old_product-buy-box__inner'] [class *= 'ProductPageVariantDetails_old_product-page-variant-details__display-price']"
         ]
       }
     },
@@ -252,7 +245,7 @@
         "sourceContextId": "single-product-view",
         "groupIndex": 1,
         "regex": [
-          "value\":\"(.*?)\".*?package_size"
+          ">Packungsgröße:(.*?)<"
         ]
       }
     },
@@ -264,7 +257,7 @@
         "sourceContextId": "single-product-view",
         "groupIndex": 1,
         "regex": [
-          "value\":\"(.*?) ml\".*?package_size"
+          ">Packungsgröße:(.*?) ml<"
         ]
       }
     },
@@ -276,15 +269,16 @@
         "sourceContextId": "sizeInMl"
       }
     },
+
     {
       "comment": "price per unit",
-      "commandId": "get-value-by-regex",
+      "commandId": "get-value-by-css-queries",
       "parameters": {
         "contextId": "pricePerUnit",
         "sourceContextId": "single-product-view",
-        "groupIndex": 1,
-        "regex": [
-          "basePrice.*?amount\":(.*?),"
+        "replacements": { "\/.*": "" },
+        "css-queries": [
+          "[data-qa-id='current-variant-price-per-unit']"
         ]
       }
     },
@@ -317,20 +311,20 @@
         "sourceContextId": "single-product-view",
         "groupIndex": 1,
         "regex": [
-          "pharmaForm\":\"(.*?)\""
+          "pharmaForm\":\"(.*?)\"",
+          "<dt.*?>Darreichung<.*?<dd.*?>(.*?)<"
         ]
       }
     },
+
     {
       "comment": "ingredients",
-      "commandId": "get-value-by-regex",
+      "commandId": "get-value-by-css-queries",
       "parameters": {
         "contextId": "ingredients",
         "sourceContextId": "single-product-view",
-        "groupIndex": 1,
-        "regex": [
-          "ingredients\":\"(.*?)\""
-        ]
+        "separator": ", ",
+        "css-queries": [ ".accordion-details:has([class*='ProductDescriptionIngredientsSection']) ul li" ]
       }
     },
 
@@ -351,7 +345,6 @@
         "informationIds": [
           "description",
           "link",
-          "ean",
           "images-big",
           "images-small",
           "ingredients",

@@ -1,0 +1,424 @@
+{
+  "site": "galapel.de",
+
+  "itemId": "{template.site}-{request.query.itemId}",
+
+  "scraping": [
+    {
+      "comment": "site",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "site",
+        "value": "galapel-de_DE"
+      }
+    },
+
+    {
+      "comment": "single-product-view",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "single-product-view",
+        "uri": "https://www.{template.site}/de/{request.query.itemId}"
+      }
+    },
+
+    {
+      "comment": "center stone master code",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "center-stone-master-code",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "data-master-code",
+        "css-queries": [ ".stoneGrade[data-class='center_stone']" ]
+      }
+    },
+    {
+      "comment": "center stone grade id",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "center-stone-grade-id",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "data-grade-id",
+        "css-queries": [ ".stoneGrade[data-class='center_stone']" ]
+      }
+    },
+    {
+      "comment": "center stone grade code",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "center-stone-grade-code",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "data-grade-code",
+        "css-queries": [ ".stoneGrade[data-class='center_stone']" ]
+      }
+    },
+
+    {
+      "comment": "accent stone master code",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "accent-stone-master-code",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "data-master-code",
+        "css-queries": [ ".stoneGrade[data-class='accent_stone']" ]
+      }
+    },
+    {
+      "comment": "accent stone grade id",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "accent-stone-grade-id",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "data-grade-id",
+        "css-queries": [ ".stoneGrade[data-class='accent_stone']" ]
+      }
+    },
+    {
+      "comment": "accent stone grade code",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "accent-stone-grade-code",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "data-grade-code",
+        "css-queries": [ ".stoneGrade[data-class='accent_stone']" ]
+      }
+    },
+
+    {
+      "comment": "stone metal metal id",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "stone-metal-id",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "data-metal-id",
+        "css-queries": [ ".metal-type [class *= 'stone_metal']" ]
+      }
+    },
+    {
+      "comment": "stone metal grade id",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "stone-metal-grade-id",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "data-grade-id",
+        "replacements": { " ": "+" },
+        "css-queries": [ ".metal-type [class *= 'stone_metal']" ]
+      }
+    },
+    {
+      "comment": "stone metal color",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "stone-metal-color",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "data-select",
+        "css-queries": [ ".metal_color_li" ]
+      }
+    },
+
+    {
+      "comment": "center stone parameter",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "center-stone-parameter",
+        "contextIdIfFlag": "center-stone-master-code",
+        "valueOnFalse": "",
+        "valueOnTrue": "&center_stone={center-stone-master-code}-{center-stone-grade-id}-{center-stone-grade-code}"
+      }
+    },
+
+    {
+      "comment": "accent stone parameter",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "accent-stone-parameter",
+        "contextIdIfFlag": "accent-stone-master-code",
+        "valueOnFalse": "",
+        "valueOnTrue": "&accent_stone={accent-stone-master-code}-{accent-stone-grade-id}-{accent-stone-grade-code}"
+      }
+    },
+
+    {
+      "comment": "link",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "link",
+        "value": "https://www.{template.site}/de/{request.query.itemId}?{center-stone-parameter}{accent-stone-parameter}&metal={stone-metal-grade-id}-{stone-metal-id}-{stone-metal-color}"
+      }
+    },
+    {
+      "comment": "single-product-view",
+      "commandId": "visit-uri",
+      "parameters": {
+        "overwrite": true,
+        "contextId": "single-product-view",
+        "uri": "{link}"
+      }
+    },
+    {
+      "comment": "title",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".product-name h1" ]
+      }
+    },
+    {
+      "comment": "price-current",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".product-price-calculated-cart" ]
+      }
+    },
+    {
+      "comment": "price-initial",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".product-price-calculated-cart" ]
+      }
+    },
+    {
+      "comment": "price-current to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-current",
+        "multiplyBy": 1.16,
+        "sourceContextId": "price-current"
+      }
+    },
+    {
+      "comment": "price-initial to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-initial",
+        "multiplyBy": 1.16,
+        "sourceContextId": "price-initial"
+      }
+    },
+
+    {
+      "comment": "weight in grams",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "weightInG",
+        "sourceContextId": "single-product-view",
+        "mustContain": "Grams",
+        "css-queries": [ ".metal-avg-weight" ]
+      }
+    },
+    {
+      "comment": "weight in grams to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "weightInG",
+        "sourceContextId": "weightInG"
+      }
+    },
+
+    {
+      "comment": "description",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "description",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [
+          "meta[name='description']"
+        ]
+      }
+    },
+
+    {
+      "comment": "material",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "material",
+        "sourceContextId": "single-product-view",
+        "css-queries": [
+          ".product-description .heading-right-side-color"
+        ]
+      }
+    },
+
+    {
+      "comment": "color",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "color",
+        "sourceContextId": "single-product-view",
+        "css-queries": [
+          ".product-description .heading-right-side-color"
+        ]
+      }
+    },
+
+    {
+      "comment": "sizes",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "sizes",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "value",
+        "separator": ", ",
+        "replacements": {
+          "Wählen, ": ""
+        },
+        "css-queries": [
+          "[id *= 'ring_size'] option"
+        ]
+      }
+    },
+
+    {
+      "comment": "stone types",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "stoneTypes",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "data-master-code",
+        "separator": ", ",
+        "css-queries": [
+          ".mild-stone-line .stoneMaster"
+        ]
+      }
+    },
+
+    {
+      "comment": "merchant article number",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "mean",
+        "value": "galapel.{request.query.itemId}"
+      }
+    },
+
+    {
+      "comment": "images-big",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "images-big",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "href",
+        "css-queries": [
+          ".thumb-container .cloud-zoom-gallery"
+        ]
+      }
+    },
+
+    {
+      "comment": "title-image",
+      "commandId": "get-value-from-array",
+      "parameters": {
+        "contextId": "title-image",
+        "sourceContextId": "images-big"
+      }
+    },
+
+    {
+      "comment": "brand",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "brand",
+        "value": "Galapel"
+      }
+    },
+
+    {
+      "comment": "teaser texts",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "teaser-texts",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".service-sec-text" ]
+      }
+    },
+
+    {
+      "comment": "number of ratings",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "numberOfRatings",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".product-reviews .review-count" ]
+      }
+    },
+    {
+      "comment": "number of ratings",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "numberOfRatings",
+        "defaultValue": 0,
+        "sourceContextId": "numberOfRatings"
+      }
+    },
+
+    {
+      "comment": "rating",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "ratingInPercent",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".product-reviews .avg-rate" ]
+      }
+    },
+    {
+      "comment": "rating",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "ratingInPercent",
+        "defaultValue": 0,
+        "sourceContextId": "ratingInPercent"
+      }
+    },
+    {
+      "comment": "rating",
+      "commandId": "get-rule-of-three-value",
+      "parameters": {
+        "maximumValue": 5,
+        "contextId": "ratingInPercent"
+      }
+    },
+
+    {
+      "comment": "seoKeywords",
+      "commandId": "extract-seo-keywords",
+      "parameters": {
+        "contextId": "seoKeywords",
+        "sourceContextId": ["description", "title"]
+      }
+    },
+
+    {
+      "comment": "store scraped information",
+      "commandId": "store-information",
+      "parameters": {
+        "informationIds": [
+          "brand",
+          "center-stone-master-code",
+          "color",
+          "description",
+          "images-big",
+          "link",
+          "material",
+          "mean",
+          "numberOfRatings",
+          "price-current",
+          "price-initial",
+          "ratingInPercent",
+          "seoKeywords",
+          "sizes",
+          "stoneTypes",
+          "teaser-texts",
+          "title",
+          "title-image",
+          "weightInG"
+        ]
+      }
+    }
+  ]
+}

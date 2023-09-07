@@ -50,6 +50,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
 
     const options = {
         headers: {
+            'Cache-Control': 'no-cache',
             'User-Agent': userAgents[Math.floor(Math.random() * userAgents.length)]
         },
         httpsAgent: new https.Agent({ rejectUnauthorized: false }),
