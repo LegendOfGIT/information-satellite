@@ -6,6 +6,7 @@ module.exports = {
     BEAUTY_CARE_FRAGRANCES_WOMEN: 'women-fragrances',
     BEAUTY_CARE_HAIR_CARE: 'hair-care',
     BEAUTY_CARE_HAIR_STYLING: 'hairstyling',
+    BEAUTY_CARE_HEALTH_NUTRITIALSUPPLEMENTS: 'nutritional-supplements',
     BEAUTY_CARE_HEALTH_PAINKILLERS: 'painkillers',
     BEAUTY_CARE_MAKEUP_EYES: 'makeup-eyes',
     BEAUTY_CARE_MAKEUP_LIPS: 'makeup-lips',
