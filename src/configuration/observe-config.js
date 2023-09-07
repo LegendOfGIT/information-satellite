@@ -90,6 +90,7 @@ module.exports = {
     HOME_FURNITURE_DININGTABLES: 'dining-tables',
     HOME_FURNITURE_GAMINGCHAIRS: 'gaming-chairs',
     HOME_FURNITURE_KIDSBEDS: 'kids-beds',
+    HOME_FURNITURE_OFFICECHAIRS: 'office-chairs',
     HOME_FURNITURE_SOFAS: 'sofas',
     HOME_GARDEN_DECORATIONS: 'garden-decorations',
     HOME_GARDEN_GRILLS: 'garden-grills',

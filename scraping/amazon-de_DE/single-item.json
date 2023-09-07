@@ -134,7 +134,8 @@
           " - Kostenloser Versand.*": "",
           "bei Amazon.*": "bei WeWanna shop!",
           ": Amazon.*": "",
-          "Gratis Lieferung ab.*": ""
+          "Gratis Lieferung ab.*": "",
+          "günstig auf Amazon.*": ""
         },
         "css-queries": [ "meta[name=description]" ]
       }
