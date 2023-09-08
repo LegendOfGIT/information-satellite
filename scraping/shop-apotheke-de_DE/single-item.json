@@ -187,6 +187,16 @@
       }
     },
     {
+      "comment": "rating",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "ratingInPercent",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".accordion-details .prose p" ]
+      }
+    },
+
+    {
       "comment": "seoDescription",
       "commandId": "get-value-by-regex",
       "parameters": {

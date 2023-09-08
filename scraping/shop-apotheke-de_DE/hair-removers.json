@@ -1,5 +1,5 @@
 {
-  "site": "amazon.de",
+  "site": "shop-apotheke.com",
 
   "scraping": [
     {
@@ -7,7 +7,7 @@
       "commandId": "set-context-value",
       "parameters": {
         "contextId": "site",
-        "value": "amazon-de_DE"
+        "value": "shop-apotheke-de_DE"
       }
     },
     {
@@ -32,27 +32,19 @@
       "parameters": {
         "contextId": "navigation-path",
         "value": [
-          "MUSIC",
-          "MUSIC_CD",
-          "MUSIC_CD_ROCK"
+          "BEAUTY_CARE",
+          "BEAUTY_CARE_HAIR",
+          "BEAUTY_CARE_HAIR_HAIRREMOVERS"
         ]
       }
     },
 
     {
-      "comment": "random-page-number",
-      "commandId": "generate-random-number",
-      "parameters": {
-        "contextId": "random-page-number",
-        "maximum": "8"
-      }
-    },
-    {
       "comment": "product-overview",
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://{template.site}/gp/bestsellers/music/264886/ref=zg_bs_nav_music_1?pg={random-page-number}"
+        "uri": "https://{template.site}/enthaarungscreme-waxing/"
       }
     },
     {
@@ -60,8 +52,8 @@
       "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "css-queries": [ ".p13n-sc-uncoverable-faceout"],
-        "attribute-id": "id",
+        "css-queries": [ ".o-SearchProductListItem__button-label"],
+        "attribute-id": "data-product-identifier",
         "sourceContextId": "product-overview"
       }
     },

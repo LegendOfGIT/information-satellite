@@ -32,9 +32,43 @@
       "parameters": {
         "contextId": "navigation-path",
         "value": [
-          "MUSIC",
-          "MUSIC_CD",
-          "MUSIC_CD_ROCK"
+          "BEAUTY_CARE",
+          "BEAUTY_CARE_HAIR",
+          "BEAUTY_CARE_HAIR_HAIRREMOVERS"
+        ]
+      }
+    },
+
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "overwrite": true,
+        "uri": "https://{template.site}/gp/bestsellers/drugstore/3186367031/ref=zg_bs_nav_drugstore_2_64266031"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "product-ids",
+        "css-queries": [ ".p13n-sc-uncoverable-faceout"],
+        "overwriteValues": true,
+        "attribute-id": "id",
+        "sourceContextId": "product-overview"
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
         ]
       }
     },
@@ -44,7 +78,8 @@
       "commandId": "generate-random-number",
       "parameters": {
         "contextId": "random-page-number",
-        "maximum": "8"
+        "minimum": 2,
+        "maximum": 8
       }
     },
     {
@@ -52,7 +87,8 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://{template.site}/gp/bestsellers/music/264886/ref=zg_bs_nav_music_1?pg={random-page-number}"
+        "overwrite": true,
+        "uri": "https://{template.site}/gp/bestsellers/drugstore/3186367031/ref=zg_bs_nav_drugstore_2_64266031?pg={random-page-number}"
       }
     },
     {
@@ -61,6 +97,7 @@
       "parameters": {
         "contextId": "product-ids",
         "css-queries": [ ".p13n-sc-uncoverable-faceout"],
+        "overwriteValues": true,
         "attribute-id": "id",
         "sourceContextId": "product-overview"
       }
