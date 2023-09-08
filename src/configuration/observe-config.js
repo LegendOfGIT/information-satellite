@@ -85,6 +85,7 @@ module.exports = {
     HOME_ACCESSOIRES_BEDCOVERS: 'bedcovers',
     HOME_ACCESSOIRES_CARPETS: 'carpets',
     HOME_ACCESSOIRES_DECORATIONS: 'home-decorations',
+    HOME_ACCESSOIRES_MATTRESSES: 'mattresses',
     HOME_ACCESSOIRES_PILLOWS: 'pillows',
     HOME_CLEANING_LAUNDRYDETERGENT: 'laundry-detergent',
     HOME_COOKINGANDBAKING_BAKINGSUPPLIES: 'baking-supplies',

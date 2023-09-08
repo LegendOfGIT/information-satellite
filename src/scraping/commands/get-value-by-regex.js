@@ -8,6 +8,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         flags,
         groupIndex,
         regex,
+        removeTags = true,
         replacements = {},
         setValueOnMatch,
         sourceContextId,
@@ -37,7 +38,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
 
     const regexes = Array.isArray(regex) ? regex : [regex];
     const values = regexes.map(r => {
-        const value = (getValuesByRegex(sourceContext, r, groupIndex, flags || 'g', tagReplacer) || [''])[0];
+        const value = (getValuesByRegex(sourceContext, r, groupIndex, flags || 'g', tagReplacer, removeTags) || [''])[0];
         if (value) {
             return value;
         }

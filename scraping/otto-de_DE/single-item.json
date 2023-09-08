@@ -117,28 +117,6 @@
     },
 
     {
-      "comment": "diameter-in-cm",
-      "commandId": "get-value-by-regex",
-      "parameters": {
-        "contextId": "diameter-in-cm",
-        "flags": "sg",
-        "sourceContextId": "single-product-view",
-        "groupIndex": 1,
-        "regex": [
-          "Größe:(.*?)<\\/span>"
-        ]
-      }
-    },
-    {
-      "comment": "diameter-in-cm to float",
-      "commandId": "get-float-from-value",
-      "parameters": {
-        "contextId": "diameter-in-cm",
-        "sourceContextId": "diameter-in-cm"
-      }
-    },
-
-    {
       "comment": "description",
       "commandId": "get-value-by-css-queries",
       "parameters": {
@@ -151,6 +129,56 @@
           ".pdp_description__text-expander p",
           ".pdp_selling-points ul li"
         ]
+      }
+    },
+    {
+      "comment": "raw description",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "descriptionRaw",
+        "flags": "sg",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "removeTags": false,
+        "regex": [
+          "<.*?pdp_description__text-expander.*?>((\\n|.)*?)<\\/div"
+        ]
+      }
+    },
+    {
+      "comment": "description headlines",
+      "commandId": "get-values-by-regex",
+      "parameters": {
+        "contextId": "descriptions.headline",
+        "flags": "gm",
+        "sourceContextId": "descriptionRaw",
+        "groupIndex": 1,
+        "regex": [
+          "<b>(.*?)<.*?<br.*?>(.*?)((\\n|.)*?)<br",
+          "<strong>(.*?):.*?<"
+        ]
+      }
+    },
+    {
+      "comment": "description contents",
+      "commandId": "get-values-by-regex",
+      "parameters": {
+        "contextId": "descriptions.content",
+        "flags": "gm",
+        "sourceContextId": "descriptionRaw",
+        "groupIndex": 3,
+        "regex": [
+          "<b>(.*?)<.*?<br.*?>(.*?)((\\n|.)*?)<br",
+          "<strong>(.*?)()<.*?>((\\n|.)*?)<"
+        ]
+      }
+    },
+    {
+      "comment": "descriptions",
+      "commandId": "zip-contexts-to-context",
+      "parameters": {
+        "contextId": "descriptions",
+        "sourceContextIds": [ "descriptions.headline", "descriptions.content" ]
       }
     },
 
@@ -832,7 +860,7 @@
           "brand",
           "color",
           "description",
-          "diameter-in-cm",
+          "descriptions",
           "drawerAmount",
           "keyAmount",
           "gtin",

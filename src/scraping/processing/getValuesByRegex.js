@@ -1,4 +1,4 @@
-module.exports = (sourceContext, regex, groupIndex, flags = 'sg', tagReplacer = '') => {
+module.exports = (sourceContext, regex, groupIndex, flags = 'sg', tagReplacer = '', removeTags = true) => {
     sourceContext = Array.isArray(sourceContext) ? sourceContext : [sourceContext];
 
     if (!sourceContext || !regex) {
@@ -19,14 +19,19 @@ module.exports = (sourceContext, regex, groupIndex, flags = 'sg', tagReplacer = 
             return v;
         }
 
-        return v.replaceAll('\\u0026', '&').replaceAll('\\u003C', '<').replaceAll('\\u003E', '>').replaceAll('&apos;', '´')
+        let val = v.replaceAll('\\u0026', '&').replaceAll('\\u003C', '<').replaceAll('\\u003E', '>').replaceAll('&apos;', '´')
             .replaceAll('&#43;', '+')
             .replaceAll('&nbsp;', ' ').replaceAll('&ndash;', '-')
             .replaceAll('&quot;', '"').replaceAll('&amp;', '&')
             .replaceAll('&auml;', 'ä').replaceAll('&Auml;', 'Ä')
             .replaceAll('&ouml;', 'ö').replaceAll('&Ouml;', 'Ö')
-            .replaceAll('&uuml;', 'ü').replaceAll('&Uuml;', 'Ü')
-            .replaceAll(/<.*?>/g, tagReplacer);
+            .replaceAll('&uuml;', 'ü').replaceAll('&Uuml;', 'Ü');
+
+        if (!removeTags) {
+            return val;
+        }
+
+        return val.replaceAll(/<.*?>/g, tagReplacer);
     })
 
     return values;
