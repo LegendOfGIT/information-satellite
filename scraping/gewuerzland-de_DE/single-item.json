@@ -1,0 +1,278 @@
+{
+  "site": "gewuerzland.com",
+
+  "itemId": "{template.site}-{sku}",
+
+  "scraping": [
+    {
+      "comment": "product search",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-search",
+        "uri": "https://{template.site}/search?search={request.query.itemId}"
+      }
+    },
+    {
+      "comment": "link",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "link",
+        "css-queries": [ ".product-image-wrapper a"],
+        "attribute-id": "href",
+        "sourceContextId": "product-search"
+      }
+    },
+    {
+      "comment": "single product",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "single-product-view",
+        "uri": "{link}"
+      }
+    },
+
+    {
+      "comment": "merchant article number",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "mean",
+        "value": "gewuela.{request.query.itemId}"
+      }
+    },
+    {
+      "comment": "sku",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "sku",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ "span[itemprop='sku']" ]
+      }
+    },
+
+    {
+      "comment": "title",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".product-detail-name" ]
+      }
+    },
+
+    {
+      "comment": "title-image",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title-image",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "replacements": {
+          "\/media\/": "/thumbnail/",
+          "_.*?x.*?\\.": "_900x900_800x800."
+        },
+        "css-queries": [ "meta[property='og:image']" ]
+      }
+    },
+
+    {
+      "comment": "description",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "description",
+        "sourceContextId": "single-product-view",
+        "separator": " ",
+        "css-queries": [
+          "div[itemprop='description'], div[itemprop='description'] div, div[itemprop='description'] p, div[itemprop='description'] p strong",
+          ".product--description p span",
+          ".product--description p"
+        ]
+      }
+    },
+
+    {
+      "comment": "SEO description",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "seoDescription",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ "meta[property='og:description']" ]
+      }
+    },
+
+    {
+      "comment": "price-current",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "single-product-view",
+        "css-queries": [
+          ".product-detail-buy .with-list-price",
+          ".product-detail-buy .product-detail-price"
+        ]
+      }
+    },
+    {
+      "comment": "price-initial",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "single-product-view",
+        "css-queries": [
+          ".product-detail-buy .list-price-price",
+          ".product-detail-buy .with-list-price",
+          ".product-detail-buy .product-detail-price"
+        ]
+      }
+    },
+    {
+      "comment": "price-current to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "price-current"
+      }
+    },
+    {
+      "comment": "price-initial to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "price-initial"
+      }
+    },
+
+    {
+      "comment": "ingredients",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "ingredients",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "replacements": { "Hinweis:.*" : "", "\\.": "" },
+        "regex": [
+          "Zutaten: (.*?)<br"
+        ]
+      }
+    },
+    {
+      "comment": "publisher",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "publisher",
+        "value": "Gewürzland GmbH"
+      }
+    },
+
+    {
+      "comment": "brand",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "brand",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ "meta[property='product:brand']" ]
+      }
+    },
+    {
+      "comment": "Price per unit",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "pricePerUnit",
+        "sourceContextId": "single-product-view",
+        "replacements": { "\/.*": "" },
+        "css-queries": [
+          ".price-unit-reference-content"
+        ]
+      }
+    },
+    {
+      "comment": "Price per unit",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "pricePerUnit",
+        "sourceContextId": "pricePerUnit"
+      }
+    },
+    {
+      "comment": "size",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "size",
+        "sourceContextId": "single-product-view",
+        "css-queries": [
+          "div:has([checked='checked']) > .product-detail-configurator-option-label"
+        ]
+      }
+    },
+    {
+      "comment": "sizes",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "sizes",
+        "sourceContextId": "single-product-view",
+        "separator": ";",
+        "css-queries": [
+          ".product-detail-configurator-option-label"
+        ]
+      }
+    },
+    {
+      "comment": "teaser-texts",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "teaser-texts",
+        "sourceContextId": "single-product-view",
+        "css-queries": [
+          ".mbanner-title-zutaten p"
+        ]
+      }
+    },
+    {
+      "comment": "teaser-texts",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "teaser-texts",
+        "replacements": {
+          "Wir haben hohe.*": "Wir haben hohe Qualitätskriterien"
+        },
+        "sourceContextId": "teaser-texts"
+      }
+    },
+
+    {
+      "comment": "seoKeywords",
+      "commandId": "extract-seo-keywords",
+      "parameters": {
+        "contextId": "seoKeywords",
+        "sourceContextId": ["description", "title"]
+      }
+    },
+
+    {
+      "comment": "store scraped information",
+      "commandId": "store-information",
+      "parameters": {
+        "informationIds": [
+          "brand",
+          "description",
+          "ingredients",
+          "link",
+          "mean",
+          "price-current",
+          "price-initial",
+          "pricePerUnit",
+          "publisher",
+          "seoDescription",
+          "seoKeywords",
+          "sku",
+          "size",
+          "sizes",
+          "teaser-texts",
+          "title",
+          "title-image"
+        ]
+      }
+    }
+  ]
+}

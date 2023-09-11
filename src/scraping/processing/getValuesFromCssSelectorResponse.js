@@ -5,7 +5,9 @@ module.exports = (cssSelectorResponse, attributeIds, mustContain, mustNotContain
         .replace(/\r/g, '')
         .replace('\r', '')
         .replace(/\n/g, '')
-        .replace('\n', '');
+        .replace('\n', '')
+        .replace(/\t/g, '')
+        .replace('\t', '');
 
     cssSelectorResponse = cssSelectorResponse || { get: () => {} };
     const results = cssSelectorResponse.get() || [];
