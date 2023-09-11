@@ -229,6 +229,39 @@
     },
 
     {
+      "comment": "description headlines",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "descriptions.headline",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".sf-custom__block-inner .content__heading" ]
+      }
+    },
+    {
+      "comment": "description content",
+      "commandId": "get-values-by-regex",
+      "parameters": {
+        "contextId": "descriptions.content",
+        "flags": "gm",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 4,
+        "replacements": { "\\s+": " ", ".*?Ich möchte den Newsletter.*": "" },
+        "regex": [
+          "content__heading(.*?)((\n|.)*?)<p>(.*?)<\/p>"
+        ]
+      }
+    },
+
+    {
+      "comment": "descriptions",
+      "commandId": "zip-contexts-to-context",
+      "parameters": {
+        "contextId": "descriptions",
+        "sourceContextIds": [ "descriptions.headline", "descriptions.content" ]
+      }
+    },
+
+    {
       "comment": "seoKeywords",
       "commandId": "extract-seo-keywords",
       "parameters": {
@@ -369,6 +402,78 @@
         "regex": "Geeignet für.*?>.*?;(.*?\\W.*?)<"
       }
     },
+    {
+      "comment": "Weight in KG",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "weightInKG",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": "Gewicht inkl.*?>(.*?)kg"
+      }
+    },
+    {
+      "comment": "Weight in KG",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "weightInKG",
+        "sourceContextId": "weightInKG"
+      }
+    },
+    {
+      "comment": "Length in cm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "length-in-cm",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": "Maße.*?>.*?;(.*?)x(.*?)x(.*?) cm"
+      }
+    },
+    {
+      "comment": "Length in cm",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "length-in-cm",
+        "sourceContextId": "length-in-cm"
+      }
+    },
+    {
+      "comment": "Width in cm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "width-in-cm",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 2,
+        "regex": "Maße.*?>.*?;(.*?)x(.*?)x(.*?) cm"
+      }
+    },
+    {
+      "comment": "Width in cm",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "width-in-cm",
+        "sourceContextId": "width-in-cm"
+      }
+    },
+    {
+      "comment": "Height in cm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "height-in-cm",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 3,
+        "regex": "Maße.*?>.*?;(.*?)x(.*?)x(.*?) cm"
+      }
+    },
+    {
+      "comment": "Height in cm",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "height-in-cm",
+        "sourceContextId": "height-in-cm"
+      }
+    },
 
     {
       "comment": "store scraped information",
@@ -377,10 +482,13 @@
         "informationIds": [
           "colors",
           "description",
+          "descriptions",
           "gtin",
+          "height-in-cm",
           "images-big",
           "images-small",
           "innerMaterial",
+          "length-in-cm",
           "link",
           "material",
           "materialProperties",
@@ -398,7 +506,9 @@
           "sizes",
           "sku",
           "title",
-          "title-image"
+          "title-image",
+          "weightInKG",
+          "width-in-cm"
         ]
       }
     }
