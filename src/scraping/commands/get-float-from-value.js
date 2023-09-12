@@ -1,3 +1,4 @@
+const {val} = require("cheerio/lib/api/attributes");
 module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     console.log('executing command "get-float-from-value"')
 
@@ -28,6 +29,18 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     };
     const isNumeric = (value) => /^\d+$/.test(value);
     const isSeparator = (value) => '.' === value || ',' === value;
+    const fixExtensiveFollowingDigits = (value) => {
+        const indexOfLastSeparator = value.indexOf('.');
+        if (-1 === indexOfLastSeparator || -1 !== value.indexOf(',')) {
+            return value;
+        }
+
+        if (indexOfLastSeparator > 2 || (value.length - indexOfLastSeparator) < 4) {
+            return value;
+        }
+
+        return value.replace('.', '');
+    }
 
     let americanFormattedValue = '';
     for (let i = 0; i < sourceContext.length; i++) {
@@ -41,6 +54,8 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
             americanFormattedValue += isLastSeparator(sourceContext, i) ? '.' : '';
         }
     }
+
+    americanFormattedValue = fixExtensiveFollowingDigits(americanFormattedValue);
 
     const newValue = parseFloat(americanFormattedValue);
     context[contextId] = isNaN(newValue) ? defaultValue : parseFloat(americanFormattedValue);
