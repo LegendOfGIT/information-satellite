@@ -125,8 +125,8 @@
         "separator": " ",
         "css-queries": [
           ".js_prd_moreBox__content",
-          ".pdp_description__text-expander",
           ".pdp_description__text-expander p",
+          ".pdp_description__text-expander",
           ".pdp_selling-points ul li"
         ]
       }
@@ -155,7 +155,8 @@
         "groupIndex": 1,
         "regex": [
           "<b>(.*?)<.*?<br.*?>(.*?)((\\n|.)*?)<br",
-          "<strong>(.*?)<"
+          "<strong>(.*?)<",
+          "<p>(.*?)(-|:)"
         ]
       }
     },
@@ -170,7 +171,8 @@
         "regex": [
           "<b>(.*?)<.*?<br.*?>(.*?)((\\n|.)*?)<br",
           "<strong>(.*?)()<.*?><br \\/>((\\n|.)*?)<p>",
-          "<strong>(.*?)()<.*?>((\\n|.)*?)<"
+          "<strong>(.*?)()<.*?>((\\n|.)*?)<",
+          "<p>(.*?)(-|:)(.*?)<\\/p>"
         ]
       }
     },
