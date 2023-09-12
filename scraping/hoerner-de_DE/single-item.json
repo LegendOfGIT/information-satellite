@@ -67,9 +67,6 @@
       "commandId": "set-context-value",
       "parameters": {
         "contextId": "title-image",
-        "replacements": {
-          "[0-9]{3}x[0-9]{3}": "400x400"
-        },
         "value": "{title-image}"
       }
     },
@@ -107,6 +104,51 @@
         "sourceContextId": "single-product-view",
         "attribute-id": "content",
         "css-queries": [ "meta[name='description']" ]
+      }
+    },
+
+    {
+      "comment": "description headlines",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "descriptions.headline",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".product-short-description span strong" ]
+      }
+    },
+    {
+      "comment": "description headlines",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "descriptions.headline",
+        "replacements": { " –":  "" },
+        "sourceContextId": "descriptions.headline"
+      }
+    },
+    {
+      "comment": "description content",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "descriptions.content",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".product-short-description p" ]
+      }
+    },
+    {
+      "comment": "description content",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "descriptions.content",
+        "replacements": { "– ":  "" },
+        "sourceContextId": "descriptions.content"
+      }
+    },
+    {
+      "comment": "descriptions",
+      "commandId": "zip-contexts-to-context",
+      "parameters": {
+        "contextId": "descriptions",
+        "sourceContextIds": [ "descriptions.headline", "descriptions.content" ]
       }
     },
 
@@ -296,6 +338,7 @@
         "informationIds": [
           "colors",
           "description",
+          "descriptions",
           "images-big",
           "length-in-cm",
           "link",
