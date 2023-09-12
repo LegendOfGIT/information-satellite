@@ -32,9 +32,9 @@
       "parameters": {
         "contextId": "navigation-path",
         "value": [
-          "BEAUTY_CARE",
-          "BEAUTY_CARE_MAKEUP",
-          "BEAUTY_CARE_MAKEUP_EYES"
+          "FASHION",
+          "FASHION_MEN",
+          "FASHION_MEN_JEWELRY"
         ]
       }
     },
@@ -45,7 +45,7 @@
       "parameters": {
         "contextId": "product-overview",
         "overwrite": true,
-        "uri": "https://{template.site}/collections/lidschatten?sort_by=created-descending"
+        "uri": "https://{template.site}/collections/armbander?sort_by=created-descending"
       }
     },
     {
@@ -54,10 +54,10 @@
       "parameters": {
         "contextId": "product-ids",
         "sourceContextId": "product-overview",
-        "groupIndex": 1,
+        "groupIndex": 2,
         "overwriteValues": true,
         "unique": true,
-        "regex": "\"sku\":\"(.*?)\""
+        "regex": "{.*?(h|H)erren.*?\"sku\":\"(.*?)\".*?}"
       }
     },
     {
@@ -80,7 +80,7 @@
       "parameters": {
         "contextId": "product-overview",
         "overwrite": true,
-        "uri": "https://{template.site}/collections/lidschatten?sort_by=best-selling"
+        "uri": "https://{template.site}/collections/armbander?sort_by=best-selling"
       }
     },
     {
@@ -89,123 +89,10 @@
       "parameters": {
         "contextId": "product-ids",
         "sourceContextId": "product-overview",
-        "groupIndex": 1,
+        "groupIndex": 2,
         "overwriteValues": true,
         "unique": true,
-        "regex": "\"sku\":\"(.*?)\""
-      }
-    },
-    {
-      "comment": "observe scraped information",
-      "commandId": "observe-information",
-      "parameters": {
-        "informationIds": [
-          "locale",
-          "navigation-path",
-          "product-ids",
-          "site",
-          "usecase"
-        ]
-      }
-    },
-
-    {
-      "comment": "random-page-number",
-      "commandId": "generate-random-number",
-      "parameters": {
-        "contextId": "random-page-number",
-        "minimum": 2,
-        "maximum": 10
-      }
-    },
-    {
-      "comment": "product-overview",
-      "commandId": "visit-uri",
-      "parameters": {
-        "contextId": "product-overview",
-        "overwrite": true,
-        "uri": "https://{template.site}/collections/lidschatten?sort_by=best-selling&page={random-page-number}"
-      }
-    },
-    {
-      "comment": "product ids",
-      "commandId": "get-values-by-regex",
-      "parameters": {
-        "contextId": "product-ids",
-        "sourceContextId": "product-overview",
-        "groupIndex": 1,
-        "overwriteValues": true,
-        "unique": true,
-        "regex": "\"sku\":\"(.*?)\""
-      }
-    },
-    {
-      "comment": "observe scraped information",
-      "commandId": "observe-information",
-      "parameters": {
-        "informationIds": [
-          "locale",
-          "navigation-path",
-          "product-ids",
-          "site",
-          "usecase"
-        ]
-      }
-    },
-
-    {
-      "comment": "product-overview",
-      "commandId": "visit-uri",
-      "parameters": {
-        "contextId": "product-overview",
-        "overwrite": true,
-        "uri": "https://{template.site}/collections/wimperntusche?sort_by=created-descending"
-      }
-    },
-    {
-      "comment": "product ids",
-      "commandId": "get-values-by-regex",
-      "parameters": {
-        "contextId": "product-ids",
-        "sourceContextId": "product-overview",
-        "groupIndex": 1,
-        "overwriteValues": true,
-        "unique": true,
-        "regex": "\"sku\":\"(.*?)\""
-      }
-    },
-    {
-      "comment": "observe scraped information",
-      "commandId": "observe-information",
-      "parameters": {
-        "informationIds": [
-          "locale",
-          "navigation-path",
-          "product-ids",
-          "site",
-          "usecase"
-        ]
-      }
-    },
-
-    {
-      "comment": "product-overview",
-      "commandId": "visit-uri",
-      "parameters": {
-        "contextId": "product-overview",
-        "overwrite": true,
-        "uri": "https://{template.site}/collections/wimperntusche?sort_by=best-selling"
-      }
-    },
-    {
-      "comment": "product ids",
-      "commandId": "get-values-by-regex",
-      "parameters": {
-        "contextId": "product-ids",
-        "sourceContextId": "product-overview",
-        "groupIndex": 1,
-        "overwriteValues": true,
-        "regex": "\"sku\":\"(.*?)\""
+        "regex": "{.*?(h|H)erren.*?\"sku\":\"(.*?)\".*?}"
       }
     },
     {
@@ -228,7 +115,7 @@
       "parameters": {
         "contextId": "random-page-number",
         "minimum": 2,
-        "maximum": 10
+        "maximum": 45
       }
     },
     {
@@ -237,7 +124,7 @@
       "parameters": {
         "contextId": "product-overview",
         "overwrite": true,
-        "uri": "https://{template.site}/collections/wimperntusche?sort_by=best-selling&page={random-page-number}"
+        "uri": "https://{template.site}/collections/armbander?sort_by=best-selling&page={random-page-number}"
       }
     },
     {
@@ -246,10 +133,124 @@
       "parameters": {
         "contextId": "product-ids",
         "sourceContextId": "product-overview",
-        "groupIndex": 1,
+        "groupIndex": 2,
         "overwriteValues": true,
         "unique": true,
-        "regex": "\"sku\":\"(.*?)\""
+        "regex": "{.*?(h|H)erren.*?\"sku\":\"(.*?)\".*?}"
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    },
+
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "overwrite": true,
+        "uri": "https://{template.site}/collections/ketten?sort_by=created-descending"
+      }
+    },
+    {
+      "comment": "product ids",
+      "commandId": "get-values-by-regex",
+      "parameters": {
+        "contextId": "product-ids",
+        "sourceContextId": "product-overview",
+        "groupIndex": 2,
+        "overwriteValues": true,
+        "unique": true,
+        "regex": "{.*?(h|H)erren.*?\"sku\":\"(.*?)\".*?}"
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    },
+
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "overwrite": true,
+        "uri": "https://{template.site}/collections/kettenr?sort_by=best-selling"
+      }
+    },
+    {
+      "comment": "product ids",
+      "commandId": "get-values-by-regex",
+      "parameters": {
+        "contextId": "product-ids",
+        "sourceContextId": "product-overview",
+        "groupIndex": 2,
+        "overwriteValues": true,
+        "unique": true,
+        "regex": "{.*?(h|H)erren.*?\"sku\":\"(.*?)\".*?}"
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    },
+
+    {
+      "comment": "random-page-number",
+      "commandId": "generate-random-number",
+      "parameters": {
+        "contextId": "random-page-number",
+        "minimum": 2,
+        "maximum": 75
+      }
+    },
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "overwrite": true,
+        "uri": "https://{template.site}/collections/ketten?sort_by=best-selling&page={random-page-number}"
+      }
+    },
+    {
+      "comment": "product ids",
+      "commandId": "get-values-by-regex",
+      "parameters": {
+        "contextId": "product-ids",
+        "sourceContextId": "product-overview",
+        "groupIndex": 2,
+        "overwriteValues": true,
+        "unique": true,
+        "regex": "{.*?(h|H)erren.*?\"sku\":\"(.*?)\".*?}"
       }
     },
     {

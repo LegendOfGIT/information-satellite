@@ -33,8 +33,8 @@
         "contextId": "navigation-path",
         "value": [
           "BEAUTY_CARE",
-          "BEAUTY_CARE_FRAGRANCES",
-          "BEAUTY_CARE_FRAGRANCES_UNISEX"
+          "BEAUTY_CARE_BODYCARE",
+          "BEAUTY_CARE_BODYCARE_SOAP"
         ]
       }
     },
@@ -45,7 +45,7 @@
       "parameters": {
         "contextId": "product-overview",
         "overwrite": true,
-        "uri": "https://{template.site}/collections/parfums-unisex?sort_by=created-descending"
+        "uri": "https://{template.site}/collections/seifen-und-gels?sort_by=created-descending"
       }
     },
     {
@@ -55,6 +55,7 @@
         "contextId": "product-ids",
         "sourceContextId": "product-overview",
         "groupIndex": 1,
+        "overwriteValues": true,
         "unique": true,
         "regex": "\"sku\":\"(.*?)\""
       }
@@ -79,7 +80,7 @@
       "parameters": {
         "contextId": "product-overview",
         "overwrite": true,
-        "uri": "https://{template.site}/collections/parfums-unisex?sort_by=best-selling"
+        "uri": "https://{template.site}/collections/seifen-und-gels?sort_by=best-selling"
       }
     },
     {
@@ -114,7 +115,7 @@
       "parameters": {
         "contextId": "random-page-number",
         "minimum": 2,
-        "maximum": 5
+        "maximum": 12
       }
     },
     {
@@ -123,7 +124,7 @@
       "parameters": {
         "contextId": "product-overview",
         "overwrite": true,
-        "uri": "https://{template.site}/collections/parfums-unisex?sort_by=best-selling&page={random-page-number}"
+        "uri": "https://{template.site}/collections/seifen-und-gels?sort_by=best-selling&page={random-page-number}"
       }
     },
     {
