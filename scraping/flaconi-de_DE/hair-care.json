@@ -1,0 +1,161 @@
+{
+  "site": "flaconi.de",
+
+  "scraping": [
+    {
+      "comment": "site",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "site",
+        "value": "flaconi-de_DE"
+      }
+    },
+    {
+      "comment": "locale",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "locale",
+        "value": "de-DE"
+      }
+    },
+    {
+      "comment": "usecase",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "usecase",
+        "value": "single-item"
+      }
+    },
+    {
+      "comment": "navigation-path",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "navigation-path",
+        "value": [
+          "BEAUTY_CARE",
+          "BEAUTY_CARE_HAIR",
+          "BEAUTY_CARE_HAIR_CARE"
+        ]
+      }
+    },
+
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "uri": "https://www.{template.site}/waschen-pflege/?sortAttributeId=createdAt&sortOrder=descending"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-regex",
+      "parameters": {
+        "contextId": "product-ids",
+        "sourceContextId": "product-overview",
+        "regex": "ExtendedProduct.*?sku\".*?\"(.*?)\"",
+        "replacements": {
+          "\\-.*": ""
+        },
+        "groupIndex": 1
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    },
+
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "overwrite": true,
+        "uri": "https://www.{template.site}/waschen-pflege/"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-regex",
+      "parameters": {
+        "contextId": "product-ids",
+        "sourceContextId": "product-overview",
+        "regex": "ExtendedProduct.*?sku\".*?\"(.*?)\"",
+        "overwriteValues": true,
+        "replacements": {
+          "\\-.*": ""
+        },
+        "groupIndex": 1
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    },
+
+    {
+      "comment": "random-offset-number",
+      "commandId": "generate-random-number",
+      "parameters": {
+        "contextId": "random-offset-number",
+        "minimum": 40,
+        "maximum": 1500
+      }
+    },
+
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "overwrite": true,
+        "uri": "https://www.{template.site}/waschen-pflege/?offset={random-offset-number}"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-regex",
+      "parameters": {
+        "contextId": "product-ids",
+        "sourceContextId": "product-overview",
+        "regex": "ExtendedProduct.*?sku\".*?\"(.*?)\"",
+        "overwriteValues": true,
+        "replacements": {
+          "\\-.*": ""
+        },
+        "groupIndex": 1
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    }
+  ]
+}

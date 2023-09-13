@@ -156,6 +156,7 @@
         "regex": [
           "<b>(.*?)<.*?<br.*?>(.*?)((\\n|.)*?)<br",
           "<strong>(.*?)<",
+          "<p>\\[(.*?)\\](-|:)",
           "<p>(.*?)(-|:)"
         ]
       }
@@ -172,6 +173,7 @@
           "<b>(.*?)<.*?<br.*?>(.*?)((\\n|.)*?)<br",
           "<strong>(.*?)()<.*?><br \\/>((\\n|.)*?)<p>",
           "<strong>(.*?)()<.*?>((\\n|.)*?)<",
+          "<p>\\[(.*?)\\](-|:)(.*?)<\\/p>",
           "<p>(.*?)(-|:)(.*?)<\\/p>"
         ]
       }
@@ -202,8 +204,27 @@
       "commandId": "get-float-from-value",
       "parameters": {
         "contextId": "minimumAge",
-        "sourceContextId": "minimumAge",
-        "defaultValue": 0
+        "sourceContextId": "minimumAge"
+      }
+    },
+    {
+      "comment": "Minimum age in months",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "minimumAgeInMonths",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "Anwendbares Alter:(.*?)Monate<"
+        ]
+      }
+    },
+    {
+      "comment": "Minimum age in months",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "minimumAgeInMonths",
+        "sourceContextId": "minimumAgeInMonths"
       }
     },
 
@@ -879,6 +900,7 @@
           "mean",
           "maximumVelocityInKmh",
           "minimumAge",
+          "minimumAgeInMonths",
           "minimumEnergyEfficiencyClass",
           "model",
           "multiplayer",

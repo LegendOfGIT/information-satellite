@@ -114,6 +114,7 @@ module.exports = {
     KIDS_TOYS_BABIES: 'kids-baby-toys',
     KIDS_TOYS_CONSTRUCTIONTOYS: 'kids-construction-toys',
     KIDS_TOYS_ELECTRICVEHICLES: 'kids-electric-vehicles',
+    KIDS_TOYS_EDUCATIONALTOYS: 'kids-educational-toys',
     KIDS_TOYS_EXPERIMENTANDRESEARCH: 'kids-toys-experiment-research',
     KIDS_TOYS_FIGURES: 'kids-toys-figures',
     KIDS_TOYS_GAMES: 'kids-games',
