@@ -39,6 +39,18 @@
         "uri": "{link}"
       }
     },
+    {
+      "comment": "variant",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "variant",
+        "sourceContextId": "link",
+        "groupIndex": 1,
+        "regex": [
+          "variant=(.*)"
+        ]
+      }
+    },
 
     {
       "comment": "merchant article number",
@@ -86,15 +98,17 @@
 
     {
       "comment": "title-image",
-      "commandId": "get-value-by-css-queries",
+      "commandId": "get-value-by-regex",
       "parameters": {
         "contextId": "title-image",
         "sourceContextId": "single-product-view",
-        "attribute-id": "content",
+        "groupIndex": 1,
         "replacements": {
-          "v=.*": "width=600"
+          "\\\\/": "/",
+          "\/\/":  "https://",
+          "$": "&width=600"
         },
-        "css-queries": [ "meta[property='og:image:secure_url']" ]
+        "regex": "{variant}\".*?\"image\".*?.*?src\":\"(.*?)\""
       }
     },
 
@@ -213,7 +227,7 @@
       "parameters": {
         "contextId": "images-big",
         "replacements": {
-          "v=.*": "width=450",
+          "v=.*": "width=600",
           "\\\\/": "/",
           "\/\/":  "https://"
         },
@@ -433,6 +447,7 @@
           "teaser-texts",
           "title",
           "title-image",
+          "variant",
           "weightInKG",
           "width-in-cm"
         ]
