@@ -11,6 +11,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         removeTags = true,
         replacements = {},
         setValueOnMatch,
+        setValueOnMiss,
         sourceContextId,
         tagReplacer = ''
     } = parameters;
@@ -54,9 +55,13 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     }).filter(v => v && v !== 'null');
 
     if (values.length) {
-        context[contextId] = setValueOnMatch || values[0];
+        context[contextId] = undefined !== setValueOnMatch ? setValueOnMatch : values[0];
     }
-    context[contextId] = context[contextId] || '';
+    else if(setValueOnMiss) {
+        context[contextId] = setValueOnMiss;
+    }
+
+    context[contextId] = undefined !== context[contextId] ? context[contextId] : '';
     for (const [key, value] of Object.entries(replacements)) {
         context[contextId] = context[contextId].replace(new RegExp(key,"g"), value);
     }
