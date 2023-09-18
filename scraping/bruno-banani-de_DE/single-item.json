@@ -1,0 +1,302 @@
+{
+  "site": "brunobanani.com",
+
+  "itemId": "{template.site}-{sku}",
+
+  "scraping": [
+    {
+      "comment": "link",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "link",
+        "value": "https://www.{template.site}/de/{request.query.itemId}"
+      }
+    },
+    {
+      "comment": "single-product-view",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "single-product-view",
+        "uri": "{link}"
+      }
+    },
+
+    {
+      "comment": "link",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "link",
+        "value": "{current-uri}"
+      }
+    },
+
+    {
+      "comment": "merchant article number",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "mean",
+        "value": "brunban.{request.query.itemId}"
+      }
+    },
+
+    {
+      "comment": "sku",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "sku",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ "[itemprop='sku']" ]
+      }
+    },
+
+    {
+      "comment": "title",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".bb-titel-left h1" ]
+      }
+    },
+
+    {
+      "comment": "images-big",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "images-big",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "srcset",
+        "css-queries": [ ".image-slider--item .image--media img" ]
+      }
+    },
+    {
+      "comment": "images-big",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "images-big",
+        "replacements": {
+          "600.jpg.*": "600.jpg"
+        },
+        "sourceContextId": "images-big"
+      }
+    },
+    {
+      "comment": "title-image",
+      "commandId": "get-value-from-array",
+      "parameters": {
+        "contextId": "title-image",
+        "sourceContextId": "images-big"
+      }
+    },
+
+    {
+      "comment": "description",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "description",
+        "sourceContextId": "single-product-view",
+        "css-queries": [
+          "[itemprop='description'] p:first-child span font",
+          "[itemprop='description'] p:first-child"
+        ]
+      }
+    },
+    {
+      "comment": "SEO description",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "seoDescription",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ "meta[property='og:description']" ]
+      }
+    },
+
+    {
+      "comment": "price-current",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".price--fsombb-info a", ".price--content" ]
+      }
+    },
+    {
+      "comment": "price-initial",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".price--line-through", ".price--content" ]
+      }
+    },
+    {
+      "comment": "price-current to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "price-current"
+      }
+    },
+    {
+      "comment": "price-initial to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "price-initial"
+      }
+    },
+
+    {
+      "comment": "seoKeywords",
+      "commandId": "extract-seo-keywords",
+      "parameters": {
+        "contextId": "seoKeywords",
+        "sourceContextId": ["description", "title"]
+      }
+    },
+
+    {
+      "comment": "brand",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "brand",
+        "sourceContextId": "single-product-view",
+        "regex": "\"brand\":\"(.*?)\"",
+        "groupIndex": 1
+      }
+    },
+    {
+      "comment": "fragrances",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "fragrances",
+        "sourceContextId": "single-product-view",
+        "regex": "product--description-usps.*?>((\\n|.)*?)(Duftfamilie((\\n|.)*?))<\\/div",
+        "groupIndex": 3
+      }
+    },
+    {
+      "comment": "fragrances",
+      "commandId": "get-values-by-regex",
+      "parameters": {
+        "contextId": "fragrances",
+        "sourceContextId": "fragrances",
+        "regex": ":(.*?)(\\n|$)",
+        "separator": ", ",
+        "groupIndex": 1
+      }
+    },
+    {
+      "comment": "size",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "size",
+        "sourceContextId": "single-product-view",
+        "regex": "<(p|P)>.*?enthält:(.*?)<\\/(p|P)>",
+        "groupIndex": 2
+      }
+    },
+    {
+      "comment": "size",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "size",
+        "sourceContextId": "single-product-view",
+        "replacements": { "\\.": "" },
+        "css-queries": [ ".variant--group div:has(input[name='group[2]']) label:not(label[class*='is--out']) span" ]
+      }
+    },
+    {
+      "comment": "sizes",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "sizes",
+        "sourceContextId": "single-product-view",
+        "separator": ", ",
+        "replacements": { "\\.": "" },
+        "css-queries": [ ".variant--group div:has(input[name='group[2]']) label:not(label[class*='is--out']) span" ]
+      }
+    },
+
+    {
+      "comment": "color",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "color",
+        "sourceContextId": "single-product-view",
+        "replacements": { "\\.": "" },
+        "css-queries": [ ".bb-color-name" ]
+      }
+    },
+    {
+      "comment": "colors",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "colors",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "alt",
+        "separator": ", ",
+        "replacements": { "\\.": "" },
+        "css-queries": [ ".variant--group div:has(input[name='group[1]']) img" ]
+      }
+    },
+
+    {
+      "comment": "price per unit",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "pricePerUnit",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".price--unit" ]
+      }
+    },
+    {
+      "comment": "price per unit",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "pricePerUnit",
+        "sourceContextId": "pricePerUnit",
+        "regex": "\\((.*?)\/.*?\\)",
+        "groupIndex": 1
+      }
+    },
+    {
+      "comment": "price per unit",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "pricePerUnit",
+        "sourceContextId": "pricePerUnit"
+      }
+    },
+
+    {
+      "comment": "store scraped information",
+      "commandId": "store-information",
+      "parameters": {
+        "requiredProperties": [ "link" ],
+        "informationIds": [
+          "brand",
+          "color",
+          "colors",
+          "description",
+          "fragrances",
+          "images-big",
+          "link",
+          "mean",
+          "price-current",
+          "price-initial",
+          "pricePerUnit",
+          "seoDescription",
+          "seoKeywords",
+          "sku",
+          "size",
+          "sizes",
+          "title",
+          "title-image"
+        ]
+      }
+    }
+  ]
+}
