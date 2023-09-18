@@ -281,6 +281,8 @@
         "contextId": "sizes",
         "sourceContextId": "single-product-view",
         "separator": "; ",
+        "replacements": { "\\+" :  "" },
+        "attribute-id": "data-attr-id",
         "css-queries": [ ".product-detail__attribute-variations[data-attr='size'] button" ]
       }
     },
