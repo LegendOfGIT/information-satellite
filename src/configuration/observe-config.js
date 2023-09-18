@@ -71,6 +71,7 @@ module.exports = {
     FASHION_WOMEN_SKIRTS: 'women-skirts',
     FASHION_WOMEN_SWEATERS_AND_KNITWEAR: 'women-sweaters-knitwear',
     FASHION_WOMEN_SWIMWEAR: 'women-swimwear',
+    FASHION_WOMEN_UNDERWEAR: 'women-underwear',
     GROCERIES_DRINKS_BEER: 'beer',
     GROCERIES_DRINKS_COFFEE: 'coffee',
     GROCERIES_DRINKS_CHAMPAIGN: 'champaign',
