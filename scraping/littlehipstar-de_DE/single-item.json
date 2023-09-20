@@ -413,6 +413,20 @@
     },
 
     {
+      "comment": "country of origin",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "countryOfOrigin",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 2,
+        "regex": [
+          "li>.*?(h|H)ergestellt in(.*?)<",
+          "li>.*?(h|H)andgefertigt in(.*?)<"
+        ]
+      }
+    },
+
+    {
       "comment": "seoKeywords",
       "commandId": "extract-seo-keywords",
       "parameters": {
@@ -431,6 +445,7 @@
           "color",
           "colors",
           "contentsOfDelivery",
+          "countryOfOrigin",
           "description",
           "gtin",
           "height-in-cm",

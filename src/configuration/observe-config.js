@@ -118,6 +118,7 @@ module.exports = {
     KIDS_SCHOOL_SCHOOLCONES: 'school-cones',
     KIDS_SCHOOL_SUPPLIES: 'school-supplies',
     KIDS_TOYS_BABIES: 'kids-baby-toys',
+    KIDS_TOYS_BEACHANDWATER: 'kids-beach-water-toys',
     KIDS_TOYS_CONSTRUCTIONTOYS: 'kids-construction-toys',
     KIDS_TOYS_ELECTRICVEHICLES: 'kids-electric-vehicles',
     KIDS_TOYS_EDUCATIONALTOYS: 'kids-educational-toys',

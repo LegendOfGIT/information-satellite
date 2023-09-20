@@ -111,7 +111,7 @@
         "contextId": "title-image",
         "sourceContextId": "single-product-view",
         "attribute-id": "content",
-        "replacements": { "[0-9]+x[0-9]+" :  "600x600" },
+        "replacements": { "[0-9]+x[0-9]+\\." :  "600x600." },
         "css-queries": [ "meta[property='og:image:secure_url']" ]
       }
     },
@@ -133,7 +133,7 @@
         "contextId": "images-big",
         "replacements": {
           " [0-9]+w.*":  "",
-          "[0-9]+x": "600x",
+          "[0-9]+x\\.": "600x.",
           "\/\/": "https://"
         },
         "sourceContextId": "images-big"
