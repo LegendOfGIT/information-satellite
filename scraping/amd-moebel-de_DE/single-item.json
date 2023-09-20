@@ -232,7 +232,8 @@
         "separator": " ",
         "css-queries": [
           ".MsoNormal:not(:first-child) b, .MsoNormal",
-          ".pdl strong, .pdr strong, .pdr p"
+          ".pdl strong, .pdr strong, .pdr p",
+          ".accordion-content .rte p strong, .accordion-content .rte p"
         ]
       }
     },
