@@ -187,6 +187,8 @@
       "commandId": "zip-contexts-to-context",
       "parameters": {
         "contextId": "descriptions",
+        "exchangeFromWhenEmpty": "headline",
+        "exchangeToWhenEmpty": "content",
         "sourceContextIds": [ "descriptions.headline", "descriptions.content" ]
       }
     },

@@ -52,8 +52,9 @@
       "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "css-queries": [ "a[data-testid='product-link']"],
+        "css-queries": [ ".MuiBox-root a[data-testid='link']"],
         "attribute-id": "href",
+        "overwriteValues": true,
         "sourceContextId": "product-overview"
       }
     },
@@ -62,6 +63,7 @@
       "commandId": "clone-items-and-modify-clones",
       "parameters": {
         "contextId": "product-ids",
+        "unique": true,
         "replacements": {
           ".*/": "",
           "\\?.*": ""
@@ -106,7 +108,7 @@
       "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "css-queries": [ "a[data-testid='product-link']"],
+        "css-queries": [ ".MuiBox-root a[data-testid='link']"],
         "attribute-id": "href",
         "overwriteValues": true,
         "sourceContextId": "product-overview"
@@ -117,6 +119,7 @@
       "commandId": "clone-items-and-modify-clones",
       "parameters": {
         "contextId": "product-ids",
+        "unique": true,
         "replacements": {
           ".*/": "",
           "\\?.*": ""

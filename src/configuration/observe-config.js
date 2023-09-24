@@ -166,6 +166,7 @@ module.exports = {
     VEHICLES_BICYCLES_CITYBIKES: 'city-bikes',
     VEHICLES_BICYCLES_ELECTRICBIKES: 'electric-bikes',
     VEHICLES_BICYCLES_KIDSBIKES: 'kids-bikes',
+    VEHICLES_KIDS_HANDCARTS: 'kids-handcarts',
     VEHICLES_KIDS_STROLLERS: 'kids-strollers',
     VEHICLES_CARS_ALLWEATHERTYRES: 'car-all-weather-tyres',
     VEHICLES_CARS_CHILDSEATS: 'car-child-seats',

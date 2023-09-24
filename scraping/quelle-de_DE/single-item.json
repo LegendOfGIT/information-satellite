@@ -12,12 +12,22 @@
         "value": "quelle-de_DE"
       }
     },
+
+    {
+      "comment": "link",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "link",
+        "value": "https://www.{template.site}/p/{request.query.itemId}"
+      }
+    },
+
     {
       "comment": "single-product-view",
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "single-product-view",
-        "uri": "https://www.{template.site}/p/{request.query.itemId}"
+        "uri": "{link}"
       }
     },
     {
@@ -26,28 +36,10 @@
       "parameters": {
         "contextId": "title",
         "sourceContextId": "single-product-view",
-        "css-queries": [ "[data-testid='headline__component']" ]
+        "css-queries": [ ".css-1jxm0xh" ]
       }
     },
-    {
-      "comment": "link",
-      "commandId": "get-value-by-css-queries",
-      "parameters": {
-        "contextId": "link",
-        "sourceContextId": "single-product-view",
-        "attribute-id": "href",
-        "css-queries": [ "link[rel='canonical']" ]
-      }
-    },
-    {
-      "comment": "single-product-view",
-      "commandId": "visit-uri",
-      "parameters": {
-        "contextId": "single-product-view",
-        "overwrite": true,
-        "uri": "{link}"
-      }
-    },
+
 
     {
       "comment": "price-current",
@@ -55,7 +47,7 @@
       "parameters": {
         "contextId": "price-current",
         "sourceContextId": "single-product-view",
-        "css-queries": [ ".kMikPo span", ".bCaozJ span" ]
+        "css-queries": [ ".css-1c5jd22", ".css-j3z02m" ]
       }
     },
     {
@@ -64,7 +56,7 @@
       "parameters": {
         "contextId": "price-initial",
         "sourceContextId": "single-product-view",
-        "css-queries": [ ".gkDkCq", ".bCaozJ span" ]
+        "css-queries": [ ".css-etjbe3", ".css-j3z02m" ]
       }
     },
     {
@@ -90,10 +82,9 @@
       "parameters": {
         "contextId": "color",
         "sourceContextId": "single-product-view",
-        "groupIndex": 2,
+        "groupIndex": 1,
         "regex": [
-          "Farbe<.*?(cwljT|dcRYcK).*?>(.*?)<|Farbe<.*?cwljT.*?<div>(.*?)<",
-          "Farbe<.*?(cwljT).*?<div>(.*?)<"
+          "\\\\\"key\\\\\":\\\\\"Farbe\\\\\",\\\\\"value\\\\\":\\\\\"(.*?)\\\\\""
         ]
       }
     },
@@ -122,36 +113,6 @@
           "\\)": ""
         },
         "separator": "; ",
-        "regex": [
-          "displayText\\\\\":\\\\\"(.*?)\\\\\""
-        ]
-      }
-    },
-
-    {
-      "comment": "colors",
-      "commandId": "get-value-by-regex",
-      "parameters": {
-        "contextId": "colors",
-        "sourceContextId": "single-product-view",
-        "groupIndex": 1,
-        "regex": [
-          "displayName\\\\\":\\\\\"Farbe\\\\\".*?values.*?\\[(.*?)\\]"
-        ]
-      }
-    },
-    {
-      "comment": "colors",
-      "commandId": "get-values-by-regex",
-      "parameters": {
-        "contextId": "colors",
-        "sourceContextId": "colors",
-        "groupIndex": 1,
-        "replacements": {
-          ".*?\\(": "",
-          "\\)": ""
-        },
-        "separator": ", ",
         "regex": [
           "displayText\\\\\":\\\\\"(.*?)\\\\\""
         ]
@@ -434,48 +395,35 @@
 
     {
       "comment": "images-big",
-      "commandId": "get-values-by-css-queries",
+      "commandId": "get-values-by-regex",
       "parameters": {
         "contextId": "images-big",
         "sourceContextId": "single-product-view",
-        "attribute-id": "src",
-        "css-queries": [ "[data-testid='thumbnail'] img" ]
+        "groupIndex": 1,
+        "replacements": { "$":  "?$format_dv_mob_075$" },
+        "regex": "\\\\\"url\\\\\":\\\\\"(.*?)\\\\\".*?\\\\\"MediaAsset\\\\\""
       }
     },
-    {
-      "comment": "images-big",
-      "commandId": "clone-items-and-modify-clones",
-      "parameters": {
-        "contextId": "images-big",
-        "sourceContextId": "images-big",
-        "replacements": {
-          "\\?.*": ""
-        }
-      }
-    },
-
     {
       "comment": "images-small",
-      "commandId": "get-values-by-css-queries",
+      "commandId": "get-values-by-regex",
       "parameters": {
         "contextId": "images-small",
         "sourceContextId": "single-product-view",
-        "attribute-id": "src",
-        "css-queries": [ "[data-testid='thumbnail'] img" ]
+        "groupIndex": 1,
+        "replacements": { "$":  "?$PDV_gallery$" },
+        "regex": "\\\\\"url\\\\\":\\\\\"(.*?)\\\\\".*?\\\\\"MediaAsset\\\\\""
       }
     },
-
     {
       "comment": "title-image",
-      "commandId": "get-value-by-css-queries",
+      "commandId": "get-value-by-regex",
       "parameters": {
         "contextId": "title-image",
         "sourceContextId": "single-product-view",
-        "attribute-id": "src",
-        "replacements": {
-          "\\?.*": ""
-        },
-        "css-queries": [ "[data-testid='thumbnail'] img" ]
+        "groupIndex": 1,
+        "replacements": { "$":  "?$format_dv_mob_075$" },
+        "regex": "\\\\\"url\\\\\":\\\\\"(.*?)\\\\\".*?\\\\\"MediaAsset\\\\\""
       }
     },
 
@@ -559,7 +507,6 @@
           "annualConsumptionInKWH",
           "brand",
           "color",
-          "colors",
           "description",
           "depth-in-cm",
           "ean",
