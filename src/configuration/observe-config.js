@@ -67,6 +67,7 @@ module.exports = {
     FASHION_WOMEN_JACKETS: 'women-jackets',
     FASHION_WOMEN_JEANS: 'women-jeans',
     FASHION_WOMEN_JEWELRY: 'women-jewelry|women-necklaces|women-earrings|women-rings',
+    FASHION_WOMEN_MATERNITYWEAR: 'maternity-wear',
     FASHION_WOMEN_NIGHTWEAR: 'women-nightwear',
     FASHION_WOMEN_PANTS: 'women-pants',
     FASHION_WOMEN_SHOES: 'women-shoes',
