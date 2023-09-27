@@ -1,5 +1,5 @@
 {
-  "site": "awg-mode.de",
+  "site": "60beans.com",
 
   "scraping": [
     {
@@ -7,7 +7,7 @@
       "commandId": "set-context-value",
       "parameters": {
         "contextId": "site",
-        "value": "awg-mode-de_DE"
+        "value": "60beans-de_DE"
       }
     },
     {
@@ -32,9 +32,9 @@
       "parameters": {
         "contextId": "navigation-path",
         "value": [
-          "FASHION",
-          "FASHION_WOMEN",
-          "FASHION_WOMEN_SWIMWEAR"
+          "GROCERIES",
+          "GROCERIES_DRINKS",
+          "GROCERIES_DRINKS_COFFEE"
         ]
       }
     },
@@ -44,30 +44,20 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://www.{template.site}/damen/bade--&-strandmode"
+        "uri": "https://www.{template.site}/collections/kaffeesorten"
       }
     },
     {
-      "comment": "product-ids",
-      "commandId": "get-values-by-css-queries",
+      "comment": "product ids",
+      "commandId": "get-values-by-regex",
       "parameters": {
         "contextId": "product-ids",
-        "css-queries": [ ".product__link"],
-        "attribute-id": "id",
-        "sourceContextId": "product-overview"
-      }
-    },
-    {
-      "comment": "product-ids",
-      "commandId": "clone-items-and-modify-clones",
-      "parameters": {
-        "contextId": "product-ids",
-        "replacements": {
-          "\\.html.*": "",
-          ".*\/": ""
-        },
+        "sourceContextId": "product-overview",
+        "groupIndex": 1,
+        "overwriteValues": true,
         "unique": true,
-        "sourceContextId": "product-ids"
+        "replacements": { " ":  "+" },
+        "regex": "\"sku\":\"(.*?)\""
       }
     },
     {
