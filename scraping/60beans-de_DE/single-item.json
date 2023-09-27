@@ -319,6 +319,7 @@
         "sourceContextId": "single-product-view",
         "groupIndex": 1,
         "separator": ", ",
+        "unique": true,
         "regex": "package_size\\\":\\\"(.*?)\\\""
       }
     },
