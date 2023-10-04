@@ -99,7 +99,7 @@
         "contextId": "product-ids",
         "css-queries": [ ".productbox meta[itemprop='image']"],
         "attribute-id": "content",
-        "overwriteValues": true,
+        "overwrite": true,
         "sourceContextId": "product-overview"
       }
     },
@@ -144,7 +144,7 @@
       "parameters": {
         "contextId": "product-ids",
         "css-queries": [ ".productbox meta[itemprop='image']"],
-        "overwriteValues": true,
+        "overwrite": true,
         "attribute-id": "content",
         "sourceContextId": "product-overview"
       }
@@ -191,7 +191,7 @@
         "contextId": "product-ids",
         "css-queries": [ ".productbox meta[itemprop='image']"],
         "attribute-id": "content",
-        "overwriteValues": true,
+        "overwrite": true,
         "sourceContextId": "product-overview"
       }
     },
@@ -237,7 +237,7 @@
         "contextId": "product-ids",
         "css-queries": [ ".productbox meta[itemprop='image']"],
         "attribute-id": "content",
-        "overwriteValues": true,
+        "overwrite": true,
         "sourceContextId": "product-overview"
       }
     },

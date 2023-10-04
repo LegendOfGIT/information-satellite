@@ -63,7 +63,7 @@
       "parameters": {
         "contextId": "product-ids",
         "sourceContextId": "product-overview",
-        "overwriteValues": true,
+        "overwrite": true,
         "groupIndex": 1,
         "regex": "\"item_id\":\"(.*?)\""
       }
@@ -97,7 +97,7 @@
       "parameters": {
         "contextId": "product-ids",
         "sourceContextId": "product-overview",
-        "overwriteValues": true,
+        "overwrite": true,
         "groupIndex": 1,
         "regex": "\"item_id\":\"(.*?)\""
       }

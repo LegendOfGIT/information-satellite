@@ -117,7 +117,7 @@
         "css-queries": [ ".products-grid .product-item a"],
         "attribute-id": "href",
         "mustContain": "shopdirekt",
-        "overwriteValues": true,
+        "overwrite": true,
         "sourceContextId": "product-overview"
       }
     },

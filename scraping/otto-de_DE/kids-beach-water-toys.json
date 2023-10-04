@@ -54,7 +54,7 @@
         "contextId": "product-ids",
         "css-queries": [ "#reptile-tilelist article"],
         "attribute-id": "data-product-id",
-        "overwriteValues": true,
+        "overwrite": true,
         "sourceContextId": "product-overview"
       }
     },
@@ -88,7 +88,7 @@
         "contextId": "product-ids",
         "css-queries": [ "#reptile-tilelist article"],
         "attribute-id": "data-product-id",
-        "overwriteValues": true,
+        "overwrite": true,
         "sourceContextId": "product-overview"
       }
     },
@@ -130,7 +130,7 @@
         "contextId": "product-ids",
         "css-queries": [ "#reptile-tilelist article"],
         "attribute-id": "data-product-id",
-        "overwriteValues": true,
+        "overwrite": true,
         "sourceContextId": "product-overview"
       }
     },
@@ -164,7 +164,7 @@
         "contextId": "product-ids",
         "css-queries": [ "#reptile-tilelist article"],
         "attribute-id": "data-product-id",
-        "overwriteValues": true,
+        "overwrite": true,
         "sourceContextId": "product-overview"
       }
     },
@@ -198,7 +198,7 @@
         "contextId": "product-ids",
         "css-queries": [ "#reptile-tilelist article"],
         "attribute-id": "data-product-id",
-        "overwriteValues": true,
+        "overwrite": true,
         "sourceContextId": "product-overview"
       }
     },
@@ -232,7 +232,7 @@
         "contextId": "product-ids",
         "css-queries": [ "#reptile-tilelist article"],
         "attribute-id": "data-product-id",
-        "overwriteValues": true,
+        "overwrite": true,
         "sourceContextId": "product-overview"
       }
     },
@@ -266,7 +266,7 @@
         "contextId": "product-ids",
         "css-queries": [ "#reptile-tilelist article"],
         "attribute-id": "data-product-id",
-        "overwriteValues": true,
+        "overwrite": true,
         "sourceContextId": "product-overview"
       }
     },
@@ -300,7 +300,7 @@
         "contextId": "product-ids",
         "css-queries": [ "#reptile-tilelist article"],
         "attribute-id": "data-product-id",
-        "overwriteValues": true,
+        "overwrite": true,
         "sourceContextId": "product-overview"
       }
     },

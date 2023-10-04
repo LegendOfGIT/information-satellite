@@ -55,7 +55,7 @@
         "contextId": "product-ids",
         "sourceContextId": "product-overview",
         "groupIndex": 2,
-        "overwriteValues": true,
+        "overwrite": true,
         "unique": true,
         "regex": "{.*?(h|H)erren.*?\"sku\":\"(.*?)\".*?}"
       }
@@ -90,7 +90,7 @@
         "contextId": "product-ids",
         "sourceContextId": "product-overview",
         "groupIndex": 2,
-        "overwriteValues": true,
+        "overwrite": true,
         "unique": true,
         "regex": "{.*?(h|H)erren.*?\"sku\":\"(.*?)\".*?}"
       }
@@ -134,7 +134,7 @@
         "contextId": "product-ids",
         "sourceContextId": "product-overview",
         "groupIndex": 2,
-        "overwriteValues": true,
+        "overwrite": true,
         "unique": true,
         "regex": "{.*?(h|H)erren.*?\"sku\":\"(.*?)\".*?}"
       }
@@ -169,7 +169,7 @@
         "contextId": "product-ids",
         "sourceContextId": "product-overview",
         "groupIndex": 2,
-        "overwriteValues": true,
+        "overwrite": true,
         "unique": true,
         "regex": "{.*?(h|H)erren.*?\"sku\":\"(.*?)\".*?}"
       }
@@ -204,7 +204,7 @@
         "contextId": "product-ids",
         "sourceContextId": "product-overview",
         "groupIndex": 2,
-        "overwriteValues": true,
+        "overwrite": true,
         "unique": true,
         "regex": "{.*?(h|H)erren.*?\"sku\":\"(.*?)\".*?}"
       }
@@ -248,7 +248,7 @@
         "contextId": "product-ids",
         "sourceContextId": "product-overview",
         "groupIndex": 2,
-        "overwriteValues": true,
+        "overwrite": true,
         "unique": true,
         "regex": "{.*?(h|H)erren.*?\"sku\":\"(.*?)\".*?}"
       }

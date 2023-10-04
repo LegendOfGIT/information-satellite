@@ -109,7 +109,7 @@
         "contextId": "product-ids",
         "sourceContextId": "product-overview",
         "groupIndex": 1,
-        "overwriteValues": true,
+        "overwrite": true,
         "flags": "i",
         "regex": "{.*?gewür.*?\"sku\":\"(.*?)\".*?}"
       }

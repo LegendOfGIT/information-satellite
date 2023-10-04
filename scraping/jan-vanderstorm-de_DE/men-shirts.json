@@ -109,7 +109,7 @@
         "contextId": "product-ids",
         "css-queries": [ ".product-box a"],
         "attribute-id": "href",
-        "overwriteValues": true,
+        "overwrite": true,
         "sourceContextId": "product-overview"
       }
     },

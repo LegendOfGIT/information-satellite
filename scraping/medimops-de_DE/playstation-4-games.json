@@ -88,7 +88,7 @@
         "contextId": "product-ids",
         "sourceContextId": "product-overview",
         "groupIndex": 1,
-        "overwriteValues": true,
+        "overwrite": true,
         "unique": true,
         "regex": "\"mpid\":\"(.*?)\""
       }
@@ -132,7 +132,7 @@
         "contextId": "product-ids",
         "sourceContextId": "product-overview",
         "groupIndex": 1,
-        "overwriteValues": true,
+        "overwrite": true,
         "unique": true,
         "regex": "\"mpid\":\"(.*?)\""
       }

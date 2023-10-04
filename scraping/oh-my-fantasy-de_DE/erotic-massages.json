@@ -110,7 +110,7 @@
         "css-queries": [ ".product-grid-container .full-unstyled-link"],
         "attribute-id": "href",
         "mustContain": "\/products",
-        "overwriteValues": true,
+        "overwrite": true,
         "unique": true,
         "sourceContextId": "product-overview"
       }

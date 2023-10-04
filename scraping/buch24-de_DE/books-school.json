@@ -116,7 +116,7 @@
         "contextId": "product-ids",
         "css-queries": [ ".products-grid .product-item a"],
         "attribute-id": "href",
-        "overwriteValues": true,
+        "overwrite": true,
         "sourceContextId": "product-overview"
       }
     },
@@ -171,7 +171,7 @@
         "contextId": "product-ids",
         "css-queries": [ ".products-grid .product-item a"],
         "attribute-id": "href",
-        "overwriteValues": true,
+        "overwrite": true,
         "sourceContextId": "product-overview"
       }
     },
@@ -226,7 +226,7 @@
         "contextId": "product-ids",
         "css-queries": [ ".products-grid .product-item a"],
         "attribute-id": "href",
-        "overwriteValues": true,
+        "overwrite": true,
         "sourceContextId": "product-overview"
       }
     },

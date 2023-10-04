@@ -87,7 +87,7 @@
         "contextId": "product-ids",
         "css-queries": [ ".p13n-sc-uncoverable-faceout"],
         "attribute-id": "id",
-        "overwriteValues": true,
+        "overwrite": true,
         "sourceContextId": "product-overview"
       }
     },
@@ -121,7 +121,7 @@
         "contextId": "product-ids",
         "css-queries": [ ".p13n-sc-uncoverable-faceout"],
         "attribute-id": "id",
-        "overwriteValues": true,
+        "overwrite": true,
         "sourceContextId": "product-overview"
       }
     },

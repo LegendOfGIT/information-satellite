@@ -54,7 +54,7 @@
         "contextId": "product-ids",
         "css-queries": [ ".MuiBox-root a[data-testid='link']"],
         "attribute-id": "href",
-        "overwriteValues": true,
+        "overwrite": true,
         "sourceContextId": "product-overview"
       }
     },
@@ -102,7 +102,7 @@
         "contextId": "product-ids",
         "css-queries": [ ".MuiBox-root a[data-testid='link']"],
         "attribute-id": "href",
-        "overwriteValues": true,
+        "overwrite": true,
         "sourceContextId": "product-overview"
       }
     },
@@ -159,7 +159,7 @@
         "contextId": "product-ids",
         "css-queries": [ ".MuiBox-root a[data-testid='link']"],
         "attribute-id": "href",
-        "overwriteValues": true,
+        "overwrite": true,
         "sourceContextId": "product-overview"
       }
     },
@@ -207,7 +207,7 @@
         "contextId": "product-ids",
         "css-queries": [ ".MuiBox-root a[data-testid='link']"],
         "attribute-id": "href",
-        "overwriteValues": true,
+        "overwrite": true,
         "sourceContextId": "product-overview"
       }
     },

@@ -85,7 +85,7 @@
       "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "overwriteValues": true,
+        "overwrite": true,
         "css-queries": [ ".product"],
         "attribute-id": "data-pid",
         "sourceContextId": "product-overview"
@@ -127,7 +127,7 @@
       "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "overwriteValues": true,
+        "overwrite": true,
         "css-queries": [ ".product"],
         "attribute-id": "data-pid",
         "sourceContextId": "product-overview"
@@ -162,7 +162,7 @@
       "parameters": {
         "contextId": "product-ids",
         "css-queries": [ ".product"],
-        "overwriteValues": true,
+        "overwrite": true,
         "attribute-id": "data-pid",
         "sourceContextId": "product-overview"
       }
@@ -195,7 +195,7 @@
       "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "overwriteValues": true,
+        "overwrite": true,
         "css-queries": [ ".product"],
         "attribute-id": "data-pid",
         "sourceContextId": "product-overview"

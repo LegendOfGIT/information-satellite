@@ -95,7 +95,7 @@
         "contextId": "product-ids",
         "css-queries": [ ".o-SearchProductListItem__button-label"],
         "attribute-id": "data-product-identifier",
-        "overwriteValues": true,
+        "overwrite": true,
         "sourceContextId": "product-overview"
       }
     },
@@ -168,7 +168,7 @@
         "contextId": "product-ids",
         "css-queries": [ ".o-SearchProductListItem__button-label"],
         "attribute-id": "data-product-identifier",
-        "overwriteValues": true,
+        "overwrite": true,
         "sourceContextId": "product-overview"
       }
     },

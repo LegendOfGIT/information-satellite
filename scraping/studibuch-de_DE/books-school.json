@@ -95,7 +95,7 @@
         "contextId": "product-ids",
         "css-queries": [ ".product--box"],
         "attribute-id": "data-ordernumber",
-        "overwriteValues": true,
+        "overwrite": true,
         "sourceContextId": "product-overview"
       }
     },
@@ -137,7 +137,7 @@
         "contextId": "product-ids",
         "css-queries": [ ".product--box"],
         "attribute-id": "data-ordernumber",
-        "overwriteValues": true,
+        "overwrite": true,
         "sourceContextId": "product-overview"
       }
     },

@@ -95,7 +95,7 @@
       "parameters": {
         "contextId": "product-ids",
         "css-queries": [ ".p13n-sc-uncoverable-faceout"],
-        "overwriteValues": true,
+        "overwrite": true,
         "attribute-id": "id",
         "sourceContextId": "product-overview"
       }
