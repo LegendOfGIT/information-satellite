@@ -7,7 +7,7 @@
       "commandId": "generate-random-number",
       "parameters": {
         "contextId": "random-page-number",
-        "maximum": "10"
+        "maximum": 10
       }
     },
     {

@@ -3,36 +3,6 @@
 
   "scraping": [
     {
-      "comment": "product-overview",
-      "commandId": "visit-uri",
-      "parameters": {
-        "contextId": "product-overview",
-        "uri": "https://{template.site}/c/bauen-renovieren/haustechnik-sicherheit/telefon-internet/netzwerkkabel"
-      }
-    },
-    {
-      "comment": "product-ids",
-      "commandId": "get-values-by-css-queries",
-      "parameters": {
-        "contextId": "product-ids",
-        "css-queries": [ "a[data-testid='m-product-teaser']"],
-        "attribute-id": "href",
-        "sourceContextId": "product-overview"
-      }
-    },
-    {
-      "comment": "product-ids",
-      "commandId": "clone-items-and-modify-clones",
-      "parameters": {
-        "contextId": "product-ids",
-        "replacements": {
-          ".*/": ""
-        },
-        "sourceContextId": "product-ids"
-      }
-    },
-
-    {
       "comment": "site",
       "commandId": "set-context-value",
       "parameters": {
@@ -62,13 +32,44 @@
       "parameters": {
         "contextId": "navigation-path",
         "value": [
-          "ELECTRONICS_AND_COMPUTERS",
-          "ELECTRONICS_AND_COMPUTERS_CABLES",
-          "ELECTRONICS_AND_COMPUTERS_CABLES_NETWORKCABLES"
+          "DIY",
+          "DIY_BUILDANDRENOVATE",
+          "DIY_BUILDANDRENOVATE_PARQUETFLOOR"
         ]
       }
     },
 
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "overwrite": true,
+        "uri": "https://{template.site}/c/bauen-renovieren/bodenbelaege/parkett?sort=wasPrice%3Adesc"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "product-ids",
+        "css-queries": [ "a[data-testid='m-product-teaser']"],
+        "attribute-id": "href",
+        "overwrite": true,
+        "sourceContextId": "product-overview"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "product-ids",
+        "replacements": {
+          ".*/": ""
+        },
+        "sourceContextId": "product-ids"
+      }
+    },
     {
       "comment": "observe scraped information",
       "commandId": "observe-information",
