@@ -1,0 +1,348 @@
+{
+  "site": "laco.de",
+
+  "itemId": "{template.site}-{request.query.itemId}",
+
+  "scraping": [
+    {
+      "comment": "site",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "site",
+        "value": "laco-de_DE"
+      }
+    },
+    {
+      "comment": "product search",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-search",
+        "uri": "https://search.flume.de/graphql",
+        "post": true,
+        "body": "{\"query\":\"query results($locale: String!, $path: String, $query: String, $filters: JSON, $limit: Int, $page: Int, $sort: String, $index: String) {\\n  results: Results(locale: $locale, path: $path, query: $query, filters: $filters, limit: $limit, page: $page, sort: $sort, index: $index) {\\n    data { url }\\n    total\\n    per_page\\n    from\\n    current_page\\n  }\\n}\\n\",\"variables\":{\"query\":\"{request.query.itemId}\",\"path\":\"/de/search\",\"index\":\"laco\",\"locale\":\"de\"}}"
+      }
+    },
+
+    {
+      "comment": "link",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "link",
+        "sourceContextId": "product-search",
+        "groupIndex": 1,
+        "replacements": {
+          "\\\\": ""
+        },
+        "regex": [
+          "url\":\\[\"(.*?)\"\\]"
+        ]
+      }
+    },
+
+    {
+      "comment": "link",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "link",
+        "value": "https://{template.site}{link}"
+      }
+    },
+    {
+      "comment": "single-product-view",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "single-product-view",
+        "uri": "{link}"
+      }
+    },
+
+    {
+      "comment": "title",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title",
+        "sourceContextId": "single-product-view",
+        "separator": " ",
+        "css-queries": [ ".product-art > [itemprop='name']" ]
+      }
+    },
+    {
+      "comment": "price-current",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".product-layer .price .price-tag" ]
+      }
+    },
+    {
+      "comment": "price-initial",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".product-layer .price .price-tag" ]
+      }
+    },
+    {
+      "comment": "price-current to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "price-current"
+      }
+    },
+    {
+      "comment": "price-initial to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "price-initial"
+      }
+    },
+
+    {
+      "comment": "weight in grams",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "weightInG",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "<dt>Gewicht.*?<.*?\\W.*<dd>(.*?) g.*?<"
+        ]
+      }
+    },
+    {
+      "comment": "weight in grams to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "weightInG",
+        "sourceContextId": "weightInG"
+      }
+    },
+
+    {
+      "comment": "diameter-in-mm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "diameter-in-mm",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "<dt>Durchmesser.*?<.*?\\W.*<dd>(.*?) mm.*?<"
+        ]
+      }
+    },
+    {
+      "comment": "diameter-in-mm to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "diameter-in-mm",
+        "sourceContextId": "diameter-in-mm"
+      }
+    },
+
+    {
+      "comment": "description",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "description",
+        "sourceContextId": "single-product-view",
+        "separator": " ",
+        "css-queries": [
+          "#products--description [itemprop='description'] p"
+        ],
+        "replacements":  {
+          "Weitere Merkmale die sich die.*": ""
+        }
+      }
+    },
+
+    {
+      "comment": "model",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "model",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".breadcrumb li[class*='active']" ]
+      }
+    },
+
+    {
+      "comment": "height in mm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "height-in-mm",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "<dt>H&ouml;he.*?<.*?\\W.*<dd>(.*?) mm.*?<"
+        ]
+      }
+    },
+    {
+      "comment": "height in mm",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "height-in-mm",
+        "sourceContextId": "height-in-mm"
+      }
+    },
+    {
+      "comment": "width in mm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "width-in-mm",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "<dt>Bandbreite.*?<.*?\\W.*<dd>(.*?) mm.*?<"
+        ]
+      }
+    },
+    {
+      "comment": "width in mm",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "width-in-mm",
+        "sourceContextId": "width-in-mm"
+      }
+    },
+
+    {
+      "comment": "merchant article number",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "mean",
+        "value": "laco.{request.query.itemId}"
+      }
+    },
+    {
+      "comment": "gtin",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "gtin",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": "gtin13\": \"(.*?)\""
+      }
+    },
+    {
+      "comment": "gtins",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "gtins",
+        "value": "{gtin}"
+      }
+    },
+
+    {
+      "comment": "images-small",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "images-small",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "data-lazy",
+        "css-queries": [ ".product-head-slider-nav img" ]
+      }
+    },
+    {
+      "comment": "images-big",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "images-big",
+        "sourceContextId": "images-small",
+        "replacements": {
+          "[0-9]{3}px": "650px"
+        }
+      }
+    },
+    {
+      "comment": "title-image",
+      "commandId": "get-value-from-array",
+      "parameters": {
+        "contextId": "title-image",
+        "sourceContextId": "images-big"
+      }
+    },
+
+    {
+      "comment": "brand",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "brand",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": "\"brand\".*?\\W.*?\\W.*?\"name\": \"(.*?)\""
+      }
+    },
+
+    {
+      "comment": "teaser texts",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "teaser-texts",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ "#products--description [itemprop='description']" ]
+      }
+    },
+    {
+      "comment": "teaser-texts",
+      "commandId": "explode-values",
+      "parameters": {
+        "contextId": "teaser-texts",
+        "separators": ["• "]
+      }
+    },
+
+    {
+      "comment": "amount in stock",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "amountInStock",
+        "sourceContextId": "single-product-view",
+        "setValueOnMatch": 0,
+        "setValueOnMiss": 999,
+        "regex": "OutOfStock"
+      }
+    },
+
+    {
+      "comment": "seoKeywords",
+      "commandId": "extract-seo-keywords",
+      "parameters": {
+        "contextId": "seoKeywords",
+        "sourceContextId": ["description", "title"]
+      }
+    },
+
+    {
+      "comment": "store scraped information",
+      "commandId": "store-information",
+      "parameters": {
+        "informationIds": [
+          "amountInStock",
+          "brand",
+          "description",
+          "diameter-in-mm",
+          "gtin",
+          "height-in-mm",
+          "images-big",
+          "images-small",
+          "link",
+          "mean",
+          "model",
+          "price-current",
+          "price-initial",
+          "seoKeywords",
+          "teaser-texts",
+          "title",
+          "title-image",
+          "weightInG",
+          "width-in-mm"
+        ]
+      }
+    }
+  ]
+}

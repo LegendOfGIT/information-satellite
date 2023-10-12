@@ -20,6 +20,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         separator = undefined,
         setValueOnMatch = undefined,
         setValueOnMiss = undefined,
+        overwrite = false,
         unique = false
     } = commandParameters;
 
@@ -29,7 +30,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         return;
     }
 
-    if (Object.prototype.hasOwnProperty.call(context, contextId) && context[contextId].length > 0  && context[contextId] !== `{${contextId}}`) {
+    if (!overwrite && (Object.prototype.hasOwnProperty.call(context, contextId) && context[contextId].length > 0  && context[contextId] !== `{${contextId}}`)) {
         resolve();
         return;
     }
@@ -58,7 +59,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
 
     const cssSelector = cheerio.load(sourceContext);
     cssQueries.forEach(cssQuery => {
-        if (context[contextId] && context[contextId].length > 0 && context[contextId] !== `{${contextId}}`) {
+        if (!overwrite && (context[contextId] && context[contextId].length > 0 && context[contextId] !== `{${contextId}}`)) {
             return;
         }
 

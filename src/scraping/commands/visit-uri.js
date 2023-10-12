@@ -3,7 +3,13 @@ const getPreparedCommandParameters = require('../getPreparedCommandParameters');
 const https = require('https');
 
 module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
-    const { contextId, uri, encoding = 'utf-8', overwrite = false } = parameters;
+    const {
+        contextId,
+        uri,
+        encoding = 'utf-8',
+        overwrite = false,
+        post = false
+    } = parameters;
 
     console.log('executing command "visit-uri"');
 
@@ -64,7 +70,11 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         return;
     }
 
-    return httpClient.get(commandParameters.uri, options)
+    const request =
+        post ? httpClient.post(commandParameters.uri, JSON.parse(commandParameters.body), options)
+        : httpClient.get(commandParameters.uri, options);
+
+    return request
         .then(response => {
             context['current-uri'] = commandParameters.uri;
 

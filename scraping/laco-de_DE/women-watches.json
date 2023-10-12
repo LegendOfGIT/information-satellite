@@ -1,0 +1,231 @@
+{
+  "site": "laco.de",
+
+  "scraping": [
+    {
+      "comment": "site",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "site",
+        "value": "laco-de_DE"
+      }
+    },
+    {
+      "comment": "locale",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "locale",
+        "value": "de-DE"
+      }
+    },
+    {
+      "comment": "usecase",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "usecase",
+        "value": "single-item"
+      }
+    },
+    {
+      "comment": "navigation-path",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "navigation-path",
+        "value": [
+          "FASHION",
+          "FASHION_WOMEN",
+          "FASHION_WOMEN_WATCHES"
+        ]
+      }
+    },
+
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "uri": "https://www.{template.site}/de/uhren/fliegeruhr-original"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "product-ids",
+        "css-queries": [ ".clock[data-gender='unisex'] img"],
+        "attribute-id": [ "src", "data-src" ],
+        "separator": ";",
+        "sourceContextId": "product-overview"
+      }
+    },
+    {
+      "comment": "product ids",
+      "commandId": "get-values-by-regex",
+      "parameters": {
+        "contextId": "product-ids",
+        "sourceContextId": "product-ids",
+        "groupIndex": 1,
+        "overwrite": true,
+        "unique": true,
+        "regex": "-([0-9]{6})"
+      }
+    },
+
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    },
+
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "overwrite": true,
+        "uri": "https://www.{template.site}/de/uhren/fliegeruhr-basis"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "overwrite": true,
+        "contextId": "product-ids",
+        "css-queries": [ ".clock[data-gender='unisex'] img"],
+        "attribute-id": [ "src", "data-src" ],
+        "separator": ";",
+        "sourceContextId": "product-overview"
+      }
+    },
+    {
+      "comment": "product ids",
+      "commandId": "get-values-by-regex",
+      "parameters": {
+        "contextId": "product-ids",
+        "sourceContextId": "product-ids",
+        "groupIndex": 1,
+        "overwrite": true,
+        "unique": true,
+        "regex": "-([0-9]{6})"
+      }
+    },
+
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    },
+
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "overwrite": true,
+        "uri": "https://www.{template.site}/de/uhren/fliegeruhren-sondermodelle"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "overwrite": true,
+        "contextId": "product-ids",
+        "css-queries": [ ".clock[data-gender='unisex'] img"],
+        "attribute-id": [ "src", "data-src" ],
+        "separator": ";",
+        "sourceContextId": "product-overview"
+      }
+    },
+    {
+      "comment": "product ids",
+      "commandId": "get-values-by-regex",
+      "parameters": {
+        "contextId": "product-ids",
+        "sourceContextId": "product-ids",
+        "groupIndex": 1,
+        "overwrite": true,
+        "unique": true,
+        "regex": "-([0-9]{6})"
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    },
+
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "overwrite": true,
+        "uri": "https://www.{template.site}/de/uhren/marineuhren"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "overwrite": true,
+        "contextId": "product-ids",
+        "css-queries": [ ".clock[data-gender='unisex'] img"],
+        "attribute-id": [ "src", "data-src" ],
+        "separator": ";",
+        "sourceContextId": "product-overview"
+      }
+    },
+    {
+      "comment": "product ids",
+      "commandId": "get-values-by-regex",
+      "parameters": {
+        "contextId": "product-ids",
+        "sourceContextId": "product-ids",
+        "groupIndex": 1,
+        "overwrite": true,
+        "unique": true,
+        "regex": "-([0-9]{6})"
+      }
+    },
+
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    }
+  ]
+}
