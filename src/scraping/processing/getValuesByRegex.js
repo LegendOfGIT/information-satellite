@@ -19,7 +19,7 @@ module.exports = (sourceContext, regex, groupIndex, flags = 'sg', tagReplacer = 
             return v;
         }
 
-        let val = v.replaceAll('\\u0026', '&').replaceAll('\\u003C', '<').replaceAll('\\u003E', '>').replaceAll('&apos;', '´')
+        let val = v.replaceAll('\\u0026', '&').replaceAll('\\u003C', '<').replaceAll('\\u003c', '<').replaceAll('\\u003E', '>').replaceAll('\\u003e', '>').replaceAll('&apos;', '´')
             .replaceAll('&#43;', '+')
             .replaceAll('&nbsp;', ' ').replaceAll('&ndash;', '-')
             .replaceAll('&quot;', '"').replaceAll('&amp;', '&')

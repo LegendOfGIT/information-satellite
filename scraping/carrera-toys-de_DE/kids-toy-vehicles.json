@@ -1,0 +1,292 @@
+{
+  "site": "carrera-toys.com",
+
+  "scraping": [
+    {
+      "comment": "site",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "site",
+        "value": "carrera-toys-de_DE"
+      }
+    },
+    {
+      "comment": "locale",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "locale",
+        "value": "de-DE"
+      }
+    },
+    {
+      "comment": "usecase",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "usecase",
+        "value": "single-item"
+      }
+    },
+    {
+      "comment": "navigation-path",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "navigation-path",
+        "value": [
+          "KIDS",
+          "KIDS_TOYS",
+          "KIDS_TOYS_TOYVEHICLES"
+        ]
+      }
+    },
+
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "uri": "https://{template.site}/de/profi-rc"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-regex",
+      "parameters": {
+        "contextId": "product-ids",
+        "sourceContextId": "product-overview",
+        "groupIndex": 1,
+        "regex": [
+          "\"sku\":\"(.*?)\""
+        ]
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    },
+
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "overwrite": true,
+        "uri": "https://{template.site}/de/turnator"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-regex",
+      "parameters": {
+        "overwrite": true,
+        "contextId": "product-ids",
+        "sourceContextId": "product-overview",
+        "groupIndex": 1,
+        "regex": [
+          "\"sku\":\"(.*?)\""
+        ]
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    },
+
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "overwrite": true,
+        "uri": "https://{template.site}/de/action"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-regex",
+      "parameters": {
+        "overwrite": true,
+        "contextId": "product-ids",
+        "sourceContextId": "product-overview",
+        "groupIndex": 1,
+        "regex": [
+          "\"sku\":\"(.*?)\""
+        ]
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    },
+
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "overwrite": true,
+        "uri": "https://{template.site}/de/buggies"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-regex",
+      "parameters": {
+        "overwrite": true,
+        "contextId": "product-ids",
+        "sourceContextId": "product-overview",
+        "groupIndex": 1,
+        "regex": [
+          "\"sku\":\"(.*?)\""
+        ]
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    },
+
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "overwrite": true,
+        "uri": "https://{template.site}/de/offroad"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-regex",
+      "parameters": {
+        "overwrite": true,
+        "contextId": "product-ids",
+        "sourceContextId": "product-overview",
+        "groupIndex": 1,
+        "regex": [
+          "\"sku\":\"(.*?)\""
+        ]
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    },
+
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "overwrite": true,
+        "uri": "https://{template.site}/de/air"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-regex",
+      "parameters": {
+        "overwrite": true,
+        "contextId": "product-ids",
+        "sourceContextId": "product-overview",
+        "groupIndex": 1,
+        "regex": [
+          "\"sku\":\"(.*?)\""
+        ]
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    },
+
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "overwrite": true,
+        "uri": "https://{template.site}/de/boote"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-regex",
+      "parameters": {
+        "overwrite": true,
+        "contextId": "product-ids",
+        "sourceContextId": "product-overview",
+        "groupIndex": 1,
+        "regex": [
+          "\"sku\":\"(.*?)\""
+        ]
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    }
+  ]
+}
