@@ -1,0 +1,343 @@
+{
+  "site": "otto.de",
+
+  "scraping": [
+    {
+      "comment": "site",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "site",
+        "value": "otto-de_DE"
+      }
+    },
+    {
+      "comment": "locale",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "locale",
+        "value": "de-DE"
+      }
+    },
+    {
+      "comment": "usecase",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "usecase",
+        "value": "single-item"
+      }
+    },
+    {
+      "comment": "navigation-path",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "navigation-path",
+        "value": [
+          "HOME",
+          "HOME_COOKINGANDBAKING",
+          "HOME_COOKINGANDBAKING_KITCHENACCESSORIES"
+        ]
+      }
+    },
+
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "overwrite": true,
+        "contextId": "product-overview",
+        "uri": "https://{template.site}/haushalt/koch-backzubehoer/kochbesteck/?sortiertnach=neuheiten"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "product-ids",
+        "css-queries": [ "#reptile-tilelist article"],
+        "attribute-id": "data-product-id",
+        "overwrite": true,
+        "sourceContextId": "product-overview"
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    },
+
+    {
+      "comment": "random-item-number",
+      "commandId": "generate-random-number",
+      "parameters": {
+        "contextId": "random-item-number",
+        "maximum": 3500
+      }
+    },
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "overwrite": true,
+        "uri": "https://{template.site}/haushalt/koch-backzubehoer/kochbesteck/?l=gq&o={random-item-number}"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "product-ids",
+        "css-queries": [ "#reptile-tilelist article"],
+        "attribute-id": "data-product-id",
+        "overwrite": true,
+        "sourceContextId": "product-overview"
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    },
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "overwrite": true,
+        "contextId": "product-overview",
+        "uri": "https://{template.site}/?selektion=(und.(ist.sortiment.haushaltsgeraete.haushaltswaren).(sind.kategorien.pfannen).(~.(v.1)))&sortiertnach=neuheiten"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "product-ids",
+        "css-queries": [ "#reptile-tilelist article"],
+        "attribute-id": "data-product-id",
+        "overwrite": true,
+        "sourceContextId": "product-overview"
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    },
+
+    {
+      "comment": "random-item-number",
+      "commandId": "generate-random-number",
+      "parameters": {
+        "contextId": "random-item-number",
+        "maximum": 3500
+      }
+    },
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "overwrite": true,
+        "uri": "https://{template.site}/?selektion=(und.(ist.sortiment.haushaltsgeraete.haushaltswaren).(sind.kategorien.pfannen).(~.(v.1)))&l=gq&o={random-item-number}"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "product-ids",
+        "css-queries": [ "#reptile-tilelist article"],
+        "attribute-id": "data-product-id",
+        "overwrite": true,
+        "sourceContextId": "product-overview"
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    },
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "overwrite": true,
+        "contextId": "product-overview",
+        "uri": "https://{template.site}/haushalt/toepfe/?sortiertnach=neuheiten"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "product-ids",
+        "css-queries": [ "#reptile-tilelist article"],
+        "attribute-id": "data-product-id",
+        "overwrite": true,
+        "sourceContextId": "product-overview"
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    },
+
+    {
+      "comment": "random-item-number",
+      "commandId": "generate-random-number",
+      "parameters": {
+        "contextId": "random-item-number",
+        "maximum": 3500
+      }
+    },
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "overwrite": true,
+        "uri": "https://{template.site}/haushalt/toepfe/?l=gq&o={random-item-number}"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "product-ids",
+        "css-queries": [ "#reptile-tilelist article"],
+        "attribute-id": "data-product-id",
+        "overwrite": true,
+        "sourceContextId": "product-overview"
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    },
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "overwrite": true,
+        "contextId": "product-overview",
+        "uri": "https://{template.site}/?selektion=(und.(ist.sortiment.haushaltswaren).(oder.(sind.kategorien.buchhalter).(sind.kategorien.crepes-verteiler).(sind.kategorien.dessertringe).(sind.kategorien.dosenoeffner).(sind.kategorien.eier-pochierer).(sind.kategorien.eieroeffner).(sind.kategorien.eierpiekser).(sind.kategorien.eiertrenner).(sind.kategorien.eieruhren).(sind.kategorien.entkerner).(sind.kategorien.flambierbrenner).(sind.kategorien.frischkaesebereiter).(sind.kategorien.garne.kuechengarne).(sind.kategorien.kannen.fetttrennkannen).(sind.kategorien.kuechenbretter).(sind.kategorien.kuechenformen.dessertformen).(sind.kategorien.kuechenformen.eisformen).(sind.kategorien.kuechenformen.eiswuerfelformen).(sind.kategorien.kuechenschaufeln).(sind.kategorien.kugelausstecher).(sind.kategorien.marinierspritzen).(sind.kategorien.messbecher).(sind.kategorien.messgeraete.termometer).(sind.kategorien.messloeffel).(sind.kategorien.nussknacker).(sind.kategorien.pinsel.marinierpinsel).(sind.kategorien.portionierer.eisportionierer).(sind.kategorien.sahnebereiter).(sind.kategorien.salatschleuder).(sind.kategorien.scheren.allzweckscheren).(sind.kategorien.scheren.effilierscheren).(sind.kategorien.scheren.fischscheren).(sind.kategorien.scheren.gefluegelscheren).(sind.kategorien.schneider.eierschneider).(sind.kategorien.schneider.julienne-schneider).(sind.kategorien.schneider.knoblauchschneider).(sind.kategorien.schneider.obstschneider).(sind.kategorien.schneider.pizzaschneider).(sind.kategorien.schneider.spiralschneider).(sind.kategorien.schneider.zestenreisser).(sind.kategorien.schneidergemueseschneider).(sind.kategorien.shaker.dressingshaker).(sind.kategorien.siebe.kuechensiebe).(sind.kategorien.speiseglocken).(sind.kategorien.sushi-roller).(sind.kategorien.tabletts).(sind.kategorien.tortillaformen).(sind.kategorien.trichter).(sind.kategorien.untersetzer).(sind.kategorien.verschlusssysteme).(sind.kategorien.zerkleinerer.moerser).(sind.kategorien.zerkleinerer.zwiebelhacker)).(~.(v.1)))&sortiertnach=neuheiten"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "product-ids",
+        "css-queries": [ "#reptile-tilelist article"],
+        "attribute-id": "data-product-id",
+        "overwrite": true,
+        "sourceContextId": "product-overview"
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    },
+
+    {
+      "comment": "random-item-number",
+      "commandId": "generate-random-number",
+      "parameters": {
+        "contextId": "random-item-number",
+        "maximum": 28000
+      }
+    },
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "overwrite": true,
+        "uri": "https://{template.site}/?selektion=(und.(ist.sortiment.haushaltswaren).(oder.(sind.kategorien.buchhalter).(sind.kategorien.crepes-verteiler).(sind.kategorien.dessertringe).(sind.kategorien.dosenoeffner).(sind.kategorien.eier-pochierer).(sind.kategorien.eieroeffner).(sind.kategorien.eierpiekser).(sind.kategorien.eiertrenner).(sind.kategorien.eieruhren).(sind.kategorien.entkerner).(sind.kategorien.flambierbrenner).(sind.kategorien.frischkaesebereiter).(sind.kategorien.garne.kuechengarne).(sind.kategorien.kannen.fetttrennkannen).(sind.kategorien.kuechenbretter).(sind.kategorien.kuechenformen.dessertformen).(sind.kategorien.kuechenformen.eisformen).(sind.kategorien.kuechenformen.eiswuerfelformen).(sind.kategorien.kuechenschaufeln).(sind.kategorien.kugelausstecher).(sind.kategorien.marinierspritzen).(sind.kategorien.messbecher).(sind.kategorien.messgeraete.termometer).(sind.kategorien.messloeffel).(sind.kategorien.nussknacker).(sind.kategorien.pinsel.marinierpinsel).(sind.kategorien.portionierer.eisportionierer).(sind.kategorien.sahnebereiter).(sind.kategorien.salatschleuder).(sind.kategorien.scheren.allzweckscheren).(sind.kategorien.scheren.effilierscheren).(sind.kategorien.scheren.fischscheren).(sind.kategorien.scheren.gefluegelscheren).(sind.kategorien.schneider.eierschneider).(sind.kategorien.schneider.julienne-schneider).(sind.kategorien.schneider.knoblauchschneider).(sind.kategorien.schneider.obstschneider).(sind.kategorien.schneider.pizzaschneider).(sind.kategorien.schneider.spiralschneider).(sind.kategorien.schneider.zestenreisser).(sind.kategorien.schneidergemueseschneider).(sind.kategorien.shaker.dressingshaker).(sind.kategorien.siebe.kuechensiebe).(sind.kategorien.speiseglocken).(sind.kategorien.sushi-roller).(sind.kategorien.tabletts).(sind.kategorien.tortillaformen).(sind.kategorien.trichter).(sind.kategorien.untersetzer).(sind.kategorien.verschlusssysteme).(sind.kategorien.zerkleinerer.moerser).(sind.kategorien.zerkleinerer.zwiebelhacker)).(~.(v.1)))&l=gq&o={random-item-number}"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "product-ids",
+        "css-queries": [ "#reptile-tilelist article"],
+        "attribute-id": "data-product-id",
+        "overwrite": true,
+        "sourceContextId": "product-overview"
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    }
+  ]
+}
