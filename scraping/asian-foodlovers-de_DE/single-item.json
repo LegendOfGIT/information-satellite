@@ -1,0 +1,357 @@
+{
+  "site": "asianfoodlovers.de",
+
+  "itemId": "{template.site}-{sku}",
+
+  "scraping": [
+    {
+      "comment": "single product",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-search",
+        "uri": "https://www.{template.site}/search/\"{request.query.itemId}\""
+      }
+    },
+    {
+      "comment": "link",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "link",
+        "sourceContextId": "product-search",
+        "attribute-id": "href",
+        "css-queries": [ ".c-card-item-product__image" ]
+      }
+    },
+    {
+      "comment": "link",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "link",
+        "value": "https://www.{template.site}{link}"
+      }
+    },
+    {
+      "comment": "single product",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "single-product-view",
+        "uri": "{link}"
+      }
+    },
+
+    {
+      "comment": "merchant article number",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "mean",
+        "value": "afl.{request.query.itemId}"
+      }
+    },
+    {
+      "comment": "sku",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "sku",
+        "value": "{request.query.itemId}"
+      }
+    },
+    {
+      "comment": "ean",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "ean",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "{&q;ean.*?&q;.*?&q;(.*?)&q;"
+        ]
+      }
+    },
+
+    {
+      "comment": "title",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".c-product-info__title" ]
+      }
+    },
+
+    {
+      "comment": "title-image",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title-image",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ "[name='og:image']" ]
+      }
+    },
+
+    {
+      "comment": "description",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "description",
+        "sourceContextId": "single-product-view",
+        "separator": " ",
+        "css-queries": [
+          ".c-product-info__description"
+        ]
+      }
+    },
+    {
+      "comment": "SEO description",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "seoDescription",
+        "value": "{description}"
+      }
+    },
+
+    {
+      "comment": "price-current",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "promotionPrice.*?:(.*?),",
+          "&q;:&q;BUY.*?value.*?:(.*?)}"
+        ]
+      }
+    },
+    {
+      "comment": "price-initial",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "&q;:&q;BUY.*?value.*?:(.*?)}"
+        ]
+      }
+    },
+    {
+      "comment": "price-current to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "price-current"
+      }
+    },
+    {
+      "comment": "price-initial to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "price-initial"
+      }
+    },
+    {
+      "comment": "ingredients",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "ingredients",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "ingredients.*?&q;.*?&q;(.*?)&q;"
+        ]
+      }
+    },
+    {
+      "comment": "brand",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "brand",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "strong>Marke<.*?<span>(.*?)<"
+        ]
+      }
+    },
+
+    {
+      "comment": "amountInStock",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "amountInStock",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".c-product-info__stock-status" ]
+      }
+    },
+    {
+      "comment": "amountInStock",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "defaultValue": 0,
+        "contextId": "amountInStock",
+        "sourceContextId": "amountInStock"
+      }
+    },
+
+    {
+      "comment": "countryOfOrigin",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "countryOfOrigin",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": "strong>Herkunftsland<.*?<span>(.*?)<"
+      }
+    },
+
+    {
+      "comment": "allergenic",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "allergenic",
+        "sourceContextId": "single-product-view",
+        "separator": ", ",
+        "css-queries": [ ".c-product-description__allergens-list .c-product-info__allergen-item" ]
+      }
+    },
+
+    {
+      "comment": "energyInKcal",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "energyInKcal",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": "strong>.*?Energie Kcal.*?strong>(.*?)<"
+      }
+    },
+    {
+      "comment": "energyInKcal",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "energyInKcal",
+        "sourceContextId": "energyInKcal"
+      }
+    },
+    {
+      "comment": "height-in-cm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "height-in-cm",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "height&q;:(.*?),"
+        ]
+      }
+    },
+    {
+      "comment": "height-in-cm",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "height-in-cm",
+        "sourceContextId": "height-in-cm"
+      }
+    },
+    {
+      "comment": "length-in-cm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "length-in-cm",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "length&q;:(.*?),"
+        ]
+      }
+    },
+    {
+      "comment": "length-in-cm",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "length-in-cm",
+        "sourceContextId": "length-in-cm"
+      }
+    },
+    {
+      "comment": "width-in-cm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "width-in-cm",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "width&q;:(.*?),"
+        ]
+      }
+    },
+    {
+      "comment": "width-in-cm",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "width-in-cm",
+        "sourceContextId": "width-in-cm"
+      }
+    },
+    {
+      "comment": "Weight in KG",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "weightInKG",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "netWeight&q;:(.*?),"
+        ]
+      }
+    },
+    {
+      "comment": "Weight in KG",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "weightInKG",
+        "sourceContextId": "weightInKG"
+      }
+    },
+    {
+      "comment": "seoKeywords",
+      "commandId": "extract-seo-keywords",
+      "parameters": {
+        "contextId": "seoKeywords",
+        "sourceContextId": ["description", "title"]
+      }
+    },
+
+    {
+      "comment": "store scraped information",
+      "commandId": "store-information",
+      "parameters": {
+        "informationIds": [
+          "allergenic",
+          "amountInStock",
+          "brand",
+          "countryOfOrigin",
+          "description",
+          "ean",
+          "energyInKcal",
+          "height-in-cm",
+          "ingredients",
+          "length-in-cm",
+          "link",
+          "mean",
+          "price-current",
+          "price-initial",
+          "seoDescription",
+          "seoKeywords",
+          "sku",
+          "title",
+          "title-image",
+          "weightInKG",
+          "width-in-cm"
+        ]
+      }
+    }
+  ]
+}
