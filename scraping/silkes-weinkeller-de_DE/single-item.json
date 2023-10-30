@@ -1,0 +1,400 @@
+{
+  "site": "silkes-weinkeller.de",
+
+  "itemId": "{template.site}-{ean}",
+
+  "scraping": [
+    {
+      "comment": "product-search",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-search",
+        "uri": "https://www.{template.site}/suche/?cl=search&searchparam=\"{request.query.itemId}\""
+      }
+    },
+
+    {
+      "comment": "link",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "link",
+        "sourceContextId": "product-search",
+        "attribute-id": "href",
+        "css-queries": [ ".teaser-wrapper a" ],
+        "replacements": {
+          "\\?.*": ""
+        }
+      }
+    },
+    {
+      "comment": "single-product-view",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "single-product-view",
+        "uri": "{link}"
+      }
+    },
+
+    {
+      "comment": "merchant article number",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "mean",
+        "value": "silkeswk.{request.query.itemId}"
+      }
+    },
+    {
+      "comment": "SKU",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "sku",
+        "value": "{request.query.itemId}"
+      }
+    },
+    {
+      "comment": "ean",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "ean",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": "\"ean\":\"(.*?)\""
+      }
+    },
+
+    {
+      "comment": "title",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".title-and-region h1" ]
+      }
+    },
+
+    {
+      "comment": "title-image",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title-image",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "src",
+        "css-queries": [ ".prod-img picture img" ]
+      }
+    },
+
+    {
+      "comment": "description",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "description",
+        "sourceContextId": "single-product-view",
+        "separator": " ",
+        "css-queries": [ "#description [data-module='MoreLess'], #description [data-module='MoreLess'] p" ]
+      }
+    },
+
+    {
+      "comment": "seoDescription",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "seoDescription",
+        "value": "{description}"
+      }
+    },
+
+    {
+      "comment": "price-current",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".product-info-box .price .val" ]
+      }
+    },
+    {
+      "comment": "price-initial",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".product-info-box .regular-price del" ,".product-info-box .price .val" ]
+      }
+    },
+
+    {
+      "comment": "price per unit",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "pricePerUnit",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": "Inhalt:.*?\\((.*?)euro;\\/l\\)"
+      }
+    },
+
+    {
+      "comment": "price-current to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "price-current"
+      }
+    },
+    {
+      "comment": "price-initial to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "price-initial"
+      }
+    },
+    {
+      "comment": "price per unit to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "pricePerUnit",
+        "sourceContextId": "pricePerUnit"
+      }
+    },
+
+    {
+      "comment": "color",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "color",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 5,
+        "regex": ">Weinart<((\\n|.)*?).*?value.*?>.*?((\\n|.)*?)<a.*?>\\n(.*?)<\\/a>"
+      }
+    },
+
+    {
+      "comment": "countryOfOrigin",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "countryOfOrigin",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 5,
+        "regex": ">Land<((\\n|.)*?).*?value.*?>.*?((\\n|.)*?)<a.*?>\\n(.*?)<\\/a>"
+      }
+    },
+    {
+      "comment": "regionOfOrigin",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "regionOfOrigin",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 5,
+        "regex": ">Anbaugebiet<((\\n|.)*?).*?value.*?>.*?((\\n|.)*?)<a.*?>\\n(.*?)<\\/a>"
+      }
+    },
+    {
+      "comment": "type of taste",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "tasteType",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 5,
+        "regex": ">Geschmack<((\\n|.)*?).*?value.*?>.*?((\\n|.)*?)<a.*?>\\n(.*?)<\\/a>"
+      }
+    },
+    {
+      "comment": "grapeVariety",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "grapeVariety",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 5,
+        "regex": ">Rebsorte<((\\n|.)*?).*?value.*?>.*?((\\n|.)*?)(.*?)<\\/div>"
+      }
+    },
+
+    {
+      "comment": "alcoholContentInPpt",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "alcoholContentInPpt",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 5,
+        "replacements": {
+          "vol.*": ""
+        },
+        "regex": ">Alkoholgehalt<((\\n|.)*?).*?value.*?>.*?((\\n|.)*?)(.*?)<\\/div>"
+      }
+    },
+    {
+      "comment": "alcoholContentInPpt",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "alcoholContentInPpt",
+        "sourceContextId": "alcoholContentInPpt"
+      }
+    },
+    {
+      "comment": "manufacturer",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "manufacturer",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 5,
+        "regex": ">Weingut<((\\n|.)*?).*?value.*?>.*?((\\n|.)*?)<a.*?>\\n(.*?)<\\/a>"
+      }
+    },
+    {
+      "comment": "allergenic",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "allergenic",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 5,
+        "regex": ">Allergene<((\\n|.)*?).*?value.*?>.*?((\\n|.)*?)(.*?)<\\/div>"
+      }
+    },
+    {
+      "comment": "size",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "size",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 5,
+        "regex": ">Inhalt<((\\n|.)*?).*?value.*?>.*?((\\n|.)*?)(.*?)<\\/div>"
+      }
+    },
+    {
+      "comment": "year of manufacture",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "yearOfManufacture",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 5,
+        "regex": ">Jahrgang<((\\n|.)*?).*?value.*?>.*?((\\n|.)*?)(.*?)<\\/div>"
+      }
+    },
+    {
+      "comment": "year of manufacture",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "yearOfManufacture",
+        "sourceContextId": "yearOfManufacture"
+      }
+    },
+
+    {
+      "comment": "number of ratings",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "numberOfRatings",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ "#review a" ],
+        "replacements": { ".*?\\(": "", "\\).*": "" }
+      }
+    },
+    {
+      "comment": "number of ratings",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "numberOfRatings",
+        "defaultValue": 0,
+        "sourceContextId": "numberOfRatings"
+      }
+    },
+
+    {
+      "comment": "rating",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "ratingInPercent",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ ".average-rating" ],
+        "replacements": { " von.*": "" }
+      }
+    },
+    {
+      "comment": "rating",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "ratingInPercent",
+        "defaultValue": 0,
+        "sourceContextId": "ratingInPercent"
+      }
+    },
+    {
+      "comment": "rating",
+      "commandId": "get-rule-of-three-value",
+      "parameters": {
+        "maximumValue": 5,
+        "contextId": "ratingInPercent"
+      }
+    },
+
+    {
+      "comment": "is bio",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "isBio",
+        "sourceContextId": "single-product-view",
+        "setValueOnMiss": false,
+        "setValueOnMatch": true,
+        "css-queries": [ ".biowein" ]
+      }
+    },
+
+    {
+      "comment": "amount in stock",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "amountInStock",
+        "sourceContextId": "single-product-view",
+        "setValueOnMatch": 0,
+        "setValueOnMiss": 999,
+        "regex": "OutOfStock"
+      }
+    },
+
+    {
+      "comment": "seoKeywords",
+      "commandId": "extract-seo-keywords",
+      "parameters": {
+        "contextId": "seoKeywords",
+        "sourceContextId": ["description", "title"]
+      }
+    },
+
+    {
+      "comment": "store scraped information",
+      "commandId": "store-information",
+      "parameters": {
+        "informationIds": [
+          "alcoholContentInPpt",
+          "allergenic",
+          "amountInStock",
+          "color",
+          "countryOfOrigin",
+          "description",
+          "ean",
+          "grapeVariety",
+          "isBio",
+          "link",
+          "manufacturer",
+          "mean",
+          "numberOfRatings",
+          "price-current",
+          "price-initial",
+          "pricePerUnit",
+          "ratingInPercent",
+          "regionOfOrigin",
+          "seoDescription",
+          "seoKeywords",
+          "size",
+          "sku",
+          "tasteType",
+          "title",
+          "title-image",
+          "yearOfManufacture"
+        ]
+      }
+    }
+  ]
+}
