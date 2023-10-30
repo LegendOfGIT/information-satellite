@@ -1,7 +1,7 @@
 {
   "site": "buch24.de",
 
-  "itemId": "{template.site}-{isbn}",
+  "itemId": "{template.site}-{globalId}",
 
   "scraping": [
 
@@ -40,6 +40,26 @@
         "sourceContextId": "single-product-view",
         "groupIndex": 1,
         "regex": "ISBN-13:.*\\s.*>(.*?)<"
+      }
+    },
+    {
+      "comment": "EAN",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "ean",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": "EAN.*\\s.*>(.*?)<"
+      }
+    },
+    {
+      "comment": "global id",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "globalId",
+        "contextIdIfFlag": "isbn",
+        "valueOnTrue": "{isbn}",
+        "valueOnFalse": "{ean}"
       }
     },
 
@@ -265,6 +285,7 @@
           "author",
           "coverType",
           "description",
+          "ean",
           "images-big",
           "isbn",
           "languages",
