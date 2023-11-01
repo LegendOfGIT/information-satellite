@@ -95,6 +95,16 @@
     },
 
     {
+      "comment": "teaser texts",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "teaser-texts",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ "#description [data-module='MoreLess'] ul li" ]
+      }
+    },
+
+    {
       "comment": "seoDescription",
       "commandId": "set-context-value",
       "parameters": {
@@ -124,12 +134,11 @@
 
     {
       "comment": "price per unit",
-      "commandId": "get-value-by-regex",
+      "commandId": "get-value-by-css-queries",
       "parameters": {
         "contextId": "pricePerUnit",
         "sourceContextId": "single-product-view",
-        "groupIndex": 1,
-        "regex": "Inhalt:.*?\\((.*?)euro;\\/l\\)"
+        "css-queries": [ ".price-per-liter" ]
       }
     },
 
@@ -390,6 +399,7 @@
           "size",
           "sku",
           "tasteType",
+          "teaser-texts",
           "title",
           "title-image",
           "yearOfManufacture"
