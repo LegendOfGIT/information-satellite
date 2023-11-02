@@ -27,7 +27,7 @@
       "commandId": "set-context-value",
       "parameters": {
         "contextId": "mean",
-        "value": "silkeswk.{request.query.itemId}"
+        "value": "clubofwine.{request.query.itemId}"
       }
     },
 
