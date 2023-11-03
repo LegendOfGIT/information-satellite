@@ -1,0 +1,230 @@
+{
+  "site": "metabrewsociety.com",
+
+  "itemId": "{template.site}-{sku}",
+
+  "scraping": [
+    {
+      "comment": "link",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "link",
+        "value": "https://www.{template.site}/products/{request.query.itemId}"
+      }
+    },
+
+    {
+      "comment": "single-product-view",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "single-product-view",
+        "uri": "{link}"
+      }
+    },
+
+    {
+      "comment": "merchant article number",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "mean",
+        "value": "metabrewsoc.{request.query.itemId}"
+      }
+    },
+
+    {
+      "comment": "SKU",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "sku",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": "\"product\":{\"id\":\"(.*?)\""
+      }
+    },
+    {
+      "comment": "gtin",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "gtin",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": "\"gtin\":\"(.*?)\""
+      }
+    },
+
+
+    {
+      "comment": "title",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".product-meta__title" ]
+      }
+    },
+
+    {
+      "comment": "title-image",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title-image",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ "meta[property='og:image:secure_url']" ],
+        "replacements": {
+          "$": "&width=650"
+        }
+      }
+    },
+
+    {
+      "comment": "description",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "description",
+        "sourceContextId": "single-product-view",
+        "separator": " ",
+        "css-queries": [ "[id *= 'product-content-description'] div p, [id *= 'product-content-description'] div p *, [id *= 'product-content-description'] div p * *"]
+      }
+    },
+
+    {
+      "comment": "seoDescription",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "seoDescription",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ "meta[name='description']" ]
+      }
+    },
+
+    {
+      "comment": "price-current",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".product__info .price-list .price--large" ]
+      }
+    },
+    {
+      "comment": "price-initial",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".product__info .price-list .price--large" ]
+      }
+    },
+
+    {
+      "comment": "price-current to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "price-current"
+      }
+    },
+    {
+      "comment": "price-initial to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "price-initial"
+      }
+    },
+
+    {
+      "comment": "alcoholContentInPpt",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "alcoholContentInPpt",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": "\\. Mit nur (.*?)\\% Alkohol"
+      }
+    },
+    {
+      "comment": "alcoholContentInPpt",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "alcoholContentInPpt",
+        "sourceContextId": "alcoholContentInPpt"
+      }
+    },
+    {
+      "comment": "manufacturer",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "manufacturer",
+        "value": "Metabrew Society"
+      }
+    },
+
+    {
+      "comment": "size",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "size",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".product-form__variants .block-swatch label" ]
+      }
+    },
+    {
+      "comment": "sizes",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "sizes",
+        "sourceContextId": "single-product-view",
+        "separator": ", ",
+        "css-queries": [ ".product-form__variants .block-swatch label" ]
+      }
+    },
+
+    {
+      "comment": "amount in stock",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "amountInStock",
+        "sourceContextId": "single-product-view",
+        "setValueOnMatch": 999,
+        "setValueOnMiss": 0,
+        "regex": "InStock"
+      }
+    },
+
+    {
+      "comment": "seoKeywords",
+      "commandId": "extract-seo-keywords",
+      "parameters": {
+        "contextId": "seoKeywords",
+        "sourceContextId": ["description", "title"]
+      }
+    },
+
+    {
+      "comment": "store scraped information",
+      "commandId": "store-information",
+      "parameters": {
+        "informationIds": [
+          "alcoholContentInPpt",
+          "amountInStock",
+          "description",
+          "link",
+          "manufacturer",
+          "mean",
+          "price-current",
+          "price-initial",
+          "seoDescription",
+          "seoKeywords",
+          "size",
+          "sizes",
+          "sku",
+          "title",
+          "title-image"
+        ]
+      }
+    }
+  ]
+}
