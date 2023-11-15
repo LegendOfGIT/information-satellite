@@ -93,6 +93,7 @@ module.exports = {
     FASHION_WOMEN_WATCHES: 'women-watches',
     GROCERIES_DRINKS_BEER: 'beer',
     GROCERIES_DRINKS_COFFEE: 'coffee',
+    GROCERIES_DRINKS_COFFEEACCESSORIES: 'coffee-accessories',
     GROCERIES_DRINKS_CHAMPAIGN: 'champaign',
     GROCERIES_DRINKS_SPARKLINGWINE: 'sparkling-wine',
     GROCERIES_DRINKS_SPIRITS: 'spirits',

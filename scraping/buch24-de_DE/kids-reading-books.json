@@ -145,7 +145,110 @@
       "parameters": {
         "contextId": "product-overview",
         "overwrite": true,
-        "uri": "https://{template.site}/shopdirekt.cgi?id=22633;p=2;t=;h=;kid=0;klid=2;sid=32;nav=2928_1477_22773_22633;offset=0;filterSortiment=2928_1477&sort=34_1&offset={random-product-offset}"
+        "uri": "https://{template.site}/shopdirekt.cgi?id=22633;p=2;t=;h=;kid=0;klid=2;sid=32;nav=2928_1477_22773_22633;filterSortiment=2928_1477&sort=34_1&offset={random-product-offset}"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "product-ids",
+        "overwrite": true,
+        "css-queries": [ ".products-grid .product-item a"],
+        "attribute-id": "href",
+        "sourceContextId": "product-overview"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "product-ids",
+        "replacements": {
+          ".*?(\\?|&)id=": "",
+          "&.*": ""
+        },
+        "sourceContextId": "product-ids"
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    },
+
+
+
+
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "overwrite": true,
+        "uri": "https://{template.site}/shopdirekt.cgi?id=23006;p=2;t=;h=;kid=0;klid=2;sid=32;nav=2928_1477_22773_28540_23006;filterSortiment=2928_1477"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "product-ids",
+        "overwrite": true,
+        "css-queries": [ ".products-grid .product-item a"],
+        "attribute-id": "href",
+        "sourceContextId": "product-overview"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "product-ids",
+        "replacements": {
+          ".*?(\\?|&)id=": "",
+          "&.*": ""
+        },
+        "sourceContextId": "product-ids"
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    },
+
+    {
+      "comment": "random-product-offset",
+      "commandId": "generate-random-number",
+      "parameters": {
+        "contextId": "random-product-offset",
+        "maximum": 8000
+      }
+    },
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "overwrite": true,
+        "uri": "https://{template.site}/shopdirekt.cgi?id=23006;p=2;t=;h=;kid=0;klid=2;sid=32;nav=2928_1477_22773_28540_23006;filterSortiment=2928_1477&offset={random-product-offset}"
       }
     },
     {
