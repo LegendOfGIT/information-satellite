@@ -1,0 +1,322 @@
+{
+  "site": "beautywelt.de",
+
+  "itemId": "{template.site}-{ean}",
+
+  "scraping": [
+    {
+      "comment": "link",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "link",
+        "value": "https://www.{template.site}/{request.query.itemId}"
+      }
+    },
+
+    {
+      "comment": "single-product-view",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "single-product-view",
+        "encoding": "latin1",
+        "uri": "{link}"
+      }
+    },
+
+    {
+      "comment": "merchant article number",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "mean",
+        "value": "beautywelt.{request.query.itemId}"
+      }
+    },
+
+    {
+      "comment": "title",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ "[property='og:title']" ]
+      }
+    },
+
+    {
+      "comment": "images-big",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "images-big",
+        "sourceContextId": "single-product-view",
+        "attribute-id": [ "src", "data-src" ],
+        "css-queries": [ ".bwhu .bwhv" ]
+      }
+    },
+    {
+      "comment": "images-big",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "images-big",
+        "replacements": {
+          "^": "https://www.beautywelt.de/"
+        },
+        "sourceContextId": "images-big"
+      }
+    },
+    {
+      "comment": "title-image",
+      "commandId": "get-value-from-array",
+      "parameters": {
+        "contextId": "title-image",
+        "sourceContextId": "images-big"
+      }
+    },
+
+    {
+      "comment": "description",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "description",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "Beschreibung.*?\"bwjy\".*?>(.*?)<\/div>"
+        ]
+      }
+    },
+    {
+      "comment": "ingredients",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "ingredients",
+        "sourceContextId": "single-product-view",
+        "separator": ". ",
+        "css-queries": [ ".bwai .bwjy" ]
+      }
+    },
+
+    {
+      "comment": "color",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "color",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".bwi6 option" ]
+      }
+    },
+    {
+      "comment": "colors",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "colors",
+        "sourceContextId": "single-product-view",
+        "separator": ", ",
+        "css-queries": [ ".bwi6 option" ]
+      }
+    },
+
+
+    {
+      "comment": "seoDescription",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "seoDescription",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "replacements": {
+          "<.*?>": "",
+          "Gratisproben.*": ""
+        },
+        "css-queries": [ "meta[itemprop='description']" ]
+      }
+    },
+
+    {
+      "comment": "product type",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "productType",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "<b>Produkttyp.*?<\\/b>(.*?)<\\/div>"
+        ]
+      }
+    },
+    {
+      "comment": "brand",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "brand",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "<b>Marke.*?<\\/b>(.*?)<\\/div>"
+        ]
+      }
+    },
+    {
+      "comment": "ean",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "ean",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "<b>EAN.*?<\\/b>(.*?)<\\/div>"
+        ]
+      }
+    },
+    {
+      "comment": "suitableFor",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "suitableFor",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "<b>Geschlecht.*?<\\/b>(.*?)<\\/div>"
+        ]
+      }
+    },
+    {
+      "comment": "series",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "series",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "<b>Serie.*?<\\/b>(.*?)<\\/div>"
+        ]
+      }
+    },
+
+    {
+      "comment": "price-current",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".bwacg .bwv" ]
+      }
+    },
+    {
+      "comment": "price-initial",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".bwacg .bwacf", ".bwacg .bwv" ]
+      }
+    },
+    {
+      "comment": "price-current to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "price-current"
+      }
+    },
+    {
+      "comment": "price-initial to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "price-initial"
+      }
+    },
+
+    {
+      "comment": "number of ratings",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "numberOfRatings",
+        "sourceContextId": "single-product-view",
+        "replacements": {
+          "\\(.*?\\)": ""
+        },
+        "css-queries": [ ".bwlz" ]
+      }
+    },
+    {
+      "comment": "number of ratings",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "numberOfRatings",
+        "defaultValue": 0,
+        "sourceContextId": "numberOfRatings"
+      }
+    },
+
+    {
+      "comment": "rating",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "ratingInPercent",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "title",
+        "replacements": {
+          "\/.*": ""
+        },
+        "css-queries": [ ".bwjn" ]
+      }
+    },
+    {
+      "comment": "rating",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "ratingInPercent",
+        "defaultValue": 0,
+        "sourceContextId": "ratingInPercent"
+      }
+    },
+    {
+      "comment": "rating",
+      "commandId": "get-rule-of-three-value",
+      "parameters": {
+        "maximumValue": 5,
+        "contextId": "ratingInPercent"
+      }
+    },
+
+    {
+      "comment": "seoKeywords",
+      "commandId": "extract-seo-keywords",
+      "parameters": {
+        "contextId": "seoKeywords",
+        "sourceContextId": ["description", "title"]
+      }
+    },
+
+    {
+      "comment": "store scraped information",
+      "commandId": "store-information",
+      "parameters": {
+        "informationIds": [
+          "brand",
+          "color",
+          "colors",
+          "description",
+          "ean",
+          "images-big",
+          "ingredients",
+          "link",
+          "mean",
+          "numberOfRatings",
+          "price-current",
+          "price-initial",
+          "productType",
+          "ratingInPercent",
+          "seoDescription",
+          "seoKeywords",
+          "series",
+          "suitableFor",
+          "title",
+          "title-image"
+        ]
+      }
+    }
+  ]
+}

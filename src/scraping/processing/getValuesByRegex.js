@@ -21,11 +21,13 @@ module.exports = (sourceContext, regex, groupIndex, flags = 'sg', tagReplacer = 
 
         let val = v.replaceAll('\\u0026', '&').replaceAll('\\u003C', '<').replaceAll('\\u003c', '<').replaceAll('\\u003E', '>').replaceAll('\\u003e', '>').replaceAll('&apos;', '´')
             .replaceAll('&#43;', '+')
+            .replaceAll('&#8722;', '-')
             .replaceAll('&nbsp;', ' ').replaceAll('&ndash;', '-')
             .replaceAll('&quot;', '"').replaceAll('&amp;', '&')
             .replaceAll('&auml;', 'ä').replaceAll('&Auml;', 'Ä')
             .replaceAll('&ouml;', 'ö').replaceAll('&Ouml;', 'Ö')
-            .replaceAll('&uuml;', 'ü').replaceAll('&Uuml;', 'Ü');
+            .replaceAll('&uuml;', 'ü').replaceAll('&Uuml;', 'Ü')
+            .replaceAll('&szlig;', 'ß');
 
         if (!removeTags) {
             return val;
