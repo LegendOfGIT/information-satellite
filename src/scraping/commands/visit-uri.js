@@ -44,7 +44,6 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.0; Trident/5.0; Trident/5.0)',
         'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0; MDDCJS)',
         'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393',
-        'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)',
         'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
         'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
         'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36',
@@ -77,6 +76,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     return request
         .then(response => {
             context['current-uri'] = commandParameters.uri;
+            context['last-response-status'] = '200';
 
             console.log(`requested uri "${commandParameters.uri}" was resolved successfully.`);
             if (contextId) {
@@ -86,6 +86,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
             resolve();
         })
         .catch((e) => {
+            context['last-response-status'] = '' + e.response?.status;
             console.log(`requested uri "${commandParameters.uri}" can not be resolved. abort`);
             resolve();
         });

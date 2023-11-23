@@ -878,6 +878,25 @@
     },
 
     {
+      "comment": "removeProviderFlag",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "removeProviderFlag",
+        "sourceContextId": "last-response-status",
+        "setValueOnMatch": true,
+        "setValueOnMiss": false,
+        "regex": "404"
+      }
+    },
+    {
+      "comment": "remove provider when product can not be found anymore",
+      "commandId": "remove-provider",
+      "parameters": {
+        "flagId": "removeProviderFlag"
+      }
+    },
+
+    {
       "comment": "store scraped information",
       "commandId": "store-information",
       "parameters": {
