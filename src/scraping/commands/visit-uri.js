@@ -76,7 +76,6 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     return request
         .then(response => {
             context['current-uri'] = commandParameters.uri;
-            context['last-response-status'] = '200';
 
             console.log(`requested uri "${commandParameters.uri}" was resolved successfully.`);
             if (contextId) {
@@ -86,7 +85,9 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
             resolve();
         })
         .catch((e) => {
-            context['last-response-status'] = '' + e.response?.status;
+            if (contextId && e.response?.data) {
+                context[contextId] = e.response?.data.toString(encoding);
+            }
             console.log(`requested uri "${commandParameters.uri}" can not be resolved. abort`);
             resolve();
         });

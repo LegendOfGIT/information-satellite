@@ -882,10 +882,10 @@
       "commandId": "get-value-by-regex",
       "parameters": {
         "contextId": "removeProviderFlag",
-        "sourceContextId": "last-response-status",
+        "sourceContextId": "single-product-view",
         "setValueOnMatch": true,
         "setValueOnMiss": false,
-        "regex": "404"
+        "regex": "Wir konnten die Seite, die du aufrufen wolltest, leider nicht finden."
       }
     },
     {
