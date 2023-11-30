@@ -44,7 +44,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://{template.site}/suche/filmposter/?sortiertnach=neuheiten"
+        "uri": "https://www.{template.site}/suche/filmposter/?sortiertnach=neuheiten"
       }
     },
     {
@@ -86,7 +86,7 @@
       "parameters": {
         "contextId": "product-overview",
         "overwrite": true,
-        "uri": "https://{template.site}/suche/filmposter/?l=gq&o={random-item-number}"
+        "uri": "https://www.{template.site}/suche/filmposter/?l=gq&o={random-item-number}"
       }
     },
     {
