@@ -1,5 +1,5 @@
 {
-  "site": "amazon.de",
+  "site": "otto.de",
 
   "scraping": [
     {
@@ -7,7 +7,7 @@
       "commandId": "set-context-value",
       "parameters": {
         "contextId": "site",
-        "value": "amazon-de_DE"
+        "value": "otto-de_DE"
       }
     },
     {
@@ -32,9 +32,9 @@
       "parameters": {
         "contextId": "navigation-path",
         "value": [
-          "GROCERIES",
-          "GROCERIES_DRINKS",
-          "GROCERIES_DRINKS_SPIRITS"
+          "BEAUTY_CARE",
+          "BEAUTY_CARE_SLEEP",
+          "BEAUTY_CARE_SLEEP_SLEEPAIDS"
         ]
       }
     },
@@ -44,7 +44,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://{template.site}/gp/bestsellers/grocery/364613031/ref=zg_bs_unv_grocery_3_6264610031_2"
+        "uri": "https://{template.site}/suche/einschlafhilfe/?sortiertnach=neuheiten"
       }
     },
     {
@@ -52,8 +52,9 @@
       "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "css-queries": [ ".p13n-sc-uncoverable-faceout"],
-        "attribute-id": "id",
+        "css-queries": [ "#reptile-tilelist article"],
+        "attribute-id": "data-product-id",
+        "overwrite": true,
         "sourceContextId": "product-overview"
       }
     },
@@ -72,12 +73,11 @@
     },
 
     {
-      "comment": "random-page-number",
+      "comment": "random-item-number",
       "commandId": "generate-random-number",
       "parameters": {
-        "contextId": "random-page-number",
-        "minimum": 2,
-        "maximum": 2
+        "contextId": "random-item-number",
+        "maximum": 50
       }
     },
     {
@@ -86,7 +86,7 @@
       "parameters": {
         "contextId": "product-overview",
         "overwrite": true,
-        "uri": "https://{template.site}/gp/bestsellers/grocery/364613031/ref=zg_bs_unv_grocery_3_6264610031_2?pg={random-page-number}"
+        "uri": "https://{template.site}/suche/einschlafhilfe/?l=gq&o={random-item-number}"
       }
     },
     {
@@ -94,8 +94,8 @@
       "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "css-queries": [ ".p13n-sc-uncoverable-faceout"],
-        "attribute-id": "id",
+        "css-queries": [ "#reptile-tilelist article"],
+        "attribute-id": "data-product-id",
         "overwrite": true,
         "sourceContextId": "product-overview"
       }

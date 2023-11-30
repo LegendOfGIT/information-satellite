@@ -44,7 +44,7 @@
       "commandId": "generate-random-number",
       "parameters": {
         "contextId": "random-page-number",
-        "maximum": "8"
+        "maximum": 2
       }
     },
     {

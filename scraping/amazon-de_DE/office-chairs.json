@@ -79,7 +79,7 @@
       "parameters": {
         "contextId": "random-page-number",
         "minimum": 2,
-        "maximum": 8
+        "maximum": 2
       }
     },
     {
