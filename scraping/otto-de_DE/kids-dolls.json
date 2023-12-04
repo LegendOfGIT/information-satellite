@@ -1,5 +1,5 @@
 {
-  "site": "amazon.de",
+  "site": "otto.de",
 
   "scraping": [
     {
@@ -7,7 +7,7 @@
       "commandId": "set-context-value",
       "parameters": {
         "contextId": "site",
-        "value": "amazon-de_DE"
+        "value": "otto-de_DE"
       }
     },
     {
@@ -44,7 +44,8 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://www.{template.site}/gp/bestsellers/toys/360431031/ref=zg_bs_nav_toys_1"
+        "overwrite": true,
+        "uri": "https://{template.site}/spielzeug/puppen/?sortiertnach=neuheiten"
       }
     },
     {
@@ -52,8 +53,9 @@
       "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "css-queries": [ ".p13n-sc-uncoverable-faceout"],
-        "attribute-id": "id",
+        "css-queries": [ "#reptile-tilelist article"],
+        "attribute-id": "data-product-id",
+        "overwrite": true,
         "sourceContextId": "product-overview"
       }
     },
@@ -72,12 +74,11 @@
     },
 
     {
-      "comment": "random-page-number",
+      "comment": "random-item-number",
       "commandId": "generate-random-number",
       "parameters": {
-        "contextId": "random-page-number",
-        "minimum": 2,
-        "maximum": 2
+        "contextId": "random-item-number",
+        "maximum": 2200
       }
     },
     {
@@ -86,7 +87,7 @@
       "parameters": {
         "contextId": "product-overview",
         "overwrite": true,
-        "uri": "https://www.{template.site}/gp/bestsellers/toys/360431031/ref=zg_bs_nav_toys_1?pg={random-page-number}"
+        "uri": "https://{template.site}/spielzeug/puppen/?l=gq&o={random-item-number}"
       }
     },
     {
@@ -94,8 +95,8 @@
       "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "css-queries": [ ".p13n-sc-uncoverable-faceout"],
-        "attribute-id": "id",
+        "css-queries": [ "#reptile-tilelist article"],
+        "attribute-id": "data-product-id",
         "overwrite": true,
         "sourceContextId": "product-overview"
       }
@@ -120,7 +121,7 @@
       "parameters": {
         "contextId": "product-overview",
         "overwrite": true,
-        "uri": "https://www.{template.site}/gp/bestsellers/toys/26900726031/ref=zg_bs_nav_toys_2_360431031"
+        "uri": "https://{template.site}/suche/diorama/?kategorie=puzzle&sortiertnach=neuheiten"
       }
     },
     {
@@ -128,9 +129,9 @@
       "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "css-queries": [ ".p13n-sc-uncoverable-faceout"],
+        "css-queries": [ "#reptile-tilelist article"],
+        "attribute-id": "data-product-id",
         "overwrite": true,
-        "attribute-id": "id",
         "sourceContextId": "product-overview"
       }
     },
