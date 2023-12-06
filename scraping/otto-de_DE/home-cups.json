@@ -32,9 +32,9 @@
       "parameters": {
         "contextId": "navigation-path",
         "value": [
-          "MULTIMEDIA",
-          "MULTIMEDIA_ART",
-          "MULTIMEDIA_ART_POSTERSANDPICTURES"
+          "HOME",
+          "HOME_ACCESSOIRES",
+          "HOME_ACCESSOIRES_CUPS"
         ]
       }
     },
@@ -44,7 +44,41 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://www.{template.site}/suche/filmposter/?sortiertnach=neuheiten"
+        "uri": "https://{template.site}/haushalt/geschirr/tassen?sortiertnach=neuheiten"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "product-ids",
+        "css-queries": [ "#reptile-tilelist article"],
+        "attribute-id": "data-product-id",
+        "overwrite": true,
+        "sourceContextId": "product-overview"
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    },
+
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "overwrite": true,
+        "uri": "https://{template.site}/haushalt/geschirr/tassen"
       }
     },
     {
@@ -77,7 +111,7 @@
       "commandId": "generate-random-number",
       "parameters": {
         "contextId": "random-item-number",
-        "maximum": 50
+        "maximum": 38000
       }
     },
     {
@@ -86,41 +120,7 @@
       "parameters": {
         "contextId": "product-overview",
         "overwrite": true,
-        "uri": "https://www.{template.site}/suche/filmposter/?l=gq&o={random-item-number}"
-      }
-    },
-    {
-      "comment": "product-ids",
-      "commandId": "get-values-by-css-queries",
-      "parameters": {
-        "contextId": "product-ids",
-        "css-queries": [ "#reptile-tilelist article"],
-        "attribute-id": "data-product-id",
-        "overwrite": true,
-        "sourceContextId": "product-overview"
-      }
-    },
-    {
-      "comment": "observe scraped information",
-      "commandId": "observe-information",
-      "parameters": {
-        "informationIds": [
-          "locale",
-          "navigation-path",
-          "product-ids",
-          "site",
-          "usecase"
-        ]
-      }
-    },
-
-    {
-      "comment": "product-overview",
-      "commandId": "visit-uri",
-      "parameters": {
-        "contextId": "product-overview",
-        "overwrite": true,
-        "uri": "https://www.{template.site}/suche/totoro"
+        "uri": "https://{template.site}/haushalt/geschirr/tassen/?l=gq&o={random-item-number}"
       }
     },
     {

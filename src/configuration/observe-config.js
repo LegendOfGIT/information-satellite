@@ -109,6 +109,7 @@ module.exports = {
     GROCERIES_FOOD_SPICES: 'spices',
     HOME_ACCESSOIRES_BEDCOVERS: 'bedcovers',
     HOME_ACCESSOIRES_CARPETS: 'carpets',
+    HOME_ACCESSOIRES_CUPS: 'home-cups',
     HOME_ACCESSOIRES_DECORATIONS: 'home-decorations',
     HOME_ACCESSOIRES_MATTRESSES: 'mattresses',
     HOME_ACCESSOIRES_PILLOWS: 'pillows',
