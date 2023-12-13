@@ -48,7 +48,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
             value = value.replace(new RegExp(key,"g"), replacementValue);
         }
         return value;
-    })
+    }).filter(v => v);
 
     if (unique) {
         values = values.filter((value, index, array) => array.indexOf(value) === index);

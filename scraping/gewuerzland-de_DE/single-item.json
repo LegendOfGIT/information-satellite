@@ -60,17 +60,41 @@
     },
 
     {
+      "comment": "big images",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "images-big",
+        "sourceContextId": "single-product-view",
+        "attribute-id": ["data-srcset", "data-src"],
+        "css-queries": [
+          ".gallery-slider-item img"
+        ]
+      }
+    },
+    {
+      "comment": "big images",
+      "commandId": "get-values-by-regex",
+      "parameters": {
+        "contextId": "images-big",
+        "sourceContextId": "images-big",
+        "groupIndex": 1,
+        "replacements": {
+          ".*, ": "",
+          "[0-9]+w": "",
+          " ":  ""
+        },
+        "unique": true,
+        "regex": [
+          "(https:\\/\\/.*?800x800\\..*? |^((?!800x800).*)*$)"
+        ]
+      }
+    },
+    {
       "comment": "title-image",
-      "commandId": "get-value-by-css-queries",
+      "commandId": "get-value-from-array",
       "parameters": {
         "contextId": "title-image",
-        "sourceContextId": "single-product-view",
-        "attribute-id": "content",
-        "replacements": {
-          "\/media\/": "/thumbnail/",
-          "_.*?x.*?\\.": "_900x900_800x800."
-        },
-        "css-queries": [ "meta[property='og:image']" ]
+        "sourceContextId": "images-big"
       }
     },
 
@@ -256,6 +280,7 @@
         "informationIds": [
           "brand",
           "description",
+          "images-big",
           "ingredients",
           "link",
           "mean",
