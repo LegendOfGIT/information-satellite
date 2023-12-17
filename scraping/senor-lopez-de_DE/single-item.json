@@ -256,18 +256,6 @@
     },
 
     {
-      "comment": "teaser-texts",
-      "commandId": "clone-items-and-modify-clones",
-      "parameters": {
-        "contextId": "teaser-texts",
-        "replacements": {
-          "Wir haben hohe.*": "Wir haben hohe Qualitätskriterien"
-        },
-        "sourceContextId": "teaser-texts"
-      }
-    },
-
-    {
       "comment": "seoKeywords",
       "commandId": "extract-seo-keywords",
       "parameters": {
