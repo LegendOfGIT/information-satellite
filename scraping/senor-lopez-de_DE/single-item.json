@@ -1,0 +1,306 @@
+{
+  "site": "srlopez.com",
+
+  "itemId": "{template.site}-{sku}",
+
+  "scraping": [
+    {
+      "comment": "link",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "link",
+        "value": "https://{template.site}/products/{request.query.itemId}"
+      }
+    },
+    {
+      "comment": "single product",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "single-product-view",
+        "uri": "{link}"
+      }
+    },
+
+    {
+      "comment": "merchant article number",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "mean",
+        "value": "srlopez.{request.query.itemId}"
+      }
+    },
+
+    {
+      "comment": "sku",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "sku",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "\"sku\":\"(.*?)\""
+        ]
+      }
+    },
+
+    {
+      "comment": "title",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".product-page--heading" ]
+      }
+    },
+
+    {
+      "comment": "big images",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "images-big",
+        "sourceContextId": "single-product-view",
+        "attribute-id":  "data-src",
+        "css-queries": [
+          ".product-zoom--wrapper .image--container img"
+        ]
+      }
+    },
+    {
+      "comment": "big images",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "images-big",
+        "replacements": {
+          "^": "https:",
+          "$": "&width=650"
+        },
+        "sourceContextId": "images-big"
+      }
+    },
+    {
+      "comment": "small images",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "images-small",
+        "replacements": {
+          "width=.*": "width=150"
+        },
+        "sourceContextId": "images-big"
+      }
+    },
+    {
+      "comment": "title-image",
+      "commandId": "get-value-from-array",
+      "parameters": {
+        "contextId": "title-image",
+        "sourceContextId": "images-big"
+      }
+    },
+
+    {
+      "comment": "description headlines",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "descriptions.headline",
+        "sourceContextId": "single-product-view",
+        "css-queries": [
+          ".product-page--description ul li strong"
+        ]
+      }
+    },
+    {
+      "comment": "description contents",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "descriptions.content",
+        "sourceContextId": "single-product-view",
+        "css-queries": [
+          ".product-page--description ul li span"
+        ]
+      }
+    },
+    {
+      "comment": "descriptions",
+      "commandId": "zip-contexts-to-context",
+      "parameters": {
+        "contextId": "descriptions",
+        "exchangeFromWhenEmpty": "headline",
+        "exchangeToWhenEmpty": "content",
+        "sourceContextIds": [ "descriptions.headline", "descriptions.content" ]
+      }
+    },
+
+    {
+      "comment": "SEO description",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "seoDescription",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "css-queries": [ "meta[property='og:description']" ]
+      }
+    },
+    {
+      "comment": "description",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "description",
+        "value": "{seoDescription}"
+      }
+    },
+
+    {
+      "comment": "price-current",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "single-product-view",
+        "css-queries": [
+          ".product-price--compare",
+          ".product-price--original"
+        ]
+      }
+    },
+    {
+      "comment": "price-initial",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "single-product-view",
+        "css-queries": [
+          ".product-price--original"
+        ]
+      }
+    },
+    {
+      "comment": "price-current to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "price-current"
+      }
+    },
+    {
+      "comment": "price-initial to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "price-initial"
+      }
+    },
+
+    {
+      "comment": "publisher",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "publisher",
+        "value": "Señor López"
+      }
+    },
+
+    {
+      "comment": "brand",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "brand",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "\"brand\":\"(.*?)\""
+        ]
+      }
+    },
+
+    {
+      "comment": "Price per unit",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "pricePerUnit",
+        "sourceContextId": "single-product-view",
+        "css-queries": [
+          ".product-price--unit-price"
+        ]
+      }
+    },
+    {
+      "comment": "Price per unit",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "pricePerUnit",
+        "sourceContextId": "pricePerUnit"
+      }
+    },
+    {
+      "comment": "Reference unit",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "referenceUnit",
+        "sourceContextId": "single-product-view",
+        "separator": "",
+        "css-queries": [
+          ".product-price--reference-value, .product-price--reference-unit"
+        ]
+      }
+    },
+
+    {
+      "comment": "size",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "size",
+        "sourceContextId": "title",
+        "regex": [
+          " [0-9]+ g"
+        ]
+      }
+    },
+
+    {
+      "comment": "teaser-texts",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "teaser-texts",
+        "replacements": {
+          "Wir haben hohe.*": "Wir haben hohe Qualitätskriterien"
+        },
+        "sourceContextId": "teaser-texts"
+      }
+    },
+
+    {
+      "comment": "seoKeywords",
+      "commandId": "extract-seo-keywords",
+      "parameters": {
+        "contextId": "seoKeywords",
+        "sourceContextId": ["description", "title"]
+      }
+    },
+
+    {
+      "comment": "store scraped information",
+      "commandId": "store-information",
+      "parameters": {
+        "informationIds": [
+          "brand",
+          "description",
+          "descriptions",
+          "images-big",
+          "images-small",
+          "link",
+          "mean",
+          "price-current",
+          "price-initial",
+          "pricePerUnit",
+          "publisher",
+          "referenceUnit",
+          "seoDescription",
+          "seoKeywords",
+          "sku",
+          "size",
+          "title",
+          "title-image"
+        ]
+      }
+    }
+  ]
+}
