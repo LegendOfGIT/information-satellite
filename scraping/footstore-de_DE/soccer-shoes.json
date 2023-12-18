@@ -1,0 +1,177 @@
+{
+  "site": "foot-store.de",
+
+  "scraping": [
+    {
+      "comment": "site",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "site",
+        "value": "footstore-de_DE"
+      }
+    },
+    {
+      "comment": "locale",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "locale",
+        "value": "de-DE"
+      }
+    },
+    {
+      "comment": "usecase",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "usecase",
+        "value": "single-item"
+      }
+    },
+    {
+      "comment": "navigation-path",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "navigation-path",
+        "value": [
+          "SPORTS",
+          "SPORTS_BALLSPORTS",
+          "SPORTS_BALLSPORTS_SOCCERSHOES"
+        ]
+      }
+    },
+
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "uri": "https://www.{template.site}/schuhe"
+      }
+    },
+
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "product-ids",
+        "css-queries": [ ".products-grid li .product-info a"],
+        "attribute-id": "href",
+        "sourceContextId": "product-overview"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-regex",
+      "parameters": {
+        "contextId": "product-ids",
+        "sourceContextId": "product-ids",
+        "groupIndex": 1,
+        "toUpper": true,
+        "regex": [
+          "\\.de\\/(.*?[0-9]+.*?[0-9]{2})-"
+        ]
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-regex",
+      "parameters": {
+        "contextId": "product-ids",
+        "sourceContextId": "product-ids",
+        "groupIndex": [1, 2],
+        "replacements": {
+          "^-.*": ""
+        },
+        "regex": [
+          "(.*?)-.*?.*?-[A-Z]+|(.*?-[0-9]+)"
+        ]
+      }
+    },
+
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    },
+
+    {
+      "comment": "random-page-number",
+      "commandId": "generate-random-number",
+      "parameters": {
+        "contextId": "random-page-number",
+        "minimum": 2,
+        "maximum": 18
+      }
+    },
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "overwrite": true,
+        "uri": "https://www.{template.site}/schuhe?p={random-page-number}"
+      }
+    },
+
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "product-ids",
+        "overwrite": true,
+        "css-queries": [ ".products-grid li .product-info a"],
+        "attribute-id": "href",
+        "sourceContextId": "product-overview"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-regex",
+      "parameters": {
+        "contextId": "product-ids",
+        "sourceContextId": "product-ids",
+        "groupIndex": 1,
+        "toUpper": true,
+        "regex": [
+          "\\.de\\/(.*?[0-9]+.*?[0-9]{2})-"
+        ]
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-regex",
+      "parameters": {
+        "contextId": "product-ids",
+        "sourceContextId": "product-ids",
+        "groupIndex": [1, 2],
+        "replacements": {
+          "^-.*": ""
+        },
+        "regex": [
+          "(.*?)-.*?.*?-[A-Z]+|(.*?-[0-9]+)"
+        ]
+      }
+    },
+
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    }
+  ]
+}

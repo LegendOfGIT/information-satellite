@@ -186,6 +186,7 @@ module.exports = {
     MUSIC_CD_POP: 'music-pop',
     MUSIC_CD_ROCK: 'music-rock',
     SPORTS_BALLSPORTS_SOCCER: 'sports-soccer',
+    SPORTS_BALLSPORTS_SOCCERSHOES: 'soccer-shoes',
     SPORTS_CLIMBING_BACKPACKS: 'climbing-backpacks',
     SPORTS_CLIMBING_HELMETS: 'climbing-helmets',
     SPORTS_CLIMBING_SHOES: 'climbing-shoes',

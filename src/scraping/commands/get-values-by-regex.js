@@ -10,6 +10,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         replacements = {},
         removeTags = true,
         separator = undefined,
+        toUpper = false,
         sourceContextId,
         unique = false
     } = parameters;
@@ -44,6 +45,8 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     });
 
     values = values.map(value => {
+        value = value && toUpper ? value.toUpperCase() : value;
+
         for (const [key, replacementValue] of Object.entries(replacements)) {
             value = value.replace(new RegExp(key,"g"), replacementValue);
         }
