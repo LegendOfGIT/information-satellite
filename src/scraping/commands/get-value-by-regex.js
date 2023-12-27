@@ -63,8 +63,10 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     }
 
     context[contextId] = undefined !== context[contextId] ? context[contextId] : '';
-    for (const [key, value] of Object.entries(replacements)) {
-        context[contextId] = context[contextId].replace(new RegExp(key,"g"), value);
+    if (context[contextId]) {
+        for (const [key, value] of Object.entries(replacements)) {
+            context[contextId] = context[contextId].replace(new RegExp(key,"g"), value);
+        }
     }
 
     if (mustContain && -1 === (context[contextId] || '').indexOf(mustContain)) {

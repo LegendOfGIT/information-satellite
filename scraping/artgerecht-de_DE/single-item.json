@@ -1,7 +1,7 @@
 {
   "site": "artgerecht.com",
 
-  "itemId": "{template.site}-{gtin}",
+  "itemId": "{template.site}-{sku}",
 
   "scraping": [
     {
