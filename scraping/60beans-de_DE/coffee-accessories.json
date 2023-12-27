@@ -117,6 +117,42 @@
           "usecase"
         ]
       }
+    },
+
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "overwrite": true,
+        "uri": "https://www.{template.site}/collections/kaffeemuehlen"
+      }
+    },
+    {
+      "comment": "product ids",
+      "commandId": "get-values-by-regex",
+      "parameters": {
+        "contextId": "product-ids",
+        "sourceContextId": "product-overview",
+        "groupIndex": 1,
+        "overwrite": true,
+        "unique": true,
+        "replacements": { " ":  "+" },
+        "regex": "\"sku\":\"(.*?)\""
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
     }
   ]
 }
