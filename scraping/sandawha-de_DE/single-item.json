@@ -184,6 +184,15 @@
       }
     },
     {
+      "comment": "reference unit",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "referenceUnit",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ "span[class^='product__unit-base-']" ]
+      }
+    },
+    {
       "comment": "price per unit",
       "commandId": "get-value-by-css-queries",
       "parameters": {
@@ -234,6 +243,7 @@
           "price-current",
           "price-initial",
           "pricePerUnit",
+          "referenceUnit",
           "seoDescription",
           "seoKeywords",
           "sku",

@@ -199,12 +199,24 @@
       }
     },
     {
+      "comment": "reference unit",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "referenceUnit",
+        "sourceContextId": "single-product-view",
+        "replacements": { ".*?\/": "", ".*?per": "", "\\)": "" },
+        "css-queries": [
+          ".price-unit-reference-content"
+        ]
+      }
+    },
+    {
       "comment": "Price per unit",
       "commandId": "get-value-by-css-queries",
       "parameters": {
         "contextId": "pricePerUnit",
         "sourceContextId": "single-product-view",
-        "replacements": { "\/.*": "" },
+        "replacements": { "\/.*": "", "per.*": "" },
         "css-queries": [
           ".price-unit-reference-content"
         ]
@@ -288,6 +300,7 @@
           "price-initial",
           "pricePerUnit",
           "publisher",
+          "referenceUnit",
           "seoDescription",
           "seoKeywords",
           "sku",

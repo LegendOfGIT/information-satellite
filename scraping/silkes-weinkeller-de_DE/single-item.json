@@ -133,6 +133,16 @@
     },
 
     {
+      "comment": "reference unit",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "referenceUnit",
+        "sourceContextId": "single-product-view",
+        "replacements": { ".*?\/": "" },
+        "css-queries": [ ".price-per-liter" ]
+      }
+    },
+    {
       "comment": "price per unit",
       "commandId": "get-value-by-css-queries",
       "parameters": {
@@ -398,6 +408,7 @@
           "pricePerUnit",
           "ratingInPercent",
           "regionOfOrigin",
+          "referenceUnit",
           "seoDescription",
           "seoKeywords",
           "size",

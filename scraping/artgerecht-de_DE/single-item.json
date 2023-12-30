@@ -136,7 +136,17 @@
         "contextId": "pricePerUnit",
         "sourceContextId": "single-product-view",
         "replacements": { "\/.*": "" },
-        "css-queries": [ ".cms-element-buy-box .price-unit-reference-content" ]
+        "css-queries": [ ".cms-element-buy-box .price-unit-reference-content", "#agPriceReference" ]
+      }
+    },
+    {
+      "comment": "reference unit",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "referenceUnit",
+        "sourceContextId": "single-product-view",
+        "replacements": { ".*?\/": "", "\\)": "" },
+        "css-queries": [ ".cms-element-buy-box .price-unit-reference-content", "#agPriceReference" ]
       }
     },
     {
@@ -212,7 +222,7 @@
         "sourceContextId": "single-product-view",
         "groupIndex": 1,
         "regex": [
-          "\"AggregateRating\".*?\"ratingValue\":(.*?),"
+          "\"AggregateRating\".*?\"ratingValue\":(...)"
         ]
       }
     },
@@ -268,6 +278,7 @@
           "price-initial",
           "pricePerUnit",
           "ratingInPercent",
+          "referenceUnit",
           "seoDescription",
           "seoKeywords",
           "size",

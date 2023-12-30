@@ -253,6 +253,16 @@
       }
     },
     {
+      "comment": "reference unit",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "referenceUnit",
+        "sourceContextId": "pricePerUnit",
+        "regex": "\\.*?\/(.*?)\\)",
+        "groupIndex": 1
+      }
+    },
+    {
       "comment": "price per unit",
       "commandId": "get-value-by-regex",
       "parameters": {
@@ -288,6 +298,7 @@
           "price-current",
           "price-initial",
           "pricePerUnit",
+          "referenceUnit",
           "seoDescription",
           "seoKeywords",
           "sku",

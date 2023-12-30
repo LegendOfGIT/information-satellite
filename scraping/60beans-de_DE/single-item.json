@@ -234,6 +234,17 @@
         "regex": "unit-price((\\n|.)*?).*?price__last.*?((\\n|.)*?)<span>€(.*?)<\\/span>"
       }
     },
+    {
+      "comment": "reference unit",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "referenceUnit",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 9,
+        "replacements": { ".*?\/" : "" },
+        "regex": "unit-price((\\n|.)*?).*?price__last.*?((\\n|.)*?)<span>.*?<\\/span>.*?((\\n|.)*?)<span>.*?<\\/span>.*?((\\n|.)*?)<span>(.*?)<\\/span>"
+      }
+    },
 
     {
       "comment": "price-current to float",
@@ -398,6 +409,7 @@
           "price-current",
           "price-initial",
           "pricePerUnit",
+          "referenceUnit",
           "regionOfOrigin",
           "seoDescription",
           "seoKeywords",

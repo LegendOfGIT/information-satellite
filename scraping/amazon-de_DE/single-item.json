@@ -436,6 +436,20 @@
     },
 
     {
+      "comment": "reference unit",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "referenceUnit",
+        "sourceContextId": "single-product-view",
+        "replacements": {
+          ".*?\/": "",
+          "\\)": ""
+        },
+        "css-queries": [ ".pricePerUnit" ]
+      }
+    },
+
+    {
       "comment": "price per unit",
       "commandId": "get-value-by-css-queries",
       "parameters": {
@@ -517,6 +531,7 @@
           "price-initial",
           "pricePerUnit",
           "ratingInPercent",
+          "referenceUnit",
           "scent",
           "seoDescription",
           "seoKeywords",

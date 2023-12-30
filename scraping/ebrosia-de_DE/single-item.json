@@ -122,6 +122,16 @@
     },
 
     {
+      "comment": "reference unit",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "referenceUnit",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 2,
+        "regex": "Inhalt:.*?\\((.*?)euro;\\/(.*?)\\)"
+      }
+    },
+    {
       "comment": "price per unit",
       "commandId": "get-value-by-regex",
       "parameters": {
@@ -393,6 +403,7 @@
           "price-initial",
           "pricePerUnit",
           "ratingInPercent",
+          "referenceUnit",
           "regionOfOrigin",
           "seoDescription",
           "seoKeywords",
