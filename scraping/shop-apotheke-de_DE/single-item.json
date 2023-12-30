@@ -215,7 +215,10 @@
       "parameters": {
         "contextId": "price-current",
         "sourceContextId": "single-product-view",
-        "css-queries": [ "[class *= 'ProductBuyBox_old_product-buy-box__inner'] [class *= 'ProductPageVariantDetails_old_product-page-variant-details__display-price']" ]
+        "css-queries": [
+          "[class *= 'ProductBuyBox_old_product-buy-box__inner'] [class *= 'ProductPageVariantDetails_old_product-page-variant-details__display-price']",
+          "[data-qa-id = 'product-details-page'] [data-qa-id = 'currentOfferPrice']"
+        ]
       }
     },
     {
@@ -226,7 +229,8 @@
         "sourceContextId": "single-product-view",
         "css-queries": [
           "[class *= 'ProductBuyBox_old_product-buy-box__inner'] [class *= 'ProductPageVariantDetails_old_product-page-variant-details__strike-through-price']",
-          "[class *= 'ProductBuyBox_old_product-buy-box__inner'] [class *= 'ProductPageVariantDetails_old_product-page-variant-details__display-price']"
+          "[class *= 'ProductBuyBox_old_product-buy-box__inner'] [class *= 'ProductPageVariantDetails_old_product-page-variant-details__display-price']",
+          "[data-qa-id = 'product-details-page'] [data-qa-id = 'product-old-price']"
         ]
       }
     },
@@ -280,6 +284,18 @@
       }
     },
 
+    {
+      "comment": "reference unit",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "referenceUnit",
+        "sourceContextId": "single-product-view",
+        "replacements": { ".*?\/": "" },
+        "css-queries": [
+          "[data-qa-id='current-variant-price-per-unit']"
+        ]
+      }
+    },
     {
       "comment": "price per unit",
       "commandId": "get-value-by-css-queries",
@@ -366,6 +382,7 @@
           "price-initial",
           "pricePerUnit",
           "ratingInPercent",
+          "referenceUnit",
           "seoDescription",
           "seoKeywords",
           "size",

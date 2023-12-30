@@ -14,6 +14,7 @@ module.exports = {
     BEAUTY_CARE_MAKEUP_EYES: 'makeup-eyes',
     BEAUTY_CARE_MAKEUP_LIPS: 'makeup-lips',
     BEAUTY_CARE_SKIN_CARE_FACE_CARE: 'face-care',
+    BEAUTY_CARE_SKIN_CARE_HANDCARE: 'hand-care',
     BEAUTY_CARE_SKIN_CARE_KIDS: 'skin-care-kids',
     BEAUTY_CARE_SLEEP_SLEEPAIDS: 'sleep-aids',
     DIY_BUILDANDRENOVATE_DOORS: 'diy-doors',

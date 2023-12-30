@@ -332,6 +332,20 @@
       }
     },
     {
+      "comment": "scent",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "scent",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "Duft<.*?<span.*?>(.*?)<\\/span>",
+          "Duft<\\/span>.*?<span.*?>(.*?)<\\/span>",
+          "Duft.*?<\\/th.*?<td.*?>\\W.*?&lrm;(.*?)<"
+        ]
+      }
+    },
+    {
       "comment": "colors",
       "commandId": "get-value-by-regex",
       "parameters": {
@@ -458,6 +472,7 @@
           "price-initial",
           "pricePerUnit",
           "ratingInPercent",
+          "scent",
           "seoDescription",
           "seoKeywords",
           "size",
