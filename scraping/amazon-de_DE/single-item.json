@@ -43,7 +43,9 @@
         "contextId": "price-current",
         "sourceContextId": "single-product-view",
         "replacements": {
-          ".*von": ""
+          ".*von": "",
+          ".*ab":  "",
+          "€": ""
         },
         "css-queries": [
           "#priceblock_ourprice",
@@ -63,7 +65,9 @@
         "contextId": "price-initial",
         "sourceContextId": "single-product-view",
         "replacements": {
-          ".*von": ""
+          ".*von": "",
+          ".*ab":  "",
+          "€": ""
         },
         "css-queries": [
           ".priceBlockStrikePriceString",
