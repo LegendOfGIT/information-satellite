@@ -48,7 +48,7 @@
       "parameters": {
         "contextId": "title",
         "sourceContextId": "single-product-view",
-        "css-queries": [ ".product-single__title" ]
+        "css-queries": [ ".product__title" ]
       }
     },
 
@@ -77,14 +77,12 @@
 
     {
       "comment": "description",
-      "commandId": "get-value-by-css-queries",
+      "commandId": "get-value-by-regex",
       "parameters": {
         "contextId": "description",
         "sourceContextId": "single-product-view",
-        "separator": " ",
-        "css-queries": [
-          ".product-desc__second h2, .product-desc__second p"
-        ]
+        "groupIndex": 1,
+        "regex": "\"description\": \"(.*?)\""
       }
     },
     {
@@ -106,7 +104,7 @@
       "parameters": {
         "contextId": "price-current",
         "sourceContextId": "single-product-view",
-        "css-queries": [ ".price__sale .price-item--regular", ".price-item--regular" ]
+        "css-queries": [ ".product-price--original" ]
       }
     },
     {
@@ -115,7 +113,31 @@
       "parameters": {
         "contextId": "price-initial",
         "sourceContextId": "single-product-view",
-        "css-queries": [ ".price-item--regular" ]
+        "css-queries": [ ".product-price--compare span", ".product-price--original" ]
+      }
+    },
+    {
+      "comment": "price per unit",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "pricePerUnit",
+        "sourceContextId": "single-product-view",
+        "replacements": {
+          "\/.*": ""
+        },
+        "css-queries": [ ".product-price--unit" ]
+      }
+    },
+    {
+      "comment": "reference unit",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "referenceUnit",
+        "sourceContextId": "single-product-view",
+        "replacements": {
+          ".*?\/": ""
+        },
+        "css-queries": [ ".product-price--unit" ]
       }
     },
     {
@@ -132,6 +154,14 @@
       "parameters": {
         "contextId": "price-initial",
         "sourceContextId": "price-initial"
+      }
+    },
+    {
+      "comment": "price per unit",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "pricePerUnit",
+        "sourceContextId": "pricePerUnit"
       }
     },
 
@@ -189,7 +219,7 @@
         "contextId": "images-big",
         "sourceContextId": "single-product-view",
         "attribute-id": "src",
-        "css-queries": [ ".product-single__thumbnail-image" ]
+        "css-queries": [ ".thumbnail__image img" ]
       }
     },
     {
@@ -199,7 +229,8 @@
         "contextId": "images-big",
         "replacements": {
           "//": "https://",
-          "_110.*?\\.": "_450x450."
+          "height=...": "height=650",
+          "width=..." : "width=650"
         },
         "sourceContextId": "images-big"
       }
@@ -210,12 +241,32 @@
       "parameters": {
         "contextId": "images-small",
         "replacements": {
-          "450x450": "150x150"
+          "height=...": "height=150",
+          "width=..." : "width=150"
         },
         "sourceContextId": "images-big"
       }
     },
 
+    {
+      "comment": "size",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "size",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ "[data-name *= 'product-size-template'] [class *= 'product-variant__label']" ]
+      }
+    },
+    {
+      "comment": "sizes",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "sizes",
+        "sourceContextId": "single-product-view",
+        "separator": ";",
+        "css-queries": [ "[data-name *= 'product-size-template'] [class *= 'product-variant__label']" ]
+      }
+    },
     {
       "comment": "publisher",
       "commandId": "set-context-value",
@@ -256,10 +307,14 @@
           "numberOfRatings",
           "price-current",
           "price-initial",
+          "pricePerUnit",
           "publisher",
           "ratingInPercent",
+          "referenceUnit",
           "seoDescription",
           "seoKeywords",
+          "size",
+          "sizes",
           "sku",
           "title",
           "title-image"
