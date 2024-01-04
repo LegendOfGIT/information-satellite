@@ -138,6 +138,7 @@ module.exports = {
     HOME_WELLNESS_SAUNAS: 'saunas',
     HOME_WELLNESS_WHIRLPOOLS: 'whirlpools',
     KIDS_BOOKS_AUDIOBOOKS: 'kids-audio-books',
+    KIDS_BOOKS_LEARNINGBOOKS: 'kids-learning-books',
     KIDS_BOOKS_READINGBOOKS: 'kids-reading-books',
     KIDS_PARTY_TABLEWARE: 'kids-party-tableware',
     KIDS_SCHOOL_DRINKINGBOTTLES: 'kids-school-drinking-bottles',

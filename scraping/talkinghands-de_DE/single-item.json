@@ -1,0 +1,281 @@
+{
+  "site": "talkinghandsflipbooks.com",
+
+  "itemId": "{template.site}-{sku}",
+
+  "scraping": [
+    {
+      "comment": "product search",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-search",
+        "uri": "https://www.{template.site}/search?type=product%2Carticle%2Cpage%2Cquery&options%5Bprefix%5D=last&q=\"{request.query.itemId}\""
+      }
+    },
+    {
+      "comment": "link",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "link",
+        "sourceContextId": "product-search",
+        "attribute-id": "href",
+        "css-queries": [ ".product-block__image" ]
+      }
+    },
+    {
+      "comment": "link",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "link",
+        "value": "https://www.{template.site}{link}"
+      }
+    },
+
+    {
+      "comment": "single product",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "single-product-view",
+        "uri": "{link}"
+      }
+    },
+
+    {
+      "comment": "merchant article number",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "mean",
+        "value": "talkinghands.{request.query.itemId}"
+      }
+    },
+
+    {
+      "comment": "sku",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "sku",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "\"sku\": \"(.*?)\""
+        ]
+      }
+    },
+
+
+    {
+      "comment": "title",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".product-detail__title" ]
+      }
+    },
+
+    {
+      "comment": "description",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "description",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "replacements": {
+          "\\\\": ""
+        },
+        "regex": [
+          "\"description\": \"(.*?)\","
+        ]
+      }
+    },
+
+    {
+      "comment": "brand",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "brand",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "\"brand\":\"(.*?)\""
+        ]
+      }
+    },
+
+    {
+      "comment": "SEO description",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "seoDescription",
+        "value": "{description}"
+      }
+    },
+
+    {
+      "comment": "price-current",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "single-product-view",
+        "css-queries": [
+          ".product-detail__detail .product-price .theme-money"
+        ]
+      }
+    },
+    {
+      "comment": "price-initial",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "single-product-view",
+        "css-queries": [
+          ".product-detail__detail .product-price__compare",
+          ".product-detail__detail .product-price .theme-money"
+        ]
+      }
+    },
+    {
+      "comment": "price-current to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "price-current"
+      }
+    },
+    {
+      "comment": "price-initial to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "price-initial"
+      }
+    },
+
+    {
+      "comment": "images-big",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "images-big",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "tagReplacer": " ",
+        "regex": [
+          "\"images\".*?\\[(.*?)\\]"
+        ]
+      }
+    },
+    {
+      "comment": "images-big",
+      "commandId": "get-values-by-regex",
+      "parameters": {
+        "contextId": "images-big",
+        "sourceContextId": "images-big",
+        "groupIndex": 1,
+        "regex": [
+          "\"(.*?)\""
+        ]
+      }
+    },
+    {
+      "comment": "images big",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "images-big",
+        "replacements": {
+          "v=.*": "width=600",
+          "\\\\/": "/",
+          "\/\/":  "https://"
+        },
+        "sourceContextId": "images-big"
+      }
+    },
+    {
+      "comment": "images small",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "images-small",
+        "replacements": {
+          "width=.*": "width=150"
+        },
+        "sourceContextId": "images-big"
+      }
+    },
+    {
+      "comment": "title-image",
+      "commandId": "get-value-from-array",
+      "parameters": {
+        "contextId": "title-image",
+        "sourceContextId": "images-big"
+      }
+    },
+
+    {
+      "comment": "teaser-texts",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "teaser-texts",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".product-description__no-expand ul li" ]
+      }
+    },
+
+    {
+      "comment": "Contents of delivery",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "contentsOfDelivery",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "<p.*?>.*?\\.(.*?enthält.*?\\.).*?<\/p>"
+        ]
+      }
+    },
+
+    {
+      "comment": "amount in stock",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "amountInStock",
+        "sourceContextId": "single-product-view",
+        "setValueOnMatch": 0,
+        "setValueOnMiss": 999,
+        "regex": "{variant}, \"available\": false"
+      }
+    },
+
+    {
+      "comment": "seoKeywords",
+      "commandId": "extract-seo-keywords",
+      "parameters": {
+        "contextId": "seoKeywords",
+        "sourceContextId": ["description", "title"]
+      }
+    },
+
+    {
+      "comment": "store scraped information",
+      "commandId": "store-information",
+      "parameters": {
+        "informationIds": [
+          "amountInStock",
+          "brand",
+          "contentsOfDelivery",
+          "description",
+          "images-big",
+          "images-small",
+          "link",
+          "mean",
+          "price-current",
+          "price-initial",
+          "seoDescription",
+          "seoKeywords",
+          "sku",
+          "teaser-texts",
+          "title",
+          "title-image"
+        ]
+      }
+    }
+  ]
+}
