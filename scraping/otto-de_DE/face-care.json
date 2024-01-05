@@ -1,5 +1,5 @@
 {
-  "site": "littlehipstar.com",
+  "site": "otto.de",
 
   "scraping": [
     {
@@ -7,7 +7,7 @@
       "commandId": "set-context-value",
       "parameters": {
         "contextId": "site",
-        "value": "littlehipstar-de_DE"
+        "value": "otto-de_DE"
       }
     },
     {
@@ -32,9 +32,9 @@
       "parameters": {
         "contextId": "navigation-path",
         "value": [
-          "KIDS",
-          "KIDS_TOYS",
-          "KIDS_TOYS_GYMNASTICSTOYS"
+          "BEAUTY_CARE",
+          "BEAUTY_CARE_SKIN_CARE",
+          "BEAUTY_CARE_SKIN_CARE_FACE_CARE"
         ]
       }
     },
@@ -44,19 +44,18 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://www.{template.site}/collections/spielzeug-bewegungsspielzeug?&sort_by=created-descending"
+        "uri": "https://{template.site}/koerperpflege/gesichtspflege/?sortiertnach=neuheiten"
       }
     },
     {
-      "comment": "product ids",
-      "commandId": "get-values-by-regex",
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "sourceContextId": "product-overview",
-        "groupIndex": 1,
+        "css-queries": [ "#reptile-tilelist article"],
+        "attribute-id": "data-product-id",
         "overwrite": true,
-        "unique": true,
-        "regex": "\"sku\":\"(.*?)\""
+        "sourceContextId": "product-overview"
       }
     },
     {
@@ -79,19 +78,18 @@
       "parameters": {
         "contextId": "product-overview",
         "overwrite": true,
-        "uri": "https://www.{template.site}/collections/spielzeug-bewegungsspielzeug?sort_by=best-selling"
+        "uri": "https://{template.site}/koerperpflege/gesichtspflege/"
       }
     },
     {
-      "comment": "product ids",
-      "commandId": "get-values-by-regex",
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "sourceContextId": "product-overview",
-        "groupIndex": 1,
+        "css-queries": [ "#reptile-tilelist article"],
+        "attribute-id": "data-product-id",
         "overwrite": true,
-        "unique": true,
-        "regex": "\"sku\":\"(.*?)\""
+        "sourceContextId": "product-overview"
       }
     },
     {
@@ -109,12 +107,11 @@
     },
 
     {
-      "comment": "random-page-number",
+      "comment": "random-item-number",
       "commandId": "generate-random-number",
       "parameters": {
-        "contextId": "random-page-number",
-        "minimum": 2,
-        "maximum": 3
+        "contextId": "random-item-number",
+        "maximum": 6000
       }
     },
     {
@@ -123,19 +120,18 @@
       "parameters": {
         "contextId": "product-overview",
         "overwrite": true,
-        "uri": "https://www.{template.site}/collections/spielzeug-bewegungsspielzeug?page={random-page-number}&sort_by=best-selling"
+        "uri": "https://{template.site}/koerperpflege/gesichtspflege/?l=gq&o={random-item-number}"
       }
     },
     {
-      "comment": "product ids",
-      "commandId": "get-values-by-regex",
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "sourceContextId": "product-overview",
-        "groupIndex": 1,
+        "css-queries": [ "#reptile-tilelist article"],
+        "attribute-id": "data-product-id",
         "overwrite": true,
-        "unique": true,
-        "regex": "\"sku\":\"(.*?)\""
+        "sourceContextId": "product-overview"
       }
     },
     {

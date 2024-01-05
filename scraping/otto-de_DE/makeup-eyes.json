@@ -1,5 +1,5 @@
 {
-  "site": "littlehipstar.com",
+  "site": "otto.de",
 
   "scraping": [
     {
@@ -7,7 +7,7 @@
       "commandId": "set-context-value",
       "parameters": {
         "contextId": "site",
-        "value": "littlehipstar-de_DE"
+        "value": "otto-de_DE"
       }
     },
     {
@@ -32,9 +32,9 @@
       "parameters": {
         "contextId": "navigation-path",
         "value": [
-          "KIDS",
-          "KIDS_TOYS",
-          "KIDS_TOYS_BABIES"
+          "BEAUTY_CARE",
+          "BEAUTY_CARE_MAKEUP",
+          "BEAUTY_CARE_MAKEUP_EYES"
         ]
       }
     },
@@ -44,19 +44,18 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://www.{template.site}/collections/holzspielzeug?filter.v.price.gte=&filter.v.price.lte=&sort_by=created-descending"
+        "uri": "https://{template.site}/?selektion=(und.(ist.sortiment.make-up).(ist.zielgruppe.damen).(oder.(sind.kategorien.augen-make-up).(sind.kategorien.augenpflege-sets).(sind.kategorien.kaemme).(sind.kategorien.klebstoffe).(sind.kategorien.pflaster).(sind.kategorien.schablonen).(sind.kategorien.seren)).(~.(v.1)))&sortiertnach=neuheiten"
       }
     },
     {
-      "comment": "product ids",
-      "commandId": "get-values-by-regex",
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "sourceContextId": "product-overview",
-        "groupIndex": 1,
+        "css-queries": [ "#reptile-tilelist article"],
+        "attribute-id": "data-product-id",
         "overwrite": true,
-        "unique": true,
-        "regex": "\"sku\":\"(.*?)\""
+        "sourceContextId": "product-overview"
       }
     },
     {
@@ -79,19 +78,18 @@
       "parameters": {
         "contextId": "product-overview",
         "overwrite": true,
-        "uri": "https://www.{template.site}/collections/holzspielzeug?sort_by=best-selling"
+        "uri": "https://{template.site}/?selektion=(und.(ist.sortiment.make-up).(ist.zielgruppe.damen).(oder.(sind.kategorien.augen-make-up).(sind.kategorien.augenpflege-sets).(sind.kategorien.kaemme).(sind.kategorien.klebstoffe).(sind.kategorien.pflaster).(sind.kategorien.schablonen).(sind.kategorien.seren)).(~.(v.1)))"
       }
     },
     {
-      "comment": "product ids",
-      "commandId": "get-values-by-regex",
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "sourceContextId": "product-overview",
-        "groupIndex": 1,
+        "css-queries": [ "#reptile-tilelist article"],
+        "attribute-id": "data-product-id",
         "overwrite": true,
-        "unique": true,
-        "regex": "\"sku\":\"(.*?)\""
+        "sourceContextId": "product-overview"
       }
     },
     {
@@ -109,12 +107,11 @@
     },
 
     {
-      "comment": "random-page-number",
+      "comment": "random-item-number",
       "commandId": "generate-random-number",
       "parameters": {
-        "contextId": "random-page-number",
-        "minimum": 2,
-        "maximum": 3
+        "contextId": "random-item-number",
+        "maximum": 400
       }
     },
     {
@@ -123,19 +120,18 @@
       "parameters": {
         "contextId": "product-overview",
         "overwrite": true,
-        "uri": "https://www.{template.site}/collections/holzspielzeug?page={random-page-number}&sort_by=best-selling"
+        "uri": "https://{template.site}/?selektion=(und.(ist.sortiment.make-up).(ist.zielgruppe.damen).(oder.(sind.kategorien.augen-make-up).(sind.kategorien.augenpflege-sets).(sind.kategorien.kaemme).(sind.kategorien.klebstoffe).(sind.kategorien.pflaster).(sind.kategorien.schablonen).(sind.kategorien.seren)).(~.(v.1)))&l=gq&o={random-item-number}"
       }
     },
     {
-      "comment": "product ids",
-      "commandId": "get-values-by-regex",
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "sourceContextId": "product-overview",
-        "groupIndex": 1,
+        "css-queries": [ "#reptile-tilelist article"],
+        "attribute-id": "data-product-id",
         "overwrite": true,
-        "unique": true,
-        "regex": "\"sku\":\"(.*?)\""
+        "sourceContextId": "product-overview"
       }
     },
     {

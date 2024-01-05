@@ -837,6 +837,21 @@
     },
 
     {
+      "comment": "is vegan",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "isVegan",
+        "sourceContextId": "title",
+        "flags": "gi",
+        "defaultValue": false,
+        "setValueOnMatch": true,
+        "regex": [
+          "vegan"
+        ]
+      }
+    },
+
+    {
       "comment": "teaser texts",
       "commandId": "get-values-by-css-queries",
       "parameters": {
@@ -916,6 +931,7 @@
           "height-in-cm",
           "images-big",
           "images-small",
+          "isVegan",
           "genre",
           "length-in-cm",
           "lock-type",
