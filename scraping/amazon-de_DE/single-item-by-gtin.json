@@ -457,6 +457,30 @@
         "sourceContextId": "amountInStock"
       }
     },
+    {
+      "comment": "is for adults",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "isForAdults",
+        "sourceContextId": "single-product-view",
+        "regex": "Nr\\..*?in <a.*?>Erotik.*?<\\/a>",
+        "setValueOnMatch": true
+      }
+    },
+    {
+      "comment": "is vegan",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "isVegan",
+        "sourceContextId": "title",
+        "flags": "gi",
+        "defaultValue": false,
+        "setValueOnMatch": true,
+        "regex": [
+          "vegan"
+        ]
+      }
+    },
 
     {
       "comment": "seoKeywords",
@@ -482,6 +506,8 @@
           "gtin",
           "images-big",
           "images-small",
+          "isForAdults",
+          "isVegan",
           "link",
           "material",
           "numberOfRatings",

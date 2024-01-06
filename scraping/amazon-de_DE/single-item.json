@@ -490,6 +490,20 @@
         "setValueOnMatch": true
       }
     },
+    {
+      "comment": "is vegan",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "isVegan",
+        "sourceContextId": "title",
+        "flags": "gi",
+        "defaultValue": false,
+        "setValueOnMatch": true,
+        "regex": [
+          "vegan"
+        ]
+      }
+    },
 
     {
       "comment": "amount in stock",
@@ -525,6 +539,7 @@
           "images-big",
           "images-small",
           "isForAdults",
+          "isVegan",
           "length-in-cm",
           "link",
           "lock-type",

@@ -316,6 +316,20 @@
       }
     },
     {
+      "comment": "is vegan",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "isVegan",
+        "sourceContextId": "allergenic",
+        "flags": "gi",
+        "defaultValue": false,
+        "setValueOnMatch": true,
+        "regex": [
+          "vegan"
+        ]
+      }
+    },
+    {
       "comment": "seoKeywords",
       "commandId": "extract-seo-keywords",
       "parameters": {
@@ -338,6 +352,7 @@
           "energyInKcal",
           "height-in-cm",
           "ingredients",
+          "isVegan",
           "length-in-cm",
           "link",
           "mean",
