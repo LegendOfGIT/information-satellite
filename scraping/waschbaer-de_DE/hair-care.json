@@ -32,9 +32,9 @@
       "parameters": {
         "contextId": "navigation-path",
         "value": [
-          "FASHION",
-          "FASHION_WOMEN",
-          "FASHION_WOMEN_SHOES"
+          "BEAUTY_CARE",
+          "BEAUTY_CARE_HAIR",
+          "BEAUTY_CARE_HAIR_CARE"
         ]
       }
     },
@@ -44,7 +44,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://service.findologic.com/ps/{template.site}//selector.php?attrib%5Bcat_url%5D%5B0%5D=%2Fshop%2Fdamen%2Fdamenschuhe%2Fboots-und-stiefeletten&outputAttrib%5B0%5D=vendor&shopurl=www.waschbaer.de&shopkey=5846ECD2D9F3FA7B543B837D69721F07"
+        "uri": "https://service.findologic.com/ps/{template.site}//selector.php?attrib%5Bcat_url%5D%5B0%5D=%2Fshop%2Fbeauty-und-wellness%2Fnaturkosmetik%2Fhaarpflege-und-styling&outputAttrib%5B0%5D=vendor&shopurl=www.waschbaer.de&shopkey=5846ECD2D9F3FA7B543B837D69721F07"
       }
     },
     {
@@ -53,53 +53,6 @@
       "parameters": {
         "contextId": "product-ids",
         "css-queries": [ ".item .productlink"],
-        "attribute-id": "href",
-        "sourceContextId": "product-overview"
-      }
-    },
-    {
-      "comment": "product-ids",
-      "commandId": "clone-items-and-modify-clones",
-      "parameters": {
-        "contextId": "product-ids",
-        "replacements": {
-          ".*-": "",
-          "\\?.*": ""
-        },
-        "unique": true,
-        "sourceContextId": "product-ids"
-      }
-    },
-    {
-      "comment": "observe scraped information",
-      "commandId": "observe-information",
-      "parameters": {
-        "informationIds": [
-          "locale",
-          "navigation-path",
-          "product-ids",
-          "site",
-          "usecase"
-        ]
-      }
-    },
-
-    {
-      "comment": "product-overview",
-      "commandId": "visit-uri",
-      "parameters": {
-        "contextId": "product-overview",
-        "overwrite": true,
-        "uri": "https://service.findologic.com/ps/{template.site}//selector.php?attrib%5Bcat_url%5D%5B0%5D=%2Fshop%2Fdamen%2Fdamenschuhe%2Fsneaker-und-freizeitschuhe&outputAttrib%5B0%5D=vendor&shopurl=www.waschbaer.de&shopkey=5846ECD2D9F3FA7B543B837D69721F07"
-      }
-    },
-    {
-      "comment": "product-ids",
-      "commandId": "get-values-by-css-queries",
-      "parameters": {
-        "contextId": "product-ids",
-        "css-queries": [ ".item .productlink"],
-        "overwrite": true,
         "attribute-id": "href",
         "sourceContextId": "product-overview"
       }

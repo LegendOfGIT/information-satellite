@@ -7,7 +7,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://www.{template.site}/shop/frontend/catalog_category/bargain?category=47885&sort=rating"
+        "uri": "https://service.findologic.com/ps/{template.site}//selector.php?attrib%5Bcat_url%5D%5B0%5D=%2Fshop%2Fdamen%2Fnaturmode%2Fhosen&outputAttrib%5B0%5D=vendor&shopurl=www.waschbaer.de&shopkey=5846ECD2D9F3FA7B543B837D69721F07"
       }
     },
     {

@@ -7,7 +7,7 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://service.findologic.com/ps/{template.site}//selector.php?attrib%5Bcat_url%5D%5B0%5D=%2Fshop%2Fherren%2Fnaturmode%2Fpullover-und-strick&outputAttrib%5B0%5D=vendor&shopurl=www.waschbaer.de&shopkey=5846ECD2D9F3FA7B543B837D69721F07"
+        "uri": "https://service.findologic.com/ps/{template.site}//selector.php?attrib%5Bcat_url%5D%5B0%5D=%2Fshop%2Fdamen%2Fnaturmode%2Fjacken&outputAttrib%5B0%5D=vendor&shopurl=www.waschbaer.de&shopkey=5846ECD2D9F3FA7B543B837D69721F07"
       }
     },
     {
@@ -15,7 +15,7 @@
       "commandId": "get-values-by-css-queries",
       "parameters": {
         "contextId": "product-ids",
-        "css-queries": [ ".productlink"],
+        "css-queries": [ ".item .productlink"],
         "attribute-id": "href",
         "sourceContextId": "product-overview"
       }
@@ -65,8 +65,8 @@
         "contextId": "navigation-path",
         "value": [
           "FASHION",
-          "FASHION_MEN",
-          "FASHION_MEN_SWEATERS_AND_KNITWEAR"
+          "FASHION_WOMEN",
+          "FASHION_WOMEN_JACKETS"
         ]
       }
     },

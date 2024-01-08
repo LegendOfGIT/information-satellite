@@ -3,38 +3,6 @@
 
   "scraping": [
     {
-      "comment": "product-overview",
-      "commandId": "visit-uri",
-      "parameters": {
-        "contextId": "product-overview",
-        "uri": "https://service.findologic.com/ps/{template.site}//selector.php?attrib%5Bcat_url%5D%5B0%5D=%2Fshop%2Fherren%2Fnaturmode%2Fjacken&outputAttrib%5B0%5D=vendor&shopurl=www.waschbaer.de&shopkey=5846ECD2D9F3FA7B543B837D69721F07"
-      }
-    },
-    {
-      "comment": "product-ids",
-      "commandId": "get-values-by-css-queries",
-      "parameters": {
-        "contextId": "product-ids",
-        "css-queries": [ ".item .productlink"],
-        "attribute-id": "href",
-        "sourceContextId": "product-overview"
-      }
-    },
-    {
-      "comment": "product-ids",
-      "commandId": "clone-items-and-modify-clones",
-      "parameters": {
-        "contextId": "product-ids",
-        "replacements": {
-          ".*-": "",
-          "\\?.*": ""
-        },
-        "unique": true,
-        "sourceContextId": "product-ids"
-      }
-    },
-
-    {
       "comment": "site",
       "commandId": "set-context-value",
       "parameters": {
@@ -65,12 +33,43 @@
         "contextId": "navigation-path",
         "value": [
           "FASHION",
-          "FASHION_MEN",
-          "FASHION_MEN_JACKETS"
+          "FASHION_WOMEN",
+          "FASHION_WOMEN_PANTS"
         ]
       }
     },
 
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "uri": "https://service.findologic.com/ps/{template.site}//selector.php?attrib%5Bcat_url%5D%5B0%5D=%2Fshop%2Fherren%2Fnaturmode%2Fhosen-und-jeans&outputAttrib%5B0%5D=vendor&shopurl=www.waschbaer.de&shopkey=5846ECD2D9F3FA7B543B837D69721F07"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "product-ids",
+        "css-queries": [ ".item .productlink"],
+        "attribute-id": "href",
+        "sourceContextId": "product-overview"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "product-ids",
+        "replacements": {
+          ".*-": "",
+          "\\?.*": ""
+        },
+        "unique": true,
+        "sourceContextId": "product-ids"
+      }
+    },
     {
       "comment": "observe scraped information",
       "commandId": "observe-information",
