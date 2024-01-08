@@ -1,0 +1,77 @@
+{
+  "site": "dunleath.com",
+
+  "scraping": [
+    {
+      "comment": "site",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "site",
+        "value": "dunleath-de_DE"
+      }
+    },
+    {
+      "comment": "locale",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "locale",
+        "value": "de-DE"
+      }
+    },
+    {
+      "comment": "usecase",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "usecase",
+        "value": "single-item"
+      }
+    },
+    {
+      "comment": "navigation-path",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "navigation-path",
+        "value": [
+          "KIDS",
+          "KIDS_SCHOOL",
+          "KIDS_SCHOOL_SATCHEL"
+        ]
+      }
+    },
+
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "overwrite": true,
+        "uri": "https://{template.site}/de-de/search?q=kinder+tasche&options%5Bprefix%5D=last&sort_by=relevance&filter.v.availability=1&filter.v.price.gte=&filter.v.price.lte=200.00"
+      }
+    },
+    {
+      "comment": "product ids",
+      "commandId": "get-values-by-regex",
+      "parameters": {
+        "contextId": "product-ids",
+        "sourceContextId": "product-overview",
+        "groupIndex": 1,
+        "overwrite": true,
+        "unique": true,
+        "regex": "\"sku\":\"(.*?)\""
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    }
+  ]
+}
