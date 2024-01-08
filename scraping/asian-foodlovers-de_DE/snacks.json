@@ -45,7 +45,7 @@
       "parameters": {
         "contextId": "product-overview",
         "overwrite": true,
-        "uri": "https://www.{template.site}/produkte/snacks-krabbenchips?query=:position:allCategories:B2C_1_0011:inStockFacet:true"
+        "uri": "https://www.{template.site}/produkte/snacks-krabbenchips/snacks?query=:position:allCategories:B2C_1_0011:inStockFacet:true"
       }
     },
     {
@@ -100,7 +100,53 @@
       "parameters": {
         "contextId": "product-overview",
         "overwrite": true,
-        "uri": "https://www.{template.site}/produkte/snacks-krabbenchips?query=:position:allCategories:B2C_1_0011:inStockFacet:true&currentPage={random-page-number}"
+        "uri": "https://www.{template.site}/produkte/snacks-krabbenchips/snacks?query=:position:allCategories:B2C_1_0011:inStockFacet:true&currentPage={random-page-number}"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "overwrite": true,
+        "contextId": "product-ids",
+        "css-queries": [ ".c-card-item-product .c-card-item-product__image img"],
+        "attribute-id": "src",
+        "sourceContextId": "product-overview"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "product-ids",
+        "replacements": {
+          ".*?[0-9]{3}H-": "",
+          "\\..*": ""
+        },
+        "sourceContextId": "product-ids"
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    },
+
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "overwrite": true,
+        "uri": "https://www.{template.site}/produkte/snacks-krabbenchips/krabbenchips?query=:position:allCategories:B2C_1_0011:inStockFacet:true"
       }
     },
     {

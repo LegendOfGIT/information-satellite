@@ -45,7 +45,7 @@
       "parameters": {
         "contextId": "product-overview",
         "overwrite": true,
-        "uri": "https://www.{template.site}/produkte/desserts?query=:position:allCategories:B2C_1_0011:inStockFacet:true"
+        "uri": "https://www.{template.site}/produkte/desserts?query=:position:allCategories:B2C_1_0002:inStockFacet:true"
       }
     },
     {
@@ -100,7 +100,7 @@
       "parameters": {
         "contextId": "product-overview",
         "overwrite": true,
-        "uri": "https://www.{template.site}/produkte/desserts?query=:position:allCategories:B2C_1_0011:inStockFacet:true&currentPage={random-page-number}"
+        "uri": "https://www.{template.site}/produkte/desserts?query=:position:allCategories:B2C_1_0002:inStockFacet:true&currentPage={random-page-number}"
       }
     },
     {
