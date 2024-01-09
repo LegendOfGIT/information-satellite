@@ -19,6 +19,10 @@
         "contextId": "link",
         "sourceContextId": "product-search",
         "attribute-id": "href",
+        "replacements": {
+          "\/de-de\/": "",
+          "\/products\/": "/de-de/products/"
+        },
         "css-queries": [ "product-card a" ]
       }
     },
@@ -92,7 +96,7 @@
         "sourceContextId": "single-product-view",
         "attribute-id": "content",
         "replacements": {
-          "v=.*": "width=450"
+          "v=.*": "width=650"
         },
         "css-queries": [ "meta[property='og:image:secure_url']" ]
       }
@@ -198,7 +202,7 @@
       "parameters": {
         "contextId": "images-big",
         "replacements": {
-          "v=.*": "width=450"
+          "v=.*": "width=650"
         },
         "sourceContextId": "images-big"
       }

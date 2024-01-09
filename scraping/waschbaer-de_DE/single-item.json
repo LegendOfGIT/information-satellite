@@ -116,6 +116,9 @@
         "contextId": "seoDescription",
         "sourceContextId": "single-product-view",
         "attribute-id": "content",
+        "replacements": {
+          "bequem online bei.*": "bei wewanna.shop entdecken!"
+        },
         "css-queries": [ "meta[name='description']" ]
       }
     },
