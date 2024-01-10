@@ -179,6 +179,8 @@ module.exports = {
     MULTIMEDIA_GAMES_PC: 'pc-games',
     MULTIMEDIA_GAMES_PLAYSTATION_4: 'playstation-4-games',
     MULTIMEDIA_GAMES_PLAYSTATION_5: 'playstation-5-games',
+    MULTIMEDIA_GAMES_XBOX_360: 'xbox-360-games',
+    MULTIMEDIA_GAMES_XBOX_ONE: 'xbox-one-games',
     MULTIMEDIA_MOVIES_ACTION: 'movies-action|movies-bluray-action|movies-dvd-action',
     MULTIMEDIA_MOVIES_ANIME: 'movies-anime',
     MULTIMEDIA_MOVIES_FANTASY: 'movies-fantasy|movies-bluray-fantasy|movies-dvd-fantasy',
