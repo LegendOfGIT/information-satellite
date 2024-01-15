@@ -48,7 +48,7 @@ module.exports = (template = {}, itemId, itemCanonical, navigationPath) => {
         const promiseFn = command.command;
 
         promiseFn(context, command.parameters).then(() => {
-            console.log(`executed command ${currentCommandIndex} of ${commands.length + currentCommandIndex}`);
+            // console.log(`executed command ${currentCommandIndex} of ${commands.length + currentCommandIndex}`);
             currentCommandIndex++;
             resolve(executeNextCommand(currentCommandIndex));
         });

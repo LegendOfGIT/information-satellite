@@ -1,0 +1,75 @@
+{
+  "site": "otto.de",
+
+  "scraping": [
+    {
+      "comment": "site",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "site",
+        "value": "otto-de_DE"
+      }
+    },
+    {
+      "comment": "locale",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "locale",
+        "value": "de-DE"
+      }
+    },
+    {
+      "comment": "usecase",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "usecase",
+        "value": "single-item"
+      }
+    },
+    {
+      "comment": "navigation-path",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "navigation-path",
+        "value": [
+          "ELECTRONICS_AND_COMPUTERS",
+          "ELECTRONICS_AND_COMPUTERS_CAMERAS",
+          "ELECTRONICS_AND_COMPUTERS_CAMERAS_CAMERASUPPLEMENTS"
+        ]
+      }
+    },
+
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "uri": "https://{template.site}/suche/farbfilm/?kategorie=digitalkameras,fotofilme,objektivfilter&sortiertnach=neuheiten"
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "product-ids",
+        "css-queries": [ "#reptile-tilelist article"],
+        "attribute-id": "data-product-id",
+        "overwrite": true,
+        "sourceContextId": "product-overview"
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    }
+  ]
+}
