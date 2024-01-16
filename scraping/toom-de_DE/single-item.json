@@ -60,7 +60,7 @@
         "attribute-id": "src",
         "replacements": {
           "\\?.*?": "",
-          "$": "?width=450"
+          "$": "?width=650"
         },
         "css-queries": [ ".image-gallery-image", "[data-testid='product-picture']" ]
       }
@@ -116,7 +116,7 @@
       "parameters": {
         "contextId": "images-big",
         "replacements": {
-          "width=.*": "width=450"
+          "width=.*": "width=650"
         },
         "sourceContextId": "images-small"
       }
