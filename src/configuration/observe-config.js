@@ -202,6 +202,7 @@ module.exports = {
     SPORTS_CLIMBING_SHOES: 'climbing-shoes',
     SPORTS_CLIMBING_SUNGLASSES: 'climbing-sunglasses',
     SPORTS_EXERCISE_EQUIPMENT: 'sports-exercise-equipment',
+    SPORTS_EXERCISE_MULTIGYMS: 'sports-multi-gyms',
     SPORTS_TABLESPORTS_BILLARD: 'sports-billard',
     SPORTS_TABLESPORTS_TABLESOCCER: 'sports-tablesoccer',
     SPORTS_TABLESPORTS_TABLETENNIS: 'sports-tabletennis',
