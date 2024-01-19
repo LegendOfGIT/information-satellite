@@ -308,7 +308,34 @@
         "contextId": "color",
         "sourceContextId": "dataProperties",
         "groupIndex": 1,
-        "regex": "Farbe\".*?value\":\"(.*?)\""
+        "regex": [
+          "Farbe\".*?value\":\"(.*?)\"",
+          "Blütenfarbe\".*?value\":\"(.*?)\""
+        ]
+      }
+    },
+    {
+      "comment": "contents of delivery",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "contentsOfDelivery",
+        "sourceContextId": "dataProperties",
+        "groupIndex": 1,
+        "regex": [
+          "Lieferumfang\".*?value\":\"(.*?)\""
+        ]
+      }
+    },
+    {
+      "comment": "important hints",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "importantHints",
+        "sourceContextId": "dataProperties",
+        "groupIndex": 1,
+        "regex": [
+          "Verzehrhinweis\".*?value\":\"(.*?)\""
+        ]
       }
     },
     {
@@ -412,12 +439,14 @@
         "informationIds": [
           "brand",
           "color",
+          "contentsOfDelivery",
           "depth-in-cm",
           "description",
           "height-in-cm",
           "width-in-cm",
           "images-big",
           "images-small",
+          "importantHints",
           "length-in-cm",
           "length-in-m",
           "link",
