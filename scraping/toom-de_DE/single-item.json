@@ -60,7 +60,7 @@
         "attribute-id": "src",
         "replacements": {
           "\\?.*?": "",
-          "$": "?width=450"
+          "$": "?width=650"
         },
         "css-queries": [ ".image-gallery-image", "[data-testid='product-picture']" ]
       }
@@ -116,7 +116,7 @@
       "parameters": {
         "contextId": "images-big",
         "replacements": {
-          "width=.*": "width=450"
+          "width=.*": "width=650"
         },
         "sourceContextId": "images-small"
       }
@@ -308,7 +308,34 @@
         "contextId": "color",
         "sourceContextId": "dataProperties",
         "groupIndex": 1,
-        "regex": "Farbe\".*?value\":\"(.*?)\""
+        "regex": [
+          "Farbe\".*?value\":\"(.*?)\"",
+          "Blütenfarbe\".*?value\":\"(.*?)\""
+        ]
+      }
+    },
+    {
+      "comment": "contents of delivery",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "contentsOfDelivery",
+        "sourceContextId": "dataProperties",
+        "groupIndex": 1,
+        "regex": [
+          "Lieferumfang\".*?value\":\"(.*?)\""
+        ]
+      }
+    },
+    {
+      "comment": "important hints",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "importantHints",
+        "sourceContextId": "dataProperties",
+        "groupIndex": 1,
+        "regex": [
+          "Verzehrhinweis\".*?value\":\"(.*?)\""
+        ]
       }
     },
     {
@@ -412,12 +439,14 @@
         "informationIds": [
           "brand",
           "color",
+          "contentsOfDelivery",
           "depth-in-cm",
           "description",
           "height-in-cm",
           "width-in-cm",
           "images-big",
           "images-small",
+          "importantHints",
           "length-in-cm",
           "length-in-m",
           "link",

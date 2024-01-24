@@ -1,0 +1,141 @@
+{
+  "site": "edelstahl-tuerklingel.de",
+
+  "scraping": [
+    {
+      "comment": "site",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "site",
+        "value": "edelstahl-tuerklingel-de_DE"
+      }
+    },
+    {
+      "comment": "locale",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "locale",
+        "value": "de-DE"
+      }
+    },
+    {
+      "comment": "usecase",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "usecase",
+        "value": "single-item"
+      }
+    },
+    {
+      "comment": "navigation-path",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "navigation-path",
+        "value": [
+          "DIY",
+          "DIY_HOUSEINSTALLATIONS",
+          "DIY_HOUSEINSTALLATIONS_MAILBOXES"
+        ]
+      }
+    },
+
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "uri": "https://www.{template.site}/briefkasten"
+      }
+    },
+
+    {
+      "comment": "product ids",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "product-ids",
+        "sourceContextId": "product-overview",
+        "attribute-id": "href",
+        "css-queries": [ "[id *= 'result-wrapper_buy_form'] > a" ]
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "product-ids",
+        "sourceContextId": "product-ids",
+        "replacements": {
+          ".*?\\.de\/": ""
+        }
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    },
+
+    {
+      "comment": "random-page-number",
+      "commandId": "generate-random-number",
+      "parameters": {
+        "contextId": "random-page-number",
+        "minimum": 2,
+        "maximum": 4
+      }
+    },
+    {
+      "comment": "product-overview",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-overview",
+        "overwrite": true,
+        "uri": "https://www.{template.site}/briefkasten_s{random-page-number}"
+      }
+    },
+
+    {
+      "comment": "product ids",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "product-ids",
+        "sourceContextId": "product-overview",
+        "attribute-id": "href",
+        "overwrite": true,
+        "css-queries": [ "[id *= 'result-wrapper_buy_form'] > a" ]
+      }
+    },
+    {
+      "comment": "product-ids",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "product-ids",
+        "sourceContextId": "product-ids",
+        "replacements": {
+          ".*?\\.de\/": ""
+        }
+      }
+    },
+    {
+      "comment": "observe scraped information",
+      "commandId": "observe-information",
+      "parameters": {
+        "informationIds": [
+          "locale",
+          "navigation-path",
+          "product-ids",
+          "site",
+          "usecase"
+        ]
+      }
+    }
+  ]
+}
