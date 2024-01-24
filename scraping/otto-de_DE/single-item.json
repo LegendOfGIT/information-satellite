@@ -753,7 +753,7 @@
         "groupIndex": 1,
         "replacements": {
           "$": "?",
-          "\\?.*": "?h=450&w=450&sm=clamp&upscale=true&fmt=auto"
+          "\\?.*": "?h=650&w=650&sm=clamp&upscale=true&fmt=auto"
         },
         "regex": [ "data-image-src=\"(https.*?)\"" ]
       }
