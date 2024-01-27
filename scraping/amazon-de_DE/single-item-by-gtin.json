@@ -75,7 +75,8 @@
           "#corePrice_desktop .a-price > span",
           "#price",
           "#style_name_1_price .olpWrapper",
-          "#ppd .a-price-whole"
+          "#ppd .a-price-whole",
+          "#kindle-price"
         ]
       }
     },
@@ -99,7 +100,8 @@
           ".priceToPay .a-offscreen",
           "#price",
           "#style_name_1_price .olpWrapper",
-          "#ppd .a-price-whole"
+          "#ppd .a-price-whole",
+          "#kindle-price"
         ]
       }
     },
@@ -305,6 +307,27 @@
     },
 
     {
+      "comment": "amount of pages",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "amountOfPages",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "<span>(.*)Seiten<\/span>"
+        ]
+      }
+    },
+    {
+      "comment": "amount of pages",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "amountOfPages",
+        "sourceContextId": "amountOfPages"
+      }
+    },
+
+    {
       "comment": "brand",
       "commandId": "get-value-by-regex",
       "parameters": {
@@ -498,6 +521,7 @@
         "requiredProperties": [ "title-image" ],
         "informationIds": [
           "amountInStock",
+          "amountOfPages",
           "asin",
           "brand",
           "color",
