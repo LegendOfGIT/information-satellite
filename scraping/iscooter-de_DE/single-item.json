@@ -1,0 +1,572 @@
+{
+  "site": "iscooterglobal.de",
+
+  "itemId": "{template.site}-{request.query.itemId}",
+
+  "scraping": [
+    {
+      "comment": "product-search",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-search",
+        "uri": "https://www.{template.site}/search?q=\"{request.query.itemId}\"&type=product&options%5Bprefix%5D=last"
+      }
+    },
+
+    {
+      "comment": "link",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "link",
+        "sourceContextId": "product-search",
+        "attribute-id": "href",
+        "css-queries": [ ".grid-product__link" ]
+      }
+    },
+    {
+      "comment": "link",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "link",
+        "value": "https://www.{template.site}{link}"
+      }
+    },
+    {
+      "comment": "single-product-view",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "single-product-view",
+        "uri": "{link}"
+      }
+    },
+
+    {
+      "comment": "merchant article number",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "mean",
+        "value": "iscooter.{request.query.itemId}"
+      }
+    },
+    {
+      "comment": "SKU",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "sku",
+        "value": "{request.query.itemId}"
+      }
+    },
+
+    {
+      "comment": "gtin",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "gtin",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": "\"gtin13\": \"(.*?)\","
+      }
+    },
+
+    {
+      "comment": "color",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "color",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".variant-input-wrap input[type=radio]:checked+label[class *= 'color-swatch']" ]
+      }
+    },
+    {
+      "comment": "colors",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "colors",
+        "sourceContextId": "single-product-view",
+        "separator": ", ",
+        "css-queries": [ "label[class *= 'color-swatch']" ]
+      }
+    },
+
+    {
+      "comment": "contents of delivery",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "contentsOfDelivery",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 2,
+        "tagReplacer": " ",
+        "regex": "Packungsinhalt(\\n|.)*?<td.*?>((\\n|.)*?)<\\/td>"
+      }
+    },
+
+    {
+      "comment": "maximumVelocityInKmh",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "maximumVelocityInKmh",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 2,
+        "tagReplacer": " ",
+        "regex": [
+          "Maximale Geschwindigkeit(\\n|.)*?<td.*?>.*?\\(((\\n|.)*?)\\)",
+          "()<span>Höchstgeschwindigkeit(.*?)<\/span>"
+        ]
+      }
+    },
+    {
+      "comment": "maximumVelocityInKmh",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "maximumVelocityInKmh",
+        "sourceContextId": "maximumVelocityInKmh"
+      }
+    },
+
+    {
+      "comment": "motor power in watts",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "motorPowerInW",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 2,
+        "tagReplacer": " ",
+        "regex": [
+          ">Motorleistung(\\n|.)*?<td.*?>.*?((\\n|.)*?)<\\/td>",
+          "<span>(.*?)Gesamtleistung(.*?)\\)<\/span>"
+        ]
+      }
+    },
+    {
+      "comment": "motor power in watts",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "motorPowerInW",
+        "sourceContextId": "motorPowerInW"
+      }
+    },
+
+    {
+      "comment": "batteryChargingTimeInHours",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "batteryChargingTimeInHours",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 3,
+        "tagReplacer": " ",
+        "regex": [
+          "Akkuladezeit(\\n|.)*?<td.*?>(\\n|.)*?-((\\n|.)*?)<\\/td>",
+          "()()<span>(.*?) Stunden Ladezeit<\/span>"
+        ]
+      }
+    },
+    {
+      "comment": "batteryChargingTimeInHours",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "batteryChargingTimeInHours",
+        "sourceContextId": "batteryChargingTimeInHours"
+      }
+    },
+
+    {
+      "comment": "minimumAge",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "minimumAge",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 3,
+        "regex": ">Empfohlenes Alter(\\n|.)*?<td.*?>(\\n|.)*?<span>(.*?)(-|~)((\\n|.)*?)<\\/td>"
+      }
+    },
+    {
+      "comment": "minimumAge",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "minimumAge",
+        "sourceContextId": "minimumAge"
+      }
+    },
+
+    {
+      "comment": "weightInKG",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "weightInKG",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 5,
+        "regex": [
+          ">Gewicht(\\n|.)*?<td.*?>((\\n|.)*?)(\\((.*?)\\)).*?<\\/span>",
+          "()()()()<span>Nettogewicht(.*?)kg<\/span>"
+        ]
+      }
+    },
+    {
+      "comment": "weightInKG",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "weightInKG",
+        "sourceContextId": "weightInKG"
+      }
+    },
+
+    {
+      "comment": "length in cm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "length-in-cm",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 2,
+        "tagReplacer": " ",
+        "regex": ">Aufgeklappte Abmessungen(\\n|.)*?<td.*?>((\\n|.)*?)\\*(\\n|.)*?\\*((\\n|.)*?) cm<\\/td>"
+      }
+    },
+    {
+      "comment": "length in cm",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "length-in-cm",
+        "sourceContextId": "length-in-cm"
+      }
+    },
+
+    {
+      "comment": "height in cm",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "height-in-cm",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 5,
+        "tagReplacer": " ",
+        "regex": ">Aufgeklappte Abmessungen(\\n|.)*?<td.*?>((\\n|.)*?)\\*(\\n|.)*?\\*((\\n|.)*?) cm<\\/td>"
+      }
+    },
+    {
+      "comment": "height in cm",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "height-in-cm",
+        "sourceContextId": "height-in-cm"
+      }
+    },
+
+    {
+      "comment": "Maximum load in KG",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "maximumLoadInKG",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 4,
+        "regex": [
+          ">Maximale Belastung(\\n|.)*?<td.*?>((\\n|.)*?)\\((.*?)\\).*?<\\/td>",
+          "()()<span>Maximale Belastung(.*?)\/(.*?)kg<\/span>"
+        ]
+      }
+    },
+    {
+      "comment": "Maximum load in KG",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "maximumLoadInKG",
+        "sourceContextId": "maximumLoadInKG"
+      }
+    },
+
+    {
+      "comment": "title",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".product-single__title" ]
+      }
+    },
+
+
+    {
+      "comment": "title-image",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title-image",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "replacements": { "$":  "&width=650" },
+        "css-queries": [ "meta[property='og:image:secure_url']" ]
+      }
+    },
+
+    {
+      "comment": "images big",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "images-big",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "href",
+        "css-queries": [ ".product__thumb-item a" ]
+      }
+    },
+    {
+      "comment": "images-big",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "images-big",
+        "replacements": {
+          "[0-9]+x[0-9]+\\.": "650x650.",
+          "\/\/": "https://"
+        },
+        "sourceContextId": "images-big"
+      }
+    },
+    {
+      "comment": "images small",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "images-small",
+        "unique": true,
+        "replacements": {
+          "[0-9]+x[0-9]+\\.": "150x150."
+        },
+        "sourceContextId": "images-big"
+      }
+    },
+
+    {
+      "comment": "description",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "description",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "replacements": {
+          "\\\\": ""
+        },
+        "regex": [
+          "\\\"name\\\".*?\\n.*?\\\"description\\\"((\\n|.)*?)\\\"category\\\""
+        ]
+      }
+    },
+
+    {
+      "comment": "seoDescription",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "seoDescription",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "content",
+        "replacements": { "Versandkostenfrei.*" : "" },
+        "css-queries": [ "meta[property='og:description']" ]
+      }
+    },
+
+    {
+      "comment": "price-current",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "single-product-view",
+        "css-queries": [
+          ".product-single__meta .sale-price",
+          ".product__price"
+        ]
+      }
+    },
+    {
+      "comment": "price-initial",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "single-product-view",
+        "mustContain": "€",
+        "css-queries": [
+          ".product-single__meta .product__price--compare",
+          ".product__price"
+        ]
+      }
+    },
+
+    {
+      "comment": "price-current to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "price-current"
+      }
+    },
+    {
+      "comment": "price-initial to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "price-initial"
+      }
+    },
+
+    {
+      "comment": "country of origin",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "countryOfOrigin",
+        "value": "China"
+      }
+    },
+
+    {
+      "comment": "Region of origin",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "regionOfOrigin",
+        "value": "Guangdong"
+      }
+    },
+
+    {
+      "comment": "title",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "title",
+        "value": "{title} {size}"
+      }
+    },
+
+    {
+      "comment": "manufacturer",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "manufacturer",
+        "value": "iScooter"
+      }
+    },
+
+    {
+      "comment": "brand",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "brand",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": "\"brand\":\"(.*?)\""
+      }
+    },
+
+    {
+      "comment": "number of ratings",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "numberOfRatings",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "data-number-of-reviews",
+        "css-queries": [ ".jdgm-prev-badge" ]
+      }
+    },
+    {
+      "comment": "number of ratings",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "numberOfRatings",
+        "defaultValue": 0,
+        "sourceContextId": "numberOfRatings"
+      }
+    },
+
+    {
+      "comment": "rating",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "ratingInPercent",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "data-average-rating",
+        "css-queries": [ ".jdgm-prev-badge" ]
+      }
+    },
+    {
+      "comment": "rating",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "ratingInPercent",
+        "defaultValue": 0,
+        "sourceContextId": "ratingInPercent"
+      }
+    },
+    {
+      "comment": "rating",
+      "commandId": "get-rule-of-three-value",
+      "parameters": {
+        "maximumValue": 5,
+        "contextId": "ratingInPercent"
+      }
+    },
+
+    {
+      "comment": "amount in stock",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "amountInStock",
+        "sourceContextId": "single-product-view",
+        "setValueOnMatch": 999,
+        "setValueOnMiss": 0,
+        "regex": "schema\\.org/InStock"
+      }
+    },
+
+    {
+      "comment": "youtube links",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "youtubeLinks",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "src",
+        "css-queries": [ ".custom__item-inner iframe" ]
+      }
+    },
+
+    {
+      "comment": "seoKeywords",
+      "commandId": "extract-seo-keywords",
+      "parameters": {
+        "contextId": "seoKeywords",
+        "sourceContextId": ["description", "title"]
+      }
+    },
+
+    {
+      "comment": "store scraped information",
+      "commandId": "store-information",
+      "parameters": {
+        "informationIds": [
+          "amountInStock",
+          "batteryChargingTimeInHours",
+          "brand",
+          "color",
+          "colors",
+          "contentsOfDelivery",
+          "countryOfOrigin",
+          "description",
+          "gtin",
+          "height-in-cm",
+          "images-big",
+          "images-small",
+          "length-in-cm",
+          "link",
+          "manufacturer",
+          "maximumLoadInKG",
+          "maximumVelocityInKmh",
+          "mean",
+          "minimumAge",
+          "motorPowerInW",
+          "numberOfRatings",
+          "price-current",
+          "price-initial",
+          "ratingInPercent",
+          "regionOfOrigin",
+          "seoDescription",
+          "seoKeywords",
+          "sku",
+          "title",
+          "title-image",
+          "weightInKG",
+          "youtubeLinks"
+        ]
+      }
+    }
+  ]
+}
