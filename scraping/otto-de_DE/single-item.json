@@ -912,9 +912,22 @@
     },
 
     {
+      "comment": "storeProviderFlag",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "storeProviderFlag",
+        "sourceContextId": "single-product-view",
+        "setValueOnMatch": false,
+        "setValueOnMiss": true,
+        "regex": "Wir konnten die Seite, die du aufrufen wolltest, leider nicht finden."
+      }
+    },
+
+    {
       "comment": "store scraped information",
       "commandId": "store-information",
       "parameters": {
+        "flagId": "storeProviderFlag",
         "informationIds": [
           "amountInStock",
           "annualConsumptionInKWH",

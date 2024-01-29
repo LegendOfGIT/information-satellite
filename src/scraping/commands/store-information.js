@@ -5,7 +5,7 @@ const getPreparedCommandParameters = require('../getPreparedCommandParameters');
 const httpClient = require('axios');
 
 module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
-    const { informationIds, requiredProperties } = parameters;
+    const { flagId, informationIds, requiredProperties } = parameters;
 
     const commandParameters = getPreparedCommandParameters(Object.assign(
         {},
@@ -17,6 +17,12 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
 
     if (!informationIds) {
         console.log('required parameter "informationIds" is not given. abort.');
+        resolve();
+        return;
+    }
+
+    if (flagId && !context[flagId]) {
+        console.log('"flagId" is false. abort.');
         resolve();
         return;
     }

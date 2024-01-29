@@ -343,6 +343,18 @@
       }
     },
     {
+      "comment": "storeProviderFlag",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "storeProviderFlag",
+        "sourceContextId": "link",
+        "setValueOnMatch": true,
+        "setValueOnMiss": false,
+        "regex": "https:\/\/.*?\/.*?"
+      }
+    },
+
+    {
       "comment": "remove provider when product can not be found anymore",
       "commandId": "remove-provider",
       "parameters": {
@@ -363,6 +375,7 @@
       "comment": "store scraped information",
       "commandId": "store-information",
       "parameters": {
+        "flagId": "storeProviderFlag",
         "informationIds": [
           "color",
           "colors",
