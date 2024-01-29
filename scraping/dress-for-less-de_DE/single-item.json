@@ -332,6 +332,25 @@
     },
 
     {
+      "comment": "removeProviderFlag",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "removeProviderFlag",
+        "sourceContextId": "link",
+        "setValueOnMatch": false,
+        "setValueOnMiss": true,
+        "regex": "https:\/\/.*?\/.*?"
+      }
+    },
+    {
+      "comment": "remove provider when product can not be found anymore",
+      "commandId": "remove-provider",
+      "parameters": {
+        "flagId": "removeProviderFlag"
+      }
+    },
+
+    {
       "comment": "seoKeywords",
       "commandId": "extract-seo-keywords",
       "parameters": {
