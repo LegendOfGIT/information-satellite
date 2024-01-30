@@ -518,6 +518,17 @@
         "css-queries": [ ".custom__item-inner iframe" ]
       }
     },
+    {
+      "comment": "youtube links",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "youtubeLinks",
+        "replacements": {
+          "youtube.com": "youtube-nocookie.com"
+        },
+        "sourceContextId": "youtubeLinks"
+      }
+    },
 
     {
       "comment": "seoKeywords",
