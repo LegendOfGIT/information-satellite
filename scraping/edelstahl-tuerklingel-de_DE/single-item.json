@@ -475,6 +475,19 @@
     },
 
     {
+      "comment": "youtubeLinks",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "youtubeLinks",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "href",
+        "css-queries": [
+          ".video-link"
+        ]
+      }
+    },
+
+    {
       "comment": "amount in stock",
       "commandId": "get-value-by-regex",
       "parameters": {
@@ -548,7 +561,8 @@
           "title",
           "title-image",
           "weightInKG",
-          "width-in-cm"
+          "width-in-cm",
+          "youtubeLinks"
         ]
       }
     }
