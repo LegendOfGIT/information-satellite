@@ -363,6 +363,20 @@
     },
 
     {
+      "comment": "youtubeLinks",
+      "commandId": "get-values-by-regex",
+      "parameters": {
+        "contextId": "youtubeLinks",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "replacements": { "^": "https://www.youtube.com/embed/" },
+        "regex": [
+          "\"video_url\":\"(.*?)\""
+        ]
+      }
+    },
+
+    {
       "comment": "seoKeywords",
       "commandId": "extract-seo-keywords",
       "parameters": {
@@ -396,7 +410,8 @@
           "sku",
           "teaser-texts",
           "title",
-          "title-image"
+          "title-image",
+          "youtubeLinks"
         ]
       }
     }
