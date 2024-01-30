@@ -513,7 +513,10 @@
         "sourceContextId": "single-product-view",
         "groupIndex": 1,
         "unique": true,
-        "regex": "\"videos\".*?\"url\":\"(.*?)\""
+        "regex": [
+          "\"videos\".*?\"url\":\"(.*?)\"",
+          "\"videoUrl\":\"(.*?)\""
+        ]
       }
     },
 
