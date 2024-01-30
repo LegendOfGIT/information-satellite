@@ -506,6 +506,18 @@
     },
 
     {
+      "comment": "youtubeLinks",
+      "commandId": "get-values-by-regex",
+      "parameters": {
+        "contextId": "youtubeLinks",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "unique": true,
+        "regex": "\"videos\".*?\"url\":\"(.*?)\""
+      }
+    },
+
+    {
       "comment": "seoKeywords",
       "commandId": "extract-seo-keywords",
       "parameters": {
@@ -548,7 +560,8 @@
           "suitableFor",
           "title",
           "title-image",
-          "minimumAge"
+          "minimumAge",
+          "youtubeLinks"
         ]
       }
     }
