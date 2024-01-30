@@ -370,6 +370,7 @@
         "sourceContextId": "single-product-view",
         "groupIndex": 1,
         "replacements": { "^": "https://www.youtube.com/embed/" },
+        "unique": true,
         "regex": [
           "\"video_url\":\"(.*?)\""
         ]
