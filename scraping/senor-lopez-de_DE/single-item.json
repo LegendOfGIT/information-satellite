@@ -265,6 +265,17 @@
     },
 
     {
+      "comment": "youTubeLinks",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "youtubeLinks",
+        "value": [
+          "https://www.youtube-nocookie.com/embed/032p-CFN1Dc"
+        ]
+      }
+    },
+
+    {
       "comment": "store scraped information",
       "commandId": "store-information",
       "parameters": {
@@ -286,7 +297,8 @@
           "sku",
           "size",
           "title",
-          "title-image"
+          "title-image",
+          "youtubeLinks"
         ]
       }
     }
