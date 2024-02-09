@@ -265,10 +265,10 @@
     },
 
     {
-      "comment": "youTubeLinks",
+      "comment": "videoLinks",
       "commandId": "set-context-value",
       "parameters": {
-        "contextId": "youtubeLinks",
+        "contextId": "videoLinks",
         "value": [
           "https://www.youtube-nocookie.com/embed/032p-CFN1Dc"
         ]
@@ -298,7 +298,7 @@
           "size",
           "title",
           "title-image",
-          "youtubeLinks"
+          "videoLinks"
         ]
       }
     }

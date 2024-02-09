@@ -475,10 +475,10 @@
     },
 
     {
-      "comment": "youtubeLinks",
+      "comment": "videoLinks",
       "commandId": "get-values-by-css-queries",
       "parameters": {
-        "contextId": "youtubeLinks",
+        "contextId": "videoLinks",
         "sourceContextId": "single-product-view",
         "attribute-id": "href",
         "css-queries": [
@@ -562,7 +562,7 @@
           "title-image",
           "weightInKG",
           "width-in-cm",
-          "youtubeLinks"
+          "videoLinks"
         ]
       }
     }

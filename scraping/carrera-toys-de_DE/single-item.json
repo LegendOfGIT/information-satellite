@@ -363,10 +363,10 @@
     },
 
     {
-      "comment": "youtubeLinks",
+      "comment": "videoLinks",
       "commandId": "get-values-by-regex",
       "parameters": {
-        "contextId": "youtubeLinks",
+        "contextId": "videoLinks",
         "sourceContextId": "single-product-view",
         "groupIndex": 1,
         "replacements": { "^": "https://www.youtube-nocookie.com/embed/" },
@@ -412,7 +412,7 @@
           "teaser-texts",
           "title",
           "title-image",
-          "youtubeLinks"
+          "videoLinks"
         ]
       }
     }

@@ -509,24 +509,24 @@
     },
 
     {
-      "comment": "youtube links",
+      "comment": "video links",
       "commandId": "get-values-by-css-queries",
       "parameters": {
-        "contextId": "youtubeLinks",
+        "contextId": "videoLinks",
         "sourceContextId": "single-product-view",
         "attribute-id": "src",
         "css-queries": [ ".custom__item-inner iframe" ]
       }
     },
     {
-      "comment": "youtube links",
+      "comment": "video links",
       "commandId": "clone-items-and-modify-clones",
       "parameters": {
-        "contextId": "youtubeLinks",
+        "contextId": "videoLinks",
         "replacements": {
           "youtube.com": "youtube-nocookie.com"
         },
-        "sourceContextId": "youtubeLinks"
+        "sourceContextId": "videoLinks"
       }
     },
 
@@ -575,7 +575,7 @@
           "title",
           "title-image",
           "weightInKG",
-          "youtubeLinks"
+          "videoLinks"
         ]
       }
     }

@@ -138,6 +138,17 @@
     },
 
     {
+      "comment": "video links",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "videoLinks",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "src",
+        "css-queries": [ ".section_video video source" ]
+      }
+    },
+
+    {
       "comment": "description",
       "commandId": "get-value-by-css-queries",
       "parameters": {
@@ -220,11 +231,49 @@
     },
 
     {
+      "comment": "is vegan",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "isVegan",
+        "sourceContextId": "single-product-view",
+        "flags": "gi",
+        "defaultValue": false,
+        "setValueOnMatch": true,
+        "regex": [
+          "<p>vegan</p>"
+        ]
+      }
+    },
+
+    {
       "comment": "manufacturer",
       "commandId": "set-context-value",
       "parameters": {
         "contextId": "manufacturer",
         "value": "Hairburst"
+      }
+    },
+    {
+      "comment": "application instructions",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "applicationInstructions",
+        "sourceContextId": "single-product-view",
+        "css-queries": [
+          "[id *= 'how_to_use_video'] .section_content p"
+        ]
+      }
+    },
+
+    {
+      "comment": "amount in stock",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "amountInStock",
+        "sourceContextId": "single-product-view",
+        "setValueOnMatch": 999,
+        "setValueOnMiss": 0,
+        "regex": "schema\\.org/InStock"
       }
     },
 
@@ -320,12 +369,15 @@
       "commandId": "store-information",
       "parameters": {
         "informationIds": [
+          "amountInStock",
+          "applicationInstructions",
           "brand",
           "countryOfOrigin",
           "description",
           "gtin",
           "images-big",
           "images-small",
+          "isVegan",
           "link",
           "manufacturer",
           "mean",
@@ -338,7 +390,8 @@
           "sku",
           "teaser-texts",
           "title",
-          "title-image"
+          "title-image",
+          "videoLinks"
         ]
       }
     }

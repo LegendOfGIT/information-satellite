@@ -495,10 +495,10 @@
     },
 
     {
-      "comment": "youtubeLinks",
+      "comment": "videoLinks",
       "commandId": "get-values-by-regex",
       "parameters": {
-        "contextId": "youtubeLinks",
+        "contextId": "videoLinks",
         "sourceContextId": "single-product-view",
         "groupIndex": 1,
         "unique": true,
@@ -599,7 +599,7 @@
           "title",
           "title-image",
           "minimumAge",
-          "youtubeLinks"
+          "videoLinks"
         ]
       }
     }
