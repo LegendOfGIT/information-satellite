@@ -15,6 +15,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         contextId,
         decodeUri = false,
         mustContain,
+        mustNotContain = '',
         sourceContextId,
         replacements = {},
         separator = undefined,
@@ -67,7 +68,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
             cssSelector(cssQuery),
             attributeId,
             mustContain,
-            '',
+            mustNotContain,
             separator
         );
 
