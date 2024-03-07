@@ -1,0 +1,427 @@
+{
+  "site": "de.soundcore.com",
+
+  "itemId": "{template.site}-{request.query.itemId}",
+
+  "scraping": [
+    {
+      "comment": "site",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "site",
+        "value": "soundcore-de_DE"
+      }
+    },
+    {
+      "comment": "product-search",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-search",
+        "uri": "https://{template.site}/search?q={request.query.itemId}"
+      }
+    },
+
+    {
+      "comment": "link",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "link",
+        "css-queries": [ ".search-result__image-container a"],
+        "attribute-id": "href",
+        "replacements": {
+          "\/\\?.*": ""
+        },
+        "sourceContextId": "product-search"
+      }
+    },
+
+    {
+      "comment": "link",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "link",
+        "value": "https://{template.site}{link}"
+      }
+    },
+    {
+      "comment": "single-product-view",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "single-product-view",
+        "uri": "{link}"
+      }
+    },
+    {
+      "comment": "title",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "title",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ "h1.product_name" ]
+      }
+    },
+    {
+      "comment": "price-current",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ "[id *= 'shopify-section-product__main'] .price-container .current-price .money" ]
+      }
+    },
+    {
+      "comment": "price-initial",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "single-product-view",
+        "css-queries": [
+          "[id *= 'shopify-section-product__main'] .price-container .current-price .money"
+        ]
+      }
+    },
+    {
+      "comment": "price-current to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-current",
+        "sourceContextId": "price-current"
+      }
+    },
+    {
+      "comment": "price-initial to float",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "price-initial",
+        "sourceContextId": "price-initial"
+      }
+    },
+
+    {
+      "comment": "description",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "description",
+        "sourceContextId": "single-product-view",
+        "css-queries": [
+          "[itemprop='description']"
+        ]
+      }
+    },
+    {
+      "comment": "description headlines",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "descriptions.headline",
+        "sourceContextId": "single-product-view",
+        "css-queries": [
+          "[id ^= 'shopify-section-product__main'] [class ^= 'description content pc_show'] ul li b",
+          "[id ^= 'shopify-section-product__main'] [class ^= 'product-description description content pc_show'] ul li *:first-child strong"
+        ]
+      }
+    },
+    {
+      "comment": "description headlines",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "descriptions.headline",
+        "sourceContextId": "descriptions.headline",
+        "replacements": {
+          ":": ""
+        }
+      }
+    },
+    {
+      "comment": "description contents",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "descriptions.content",
+        "sourceContextId": "single-product-view",
+        "css-queries": [
+          "#shopify-section-product__main [class ^= 'description content pc_show'] ul li",
+          "[id ^= 'shopify-section-product__main'] [class ^= 'product-description description content pc_show'] ul li span, [id ^= 'shopify-section-product__main'] [class ^= 'product-description description content pc_show'] ul li div"
+        ]
+      }
+    },
+    {
+      "comment": "descriptions",
+      "commandId": "zip-contexts-to-context",
+      "parameters": {
+        "contextId": "descriptions",
+        "exchangeFromWhenEmpty": "headline",
+        "exchangeToWhenEmpty": "content",
+        "sourceContextIds": [ "descriptions.headline", "descriptions.content" ]
+      }
+    },
+
+    {
+      "comment": "color",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "color",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "\"Color\" : \"(.*?)\""
+        ]
+      }
+    },
+    {
+      "comment": "colors",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "colors",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "regex": [
+          "\"color_txt\":\\[(.*?)\\]"
+        ]
+      }
+    },
+    {
+      "comment": "colors",
+      "commandId": "get-values-by-regex",
+      "parameters": {
+        "contextId": "colors",
+        "sourceContextId": "colors",
+        "groupIndex": 1,
+        "separator": ", ",
+        "regex": [
+          "\"(.*?)\""
+        ]
+      }
+    },
+
+    {
+      "comment": "video links",
+      "commandId": "get-values-by-regex",
+      "parameters": {
+        "contextId": "videoLinks",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "unique": true,
+        "replacements": { "www.youtube.com": "www.youtube-nocookie.com"},
+        "regex": [
+          "\"video_title\": \"(.*?)\""
+        ]
+      }
+    },
+
+    {
+      "comment": "model",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "model",
+        "value": "{request.query.itemId}"
+      }
+    },
+
+    {
+      "comment": "merchant article number",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "mean",
+        "value": "soundcore.{request.query.itemId}"
+      }
+    },
+    {
+      "comment": "images-big",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "images-big",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "src",
+        "css-queries": [
+          ".product-gallery__thumbnails .product-gallery__thumbnail img",
+          ".product__images .swiper-slide picture img"
+        ]
+      }
+    },
+    {
+      "comment": "images-big",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "unique": true,
+        "contextId": "images-big",
+        "sourceContextId": "images-big",
+        "replacements": {
+          "^": "https:",
+          "300x": "650x",
+          "500x": "650x",
+          "1200x": "650x"
+        }
+      }
+    },
+    {
+      "comment": "add small versions of images-big",
+      "commandId": "clone-items-and-modify-clones",
+      "parameters": {
+        "contextId": "images-small",
+        "sourceContextId": "images-big",
+        "replacements": {
+          "650x": "150x"
+        }
+      }
+    },
+    {
+      "comment": "title-image",
+      "commandId": "get-value-from-array",
+      "parameters": {
+        "contextId": "title-image",
+        "sourceContextId": "images-big"
+      }
+    },
+
+    {
+      "comment": "number of ratings",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "numberOfRatings",
+        "sourceContextId": "single-product-view",
+        "css-queries": [ ".jdgm-prev-badge__text" ]
+      }
+    },
+    {
+      "comment": "number of ratings",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "numberOfRatings",
+        "defaultValue": 0,
+        "sourceContextId": "numberOfRatings"
+      }
+    },
+
+    {
+      "comment": "rating",
+      "commandId": "get-value-by-css-queries",
+      "parameters": {
+        "contextId": "ratingInPercent",
+        "sourceContextId": "single-product-view",
+        "attribute-id": "data-average-rating",
+        "css-queries": [ ".jdgm-rev-widg" ]
+      }
+    },
+    {
+      "comment": "rating",
+      "commandId": "get-float-from-value",
+      "parameters": {
+        "contextId": "ratingInPercent",
+        "defaultValue": 0,
+        "sourceContextId": "ratingInPercent"
+      }
+    },
+    {
+      "comment": "rating",
+      "commandId": "get-rule-of-three-value",
+      "parameters": {
+        "maximumValue": 5,
+        "contextId": "ratingInPercent"
+      }
+    },
+
+    {
+      "comment": "brand",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "brand",
+        "value": "Soundcore"
+      }
+    },
+
+    {
+      "comment": "teaser texts",
+      "commandId": "get-values-by-css-queries",
+      "parameters": {
+        "contextId": "teaser-texts",
+        "sourceContextId": "single-product-view",
+        "unique": true,
+        "css-queries": [
+          "#shopify-section-product__main [class ^= 'description content pc_show'] ul li b",
+          ".product-description ul li div"
+        ]
+      }
+    },
+
+    {
+      "comment": "amount in stock",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "amountInStock",
+        "sourceContextId": "single-product-view",
+        "setValueOnMatch": 0,
+        "setValueOnMiss": 999,
+        "regex": "OutOfStock"
+      }
+    },
+
+    {
+      "comment": "seoKeywords",
+      "commandId": "extract-seo-keywords",
+      "parameters": {
+        "contextId": "seoKeywords",
+        "sourceContextId": ["description", "title"]
+      }
+    },
+
+    {
+      "comment": "removeProviderFlag",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "removeProviderFlag",
+        "sourceContextId": "single-product-view",
+        "setValueOnMatch": true,
+        "setValueOnMiss": false,
+        "regex": "Wir konnten die Seite, die du aufrufen wolltest, leider nicht finden."
+      }
+    },
+    {
+      "comment": "remove provider when product can not be found anymore",
+      "commandId": "remove-provider",
+      "parameters": {
+        "flagId": "removeProviderFlag"
+      }
+    },
+
+    {
+      "comment": "storeProviderFlag",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "storeProviderFlag",
+        "sourceContextId": "single-product-view",
+        "setValueOnMatch": false,
+        "setValueOnMiss": true,
+        "regex": "Wir konnten die Seite, die du aufrufen wolltest, leider nicht finden."
+      }
+    },
+
+    {
+      "comment": "store scraped information",
+      "commandId": "store-information",
+      "parameters": {
+        "flagId": "storeProviderFlag",
+        "informationIds": [
+          "amountInStock",
+          "brand",
+          "color",
+          "colors",
+          "description",
+          "descriptions",
+          "images-big",
+          "images-small",
+          "link",
+          "mean",
+          "model",
+          "numberOfRatings",
+          "price-current",
+          "price-initial",
+          "ratingInPercent",
+          "seoKeywords",
+          "teaser-texts",
+          "title",
+          "title-image",
+          "videoLinks"
+        ]
+      }
+    }
+  ]
+}
