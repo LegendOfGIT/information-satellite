@@ -44,29 +44,20 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://{template.site}/shop/"
+        "uri": "https://{template.site}/collections/all"
       }
     },
     {
-      "comment": "product-ids",
-      "commandId": "get-values-by-css-queries",
+      "comment": "product ids",
+      "commandId": "get-values-by-regex",
       "parameters": {
         "contextId": "product-ids",
-        "css-queries": [ ".woocommerce-loop-product__link"],
-        "attribute-id": "href",
-        "sourceContextId": "product-overview"
-      }
-    },
-    {
-      "comment": "product-ids",
-      "commandId": "clone-items-and-modify-clones",
-      "parameters": {
-        "contextId": "product-ids",
-        "replacements": {
-          "\/$": "",
-          ".*\/": ""
-        },
-        "sourceContextId": "product-ids"
+        "sourceContextId": "product-overview",
+        "groupIndex": 1,
+        "overwrite": true,
+        "unique": true,
+        "replacements": { " ":  "+" },
+        "regex": "\"sku\":\"(.*?)\""
       }
     },
     {

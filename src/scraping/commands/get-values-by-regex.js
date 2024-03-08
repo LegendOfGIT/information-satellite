@@ -5,6 +5,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
 
     const {
         contextId,
+        flags = undefined,
         groupIndex,
         regex,
         replacements = {},
@@ -41,7 +42,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     regexes.forEach(regex => {
         values = values && values.length
             ? values
-            : getValuesByRegex(sourceContext, regex, groupIndex, undefined, undefined, removeTags);
+            : getValuesByRegex(sourceContext, regex, groupIndex, flags, undefined, removeTags);
     });
 
     values = values.map(value => {

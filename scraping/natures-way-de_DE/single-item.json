@@ -1,15 +1,29 @@
 {
   "site": "naturesway.de",
 
-  "itemId": "{template.site}-{gtin}",
+  "itemId": "{template.site}-{request.query.itemId}",
 
   "scraping": [
     {
+      "comment": "product-search",
+      "commandId": "visit-uri",
+      "parameters": {
+        "contextId": "product-search",
+        "uri": "https://www.{template.site}/search?type=product&options%5Bprefix%5D=last&options%5Bunavailable_products%5D=last&q={request.query.itemId}"
+      }
+    },
+
+    {
       "comment": "link",
-      "commandId": "set-context-value",
+      "commandId": "get-value-by-css-queries",
       "parameters": {
         "contextId": "link",
-        "value": "https://{template.site}/shop/{request.query.itemId}"
+        "css-queries": [ ".product-item__image-wrapper a"],
+        "attribute-id": "href",
+        "replacements": {
+          "^": "https://www.naturesway.de"
+        },
+        "sourceContextId": "product-search"
       }
     },
 
@@ -42,32 +56,21 @@
     },
     {
       "comment": "sku",
-      "commandId": "get-value-by-css-queries",
+      "commandId": "set-context-value",
       "parameters": {
         "contextId": "sku",
-        "sourceContextId": "single-product-view",
-        "attribute-id": "data-sku",
-        "css-queries": [ ".shop-analytics-single-product-details" ]
-      }
-    },
-    {
-      "comment": "gtin",
-      "commandId": "get-value-by-css-queries",
-      "parameters": {
-        "contextId": "gtin",
-        "sourceContextId": "single-product-view",
-        "attribute-id": "data-gtin",
-        "css-queries": [ ".shop-analytics-single-product-details" ]
+        "value": "{request.query.itemId}"
       }
     },
     {
       "comment": "amount in stock",
-      "commandId": "get-value-by-css-queries",
+      "commandId": "get-value-by-regex",
       "parameters": {
         "contextId": "amountInStock",
         "sourceContextId": "single-product-view",
-        "attribute-id": "data-stock",
-        "css-queries": [ ".shop-analytics-single-product-details" ]
+        "setValueOnMatch": 0,
+        "setValueOnMiss": 999,
+        "regex": "OutOfStock"
       }
     },
 
@@ -77,11 +80,9 @@
       "parameters": {
         "contextId": "images-big",
         "sourceContextId": "single-product-view",
-        "attribute-id": "data-thumb",
-        "replacements": {
-          "[0-9]{3}x[0-9]{3}": "600x600"
-        },
-        "css-queries": [ ".woocommerce-product-gallery__image" ]
+        "attribute-id": "src",
+        "mustNotContain": "_small.",
+        "css-queries": [ ".product__media-image-wrapper img" ]
       }
     },
     {
@@ -90,7 +91,8 @@
       "parameters": {
         "contextId": "images-big",
         "replacements": {
-          "[0-9]{3}x[0-9]{3}": "600x600"
+          "^": "https:",
+          "[0-9]{4}x": "650x"
         },
         "sourceContextId": "images-big"
       }
@@ -101,7 +103,7 @@
       "parameters": {
         "contextId": "images-small",
         "replacements": {
-          "[0-9]{3}x[0-9]{3}": "300x300"
+          "[0-9]{3}x": "300x"
         },
         "sourceContextId": "images-big"
       }
@@ -126,16 +128,15 @@
       }
     },
 
-
     {
       "comment": "description",
-      "commandId": "get-value-by-css-queries",
+      "commandId": "get-value-by-regex",
       "parameters": {
         "contextId": "description",
         "sourceContextId": "single-product-view",
-        "attribute-id": "content",
-        "css-queries": [
-          "meta[property='og:description']"
+        "groupIndex": 1,
+        "regex": [
+          "\"description\": \"(.*?)\",\n"
         ]
       }
     },
@@ -152,42 +153,13 @@
     },
 
     {
-      "comment": "description headlines",
-      "commandId": "get-values-by-css-queries",
-      "parameters": {
-        "contextId": "descriptions.headline",
-        "sourceContextId": "single-product-view",
-        "css-queries": [ ".woocommerce-Tabs-panel--description p strong .a-list-item, .woocommerce-Tabs-panel--description p strong" ]
-      }
-    },
-    {
-      "comment": "description contents",
-      "commandId": "get-values-by-css-queries",
-      "parameters": {
-        "contextId": "descriptions.content",
-        "sourceContextId": "single-product-view",
-        "css-queries": [ ".woocommerce-Tabs-panel--description p > .a-list-item" ]
-      }
-    },
-    {
-      "comment": "descriptions",
-      "commandId": "zip-contexts-to-context",
-      "parameters": {
-        "contextId": "descriptions",
-        "exchangeFromWhenEmpty": "headline",
-        "exchangeToWhenEmpty": "content",
-        "sourceContextIds": [ "descriptions.headline", "descriptions.content" ]
-      }
-    },
-
-    {
       "comment": "price-current",
       "commandId": "get-value-by-css-queries",
       "parameters": {
         "contextId": "price-current",
         "sourceContextId": "single-product-view",
         "attribute-id": "data-price",
-        "css-queries": [ ".shop-analytics-single-product-details" ]
+        "css-queries": [ ".block-swatch__radio:checked + .block-swatch__item .main-price-custom" ]
       }
     },
     {
@@ -197,7 +169,10 @@
         "contextId": "price-initial",
         "sourceContextId": "single-product-view",
         "attribute-id": "data-price",
-        "css-queries": [ ".shop-analytics-single-product-details" ]
+        "css-queries": [
+          ".block-swatch__radio:checked + .block-swatch__item .comapre-price-custom",
+          ".block-swatch__radio:checked + .block-swatch__item .main-price-custom"
+        ]
       }
     },
 
@@ -207,7 +182,7 @@
       "parameters": {
         "contextId": "pricePerUnit",
         "sourceContextId": "single-product-view",
-        "css-queries": [ ".price-per-unit bdi" ]
+        "css-queries": [ ".block-swatch__radio:checked + .block-swatch__item .upper-class-data2" ]
       }
     },
     {
@@ -220,56 +195,72 @@
           ".*?\/": "",
           "\\)": ""
         },
-        "css-queries": [ ".price-per-unit" ]
+        "css-queries": [ ".block-swatch__radio:checked + .block-swatch__item .upper-class-data2" ]
       }
     },
 
     {
       "comment": "ingredients",
-      "commandId": "get-value-by-css-queries",
+      "commandId": "get-value-by-regex",
       "parameters": {
         "contextId": "ingredients",
         "sourceContextId": "single-product-view",
-        "css-queries": [ "#tab-zutaten p" ]
+        "groupIndex": 2,
+        "regex": [
+          "Zutaten(\\n|.)*?metafield-multi_line_text_field.*?>(.*?)<\\/"
+        ]
+      }
+    },
+    {
+      "comment": "important hints",
+      "commandId": "get-value-by-regex",
+      "parameters": {
+        "contextId": "importantHints",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 2,
+        "replacements": { "\\n" : ""},
+        "regex": [
+          "Aufbewahrungs- & Verwendungshinweise(\\n|.)*?metafield-multi_line_text_field.*?>((\\n|.)*?)<\\/"
+        ]
+      }
+    },
+    {
+      "comment": "video links",
+      "commandId": "get-values-by-regex",
+      "parameters": {
+        "contextId": "videoLinks",
+        "sourceContextId": "single-product-view",
+        "groupIndex": 1,
+        "unique": true,
+        "flags": "g",
+        "regex": [
+          "src=\"(.*?.mp4)\""
+        ]
       }
     },
 
     {
       "comment": "size",
-      "commandId": "get-value-by-regex",
+      "commandId": "get-value-by-css-queries",
       "parameters": {
         "contextId": "size",
         "sourceContextId": "single-product-view",
-        "groupIndex": 1,
-        "replacements": {
-          "$": " Stück"
-        },
-        "regex": [
-          "attributes-item__label\">Inhalt in.*?<\\/.*?\\W.*?<td.*?<p>(.*?)<\\/p>"
-        ]
+        "attribute-id": "value",
+        "css-queries": [ ".block-swatch__radio:checked" ]
       }
     },
     {
-      "comment": "intake type",
-      "commandId": "get-value-by-regex",
+      "comment": "sizes",
+      "commandId": "get-value-by-css-queries",
       "parameters": {
-        "contextId": "intakeType",
+        "contextId": "sizes",
         "sourceContextId": "single-product-view",
-        "groupIndex": 1,
-        "regex": [
-          "attributes-item__label\">Darreichungsform.*?<\\/.*?\\W.*?<td.*?<p>(.*?)<\\/p>"
-        ]
+        "attribute-id": "value",
+        "separator": ", ",
+        "css-queries": [ ".block-swatch__radio" ]
       }
     },
 
-    {
-      "comment": "amount in Stock",
-      "commandId": "get-float-from-value",
-      "parameters": {
-        "contextId": "amountInStock",
-        "sourceContextId": "amountInStock"
-      }
-    },
     {
       "comment": "price-current to float",
       "commandId": "get-float-from-value",
@@ -304,76 +295,6 @@
     },
 
     {
-      "comment": "review data",
-      "commandId": "visit-uri",
-      "parameters": {
-        "contextId": "review-data",
-        "uri": "https://api.reviews.io/json-ld/product/richsnippet?store=www.{template.site}&sku={sku}&data=true&mpn="
-      }
-    },
-
-    {
-      "comment": "number of ratings",
-      "commandId": "get-value-by-regex",
-      "parameters": {
-        "contextId": "numberOfRatings",
-        "sourceContextId": "review-data",
-        "groupIndex": 1,
-        "regex": [
-          "\"reviewCount\" : \"(.*?)\""
-        ]
-      }
-    },
-    {
-      "comment": "number of ratings",
-      "commandId": "get-float-from-value",
-      "parameters": {
-        "contextId": "numberOfRatings",
-        "defaultValue": 0,
-        "sourceContextId": "numberOfRatings"
-      }
-    },
-
-    {
-      "comment": "rating",
-      "commandId": "get-value-by-regex",
-      "parameters": {
-        "contextId": "ratingInPercent",
-        "sourceContextId": "review-data",
-        "groupIndex": 1,
-        "regex": [
-          "\"ratingValue\" : \"(....).*?\","
-        ]
-      }
-    },
-    {
-      "comment": "rating",
-      "commandId": "get-float-from-value",
-      "parameters": {
-        "contextId": "ratingInPercent",
-        "defaultValue": 0,
-        "sourceContextId": "ratingInPercent"
-      }
-    },
-    {
-      "comment": "rating",
-      "commandId": "get-rule-of-three-value",
-      "parameters": {
-        "maximumValue": 5,
-        "contextId": "ratingInPercent"
-      }
-    },
-
-    {
-      "comment": "teaser-texts",
-      "commandId": "get-values-by-css-queries",
-      "parameters": {
-        "contextId": "teaser-texts",
-        "sourceContextId": "single-product-view",
-        "css-queries": [ ".woocommerce-product-details__short-description li" ]
-      }
-    },
-    {
       "comment": "seoKeywords",
       "commandId": "extract-seo-keywords",
       "parameters": {
@@ -389,27 +310,25 @@
         "informationIds": [
           "amountInStock",
           "description",
-          "descriptions",
           "images-big",
           "images-small",
+          "importantHints",
           "ingredients",
-          "intakeType",
           "link",
           "manufacturer",
           "mean",
-          "numberOfRatings",
           "price-current",
           "price-initial",
           "pricePerUnit",
-          "ratingInPercent",
           "referenceUnit",
           "seoDescription",
           "seoKeywords",
           "size",
+          "sizes",
           "sku",
-          "teaser-texts",
           "title",
-          "title-image"
+          "title-image",
+          "videoLinks"
         ]
       }
     }
