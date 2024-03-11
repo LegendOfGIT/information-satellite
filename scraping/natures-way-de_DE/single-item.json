@@ -295,6 +295,15 @@
     },
 
     {
+      "comment": "title",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "title",
+        "value": "{title} - {size}"
+      }
+    },
+
+    {
       "comment": "seoKeywords",
       "commandId": "extract-seo-keywords",
       "parameters": {

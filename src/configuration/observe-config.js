@@ -79,7 +79,7 @@ module.exports = {
     FASHION_MEN_HATS: 'men-hats',
     FASHION_MEN_JACKETS: 'men-jackets',
     FASHION_MEN_JEANS: 'men-jeans',
-    FASHION_MEN_JEWELRY: 'men-jewelry',
+    FASHION_MEN_JEWELRY: 'men-jewelry|men-necklaces|men-rings',
     FASHION_MEN_NIGHTWEAR: 'men-nightwear',
     FASHION_MEN_PANTS: 'men-pants',
     FASHION_MEN_RAINWEAR: 'men-rainwear',

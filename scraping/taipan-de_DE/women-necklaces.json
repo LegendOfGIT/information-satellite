@@ -1,13 +1,14 @@
 {
-  "site": "talkinghandsflipbooks.com",
+  "site": "taipanschmuck.de",
 
   "scraping": [
+
     {
       "comment": "site",
       "commandId": "set-context-value",
       "parameters": {
         "contextId": "site",
-        "value": "talkinghands-de_DE"
+        "value": "taipan-de_DE"
       }
     },
     {
@@ -32,9 +33,9 @@
       "parameters": {
         "contextId": "navigation-path",
         "value": [
-          "KIDS",
-          "KIDS_BOOKS",
-          "KIDS_BOOKS_LEARNINGBOOKS"
+          "FASHION",
+          "FASHION_WOMEN",
+          "FASHION_WOMEN_JEWELRY"
         ]
       }
     },
@@ -44,58 +45,22 @@
       "commandId": "visit-uri",
       "parameters": {
         "contextId": "product-overview",
-        "uri": "https://{template.site}/collections/altersklasse-0-2"
+        "uri": "https://{template.site}/collections/damen-halskette"
       }
     },
     {
-      "comment": "product-ids",
-      "commandId": "get-values-by-regex",
-      "parameters": {
-        "contextId": "product-ids",
-        "unique": true,
-        "sourceContextId": "product-overview",
-        "groupIndex": 1,
-        "regex": [
-          "\"sku\":\"(.*?)\""
-        ]
-      }
-    },
-    {
-      "comment": "observe scraped information",
-      "commandId": "observe-information",
-      "parameters": {
-        "informationIds": [
-          "locale",
-          "navigation-path",
-          "product-ids",
-          "site",
-          "usecase"
-        ]
-      }
-    },
-    {
-      "comment": "product-overview",
-      "commandId": "visit-uri",
-      "parameters": {
-        "contextId": "product-overview",
-        "overwrite": true,
-        "uri": "https://{template.site}/collections/bundles"
-      }
-    },
-    {
-      "comment": "product-ids",
+      "comment": "product ids",
       "commandId": "get-values-by-regex",
       "parameters": {
         "contextId": "product-ids",
         "sourceContextId": "product-overview",
         "groupIndex": 1,
-        "unique": true,
         "overwrite": true,
-        "regex": [
-          "\"sku\":\"(.*?)\""
-        ]
+        "unique": true,
+        "regex": "\"sku\":\"(.*?)\""
       }
     },
+
     {
       "comment": "observe scraped information",
       "commandId": "observe-information",
