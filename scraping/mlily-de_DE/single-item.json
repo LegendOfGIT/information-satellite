@@ -381,6 +381,14 @@
         "css-queries": [ ".shopify-section .banner .bannerInner .text" ]
       }
     },
+    {
+      "comment": "title",
+      "commandId": "set-context-value",
+      "parameters": {
+        "contextId": "title",
+        "value": "{title} {size}"
+      }
+    },
 
     {
       "comment": "store scraped information",
