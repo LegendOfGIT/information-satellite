@@ -85,7 +85,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     });
 
     context[contextId] = context[contextId] || '';
-    if (context[contextId].length > 0 && setValueOnMatch) {
+    if (context[contextId].length > 0 && setValueOnMatch !== undefined) {
         context[contextId] = setValueOnMatch;
     }
     if (context[contextId].length === 0 && setValueOnMiss !== undefined) {
