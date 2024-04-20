@@ -31,14 +31,11 @@
 
     {
       "comment": "title",
-      "commandId": "get-value-by-regex",
+      "commandId": "get-value-by-css-queries",
       "parameters": {
         "contextId": "title",
         "sourceContextId": "single-product-view",
-        "groupIndex": 1,
-        "regex": [
-          "\"sku\".*?\"name\": \"(.*?)\""
-        ]
+        "css-queries": [ ".pdp_variation-name" ]
       }
     },
     {
