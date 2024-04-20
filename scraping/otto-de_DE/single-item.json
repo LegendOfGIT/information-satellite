@@ -28,13 +28,17 @@
         "uri": "https://{template.site}/p/{request.query.itemId}"
       }
     },
+
     {
       "comment": "title",
-      "commandId": "get-value-by-css-queries",
+      "commandId": "get-value-by-regex",
       "parameters": {
         "contextId": "title",
         "sourceContextId": "single-product-view",
-        "css-queries": [ ".pdp_variation-name" ]
+        "groupIndex": 1,
+        "regex": [
+          "\"sku\".*?\"name\": \"(.*?)\""
+        ]
       }
     },
     {
