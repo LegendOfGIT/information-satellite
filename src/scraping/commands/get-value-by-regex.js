@@ -9,6 +9,7 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
         flags,
         groupIndex,
         mustContain = '',
+        mustNotContain = '',
         removeTags = true,
         replacements = {},
         setValueOnMatch,
@@ -70,6 +71,9 @@ module.exports = (context = {}, parameters = {}) => new Promise(resolve => {
     }
 
     if (mustContain && -1 === (context[contextId] || '').indexOf(mustContain)) {
+        context[contextId] = undefined;
+    }
+    if (mustNotContain && -1 !== (context[contextId] || '').indexOf(mustNotContain)) {
         context[contextId] = undefined;
     }
 
